@@ -32,7 +32,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"SET_STATUS_404" => "Y",
 		"DETAIL_DISPLAY_NAME" => "Y",
 		"USE_ELEMENT_COUNTER" => "Y",
-		"USE_FILTER" => "N",
+		"USE_FILTER" => "Y",
 		"FILTER_NAME" => "",
 		"FILTER_VIEW_MODE" => "HORIZONTAL",
 		"USE_COMPARE" => "Y",

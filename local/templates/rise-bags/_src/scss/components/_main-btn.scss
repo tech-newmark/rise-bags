@@ -1,0 +1,35 @@
+@use "@scss/extends/index";
+.main-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 18px;
+	font-weight: 600;
+	padding: 12px 24px;
+	border: 2px solid transparent;
+	border-radius: var(--base-br);
+	background-color: var(--primary);
+	color: var(--white);
+	cursor: pointer;
+
+	@extend %hover-opacity;
+
+	&.outlined {
+		border-color: var(--primary);
+		background-color: transparent;
+		color: var(--primary);
+	}
+
+	&.disabled {
+		opacity: 0.6;
+		pointer-events: none;
+	}
+
+	&--line {
+		padding: 0;
+		border: none;
+		background-color: transparent;
+		color: var(--primary);
+	}
+}
