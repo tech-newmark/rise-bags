@@ -5,6 +5,7 @@ import path from "path";
 import fs from "fs";
 import svgSpritemap from "vite-plugin-svg-spritemap";
 import vue from "@vitejs/plugin-vue";
+import autoprefixer from "autoprefixer";
 
 // Базовые пути
 const TEMPLATE_NAME = "rise-bags";
@@ -319,6 +320,13 @@ export default defineConfig({
 	],
 
 	css: {
+		postcss: {
+			plugins: [
+				autoprefixer({
+					overrideBrowserslist: ["> 2%", "last 5 versions", "not dead"],
+				}),
+			],
+		},
 		preprocessorOptions: {
 			scss: {
 				api: "modern-compiler",
