@@ -10,6 +10,9 @@
 
   <? $APPLICATION->ShowHead(); ?>
   <title><? $APPLICATION->ShowTitle() ?></title>
+
+  <?/* includeGlobalAssets();
+  initBitrixCore('popup'); */ ?>
 </head>
 
 <body>

@@ -570,47 +570,47 @@ if (isset($arCurrentValues['DETAIL_USE_COMMENTS']) && 'Y' == $arCurrentValues['D
 		}
 	}
 
-	$boolRus = false;
-	$rsLangs = CLanguage::GetList('id', 'asc', array('ID' => 'ru', "ACTIVE" => "Y"));
-	if ($arLang = $rsLangs->Fetch()) {
-		$boolRus = true;
-	}
+	// $boolRus = false;
+	// $rsLangs = CLanguage::GetList('id', 'asc', array('ID' => 'ru', "ACTIVE" => "Y"));
+	// if ($arLang = $rsLangs->Fetch()) {
+	// 	$boolRus = true;
+	// }
 
-	if ($boolRus) {
-		$arTemplateParameters['DETAIL_VK_USE'] = array(
-			'PARENT' => 'DETAIL_SETTINGS',
-			'NAME' => GetMessage('CP_BC_TPL_DETAIL_VK_USE'),
-			'TYPE' => 'CHECKBOX',
-			'DEFAULT' => 'N',
-			'REFRESH' => 'Y'
-		);
+	// if ($boolRus) {
+	// 	$arTemplateParameters['DETAIL_VK_USE'] = array(
+	// 		'PARENT' => 'DETAIL_SETTINGS',
+	// 		'NAME' => GetMessage('CP_BC_TPL_DETAIL_VK_USE'),
+	// 		'TYPE' => 'CHECKBOX',
+	// 		'DEFAULT' => 'N',
+	// 		'REFRESH' => 'Y'
+	// 	);
 
-		if (isset($arCurrentValues['DETAIL_VK_USE']) && 'Y' == $arCurrentValues['DETAIL_VK_USE']) {
-			$arTemplateParameters['DETAIL_VK_API_ID'] = array(
-				'PARENT' => 'DETAIL_SETTINGS',
-				'NAME' => GetMessage('CP_BC_TPL_DETAIL_VK_API_ID'),
-				'TYPE' => 'STRING',
-				'DEFAULT' => 'API_ID'
-			);
-		}
-	}
+	// 	if (isset($arCurrentValues['DETAIL_VK_USE']) && 'Y' == $arCurrentValues['DETAIL_VK_USE']) {
+	// 		$arTemplateParameters['DETAIL_VK_API_ID'] = array(
+	// 			'PARENT' => 'DETAIL_SETTINGS',
+	// 			'NAME' => GetMessage('CP_BC_TPL_DETAIL_VK_API_ID'),
+	// 			'TYPE' => 'STRING',
+	// 			'DEFAULT' => 'API_ID'
+	// 		);
+	// 	}
+	// }
 
-	$arTemplateParameters['DETAIL_FB_USE'] = array(
-		'PARENT' => 'DETAIL_SETTINGS',
-		'NAME' => GetMessage('CP_BC_TPL_DETAIL_FB_USE'),
-		'TYPE' => 'CHECKBOX',
-		'DEFAULT' => 'N',
-		'REFRESH' => 'Y'
-	);
+	// $arTemplateParameters['DETAIL_FB_USE'] = array(
+	// 	'PARENT' => 'DETAIL_SETTINGS',
+	// 	'NAME' => GetMessage('CP_BC_TPL_DETAIL_FB_USE'),
+	// 	'TYPE' => 'CHECKBOX',
+	// 	'DEFAULT' => 'N',
+	// 	'REFRESH' => 'Y'
+	// );
 
-	if (isset($arCurrentValues['DETAIL_FB_USE']) && 'Y' == $arCurrentValues['DETAIL_FB_USE']) {
-		$arTemplateParameters['DETAIL_FB_APP_ID'] = array(
-			'PARENT' => 'DETAIL_SETTINGS',
-			'NAME' => GetMessage('CP_BC_TPL_DETAIL_FB_APP_ID'),
-			'TYPE' => 'STRING',
-			'DEFAULT' => ''
-		);
-	}
+	// if (isset($arCurrentValues['DETAIL_FB_USE']) && 'Y' == $arCurrentValues['DETAIL_FB_USE']) {
+	// 	$arTemplateParameters['DETAIL_FB_APP_ID'] = array(
+	// 		'PARENT' => 'DETAIL_SETTINGS',
+	// 		'NAME' => GetMessage('CP_BC_TPL_DETAIL_FB_APP_ID'),
+	// 		'TYPE' => 'STRING',
+	// 		'DEFAULT' => ''
+	// 	);
+	// }
 }
 
 if (ModuleManager::isModuleInstalled("highloadblock")) {

@@ -1,0 +1,1 @@
+.catalog-section .grid{display:grid;grid-template-columns:320px auto;gap:var(--base-gap)}.catalog-section .grid-item--sidebar{position:sticky;top:40px;outline:1px solid red;height:-moz-fit-content;height:fit-content}
