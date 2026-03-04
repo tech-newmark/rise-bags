@@ -1,0 +1,123 @@
+{
+  "local/templates/rise-bags/_src/fonts/Inter-Bold.woff2": {
+    "file": "fonts/Inter-Bold.zwRZDudv.woff2",
+    "src": "local/templates/rise-bags/_src/fonts/Inter-Bold.woff2"
+  },
+  "local/templates/rise-bags/_src/fonts/Inter-Medium.woff2": {
+    "file": "fonts/Inter-Medium.BhExgSSR.woff2",
+    "src": "local/templates/rise-bags/_src/fonts/Inter-Medium.woff2"
+  },
+  "local/templates/rise-bags/_src/fonts/Inter-Regular.woff2": {
+    "file": "fonts/Inter-Regular.qvK65rjz.woff2",
+    "src": "local/templates/rise-bags/_src/fonts/Inter-Regular.woff2"
+  },
+  "local/templates/rise-bags/_src/fonts/Inter-SemiBold.woff2": {
+    "file": "fonts/Inter-SemiBold.KBifbP54.woff2",
+    "src": "local/templates/rise-bags/_src/fonts/Inter-SemiBold.woff2"
+  },
+  "local/templates/rise-bags/_src/fonts/Inter-Thin.woff2": {
+    "file": "fonts/Inter-Thin.D8LugPGj.woff2",
+    "src": "local/templates/rise-bags/_src/fonts/Inter-Thin.woff2"
+  },
+  "local/templates/rise-bags/_src/fonts/Roboto-Regular.woff2": {
+    "file": "fonts/Roboto-Regular.CriGEldC.woff2",
+    "src": "local/templates/rise-bags/_src/fonts/Roboto-Regular.woff2"
+  },
+  "local/templates/rise-bags/_src/fonts/SegoeUI-Regular.woff2": {
+    "file": "fonts/SegoeUI-Regular.BE5lHcPA.woff2",
+    "src": "local/templates/rise-bags/_src/fonts/SegoeUI-Regular.woff2"
+  },
+  "local/templates/rise-bags/_src/js/index.js": {
+    "file": "template_scripts.kUUXLdWW.js",
+    "name": "script",
+    "src": "local/templates/rise-bags/_src/js/index.js",
+    "isEntry": true
+  },
+  "local/templates/rise-bags/_src/scss/template.scss": {
+    "file": "template_styles.DQamQiSz.css",
+    "src": "local/templates/rise-bags/_src/scss/template.scss",
+    "isEntry": true,
+    "name": "template",
+    "names": [
+      "template.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/catalog.section.list/accordeon/_src/js/index.js": {
+    "file": "components/bitrix/catalog.section.list/accordeon/script.l0sNRNKZ.js",
+    "name": "bitrix_catalog_section_list_accordeon_js",
+    "src": "local/templates/rise-bags/components/bitrix/catalog.section.list/accordeon/_src/js/index.js",
+    "isEntry": true
+  },
+  "local/templates/rise-bags/components/bitrix/catalog.section.list/accordeon/_src/scss/index.scss": {
+    "file": "components/bitrix/catalog.section.list/accordeon/style.JsT7Zg8N.css",
+    "src": "local/templates/rise-bags/components/bitrix/catalog.section.list/accordeon/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_catalog_section_list_accordeon_scss",
+    "names": [
+      "bitrix_catalog_section_list_accordeon_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/catalog.smart.filter/horizontal/_src/scss/index.scss": {
+    "file": "components/bitrix/catalog.smart.filter/horizontal/style.CxVPKICK.css",
+    "src": "local/templates/rise-bags/components/bitrix/catalog.smart.filter/horizontal/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_catalog_smart_filter_horizontal_scss",
+    "names": [
+      "bitrix_catalog_smart_filter_horizontal_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/main.profile/rise/_src/scss/index.scss": {
+    "file": "components/bitrix/main.profile/rise/style.CmWzbKQK.css",
+    "src": "local/templates/rise-bags/components/bitrix/main.profile/rise/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_main_profile_rise_scss",
+    "names": [
+      "bitrix_main_profile_rise_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/catalog-preview/_src/scss/index.scss": {
+    "file": "components/bitrix/news.list/catalog-preview/style.1EAXJ-2y.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/catalog-preview/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_list_catalog-preview_scss",
+    "names": [
+      "bitrix_news_list_catalog-preview_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/tizzers/_src/scss/index.scss": {
+    "file": "components/bitrix/news.list/tizzers/style.CWLm51Sl.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/tizzers/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_list_tizzers_scss",
+    "names": [
+      "bitrix_news_list_tizzers_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/sale.basket.basket/rise/_src/scss/index.scss": {
+    "file": "components/bitrix/sale.basket.basket/rise/style.D9_6vbKS.css",
+    "src": "local/templates/rise-bags/components/bitrix/sale.basket.basket/rise/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_sale_basket_basket_rise_scss",
+    "names": [
+      "bitrix_sale_basket_basket_rise_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/sale.order.ajax/rise/_src/scss/index.scss": {
+    "file": "components/bitrix/sale.order.ajax/rise/style.HumBNCEw.css",
+    "src": "local/templates/rise-bags/components/bitrix/sale.order.ajax/rise/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_sale_order_ajax_rise_scss",
+    "names": [
+      "bitrix_sale_order_ajax_rise_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/sale.personal.section/rise/_src/scss/index.scss": {
+    "file": "components/bitrix/sale.personal.section/rise/style.C6Fnmsrn.css",
+    "src": "local/templates/rise-bags/components/bitrix/sale.personal.section/rise/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_sale_personal_section_rise_scss",
+    "names": [
+      "bitrix_sale_personal_section_rise_scss.css"
+    ]
+  }
+}

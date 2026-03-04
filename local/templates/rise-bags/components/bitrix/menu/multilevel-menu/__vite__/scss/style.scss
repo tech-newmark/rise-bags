@@ -1,0 +1,8 @@
+.multilevel-menu {
+	columns: 2;
+	column-gap: 24px;
+
+	& > li {
+		break-inside: avoid;
+	}
+}

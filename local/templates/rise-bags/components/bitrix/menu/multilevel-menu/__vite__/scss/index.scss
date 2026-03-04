@@ -1,0 +1,67 @@
+@use "@scss/base/container-queries" as *;
+
+.multilevel-menu {
+	container: multilevel-menu / inline-size;
+
+	&__title {
+		display: flex;
+		font-size: 24px;
+		font-weight: bold;
+		line-height: 1;
+		text-align: left;
+		text-transform: uppercase;
+
+		color: var(--white);
+		margin-bottom: 16px;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		li {
+			color: var(--white);
+
+			a {
+				display: flex;
+				padding: 2px 0;
+				color: var(--white);
+			}
+		}
+	}
+
+	& > ul {
+		& > li {
+			& > a {
+				font-size: 18px;
+				font-weight: 600;
+				color: var(--white);
+				margin-bottom: 6px;
+
+				& + ul {
+					margin-bottom: 6px;
+				}
+			}
+		}
+
+		& > li:last-child > ul {
+			margin-bottom: 0;
+		}
+	}
+
+	&.column-view {
+		& > ul {
+			columns: 200px;
+			column-gap: 24px;
+
+			& > li {
+				break-inside: avoid;
+			}
+
+			// @include container-up("multilevel-menu", 320px) {
+			// 	columns: 2;
+			// }
+		}
+	}
+}
