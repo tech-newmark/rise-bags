@@ -1,4 +1,4 @@
-// vite.config.js
+// vite.config.mjs
 
 import { defineConfig } from "vite";
 import path from "path";
@@ -7,7 +7,8 @@ import svgSpritemap from "vite-plugin-svg-spritemap";
 import vue from "@vitejs/plugin-vue";
 
 // Базовые пути
-const TEMPLATE_PATH = "local/templates/rise-bags";
+const TEMPLATE_NAME = "rise-bags";
+const TEMPLATE_PATH = `local/templates/${TEMPLATE_NAME}`;
 const BASE_PATH = `/${TEMPLATE_PATH}`;
 const DIST_PATH = `${TEMPLATE_PATH}/_dist`;
 const COMPONENTS_BASE_PATH = `${TEMPLATE_PATH}/components`;
@@ -294,8 +295,6 @@ const getCssOutputPath = (fileName) => {
 // Основная конфигурация
 export default defineConfig({
 	base: `${BASE_PATH}/_dist/`,
-
-	// Добавляем публичную директорию
 	publicDir: path.resolve(__dirname, `${TEMPLATE_PATH}/_src/public`), // Файлы отсюда будут скопированы в _dist как есть
 
 	plugins: [
@@ -401,6 +400,7 @@ export default defineConfig({
 			"@scss": path.resolve(__dirname, `${TEMPLATE_PATH}/_src/scss`),
 			"@img": path.resolve(__dirname, `${TEMPLATE_PATH}/_src/images`),
 			"@fonts": path.resolve(__dirname, `${TEMPLATE_PATH}/_src/fonts`),
+			"@public": path.resolve(__dirname, `${TEMPLATE_PATH}/_src/public`),
 			"@vue-components": path.resolve(
 				__dirname,
 				`${TEMPLATE_PATH}/_src/vue-components`,

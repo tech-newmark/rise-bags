@@ -1,0 +1,24 @@
+.product-label {
+	font-size: 12px;
+	text-wrap: nowrap;
+	padding: 4px;
+	border-radius: 4px;
+	color: var(--dark);
+
+	&--discount {
+		background-color: var(--danger);
+		color: var(--white);
+	}
+
+	&--popular {
+		background-color: var(--warning);
+	}
+
+	&--hit {
+		background-color: var(--violet);
+	}
+
+	&--new {
+		background-color: var(--success);
+	}
+}

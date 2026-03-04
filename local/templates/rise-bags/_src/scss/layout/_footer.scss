@@ -1,0 +1,150 @@
+@use "@scss/base/container-queries" as *;
+
+.footer {
+	padding: clamp(60px, 8vw, 100px) 0;
+	border-radius: 30px 30px 0 0;
+	background-color: var(--primary);
+	color: var(--white);
+
+	container: footer / inline-size;
+
+	.grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: clamp(40px, 4vw, 100px);
+
+		@include container-up(footer, 768px) {
+			grid-template-columns: 240px auto 240px;
+		}
+
+		@include container-up(footer, 1240px) {
+			grid-template-columns: 240px auto auto minmax(280px, 360px);
+		}
+
+		@include container-up(footer, 1440px) {
+			justify-content: space-between;
+			grid-template-columns: 240px 440px 220px minmax(280px, 360px);
+		}
+
+		&__item {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			height: fit-content;
+			order: 1;
+
+			&--company {
+				align-items: center;
+			}
+
+			&--contacts {
+				order: 1;
+				@include container-up(footer, 768px) {
+					grid-column: 2/4;
+				}
+
+				@include container-up(footer, 1240px) {
+					grid-column: revert;
+				}
+			}
+
+			&--menu {
+				order: 2;
+				@include container-up(footer, 768px) {
+					&-wide {
+						grid-column: 1/3;
+					}
+				}
+
+				@include container-up(footer, 1240px) {
+					order: 1;
+
+					&-wide {
+						grid-column: revert;
+					}
+				}
+			}
+		}
+	}
+
+	&__logo {
+		margin-bottom: 20px;
+		img {
+			display: flex;
+			width: 100%;
+			max-width: 240px;
+			height: auto;
+			object-fit: contain;
+		}
+	}
+
+	.main-btn {
+		width: 100%;
+		max-width: 320px;
+		&:not(.outlined) {
+			background-color: var(--white);
+			color: var(--primary);
+		}
+		&.outlined {
+			color: var(--white);
+			border-color: var(--white);
+		}
+	}
+}
+
+//
+.underfooter-line {
+	background-color: var(--dark);
+	padding: 20px 0;
+	color: var(--white);
+}
+//
+.contact-block {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 20px;
+	background-color: var(--white);
+	border-radius: var(--base-br);
+
+	&__section {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		&-header {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+
+			svg {
+				fill: var(--gray-900);
+			}
+			&-title {
+				font-weight: 600;
+				color: var(--dark);
+			}
+		}
+
+		&-content {
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+
+			* {
+				color: var(--primary);
+			}
+
+			// a {
+			// 	display: flex;
+			// 	color: var(--primary);
+			// }
+
+			img {
+				width: 100%;
+				max-width: 212px;
+				height: auto;
+				object-fit: contain;
+			}
+		}
+	}
+}
