@@ -241,42 +241,42 @@
 				flex-direction: column;
 				gap: 4px;
 
-				.product-label-container {
-					display: flex;
-					flex-wrap: wrap;
-					gap: 4px;
-				}
+				// .product-label-container {
+				// 	display: flex;
+				// 	flex-wrap: wrap;
+				// 	gap: 4px;
+				// }
 			}
 
-			&-prop {
-				position: relative;
-				display: flex;
-				align-items: flex-end;
-				gap: 4px;
-				padding: 4px 0;
+			// &-prop {
+			// 	position: relative;
+			// 	display: flex;
+			// 	align-items: flex-end;
+			// 	gap: 4px;
+			// 	padding: 4px 0;
 
-				&::before {
-					content: "";
-					flex-grow: 1;
-					border-bottom: 1px dashed var(--gray-600);
-					margin: 0 6px;
-					order: 1;
-				}
+			// 	&::before {
+			// 		content: "";
+			// 		flex-grow: 1;
+			// 		border-bottom: 1px dashed var(--gray-600);
+			// 		margin: 0 6px;
+			// 		order: 1;
+			// 	}
 
-				&-name {
-					font-size: 14px;
-					line-height: 1;
-					color: var(--gray-700);
-				}
+			// 	&-name {
+			// 		font-size: 14px;
+			// 		line-height: 1;
+			// 		color: var(--gray-700);
+			// 	}
 
-				&-value {
-					font-size: 14px;
-					line-height: 1;
-					text-align: right;
-					color: var(--primary);
-					order: 2;
-				}
-			}
+			// 	&-value {
+			// 		font-size: 14px;
+			// 		line-height: 1;
+			// 		text-align: right;
+			// 		color: var(--primary);
+			// 		order: 2;
+			// 	}
+			// }
 
 			&-scu-prop {
 				display: flex;

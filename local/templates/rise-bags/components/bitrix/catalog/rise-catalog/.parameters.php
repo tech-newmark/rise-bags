@@ -106,14 +106,14 @@ $arTemplateParameters["INSTANT_RELOAD"] = array(
 	"DEFAULT" => "N",
 	"HIDDEN" => (!isset($arCurrentValues['USE_FILTER']) || 'N' == $arCurrentValues['USE_FILTER'] ? 'Y' : 'N')
 );
-$arTemplateParameters['TEMPLATE_THEME'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage("CP_BC_TPL_TEMPLATE_THEME"),
-	'TYPE' => 'LIST',
-	'VALUES' => $arThemes,
-	'DEFAULT' => 'blue',
-	'ADDITIONAL_VALUES' => 'Y'
-);
+// $arTemplateParameters['TEMPLATE_THEME'] = array(
+// 	'PARENT' => 'VISUAL',
+// 	'NAME' => GetMessage("CP_BC_TPL_TEMPLATE_THEME"),
+// 	'TYPE' => 'LIST',
+// 	'VALUES' => $arThemes,
+// 	'DEFAULT' => 'blue',
+// 	'ADDITIONAL_VALUES' => 'Y'
+// );
 $arTemplateParameters['SEARCH_PAGE_RESULT_COUNT'] = array(
 	'PARENT' => 'SEARCH_SETTINGS',
 	'NAME' => GetMessage("CP_BC_TPL_SEARCH_PAGE_RESULT_COUNT_MSGVER_1"),
@@ -206,13 +206,13 @@ if ($iblockExists) {
 			}
 		}
 
-		$arTemplateParameters['LIST_PROPERTY_CODE_MOBILE'] = array(
-			'PARENT' => 'LIST_SETTINGS',
-			'NAME' => GetMessage('CP_BC_TPL_PROPERTY_CODE_MOBILE'),
-			'TYPE' => 'LIST',
-			'MULTIPLE' => 'Y',
-			'VALUES' => $selected
-		);
+		// $arTemplateParameters['LIST_PROPERTY_CODE_MOBILE'] = array(
+		// 	'PARENT' => 'LIST_SETTINGS',
+		// 	'NAME' => GetMessage('CP_BC_TPL_PROPERTY_CODE_MOBILE'),
+		// 	'TYPE' => 'LIST',
+		// 	'MULTIPLE' => 'Y',
+		// 	'VALUES' => $selected
+		// );
 	}
 	unset($showedProperties);
 
@@ -340,41 +340,41 @@ if ($iblockExists) {
 			}
 		}
 
-		$arTemplateParameters['LABEL_PROP_MOBILE'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BC_TPL_LABEL_PROP_MOBILE'),
-			'TYPE' => 'LIST',
-			'MULTIPLE' => 'Y',
-			'ADDITIONAL_VALUES' => 'N',
-			'REFRESH' => 'N',
-			'VALUES' => $selected
-		);
-		unset($selected);
+		// $arTemplateParameters['LABEL_PROP_MOBILE'] = array(
+		// 	'PARENT' => 'VISUAL',
+		// 	'NAME' => GetMessage('CP_BC_TPL_LABEL_PROP_MOBILE'),
+		// 	'TYPE' => 'LIST',
+		// 	'MULTIPLE' => 'Y',
+		// 	'ADDITIONAL_VALUES' => 'N',
+		// 	'REFRESH' => 'N',
+		// 	'VALUES' => $selected
+		// );
+		// unset($selected);
 
-		$arTemplateParameters['LABEL_PROP_POSITION'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BC_TPL_LABEL_PROP_POSITION'),
-			'TYPE' => 'CUSTOM',
-			'JS_FILE' => CatalogSectionComponent::getSettingsScript('/bitrix/components/bitrix/catalog.section', 'position'),
-			'JS_EVENT' => 'initPositionControl',
-			'JS_DATA' => Json::encode(
-				array(
-					'positions' => array(
-						'top-left',
-						'top-center',
-						'top-right',
-						'middle-left',
-						'middle-center',
-						'middle-right',
-						'bottom-left',
-						'bottom-center',
-						'bottom-right'
-					),
-					'className' => ''
-				)
-			),
-			'DEFAULT' => 'top-left'
-		);
+		// $arTemplateParameters['LABEL_PROP_POSITION'] = array(
+		// 	'PARENT' => 'VISUAL',
+		// 	'NAME' => GetMessage('CP_BC_TPL_LABEL_PROP_POSITION'),
+		// 	'TYPE' => 'CUSTOM',
+		// 	'JS_FILE' => CatalogSectionComponent::getSettingsScript('/bitrix/components/bitrix/catalog.section', 'position'),
+		// 	'JS_EVENT' => 'initPositionControl',
+		// 	'JS_DATA' => Json::encode(
+		// 		array(
+		// 			'positions' => array(
+		// 				'top-left',
+		// 				'top-center',
+		// 				'top-right',
+		// 				'middle-left',
+		// 				'middle-center',
+		// 				'middle-right',
+		// 				'bottom-left',
+		// 				'bottom-center',
+		// 				'bottom-right'
+		// 			),
+		// 			'className' => ''
+		// 		)
+		// 	),
+		// 	'DEFAULT' => 'top-left'
+		// );
 	}
 
 	if ($boolSKU) {
@@ -859,32 +859,32 @@ if ($boolCatalog) {
 		'REFRESH' => 'Y',
 	);
 
-	if (isset($arCurrentValues['SHOW_DISCOUNT_PERCENT']) && $arCurrentValues['SHOW_DISCOUNT_PERCENT'] === 'Y') {
-		$arTemplateParameters['DISCOUNT_PERCENT_POSITION'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BC_TPL_DISCOUNT_PERCENT_POSITION'),
-			'TYPE' => 'CUSTOM',
-			'JS_FILE' => CatalogSectionComponent::getSettingsScript('/bitrix/components/bitrix/catalog.section', 'position'),
-			'JS_EVENT' => 'initPositionControl',
-			'JS_DATA' => Json::encode(
-				array(
-					'positions' => array(
-						'top-left',
-						'top-center',
-						'top-right',
-						'middle-left',
-						'middle-center',
-						'middle-right',
-						'bottom-left',
-						'bottom-center',
-						'bottom-right'
-					),
-					'className' => 'bx-pos-parameter-block-circle'
-				)
-			),
-			'DEFAULT' => 'bottom-right'
-		);
-	}
+	// if (isset($arCurrentValues['SHOW_DISCOUNT_PERCENT']) && $arCurrentValues['SHOW_DISCOUNT_PERCENT'] === 'Y') {
+	// 	$arTemplateParameters['DISCOUNT_PERCENT_POSITION'] = array(
+	// 		'PARENT' => 'VISUAL',
+	// 		'NAME' => GetMessage('CP_BC_TPL_DISCOUNT_PERCENT_POSITION'),
+	// 		'TYPE' => 'CUSTOM',
+	// 		'JS_FILE' => CatalogSectionComponent::getSettingsScript('/bitrix/components/bitrix/catalog.section', 'position'),
+	// 		'JS_EVENT' => 'initPositionControl',
+	// 		'JS_DATA' => Json::encode(
+	// 			array(
+	// 				'positions' => array(
+	// 					'top-left',
+	// 					'top-center',
+	// 					'top-right',
+	// 					'middle-left',
+	// 					'middle-center',
+	// 					'middle-right',
+	// 					'bottom-left',
+	// 					'bottom-center',
+	// 					'bottom-right'
+	// 				),
+	// 				'className' => 'bx-pos-parameter-block-circle'
+	// 			)
+	// 		),
+	// 		'DEFAULT' => 'bottom-right'
+	// 	);
+	// }
 
 	$arTemplateParameters['SHOW_OLD_PRICE'] = array(
 		'PARENT' => 'VISUAL',
@@ -1221,13 +1221,13 @@ $arTemplateParameters['SIDEBAR_SECTION_SHOW'] = array(
 	'DEFAULT' => 'Y',
 	'SORT' => 800
 );
-$arTemplateParameters['SIDEBAR_DETAIL_SHOW'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CPT_SIDEBAR_DETAIL_SHOW'),
-	'TYPE' => 'CHECKBOX',
-	'DEFAULT' => 'N',
-	'SORT' => 800
-);
+// $arTemplateParameters['SIDEBAR_DETAIL_SHOW'] = array(
+// 	'PARENT' => 'VISUAL',
+// 	'NAME' => GetMessage('CPT_SIDEBAR_DETAIL_SHOW'),
+// 	'TYPE' => 'CHECKBOX',
+// 	'DEFAULT' => 'N',
+// 	'SORT' => 800
+// );
 $arTemplateParameters['SIDEBAR_PATH'] = array(
 	'PARENT' => 'VISUAL',
 	'NAME' => GetMessage('CPT_SIDEBAR_PATH'),

@@ -5,6 +5,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 }
 
 use Bitrix\Main;
+// use Bitrix\Main\Web\Json;
 
 /**
  * @global CMain $APPLICATION
@@ -104,13 +105,11 @@ if (isset($arResult['ITEM'])):
 	$itemHasDetailUrl = isset($item['DETAIL_PAGE_URL']) && $item['DETAIL_PAGE_URL'] != '';
 ?>
 
-	<div class="product-item-container<?= (isset($arResult['SCALABLE']) && $arResult['SCALABLE'] === 'Y' ? ' product-item-scalable-card' : '') ?>"
-		id="<?= $areaId ?>" data-entity="item">
+	<div class="product-item-container" id="<?= $areaId ?>" data-entity="item">
 		<?php
 		$documentRoot = Main\Application::getDocumentRoot();
-		// $templatePath = mb_strtolower($arResult['TYPE']) . '/template.php';
 
-		$file = new Main\IO\File($documentRoot . $templateFolder . '/card/template.php');
+		$file = new Main\IO\File($documentRoot . $templateFolder . '/card-template.php');
 		if ($file->isExists()) {
 			include($file->getPath());
 		}

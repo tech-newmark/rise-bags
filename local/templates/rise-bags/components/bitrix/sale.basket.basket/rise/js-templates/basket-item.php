@@ -217,11 +217,11 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 								?>
 									{{#COLUMN_LIST}}
 										{{#IS_IMAGE}}
-											<div class="bx-basket__list-item-prop" data-entity="basket-item-property">
-												<span class="bx-basket__list-item-prop-name">{{NAME}}</span>
-												<span class="bx-basket__list-item-prop-value">
+											<div class="prop-list-item" data-entity="basket-item-property">
+												<span class="prop-list-item-name">{{NAME}}</span>
+												<span class="prop-list-item-value">
 													{{#VALUE}}
-														<img class="bx-basket__list-item-prop-img"
+														<img class="prop-list-item-img"
 															src="{{{IMAGE_SRC}}}" data-image-index="{{INDEX}}"
 															data-column-property-code="{{CODE}}" width="32" height="32" alt="{{NAME}}">
 													{{/VALUE}}
@@ -230,9 +230,9 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 										{{/IS_IMAGE}}
 
 										{{#IS_TEXT}}
-											<div class="bx-basket__list-item-prop" data-entity="basket-item-property">
-												<span class="bx-basket__list-item-prop-name">{{NAME}}</span>
-												<span class="bx-basket__list-item-prop-value"
+											<div class="prop-list-item" data-entity="basket-item-property">
+												<span class="prop-list-item-name">{{NAME}}</span>
+												<span class="prop-list-item-value"
 													data-column-property-code="{{CODE}}"
 													data-entity="basket-item-property-column-value">
 													{{VALUE}}
@@ -241,9 +241,9 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 										{{/IS_TEXT}}
 
 										{{#IS_HTML}}
-											<div class="bx-basket__list-item-prop" data-entity="basket-item-property">
-												<span class="bx-basket__list-item-prop-name">{{NAME}}</span>
-												<span class="bx-basket__list-item-prop-value" data-column-property-code="{{CODE}}"
+											<div class="prop-list-item" data-entity="basket-item-property">
+												<span class="prop-list-item-name">{{NAME}}</span>
+												<span class="prop-list-item-value" data-column-property-code="{{CODE}}"
 													data-entity="basket-item-property-column-value">
 													{{{VALUE}}}
 												</span>
@@ -251,9 +251,9 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 										{{/IS_HTML}}
 
 										{{#IS_LINK}}
-											<div class="bx-basket__list-item-prop" data-entity="basket-item-property">
-												<span class="bx-basket__list-item-prop-name">{{NAME}}</span>
-												<span class="bx-basket__list-item-prop-value" data-column-property-code="{{CODE}}"
+											<div class="prop-list-item" data-entity="basket-item-property">
+												<span class="prop-list-item-name">{{NAME}}</span>
+												<span class="prop-list-item-value" data-column-property-code="{{CODE}}"
 													data-entity="basket-item-property-column-value">
 													{{#VALUE}}
 														{{{LINK}}}{{^IS_LAST}}<br>{{/IS_LAST}}
