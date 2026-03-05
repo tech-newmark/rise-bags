@@ -12,18 +12,9 @@
 /** @var CBitrixComponent $component */
 
 use Bitrix\Main\Loader;
-// use Bitrix\Main\ModuleManager;
+use Bitrix\Main\ModuleManager;
 
 $this->setFrameMode(true);
-
-// global $vite;
-
-// $componentName = 'rise-catalog/section';
-// $cssPath = $vite->getComponentCss($componentName);
-// $jsPath = $vite->getComponentJs($componentName);
-
-// if ($cssPath) $this->addExternalCss($cssPath);
-// if ($jsPath) $this->addExternalJs($jsPath);
 ?>
 
 <?
