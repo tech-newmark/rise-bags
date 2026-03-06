@@ -3,9 +3,10 @@
 	align-items: center;
 	height: 40px;
 	border: 1px solid var(--primary);
-	border-radius: 6px;
+	border-radius: 30px;
 	overflow: hidden;
 	width: 140px;
+	min-width: 140px;
 
 	&-btn {
 		display: flex;
@@ -17,17 +18,23 @@
 		padding: 6px;
 		border: none;
 		background-color: var(--primary);
-
-		// &--dec {
-		// 	background-image: url("@img/minus-icon.svg");
-		// }
-
-		// &--inc {
-		// 	background-image: url("@img/plus-icon.svg");
-		// }
+		transition: opacity var(--main-transition);
 
 		svg {
 			fill: var(--white);
+		}
+
+		&.disabled {
+			pointer-events: none;
+			opacity: 0.6;
+		}
+
+		&--inc {
+			padding-right: 10px;
+		}
+
+		&--dec {
+			padding-left: 10px;
 		}
 	}
 
@@ -37,5 +44,10 @@
 		outline: none;
 		text-align: center;
 		font-size: 16px;
+
+		&.disabled {
+			pointer-events: none;
+			opacity: 0.6;
+		}
 	}
 }

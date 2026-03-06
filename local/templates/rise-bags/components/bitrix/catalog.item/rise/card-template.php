@@ -77,6 +77,16 @@ use Bitrix\Main\Localization\Loc;
 					<? endforeach; ?>
 				</div>
 			<? endif; ?>
+
+			<? if ($arParams['DISPLAY_COMPARE'] && (!$haveOffers || $arParams['PRODUCT_DISPLAY_MODE'] === 'Y')): ?>
+				<label id="<?= $itemIds['COMPARE_LINK'] ?>" class="compare">
+					<input type="checkbox" data-entity="compare-checkbox">
+					<svg width='32' height='32' role='img' aria-hidden='true' focusable='false'>
+						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#compare-icon'></use>
+					</svg>
+				</label>
+			<? endif; ?>
+
 			<!-- готово -->
 
 			<div
@@ -115,22 +125,18 @@ if (!empty($arParams['PRODUCT_BLOCKS_ORDER'])) {
 	foreach ($arParams['PRODUCT_BLOCKS_ORDER'] as $blockName) {
 		switch ($blockName) {
 			case 'price': ?>
-				PRICE CASE
-				<div class="product-item-info-container product-item-price-container" data-entity="price-block">
-					<?
-					if ($arParams['SHOW_OLD_PRICE'] === 'Y' && !empty($price)) {
-					?>
-						<span class="product-item-price-old" id="<?= $itemIds['PRICE_OLD'] ?>"
+				<!-- готово -->
+				<div class="product-item-price-container" data-entity="price-block">
+					<? if ($arParams['SHOW_OLD_PRICE'] === 'Y' && !empty($price)): ?>
+						<span class="product-item-price product-item-price--old" id="<?= $itemIds['PRICE_OLD'] ?>"
 							<?= ($price['RATIO_PRICE'] >= $price['RATIO_BASE_PRICE'] ? 'style="display: none;"' : '') ?>>
 							<?= $price['PRINT_RATIO_BASE_PRICE'] ?>
-						</span>&nbsp;
-					<?
-					}
-					?>
-					<span class="product-item-price-current" id="<?= $itemIds['PRICE'] ?>">
-						<?
-						if (!empty($price)) {
-							if ($arParams['PRODUCT_DISPLAY_MODE'] === 'N' && $haveOffers) {
+						</span>
+					<? endif; ?>
+					<span class="product-item-price product-item-price--current" id="<?= $itemIds['PRICE'] ?>">
+						<? if (!empty($price)): ?>
+							<?
+							if ($arParams['PRODUCT_DISPLAY_MODE'] === 'N' && $haveOffers):
 								echo Loc::getMessage(
 									'CT_BCI_TPL_MESS_PRICE_SIMPLE_MODE',
 									array(
@@ -139,13 +145,15 @@ if (!empty($arParams['PRODUCT_BLOCKS_ORDER'])) {
 										'#UNIT#' => $minOffer['ITEM_MEASURE']['TITLE']
 									)
 								);
-							} else {
+							else:
 								echo $price['PRINT_RATIO_PRICE'];
-							}
-						}
-						?>
+							endif;
+							?>
+						<? endif; ?>
 					</span>
 				</div>
+				<!-- готово -->
+
 				<?
 				break;
 
@@ -190,7 +198,7 @@ if (!empty($arParams['PRODUCT_BLOCKS_ORDER'])) {
 									</span>
 								</div>
 							</div>
-						<?
+					<?
 						}
 					}
 				}
@@ -198,50 +206,39 @@ if (!empty($arParams['PRODUCT_BLOCKS_ORDER'])) {
 				break;
 
 			case 'quantity':
-				if (!$haveOffers) {
-					if ($actualItem['CAN_BUY'] && $arParams['USE_PRODUCT_QUANTITY']) {
-						?>
-						quantity
-						<div class="product-item-info-container product-item-hidden" data-entity="quantity-block">
-							<div class="product-item-amount">
-								<div class="product-item-amount-field-container">
-									<span class="product-item-amount-field-btn-minus no-select" id="<?= $itemIds['QUANTITY_DOWN'] ?>"></span>
-									<input class="product-item-amount-field" id="<?= $itemIds['QUANTITY'] ?>" type="number"
-										name="<?= $arParams['PRODUCT_QUANTITY_VARIABLE'] ?>"
-										value="<?= $measureRatio ?>">
-									<span class="product-item-amount-field-btn-plus no-select" id="<?= $itemIds['QUANTITY_UP'] ?>"></span>
-									<span class="product-item-amount-description-container">
-										<span id="<?= $itemIds['QUANTITY_MEASURE'] ?>">
-											<?= $actualItem['ITEM_MEASURE']['TITLE'] ?>
-										</span>
-										<span id="<?= $itemIds['PRICE_TOTAL'] ?>"></span>
-									</span>
-								</div>
-							</div>
-						</div>
-					<?
-					}
-				} elseif ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y') {
-					if ($arParams['USE_PRODUCT_QUANTITY']) {
+				// готово
+				$showQuantityBlock = (
+					!$haveOffers && $actualItem['CAN_BUY'] && $arParams['USE_PRODUCT_QUANTITY']
+				) || (
+					$haveOffers && $arParams['PRODUCT_DISPLAY_MODE'] === 'Y' && $arParams['USE_PRODUCT_QUANTITY']
+				);
+
+				if ($showQuantityBlock):
 					?>
-						<div class="product-item-info-container product-item-hidden" data-entity="quantity-block">
-							<div class="product-item-amount">
-								<div class="product-item-amount-field-container">
-									<span class="product-item-amount-field-btn-minus no-select" id="<?= $itemIds['QUANTITY_DOWN'] ?>"></span>
-									<input class="product-item-amount-field" id="<?= $itemIds['QUANTITY'] ?>" type="number"
-										name="<?= $arParams['PRODUCT_QUANTITY_VARIABLE'] ?>"
-										value="<?= $measureRatio ?>">
-									<span class="product-item-amount-field-btn-plus no-select" id="<?= $itemIds['QUANTITY_UP'] ?>"></span>
-									<span class="product-item-amount-description-container">
-										<span id="<?= $itemIds['QUANTITY_MEASURE'] ?>"><?= $actualItem['ITEM_MEASURE']['TITLE'] ?></span>
-										<span id="<?= $itemIds['PRICE_TOTAL'] ?>"></span>
-									</span>
-								</div>
-							</div>
+					<div class="counter-block">
+						<div class="counter" data-entity="quantity-block">
+							<button type="button" class="counter-btn counter-btn--dec" id="<?= $itemIds['QUANTITY_DOWN'] ?>">
+								<svg width="24" height="24" role="img" aria-hidden="true" focusable="false">
+									<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#icon-minus"></use>
+								</svg>
+							</button>
+							<input type="number" value="1" disabled="disabled" data-value="1" id="<?= $itemIds['QUANTITY'] ?>" type="number"
+								name="<?= $arParams['PRODUCT_QUANTITY_VARIABLE'] ?>"
+								value="<?= $measureRatio ?>">
+							<button type="button" class="counter-btn counter-btn--inc" id="<?= $itemIds['QUANTITY_UP'] ?>">
+								<svg width="24" height="24" role="img" aria-hidden="true" focusable="false">
+									<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#icon-plus"></use>
+								</svg>
+							</button>
 						</div>
-				<?
-					}
-				}
+						<span class="product-item-amount-description-container">
+							<small id="<?= $itemIds['QUANTITY_MEASURE'] ?>">
+								<?= $actualItem['ITEM_MEASURE']['TITLE'] ?>
+							</small>
+							<small id="<?= $itemIds['PRICE_TOTAL'] ?>"></small>
+						</span>
+					</div>
+				<? endif;
 
 				break;
 
@@ -449,67 +446,54 @@ if (!empty($arParams['PRODUCT_BLOCKS_ORDER'])) {
 				break;
 
 			case 'sku':
-				if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y' && $haveOffers && !empty($item['OFFERS_PROP'])) {
-					?>
-					sku
+				if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y' && $haveOffers && !empty($item['OFFERS_PROP'])): ?>
+					<!-- готово -->
 					<div id="<?= $itemIds['PROP_DIV'] ?>">
 						<?
-						foreach ($arParams['SKU_PROPS'] as $skuProperty) {
+						foreach ($arParams['SKU_PROPS'] as $skuProperty):
 							$propertyId = $skuProperty['ID'];
 							$skuProperty['NAME'] = htmlspecialcharsbx($skuProperty['NAME']);
 							if (!isset($item['SKU_TREE_VALUES'][$propertyId]))
 								continue;
 						?>
-							<!-- забрать с карточки в корзине -->
-							<div class="product-item-info-container" data-entity="sku-block">
-								<div class="product-item-scu-container" data-entity="sku-line-block">
-									<?= $skuProperty['NAME'] ?>
-									<div class="product-item-scu-block">
-										<div class="product-item-scu-list">
-											<ul class="product-item-scu-item-list">
-												<?
-												foreach ($skuProperty['VALUES'] as $value) {
-													if (!isset($item['SKU_TREE_VALUES'][$propertyId][$value['ID']]))
-														continue;
 
-													$value['NAME'] = htmlspecialcharsbx($value['NAME']);
+							<div class="scu-prop-block" data-entity="sku-block">
+								<div class="scu-prop-container" data-entity="sku-line-block">
+									<span class="scu-prop-name"><?= $skuProperty['NAME'] ?></span>
+									<ul class="scu-prop-list">
 
-													if ($skuProperty['SHOW_MODE'] === 'PICT') {
-												?>
-														<li class="product-item-scu-item-color-container" title="<?= $value['NAME'] ?>"
-															data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
-															<div class="product-item-scu-item-color-block">
-																<div class="product-item-scu-item-color" title="<?= $value['NAME'] ?>"
-																	style="background-image: url('<?= $value['PICT']['SRC'] ?>');">
-																</div>
-															</div>
-														</li>
-													<?
-													} else {
-													?>
-														<li class="product-item-scu-item-text-container" title="<?= $value['NAME'] ?>"
-															data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
-															<div class="product-item-scu-item-text-block">
-																<div class="product-item-scu-item-text"><?= $value['NAME'] ?></div>
-															</div>
-														</li>
-												<?
-													}
-												}
-												?>
-											</ul>
-											<div style="clear: both;"></div>
-										</div>
-									</div>
+										<? foreach ($skuProperty['VALUES'] as $value):
+											if (!isset($item['SKU_TREE_VALUES'][$propertyId][$value['ID']]))
+												continue;
+
+											$value['NAME'] = htmlspecialcharsbx($value['NAME']);
+
+											if ($skuProperty['SHOW_MODE'] === 'PICT'):
+										?>
+												<li class="scu-prop-list-item" title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
+													<button type="button" class="scu-prop-list-item-value">
+														<img src="<?= $value['PICT']['SRC'] ?>" alt="<?= $value['NAME'] ?>" width="40" height="40">
+													</button>
+												</li>
+											<? else: ?>
+												<li title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
+													<button type="button" class="scu-prop-list-item-value">
+														<span><?= $value['NAME'] ?></span>
+													</button>
+												</li>
+										<? endif;
+										endforeach;
+										?>
+									</ul>
 								</div>
 							</div>
-						<?
-						}
-						?>
+
+						<? endforeach; ?>
 					</div>
-<?
-					foreach ($arParams['SKU_PROPS'] as $skuProperty) {
-						if (!isset($item['OFFERS_PROP'][$skuProperty['CODE']]))
+					<!-- готово -->
+
+					<? foreach ($arParams['SKU_PROPS'] as $skuProperty): ?>
+						<? if (!isset($item['OFFERS_PROP'][$skuProperty['CODE']]))
 							continue;
 
 						$skuProps[] = array(
@@ -517,13 +501,12 @@ if (!empty($arParams['PRODUCT_BLOCKS_ORDER'])) {
 							'SHOW_MODE' => $skuProperty['SHOW_MODE'],
 							'VALUES' => $skuProperty['VALUES'],
 							'VALUES_COUNT' => $skuProperty['VALUES_COUNT']
-						);
-					}
+						); ?>
+					<? endforeach;
+					unset($skuProperty, $value); ?>
 
-					unset($skuProperty, $value);
-
-					if ($item['OFFERS_PROPS_DISPLAY']) {
-						foreach ($item['JS_OFFERS'] as $keyOffer => $jsOffer) {
+					<? if ($item['OFFERS_PROPS_DISPLAY']): ?>
+<? foreach ($item['JS_OFFERS'] as $keyOffer => $jsOffer):
 							$strProps = '';
 
 							if (!empty($jsOffer['DISPLAY_PROPERTIES'])) {
@@ -537,31 +520,14 @@ if (!empty($arParams['PRODUCT_BLOCKS_ORDER'])) {
 							}
 
 							$item['JS_OFFERS'][$keyOffer]['DISPLAY_PROPERTIES'] = $strProps;
-						}
+						endforeach;
 						unset($jsOffer, $strProps);
-					}
-				}
+					endif;
+				endif;
 
 				break;
 		}
 	}
 }
 ?>
-
-<? if (
-	$arParams['DISPLAY_COMPARE']
-	&& (!$haveOffers || $arParams['PRODUCT_DISPLAY_MODE'] === 'Y')
-):
-?>
-	<div class="product-item-compare-container">
-		<div class="product-item-compare">
-			<div class="checkbox">
-				<label id="<?= $itemIds['COMPARE_LINK'] ?>">
-					<input type="checkbox" data-entity="compare-checkbox">
-					<span data-entity="compare-title"><?= $arParams['MESS_BTN_COMPARE'] ?></span>
-				</label>
-			</div>
-		</div>
-	</div>
-<? endif; ?>
 </div>

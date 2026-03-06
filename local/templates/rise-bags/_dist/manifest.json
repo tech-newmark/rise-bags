@@ -34,7 +34,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/_src/scss/template.scss": {
-    "file": "template_styles.BZiShG4-.css",
+    "file": "template_styles.nrHnpSiZ.css",
     "src": "local/templates/rise-bags/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
@@ -43,7 +43,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/catalog.item/rise/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog.item/rise/style.BpLD47au.css",
+    "file": "components/bitrix/catalog.item/rise/style.DvoitjW9.css",
     "src": "local/templates/rise-bags/components/bitrix/catalog.item/rise/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_item_rise_scss",
@@ -112,7 +112,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/sale.basket.basket/rise/_src/scss/index.scss": {
-    "file": "components/bitrix/sale.basket.basket/rise/style.DLIGNHOG.css",
+    "file": "components/bitrix/sale.basket.basket/rise/style.CDZc0Y6P.css",
     "src": "local/templates/rise-bags/components/bitrix/sale.basket.basket/rise/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_sale_basket_basket_rise_scss",

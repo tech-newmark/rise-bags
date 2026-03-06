@@ -55,7 +55,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		],
 		"SHOW_TOP_ELEMENTS" => "Y",
 		"SECTION_COUNT_ELEMENTS" => "Y",
-		"SECTION_TOP_DEPTH" => "3",
+		"SECTION_TOP_DEPTH" => "2",
 		"SECTIONS_VIEW_MODE" => "LIST",
 		"SECTIONS_SHOW_PARENT_NAME" => "Y",
 		"PAGE_ELEMENT_COUNT" => "15",
