@@ -19,7 +19,6 @@
 	BX.extend(BasketButton, BX.PopupWindowButton);
 
 	window.JCCatalogItem = function (arParams) {
-		this.swiperInstance = null;
 		this.productType = 0;
 		this.showQuantity = true;
 		this.showAbsent = true;
@@ -391,7 +390,6 @@
 			}
 
 			this.obPict = BX(this.visual.PICT_ID);
-			console.log(this.obPict, "obPict");
 			if (!this.obPict) {
 				this.errorCode = -2;
 			}
@@ -401,13 +399,12 @@
 			}
 
 			this.obPictSlider = BX(this.visual.PICT_SLIDER_ID);
-			// this.obPictSliderIndicator = BX(
-			// 	this.visual.PICT_SLIDER_ID + "_indicator",
-			// );
-			// this.obPictSliderProgressBar = BX(
-			// 	this.visual.PICT_SLIDER_ID + "_progress_bar",
-			// );
-			console.log(this.obPictSlider, "SLIDER");
+			this.obPictSliderIndicator = BX(
+				this.visual.PICT_SLIDER_ID + "_indicator",
+			);
+			this.obPictSliderProgressBar = BX(
+				this.visual.PICT_SLIDER_ID + "_progress_bar",
+			);
 			if (!this.obPictSlider) {
 				this.errorCode = -4;
 			}
@@ -494,45 +491,45 @@
 
 			if (this.errorCode === 0) {
 				// product slider events
-				// if (this.isTouchDevice) {
-				// 	BX.bind(
-				// 		this.obPictSlider,
-				// 		"touchstart",
-				// 		BX.proxy(this.touchStartEvent, this),
-				// 	);
-				// 	BX.bind(
-				// 		this.obPictSlider,
-				// 		"touchend",
-				// 		BX.proxy(this.touchEndEvent, this),
-				// 	);
-				// 	BX.bind(
-				// 		this.obPictSlider,
-				// 		"touchcancel",
-				// 		BX.proxy(this.touchEndEvent, this),
-				// 	);
-				// } else {
-				// 	if (this.viewMode === "CARD") {
-				// 		// product hover events
-				// 		BX.bind(this.obProduct, "mouseenter", BX.proxy(this.hoverOn, this));
-				// 		BX.bind(
-				// 			this.obProduct,
-				// 			"mouseleave",
-				// 			BX.proxy(this.hoverOff, this),
-				// 		);
-				// 	}
+				if (this.isTouchDevice) {
+					BX.bind(
+						this.obPictSlider,
+						"touchstart",
+						BX.proxy(this.touchStartEvent, this),
+					);
+					BX.bind(
+						this.obPictSlider,
+						"touchend",
+						BX.proxy(this.touchEndEvent, this),
+					);
+					BX.bind(
+						this.obPictSlider,
+						"touchcancel",
+						BX.proxy(this.touchEndEvent, this),
+					);
+				} else {
+					if (this.viewMode === "CARD") {
+						// product hover events
+						BX.bind(this.obProduct, "mouseenter", BX.proxy(this.hoverOn, this));
+						BX.bind(
+							this.obProduct,
+							"mouseleave",
+							BX.proxy(this.hoverOff, this),
+						);
+					}
 
-				// 	// product slider events
-				// 	BX.bind(
-				// 		this.obProduct,
-				// 		"mouseenter",
-				// 		BX.proxy(this.cycleSlider, this),
-				// 	);
-				// 	BX.bind(
-				// 		this.obProduct,
-				// 		"mouseleave",
-				// 		BX.proxy(this.stopSlider, this),
-				// 	);
-				// }
+					// product slider events
+					BX.bind(
+						this.obProduct,
+						"mouseenter",
+						BX.proxy(this.cycleSlider, this),
+					);
+					BX.bind(
+						this.obProduct,
+						"mouseleave",
+						BX.proxy(this.stopSlider, this),
+					);
+				}
 
 				if (this.bigData) {
 					var links = BX.findChildren(this.obProduct, { tag: "a" }, true);
@@ -1173,45 +1170,52 @@
 		},
 
 		initializeSlider: function () {
-			console.log("init slider");
-
-			// Если Swiper уже инициализирован, уничтожаем его
-			if (this.swiperInstance) {
-				this.swiperInstance.destroy(true, true);
-				this.swiperInstance = null;
+			var wrap = this.obPictSlider.getAttribute("data-slider-wrap");
+			if (wrap) {
+				this.slider.options.wrap = wrap === "true";
+			} else {
+				this.slider.options.wrap = this.defaultSliderOptions.wrap;
 			}
 
-			// Инициализируем новый Swiper
-			if (typeof Swiper !== "undefined" && this.obPictSlider) {
-				this.swiperInstance = new Swiper(this.obPictSlider.closest(".swiper"), {
-					// Базовые настройки
-					slidesPerView: 1,
-					spaceBetween: 0,
-					loop: true,
+			if (this.isTouchDevice) {
+				this.slider.options.interval = false;
+			} else {
+				this.slider.options.interval =
+					parseInt(this.obPictSlider.getAttribute("data-slider-interval")) ||
+					this.defaultSliderOptions.interval;
+				// slider interval must be more than 700ms because of css transitions
+				if (this.slider.options.interval < 700) {
+					this.slider.options.interval = 700;
+				}
 
-					// Пагинация
-					pagination: {
-						el: this.obPictSlider
-							.closest(".swiper")
-							.querySelector(".swiper-pagination"),
-						clickable: true,
-					},
+				if (this.obPictSliderIndicator) {
+					var controls =
+						this.obPictSliderIndicator.querySelectorAll("[data-go-to]");
+					for (var i in controls) {
+						if (controls.hasOwnProperty(i)) {
+							BX.bind(
+								controls[i],
+								"click",
+								BX.proxy(this.sliderClickHandler, this),
+							);
+						}
+					}
+				}
 
-					// Навигация (если нужны стрелки)
-					// navigation: {
-					// 	nextEl: '.swiper-button-next',
-					// 	prevEl: '.swiper-button-prev',
-					// },
-
-					// Автопрокрутка (опционально)
-					autoplay: {
-						delay: 5000,
-						disableOnInteraction: false,
-					},
-
-					// Отключаем автопрокрутку при наведении
-					autoplayOnHover: "pause",
-				});
+				if (this.obPictSliderProgressBar) {
+					if (this.slider.progress) {
+						this.resetProgress();
+						this.cycleSlider();
+					} else {
+						this.slider.progress = new BX.easing({
+							transition: BX.easing.transitions.linear,
+							step: BX.delegate(function (state) {
+								this.obPictSliderProgressBar.style.width =
+									state.width / 10 + "%";
+							}, this),
+						});
+					}
+				}
 			}
 		},
 
@@ -1757,41 +1761,57 @@
 					for (i in this.offers[index].MORE_PHOTO) {
 						if (this.offers[index].MORE_PHOTO.hasOwnProperty(i)) {
 							this.obPictSlider.appendChild(
-								BX.create("div", {
+								BX.create("SPAN", {
 									props: {
-										className: "swiper-slide",
+										className:
+											"product-item-image-slide item" +
+											(i == 0 ? " active" : ""),
 									},
-									children: [
-										BX.create("img", {
-											props: {
-												src: this.offers[index].MORE_PHOTO[i].SRC,
-												alt: this.product.name || "product image",
-												className: "swiper-slide-image",
-											},
-											attrs: {
-												loading: "lazy",
-											},
-										}),
-									],
+									style: {
+										backgroundImage:
+											"url('" + this.offers[index].MORE_PHOTO[i].SRC + "')",
+									},
 								}),
 							);
 						}
 					}
 
+					// fill slider indicator if exists
+					if (this.obPictSliderIndicator) {
+						BX.cleanNode(this.obPictSliderIndicator);
+
+						for (i in this.offers[index].MORE_PHOTO) {
+							if (this.offers[index].MORE_PHOTO.hasOwnProperty(i)) {
+								this.obPictSliderIndicator.appendChild(
+									BX.create("DIV", {
+										attrs: { "data-go-to": i },
+										props: {
+											className:
+												"product-item-image-slider-control" +
+												(i == 0 ? " active" : ""),
+										},
+									}),
+								);
+								this.obPictSliderIndicator.appendChild(
+									document.createTextNode(" "),
+								);
+							}
+						}
+
+						this.obPictSliderIndicator.style.display = "";
+					}
+
+					if (this.obPictSliderProgressBar) {
+						this.obPictSliderProgressBar.style.display = "";
+					}
+
 					// show slider container
 					this.obPictSlider.style.display = "";
-
-					// Инициализируем слайдер с новыми слайдами
 					this.initializeSlider();
 				} else {
 					// hide slider container
 					if (this.obPictSlider) {
 						this.obPictSlider.style.display = "none";
-						// Уничтожаем Swiper если он был
-						if (this.swiperInstance) {
-							this.swiperInstance.destroy(true, true);
-							this.swiperInstance = null;
-						}
 					}
 
 					if (this.obPictSliderIndicator) {

@@ -36,34 +36,31 @@ use Bitrix\Main\Localization\Loc;
 			<div class="product-item-image-wrapper" data-entity="image-wrapper">
 			<? endif; ?>
 
-			<div class="swiper">
-				<div class="swiper-wrapper" id="<?= $itemIds['PICT_SLIDER'] ?>">
-					<? if ($showSlider): ?>
-						<? foreach ($morePhoto as $key => $photo): ?>
-							<div class="swiper-slide">
-								<img src="<?= $photo['SRC'] ?>" alt="">
-							</div>
-						<? endforeach; ?>
-					<? endif; ?>
+			<span
+				class="product-item-image-slider-slide-container slide" id="<?= $itemIds['PICT_SLIDER'] ?>"
+				<?= ($showSlider ? '' : 'style="display: none;"') ?>
+				data-slider-interval="<?= $arParams['SLIDER_INTERVAL'] ?>" data-slider-wrap="true">
 
-					<div class="swiper-slide" id="<?= $itemIds['PICT'] ?>">
-						<? if (!$showSlider): ?>
-							<img src="<?= $item['PREVIEW_PICTURE']['SRC'] ?>" alt="">
-						<? endif; ?>
-					</div>
+				<? if ($showSlider): ?>
+					<? foreach ($morePhoto as $key => $photo): ?>
+						<span class="product-item-image-slide item <?= ($key == 0 ? 'active' : '') ?>"
+							style="background-image: url('<?= $photo['SRC'] ?>');">
+						</span>
+					<? endforeach; ?>
+				<? endif; ?>
+			</span>
 
-					<? if ($item['SECOND_PICT']):
-						$bgImage = !empty($item['PREVIEW_PICTURE_SECOND']) ? $item['PREVIEW_PICTURE_SECOND']['SRC'] : $item['PREVIEW_PICTURE']['SRC'];
-					?>
-						<? if (!$showSlider): ?>
-							<div class="swiper-slide" id="<?= $itemIds['SECOND_PICT'] ?>">
-								<img src="<?= $bgImage ?>" alt="">
-							</div>
-						<? endif; ?>
-					<? endif; ?>
-				</div>
-				<div class="swiper-pagination" aria-label="Пагинация"></div>
-			</div>
+			<span class="product-item-image-original" id="<?= $itemIds['PICT'] ?>"
+				style="background-image: url('<?= $item['PREVIEW_PICTURE']['SRC'] ?>'); <?= ($showSlider ? 'display: none;' : '') ?>">
+			</span>
+
+			<? if ($item['SECOND_PICT']):
+				$bgImage = !empty($item['PREVIEW_PICTURE_SECOND']) ? $item['PREVIEW_PICTURE_SECOND']['SRC'] : $item['PREVIEW_PICTURE']['SRC'];
+			?>
+				<span class="product-item-image-alternative" id="<?= $itemIds['SECOND_PICT'] ?>"
+					style="background-image: url('<?= $bgImage ?>'); <?= ($showSlider ? 'display: none;' : '') ?>">
+				</span>
+			<? endif; ?>
 
 			<!-- готово метки(хит и тд) и скидка-->
 			<? if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y' && !empty($price) && $price['PERCENT'] > 0): ?>
@@ -114,28 +111,6 @@ use Bitrix\Main\Localization\Loc;
 </div>
 <? endif; ?>
 
-<style>
-	.product-item-image-wrapper * {
-		z-index: 8;
-	}
-
-	.swiper {
-		width: 100%;
-		height: 100%;
-		z-index: 7;
-	}
-
-	.swiper-slide {
-		display: flex;
-		padding: 16px;
-	}
-
-	.swiper-slide img {
-		width: 100%;
-		height: auto;
-		object-fit: contain;
-	}
-</style>
 
 <? if ($itemHasDetailUrl): ?>
 	<a class="product-item-title" href="<?= $item['DETAIL_PAGE_URL'] ?>" title="<?= $productTitle ?>">

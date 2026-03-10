@@ -28,7 +28,7 @@
     "src": "local/templates/rise-bags/_src/fonts/SegoeUI-Regular.woff2"
   },
   "local/templates/rise-bags/_src/js/index.js": {
-    "file": "template_scripts.ajSj6BSv.js",
+    "file": "template_scripts.L3kpfaRR.js",
     "name": "script",
     "src": "local/templates/rise-bags/_src/js/index.js",
     "isEntry": true
@@ -41,6 +41,12 @@
     "names": [
       "template.css"
     ]
+  },
+  "local/templates/rise-bags/components/bitrix/catalog.item/rise/_src/js/index.js": {
+    "file": "components/bitrix/catalog.item/rise/script.DfHZ6Q6a.js",
+    "name": "bitrix_catalog_item_rise_js",
+    "src": "local/templates/rise-bags/components/bitrix/catalog.item/rise/_src/js/index.js",
+    "isEntry": true
   },
   "local/templates/rise-bags/components/bitrix/catalog.item/rise/_src/scss/index.scss": {
     "file": "components/bitrix/catalog.item/rise/style.DvoitjW9.css",
