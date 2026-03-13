@@ -389,7 +389,8 @@ if ($iblockExists) {
 			'VALUES' => array(
 				'N' => GetMessage('CP_BC_TPL_DML_SIMPLE'),
 				'Y' => GetMessage('CP_BC_TPL_DML_EXT')
-			)
+			),
+			'REFRESH' => 'Y'
 		);
 		$arAllOfferPropList = array();
 		$arFileOfferPropList = array(
@@ -421,16 +422,20 @@ if ($iblockExists) {
 			)
 				$arTreeOfferPropList[$arProp['CODE']] = $strPropName;
 		}
-		$arTemplateParameters['OFFER_ADD_PICT_PROP'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BC_TPL_OFFER_ADD_PICT_PROP'),
-			'TYPE' => 'LIST',
-			'MULTIPLE' => 'N',
-			'ADDITIONAL_VALUES' => 'N',
-			'REFRESH' => 'N',
-			'DEFAULT' => '-',
-			'VALUES' => $arFileOfferPropList
-		);
+
+		if ($arCurrentValues['PRODUCT_DISPLAY_MODE'] === "Y") {
+			$arTemplateParameters['OFFER_ADD_PICT_PROP'] = array(
+				'PARENT' => 'VISUAL',
+				'NAME' => GetMessage('CP_BC_TPL_OFFER_ADD_PICT_PROP'),
+				'TYPE' => 'LIST',
+				'MULTIPLE' => 'N',
+				'ADDITIONAL_VALUES' => 'N',
+				'REFRESH' => 'N',
+				'DEFAULT' => '-',
+				'VALUES' => $arFileOfferPropList
+			);
+		}
+
 		if (!$usePropertyFeatures) {
 			$arTemplateParameters['OFFER_TREE_PROPS'] = array(
 				'PARENT' => 'VISUAL',

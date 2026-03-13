@@ -23,7 +23,7 @@
 		this.productType = 0;
 		this.showQuantity = true;
 		this.showAbsent = true;
-		this.secondPict = false;
+		// this.secondPict = false;
 		this.showOldPrice = false;
 		this.showMaxQuantity = "N";
 		this.relativeQuantityFactor = 5;
@@ -36,7 +36,7 @@
 		this.visual = {
 			ID: "",
 			PICT_ID: "",
-			SECOND_PICT_ID: "",
+			// SECOND_PICT_ID: "",
 			PICT_SLIDER_ID: "",
 			QUANTITY_ID: "",
 			QUANTITY_UP_ID: "",
@@ -81,25 +81,26 @@
 			comparePath: "",
 		};
 
-		this.defaultPict = {
-			pict: null,
-			secondPict: null,
-		};
+		// console.log("arParams:", arParams);
+		// this.defaultPict = {
+		// 	pict: arParams.DEFAULT_PICTURE,
+		// 	// secondPict: null,
+		// };
 
-		this.defaultSliderOptions = {
-			interval: 3000,
-			wrap: true,
-		};
-		this.slider = {
-			options: {},
-			items: [],
-			active: null,
-			sliding: null,
-			paused: null,
-			interval: null,
-			progress: null,
-		};
-		this.touch = null;
+		// this.defaultSliderOptions = {
+		// 	interval: 3000,
+		// 	wrap: true,
+		// };
+		// this.slider = {
+		// 	options: {},
+		// 	items: [],
+		// 	active: null,
+		// 	sliding: null,
+		// 	paused: null,
+		// 	interval: null,
+		// 	progress: null,
+		// };
+		// this.touch = null;
 
 		this.quantityDelay = null;
 		this.quantityTimer = null;
@@ -172,7 +173,7 @@
 
 			this.showQuantity = arParams.SHOW_QUANTITY;
 			this.showAbsent = arParams.SHOW_ABSENT;
-			this.secondPict = arParams.SECOND_PICT;
+			// this.secondPict = arParams.SECOND_PICT;
 			this.showOldPrice = arParams.SHOW_OLD_PRICE;
 			this.showMaxQuantity = arParams.SHOW_MAX_QUANTITY;
 			this.relativeQuantityFactor = parseInt(arParams.RELATIVE_QUANTITY_FACTOR);
@@ -273,6 +274,7 @@
 						}
 					} else {
 						this.errorCode = -1;
+						console.log("КОД ОШИБКИ:", this.errorCode);
 					}
 
 					break;
@@ -306,9 +308,9 @@
 						}
 
 						if (arParams.DEFAULT_PICTURE) {
-							this.defaultPict.pict = arParams.DEFAULT_PICTURE.PICTURE;
-							this.defaultPict.secondPict =
-								arParams.DEFAULT_PICTURE.PICTURE_SECOND;
+							this.defaultPict = arParams.DEFAULT_PICTURE;
+							// this.defaultPict.secondPict =
+							// 	arParams.DEFAULT_PICTURE.PICTURE_SECOND;
 						}
 					}
 
@@ -345,6 +347,7 @@
 
 				if (this.basketData.add_url === "" && this.basketData.buy_url === "") {
 					this.errorCode = -1024;
+					console.log("КОД ОШИБКИ:", this.errorCode);
 				}
 			}
 
@@ -382,34 +385,38 @@
 
 	window.JCCatalogItem.prototype = {
 		init: function () {
+			// console.log("ФУНКЦИЯ INIT || 385");
 			var i = 0,
 				treeItems = null;
 
 			this.obProduct = BX(this.visual.ID);
 			if (!this.obProduct) {
 				this.errorCode = -1;
+				console.log("КОД ОШИБКИ:", this.errorCode);
 			}
 
 			this.obPict = BX(this.visual.PICT_ID);
-			console.log(this.obPict, "obPict");
-			if (!this.obPict) {
-				this.errorCode = -2;
-			}
-
-			if (this.secondPict && this.visual.SECOND_PICT_ID) {
-				this.obSecondPict = BX(this.visual.SECOND_PICT_ID);
-			}
-
 			this.obPictSlider = BX(this.visual.PICT_SLIDER_ID);
+
+			if (!this.obPict && !this.obPictSlider) {
+				this.errorCode = -2;
+				console.log("КОД ОШИБКИ:", this.errorCode);
+			}
+
+			// if (this.secondPict && this.visual.SECOND_PICT_ID) {
+			// 	this.obSecondPict = BX(this.visual.SECOND_PICT_ID);
+			// }
+
 			// this.obPictSliderIndicator = BX(
 			// 	this.visual.PICT_SLIDER_ID + "_indicator",
 			// );
 			// this.obPictSliderProgressBar = BX(
 			// 	this.visual.PICT_SLIDER_ID + "_progress_bar",
 			// );
-			console.log(this.obPictSlider, "SLIDER");
+
 			if (!this.obPictSlider) {
 				this.errorCode = -4;
+				console.log("КОД ОШИБКИ:", this.errorCode);
 			}
 
 			this.obPrice = BX(this.visual.PRICE_ID);
@@ -417,6 +424,7 @@
 			this.obPriceTotal = BX(this.visual.PRICE_TOTAL_ID);
 			if (!this.obPrice) {
 				this.errorCode = -16;
+				console.log("КОД ОШИБКИ:", this.errorCode);
 			}
 
 			if (this.showQuantity && this.visual.QUANTITY_ID) {
@@ -456,6 +464,7 @@
 					this.obTree = BX(this.visual.TREE_ID);
 					if (!this.obTree) {
 						this.errorCode = -256;
+						console.log("КОД ОШИБКИ:", this.errorCode);
 					}
 				}
 
@@ -481,9 +490,9 @@
 				if (this.visual.DSC_PERC) {
 					this.obDscPerc = BX(this.visual.DSC_PERC);
 				}
-				if (this.secondPict && this.visual.SECOND_DSC_PERC) {
-					this.obSecondDscPerc = BX(this.visual.SECOND_DSC_PERC);
-				}
+				// if (this.secondPict && this.visual.SECOND_DSC_PERC) {
+				// 	this.obSecondDscPerc = BX(this.visual.SECOND_DSC_PERC);
+				// }
 			}
 
 			if (this.showSkuProps) {
@@ -491,8 +500,8 @@
 					this.obSkuProps = BX(this.visual.DISPLAY_PROP_DIV);
 				}
 			}
-
 			if (this.errorCode === 0) {
+				console.log("КОД ОШИБКИ:", this.errorCode);
 				// product slider events
 				// if (this.isTouchDevice) {
 				// 	BX.bind(
@@ -612,15 +621,13 @@
 					}
 				}
 
+				console.log("productType перед switch:", this.productType);
 				switch (this.productType) {
 					case 0: // no catalog
 					case 1: // product
 					case 2: // set
 					case 7: // service
-						if (
-							parseInt(this.product.morePhotoCount) > 1 &&
-							this.obPictSlider
-						) {
+						if (this.obPictSlider) {
 							this.initializeSlider();
 						}
 
@@ -640,12 +647,8 @@
 									);
 								}
 							}
-
 							this.setCurrent();
-						} else if (
-							parseInt(this.product.morePhotoCount) > 1 &&
-							this.obPictSlider
-						) {
+						} else if (this.obPictSlider) {
 							this.initializeSlider();
 						}
 
@@ -773,51 +776,51 @@
 			window[this.dataLayerName].push(info);
 		},
 
-		hoverOn: function (event) {
-			clearTimeout(this.hoverTimer);
-			this.obProduct.style.height = getComputedStyle(this.obProduct).height;
-			BX.addClass(this.obProduct, "hover");
+		// hoverOn: function (event) {
+		// 	clearTimeout(this.hoverTimer);
+		// 	this.obProduct.style.height = getComputedStyle(this.obProduct).height;
+		// 	BX.addClass(this.obProduct, "hover");
 
-			BX.PreventDefault(event);
-		},
+		// 	BX.PreventDefault(event);
+		// },
 
-		hoverOff: function (event) {
-			if (this.hoverStateChangeForbidden) return;
+		// hoverOff: function (event) {
+		// 	if (this.hoverStateChangeForbidden) return;
 
-			BX.removeClass(this.obProduct, "hover");
-			this.hoverTimer = setTimeout(
-				BX.delegate(function () {
-					this.obProduct.style.height = "auto";
-				}, this),
-				300,
-			);
+		// 	BX.removeClass(this.obProduct, "hover");
+		// 	this.hoverTimer = setTimeout(
+		// 		BX.delegate(function () {
+		// 			this.obProduct.style.height = "auto";
+		// 		}, this),
+		// 		300,
+		// 	);
 
-			BX.PreventDefault(event);
-		},
+		// 	BX.PreventDefault(event);
+		// },
 
-		onFocus: function () {
-			this.hoverStateChangeForbidden = true;
-			BX.bind(document, "mousemove", BX.proxy(this.captureMousePosition, this));
-		},
+		// onFocus: function () {
+		// 	this.hoverStateChangeForbidden = true;
+		// 	BX.bind(document, "mousemove", BX.proxy(this.captureMousePosition, this));
+		// },
 
-		onBlur: function () {
-			this.hoverStateChangeForbidden = false;
-			BX.unbind(
-				document,
-				"mousemove",
-				BX.proxy(this.captureMousePosition, this),
-			);
+		// onBlur: function () {
+		// 	this.hoverStateChangeForbidden = false;
+		// 	BX.unbind(
+		// 		document,
+		// 		"mousemove",
+		// 		BX.proxy(this.captureMousePosition, this),
+		// 	);
 
-			var cursorElement = document.elementFromPoint(this.mouseX, this.mouseY);
-			if (!cursorElement || !this.obProduct.contains(cursorElement)) {
-				this.hoverOff();
-			}
-		},
+		// 	var cursorElement = document.elementFromPoint(this.mouseX, this.mouseY);
+		// 	if (!cursorElement || !this.obProduct.contains(cursorElement)) {
+		// 		this.hoverOff();
+		// 	}
+		// },
 
-		captureMousePosition: function (event) {
-			this.mouseX = event.clientX;
-			this.mouseY = event.clientY;
-		},
+		// captureMousePosition: function (event) {
+		// 	this.mouseX = event.clientX;
+		// 	this.mouseY = event.clientY;
+		// },
 
 		getCookie: function (name) {
 			var matches = document.cookie.match(
@@ -1173,8 +1176,7 @@
 		},
 
 		initializeSlider: function () {
-			console.log("init slider");
-
+			// console.log("initializeSlider", this.swiperInstance);
 			// Если Swiper уже инициализирован, уничтожаем его
 			if (this.swiperInstance) {
 				this.swiperInstance.destroy(true, true);
@@ -1183,258 +1185,267 @@
 
 			// Инициализируем новый Swiper
 			if (typeof Swiper !== "undefined" && this.obPictSlider) {
-				this.swiperInstance = new Swiper(this.obPictSlider.closest(".swiper"), {
-					// Базовые настройки
-					slidesPerView: 1,
-					spaceBetween: 0,
-					loop: true,
+				// Находим родительский контейнер swiper для текущего слайдера
+				var swiperContainer = this.obPictSlider.closest(".swiper");
+				var slideCount =
+					this.obPictSlider.querySelectorAll(".swiper-slide").length;
 
-					// Пагинация
-					pagination: {
-						el: this.obPictSlider
-							.closest(".swiper")
-							.querySelector(".swiper-pagination"),
-						clickable: true,
-					},
+				if (swiperContainer && slideCount > 0) {
+					this.swiperInstance = new Swiper(swiperContainer, {
+						// Базовые настройки
+						slidesPerView: 1,
+						spaceBetween: 0,
+						loop: slideCount > 1,
 
-					// Навигация (если нужны стрелки)
-					// navigation: {
-					// 	nextEl: '.swiper-button-next',
-					// 	prevEl: '.swiper-button-prev',
-					// },
+						// Пагинация - ищем внутри текущего контейнера
+						pagination: {
+							el: swiperContainer.parentNode.querySelector(
+								".swiper-pagination",
+							),
+							clickable: true,
+						},
 
-					// Автопрокрутка (опционально)
-					autoplay: {
-						delay: 5000,
-						disableOnInteraction: false,
-					},
+						// Навигация (если нужны стрелки)
+						// navigation: {
+						// 	nextEl: swiperContainer.querySelector('.swiper-button-next'),
+						// 	prevEl: swiperContainer.querySelector('.swiper-button-prev'),
+						// },
 
-					// Отключаем автопрокрутку при наведении
-					autoplayOnHover: "pause",
-				});
-			}
-		},
-
-		checkTouch: function (event) {
-			if (!event || !event.changedTouches) return false;
-
-			return event.changedTouches[0].identifier === this.touch.identifier;
-		},
-
-		touchStartEvent: function (event) {
-			if (event.touches.length != 1) return;
-
-			this.touch = event.changedTouches[0];
-		},
-
-		touchEndEvent: function (event) {
-			if (!this.checkTouch(event)) return;
-
-			var deltaX = this.touch.pageX - event.changedTouches[0].pageX,
-				deltaY = this.touch.pageY - event.changedTouches[0].pageY;
-
-			if (Math.abs(deltaX) >= Math.abs(deltaY) + 10) {
-				if (deltaX > 0) {
-					this.slideNext();
-				}
-
-				if (deltaX < 0) {
-					this.slidePrev();
+						// Автопрокрутка (опционально)
+						autoplay:
+							slideCount > 1
+								? {
+										delay: 5000,
+										disableOnInteraction: false,
+										pauseOnMouseEnter: true,
+									}
+								: false,
+					});
+				} else if (!swiperContainer) {
+					console.error("Swiper container not found");
 				}
 			}
 		},
 
-		sliderClickHandler: function (event) {
-			var target = BX.getEventTarget(event),
-				slideIndex = target.getAttribute("data-go-to");
+		// checkTouch: function (event) {
+		// 	if (!event || !event.changedTouches) return false;
 
-			if (slideIndex) {
-				this.slideTo(slideIndex);
-			}
+		// 	return event.changedTouches[0].identifier === this.touch.identifier;
+		// },
 
-			BX.PreventDefault(event);
-		},
+		// touchStartEvent: function (event) {
+		// 	if (event.touches.length != 1) return;
 
-		slideNext: function () {
-			if (this.slider.sliding) return;
+		// 	this.touch = event.changedTouches[0];
+		// },
 
-			return this.slide("next");
-		},
+		// touchEndEvent: function (event) {
+		// 	if (!this.checkTouch(event)) return;
 
-		slidePrev: function () {
-			if (this.slider.sliding) return;
+		// 	var deltaX = this.touch.pageX - event.changedTouches[0].pageX,
+		// 		deltaY = this.touch.pageY - event.changedTouches[0].pageY;
 
-			return this.slide("prev");
-		},
+		// 	if (Math.abs(deltaX) >= Math.abs(deltaY) + 10) {
+		// 		if (deltaX > 0) {
+		// 			this.slideNext();
+		// 		}
 
-		slideTo: function (pos) {
-			this.slider.active = BX.findChild(
-				this.obPictSlider,
-				{ className: "item active" },
-				true,
-				false,
-			);
-			this.slider.progress && (this.slider.interval = true);
+		// 		if (deltaX < 0) {
+		// 			this.slidePrev();
+		// 		}
+		// 	}
+		// },
 
-			var activeIndex = this.getItemIndex(this.slider.active);
+		// sliderClickHandler: function (event) {
+		// 	var target = BX.getEventTarget(event),
+		// 		slideIndex = target.getAttribute("data-go-to");
 
-			if (pos > this.slider.items.length - 1 || pos < 0) return;
+		// 	if (slideIndex) {
+		// 		this.slideTo(slideIndex);
+		// 	}
 
-			if (this.slider.sliding) return false;
+		// 	BX.PreventDefault(event);
+		// },
 
-			if (activeIndex == pos) {
-				this.stopSlider();
-				this.cycleSlider();
-				return;
-			}
+		// slideNext: function () {
+		// 	if (this.slider.sliding) return;
 
-			return this.slide(
-				pos > activeIndex ? "next" : "prev",
-				this.eq(this.slider.items, pos),
-			);
-		},
+		// 	return this.slide("next");
+		// },
 
-		slide: function (type, next) {
-			var active = BX.findChild(
-					this.obPictSlider,
-					{ className: "item active" },
-					true,
-					false,
-				),
-				isCycling = this.slider.interval,
-				direction = type === "next" ? "left" : "right";
+		// slidePrev: function () {
+		// 	if (this.slider.sliding) return;
 
-			next = next || this.getItemForDirection(type, active);
+		// 	return this.slide("prev");
+		// },
 
-			if (BX.hasClass(next, "active")) {
-				return (this.slider.sliding = false);
-			}
+		// slideTo: function (pos) {
+		// 	this.slider.active = BX.findChild(
+		// 		this.obPictSlider,
+		// 		{ className: "item active" },
+		// 		true,
+		// 		false,
+		// 	);
+		// 	this.slider.progress && (this.slider.interval = true);
 
-			this.slider.sliding = true;
+		// 	var activeIndex = this.getItemIndex(this.slider.active);
 
-			isCycling && this.stopSlider();
+		// 	if (pos > this.slider.items.length - 1 || pos < 0) return;
 
-			if (this.obPictSliderIndicator) {
-				BX.removeClass(
-					this.obPictSliderIndicator.querySelector(".active"),
-					"active",
-				);
-				var nextIndicator =
-					this.obPictSliderIndicator.querySelectorAll("[data-go-to]")[
-						this.getItemIndex(next)
-					];
-				nextIndicator && BX.addClass(nextIndicator, "active");
-			}
+		// 	if (this.slider.sliding) return false;
 
-			if (BX.hasClass(this.obPictSlider, "slide") && !BX.browser.IsIE()) {
-				var self = this;
-				BX.addClass(next, type);
-				next.offsetWidth; // force reflow
-				BX.addClass(active, direction);
-				BX.addClass(next, direction);
-				setTimeout(function () {
-					BX.addClass(next, "active");
-					BX.removeClass(active, "active");
-					BX.removeClass(active, direction);
-					BX.removeClass(next, type);
-					BX.removeClass(next, direction);
-					self.slider.sliding = false;
-				}, 700);
-			} else {
-				BX.addClass(next, "active");
-				this.slider.sliding = false;
-			}
+		// 	if (activeIndex == pos) {
+		// 		this.stopSlider();
+		// 		this.cycleSlider();
+		// 		return;
+		// 	}
 
-			this.obPictSliderProgressBar && this.resetProgress();
-			isCycling && this.cycleSlider();
-		},
+		// 	return this.slide(
+		// 		pos > activeIndex ? "next" : "prev",
+		// 		this.eq(this.slider.items, pos),
+		// 	);
+		// },
 
-		stopSlider: function (event) {
-			event || (this.slider.paused = true);
+		// slide: function (type, next) {
+		// 	var active = BX.findChild(
+		// 			this.obPictSlider,
+		// 			{ className: "item active" },
+		// 			true,
+		// 			false,
+		// 		),
+		// 		isCycling = this.slider.interval,
+		// 		direction = type === "next" ? "left" : "right";
 
-			this.slider.interval && clearInterval(this.slider.interval);
+		// 	next = next || this.getItemForDirection(type, active);
 
-			if (this.slider.progress) {
-				this.slider.progress.stop();
+		// 	if (BX.hasClass(next, "active")) {
+		// 		return (this.slider.sliding = false);
+		// 	}
 
-				var width = parseInt(this.obPictSliderProgressBar.style.width);
+		// 	this.slider.sliding = true;
 
-				this.slider.progress.options.duration =
-					(this.slider.options.interval * width) / 200;
-				this.slider.progress.options.start = { width: width * 10 };
-				this.slider.progress.options.finish = { width: 0 };
-				this.slider.progress.options.complete = null;
-				this.slider.progress.animate();
-			}
-		},
+		// 	isCycling && this.stopSlider();
 
-		cycleSlider: function (event) {
-			event || (this.slider.paused = false);
+		// 	if (this.obPictSliderIndicator) {
+		// 		BX.removeClass(
+		// 			this.obPictSliderIndicator.querySelector(".active"),
+		// 			"active",
+		// 		);
+		// 		var nextIndicator =
+		// 			this.obPictSliderIndicator.querySelectorAll("[data-go-to]")[
+		// 				this.getItemIndex(next)
+		// 			];
+		// 		nextIndicator && BX.addClass(nextIndicator, "active");
+		// 	}
 
-			this.slider.interval && clearInterval(this.slider.interval);
+		// 	if (BX.hasClass(this.obPictSlider, "slide") && !BX.browser.IsIE()) {
+		// 		var self = this;
+		// 		BX.addClass(next, type);
+		// 		next.offsetWidth; // force reflow
+		// 		BX.addClass(active, direction);
+		// 		BX.addClass(next, direction);
+		// 		setTimeout(function () {
+		// 			BX.addClass(next, "active");
+		// 			BX.removeClass(active, "active");
+		// 			BX.removeClass(active, direction);
+		// 			BX.removeClass(next, type);
+		// 			BX.removeClass(next, direction);
+		// 			self.slider.sliding = false;
+		// 		}, 700);
+		// 	} else {
+		// 		BX.addClass(next, "active");
+		// 		this.slider.sliding = false;
+		// 	}
 
-			if (this.slider.options.interval && !this.slider.paused) {
-				if (this.slider.progress) {
-					this.slider.progress.stop();
+		// 	this.obPictSliderProgressBar && this.resetProgress();
+		// 	isCycling && this.cycleSlider();
+		// },
 
-					var width = parseInt(this.obPictSliderProgressBar.style.width);
+		// stopSlider: function (event) {
+		// 	event || (this.slider.paused = true);
 
-					this.slider.progress.options.duration =
-						(this.slider.options.interval * (100 - width)) / 100;
-					this.slider.progress.options.start = { width: width * 10 };
-					this.slider.progress.options.finish = { width: 1000 };
-					this.slider.progress.options.complete = BX.delegate(function () {
-						this.slider.interval = true;
-						this.slideNext();
-					}, this);
-					this.slider.progress.animate();
-				} else {
-					this.slider.interval = setInterval(
-						BX.proxy(this.slideNext, this),
-						this.slider.options.interval,
-					);
-				}
-			}
-		},
+		// 	this.slider.interval && clearInterval(this.slider.interval);
 
-		resetProgress: function () {
-			this.slider.progress && this.slider.progress.stop();
-			this.obPictSliderProgressBar.style.width = 0;
-		},
+		// 	if (this.slider.progress) {
+		// 		this.slider.progress.stop();
 
-		getItemForDirection: function (direction, active) {
-			var activeIndex = this.getItemIndex(active),
-				willWrap =
-					(direction === "prev" && activeIndex === 0) ||
-					(direction === "next" && activeIndex == this.slider.items.length - 1);
+		// 		var width = parseInt(this.obPictSliderProgressBar.style.width);
 
-			if (willWrap && !this.slider.options.wrap) return active;
+		// 		this.slider.progress.options.duration =
+		// 			(this.slider.options.interval * width) / 200;
+		// 		this.slider.progress.options.start = { width: width * 10 };
+		// 		this.slider.progress.options.finish = { width: 0 };
+		// 		this.slider.progress.options.complete = null;
+		// 		this.slider.progress.animate();
+		// 	}
+		// },
 
-			var delta = direction === "prev" ? -1 : 1,
-				itemIndex = (activeIndex + delta) % this.slider.items.length;
+		// cycleSlider: function (event) {
+		// 	event || (this.slider.paused = false);
 
-			return this.eq(this.slider.items, itemIndex);
-		},
+		// 	this.slider.interval && clearInterval(this.slider.interval);
 
-		getItemIndex: function (item) {
-			this.slider.items = BX.findChildren(
-				item.parentNode,
-				{ className: "item" },
-				true,
-			);
+		// 	if (this.slider.options.interval && !this.slider.paused) {
+		// 		if (this.slider.progress) {
+		// 			this.slider.progress.stop();
 
-			return this.slider.items.indexOf(item || this.slider.active);
-		},
+		// 			var width = parseInt(this.obPictSliderProgressBar.style.width);
 
-		eq: function (obj, i) {
-			var len = obj.length,
-				j = +i + (i < 0 ? len : 0);
+		// 			this.slider.progress.options.duration =
+		// 				(this.slider.options.interval * (100 - width)) / 100;
+		// 			this.slider.progress.options.start = { width: width * 10 };
+		// 			this.slider.progress.options.finish = { width: 1000 };
+		// 			this.slider.progress.options.complete = BX.delegate(function () {
+		// 				this.slider.interval = true;
+		// 				this.slideNext();
+		// 			}, this);
+		// 			this.slider.progress.animate();
+		// 		} else {
+		// 			this.slider.interval = setInterval(
+		// 				BX.proxy(this.slideNext, this),
+		// 				this.slider.options.interval,
+		// 			);
+		// 		}
+		// 	}
+		// },
 
-			return j >= 0 && j < len ? obj[j] : {};
-		},
+		// resetProgress: function () {
+		// 	this.slider.progress && this.slider.progress.stop();
+		// 	this.obPictSliderProgressBar.style.width = 0;
+		// },
+
+		// getItemForDirection: function (direction, active) {
+		// 	var activeIndex = this.getItemIndex(active),
+		// 		willWrap =
+		// 			(direction === "prev" && activeIndex === 0) ||
+		// 			(direction === "next" && activeIndex == this.slider.items.length - 1);
+
+		// 	if (willWrap && !this.slider.options.wrap) return active;
+
+		// 	var delta = direction === "prev" ? -1 : 1,
+		// 		itemIndex = (activeIndex + delta) % this.slider.items.length;
+
+		// 	return this.eq(this.slider.items, itemIndex);
+		// },
+
+		// getItemIndex: function (item) {
+		// 	this.slider.items = BX.findChildren(
+		// 		item.parentNode,
+		// 		{ className: "item" },
+		// 		true,
+		// 	);
+
+		// 	return this.slider.items.indexOf(item || this.slider.active);
+		// },
+
+		// eq: function (obj, i) {
+		// 	var len = obj.length,
+		// 		j = +i + (i < 0 ? len : 0);
+
+		// 	return j >= 0 && j < len ? obj[j] : {};
+		// },
 
 		selectOfferProp: function () {
-			console.log("selectOff");
 			var i = 0,
 				value = "",
 				strTreeValue = "",
@@ -1476,17 +1487,17 @@
 						}
 					}
 
-					if (
-						this.isFacebookConversionCustomizeProductEventEnabled &&
-						BX.Type.isArrayFilled(this.offers) &&
-						BX.Type.isObject(this.offers[this.offerNum])
-					) {
-						BX.ajax.runAction("sale.facebookconversion.customizeProduct", {
-							data: {
-								offerId: this.offers[this.offerNum]["ID"],
-							},
-						});
-					}
+					// if (
+					// 	this.isFacebookConversionCustomizeProductEventEnabled &&
+					// 	BX.Type.isArrayFilled(this.offers) &&
+					// 	BX.Type.isObject(this.offers[this.offerNum])
+					// ) {
+					// 	BX.ajax.runAction("sale.facebookconversion.customizeProduct", {
+					// 		data: {
+					// 			offerId: this.offers[this.offerNum]["ID"],
+					// 		},
+					// 	});
+					// }
 				}
 			}
 		},
@@ -1563,7 +1574,6 @@
 		},
 
 		updateRow: function (intNumber, activeID, showID, canBuyID) {
-			console.log("updateRow");
 			var i = 0,
 				value = "",
 				isCurrent = false,
@@ -1717,6 +1727,7 @@
 		},
 
 		changeInfo: function () {
+			// console.log("changeInfo");
 			var i,
 				j,
 				index = -1,
@@ -1737,125 +1748,55 @@
 				}
 			}
 			if (index > -1) {
-				if (
-					parseInt(this.offers[index].MORE_PHOTO_COUNT) > 1 &&
-					this.obPictSlider
-				) {
-					// hide pict and second_pict containers
-					if (this.obPict) {
-						this.obPict.style.display = "none";
-					}
+				if (this.obPictSlider) {
+					// console.log("OFFER_DATA:", this.offers[index]);
+					// console.log(this.defaultPict);
 
-					if (this.obSecondPict) {
-						this.obSecondPict.style.display = "none";
-					}
+					var offer = this.offers[index];
+					var slides = [];
 
-					// clear slider container
-					BX.cleanNode(this.obPictSlider);
-
-					// fill slider container with slides
-					for (i in this.offers[index].MORE_PHOTO) {
-						if (this.offers[index].MORE_PHOTO.hasOwnProperty(i)) {
-							this.obPictSlider.appendChild(
-								BX.create("div", {
-									props: {
-										className: "swiper-slide",
-									},
-									children: [
-										BX.create("img", {
-											props: {
-												src: this.offers[index].MORE_PHOTO[i].SRC,
-												alt: this.product.name || "product image",
-												className: "swiper-slide-image",
-											},
-											attrs: {
-												loading: "lazy",
-											},
-										}),
-									],
-								}),
-							);
+					if (offer.MORE_PHOTO.length) {
+						for (i in offer.MORE_PHOTO) {
+							if (offer.MORE_PHOTO[i].SRC) {
+								slides.push(offer.MORE_PHOTO[i]);
+							}
 						}
 					}
 
-					// show slider container
-					this.obPictSlider.style.display = "";
+					// console.log("SLIDES TO VIEW:", slides);
 
-					// Инициализируем слайдер с новыми слайдами
-					this.initializeSlider();
-				} else {
-					// hide slider container
-					if (this.obPictSlider) {
+					BX.cleanNode(this.obPictSlider);
+					for (i = 0; i < slides.length; i++) {
+						this.obPictSlider.appendChild(
+							BX.create("div", {
+								props: {
+									className: "swiper-slide",
+								},
+								children: [
+									BX.create("img", {
+										props: {
+											src: slides[i].SRC,
+											alt: this.product.name || "product image",
+										},
+										attrs: {
+											loading: "lazy",
+										},
+									}),
+								],
+							}),
+						);
+					}
+					if (slides.length > 0) {
+						this.obPictSlider.style.display = "";
+						this.initializeSlider();
+					} else {
 						this.obPictSlider.style.display = "none";
-						// Уничтожаем Swiper если он был
 						if (this.swiperInstance) {
 							this.swiperInstance.destroy(true, true);
 							this.swiperInstance = null;
 						}
 					}
-
-					if (this.obPictSliderIndicator) {
-						this.obPictSliderIndicator.style.display = "none";
-					}
-
-					if (this.obPictSliderProgressBar) {
-						this.obPictSliderProgressBar.style.display = "none";
-					}
-
-					// show pict and pict_second containers
-					if (this.obPict) {
-						if (this.offers[index].PREVIEW_PICTURE) {
-							BX.adjust(this.obPict, {
-								style: {
-									backgroundImage:
-										"url('" + this.offers[index].PREVIEW_PICTURE.SRC + "')",
-								},
-							});
-						} else {
-							BX.adjust(this.obPict, {
-								style: {
-									backgroundImage: "url('" + this.defaultPict.pict.SRC + "')",
-								},
-							});
-						}
-
-						this.obPict.style.display = "";
-					}
-
-					if (this.secondPict && this.obSecondPict) {
-						if (this.offers[index].PREVIEW_PICTURE_SECOND) {
-							BX.adjust(this.obSecondPict, {
-								style: {
-									backgroundImage:
-										"url('" +
-										this.offers[index].PREVIEW_PICTURE_SECOND.SRC +
-										"')",
-								},
-							});
-						} else if (this.offers[index].PREVIEW_PICTURE.SRC) {
-							BX.adjust(this.obSecondPict, {
-								style: {
-									backgroundImage:
-										"url('" + this.offers[index].PREVIEW_PICTURE.SRC + "')",
-								},
-							});
-						} else if (this.defaultPict.secondPict) {
-							BX.adjust(this.obSecondPict, {
-								style: {
-									backgroundImage:
-										"url('" + this.defaultPict.secondPict.SRC + "')",
-								},
-							});
-						} else {
-							BX.adjust(this.obSecondPict, {
-								style: {
-									backgroundImage: "url('" + this.defaultPict.pict.SRC + "')",
-								},
-							});
-						}
-
-						this.obSecondPict.style.display = "";
-					}
+					// this.initializeSlider();
 				}
 
 				if (this.showSkuProps && this.obSkuProps) {
@@ -2446,7 +2387,7 @@
 						case 3: // sku
 							strPict = this.offers[this.offerNum].PREVIEW_PICTURE
 								? this.offers[this.offerNum].PREVIEW_PICTURE.SRC
-								: this.defaultPict.pict.SRC;
+								: this.defaultPict;
 							break;
 					}
 

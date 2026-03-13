@@ -128,7 +128,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"PAGER_DESC_NUMBERING" => "N",
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000000",
 		"PAGER_SHOW_ALL" => "N",
-		"ADD_PICT_PROP" => "-",
+		"ADD_PICT_PROP" => "MORE_PHOTO",
 		"LABEL_PROP" => [
 			0 => "NEW",
 			1 => "HIT",
@@ -179,9 +179,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"SIDEBAR_PATH" => "/catalog/sidebar.php",
 		"COMPONENT_TEMPLATE" => "rise-catalog",
 		"HIDE_NOT_AVAILABLE_OFFERS" => "N",
-		"LABEL_PROP_MOBILE" => [
-			0 => "PROP_1",
-		],
+		"LABEL_PROP_MOBILE" => "",
 		"LABEL_PROP_POSITION" => "top-left",
 		"COMMON_SHOW_CLOSE_POPUP" => "Y",
 		"PRODUCT_SUBSCRIPTION" => "Y",

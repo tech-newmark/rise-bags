@@ -36,34 +36,29 @@ use Bitrix\Main\Localization\Loc;
 			<div class="product-item-image-wrapper" data-entity="image-wrapper">
 			<? endif; ?>
 
-			<div class="swiper">
+			<div class="swiper product-item-slider">
 				<div class="swiper-wrapper" id="<?= $itemIds['PICT_SLIDER'] ?>">
 					<? if ($showSlider): ?>
-						<? foreach ($morePhoto as $key => $photo): ?>
-							<div class="swiper-slide">
-								<img src="<?= $photo['SRC'] ?>" alt="">
+						<? foreach ($morePhoto as $index => $slide): ?>
+							<div class="swiper-slide" <?= ($index === 0 ? ' id="' . $itemIds['PICT'] . '"' : '') ?>>
+								<img src="<?= $slide['SRC'] ?>" alt="<?= $item['NAME'] ?>">
 							</div>
 						<? endforeach; ?>
-					<? endif; ?>
-
-					<div class="swiper-slide" id="<?= $itemIds['PICT'] ?>">
-						<? if (!$showSlider): ?>
-							<img src="<?= $item['PREVIEW_PICTURE']['SRC'] ?>" alt="">
-						<? endif; ?>
-					</div>
-
-					<? if ($item['SECOND_PICT']):
-						$bgImage = !empty($item['PREVIEW_PICTURE_SECOND']) ? $item['PREVIEW_PICTURE_SECOND']['SRC'] : $item['PREVIEW_PICTURE']['SRC'];
-					?>
-						<? if (!$showSlider): ?>
-							<div class="swiper-slide" id="<?= $itemIds['SECOND_PICT'] ?>">
-								<img src="<?= $bgImage ?>" alt="">
+					<? else: ?>
+						<? if (!empty($morePhoto[0]['SRC'])): ?>
+							<div class="swiper-slide" id="<?= $itemIds['PICT'] ?>">
+								<img src="<?= $item["PREVIEW_PICTURE"]["SRC"] ?>" alt="<?= $item['NAME'] ?>">
+							</div>
+						<? else: ?>
+							<div class="swiper-slide" id="<?= $itemIds['PICT'] ?>">
+								<img src="<?= SITE_TEMPLATE_PATH ?>/_dist/images/logo.svg" alt="<?= $item['NAME'] ?>">
 							</div>
 						<? endif; ?>
 					<? endif; ?>
 				</div>
-				<div class="swiper-pagination" aria-label="Пагинация"></div>
 			</div>
+
+			<div class="swiper-pagination" aria-label="Пагинация"></div>
 
 			<!-- готово метки(хит и тд) и скидка-->
 			<? if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y' && !empty($price) && $price['PERCENT'] > 0): ?>
@@ -92,50 +87,11 @@ use Bitrix\Main\Localization\Loc;
 
 			<!-- готово -->
 
-			<div
-				class="product-item-image-slider-control-container" id="<?= $itemIds['PICT_SLIDER'] ?>_indicator"
-				<?= ($showSlider ? '' : 'style="display: none;"') ?>>
-				<? if ($showSlider): ?>
-					<? foreach ($morePhoto as $key => $photo): ?>
-						<div class="product-item-image-slider-control<?= ($key == 0 ? ' active' : '') ?>" data-go-to="<?= $key ?>"></div>
-					<? endforeach; ?>
-				<? endif; ?>
-			</div>
-
-			<? if ($arParams['SLIDER_PROGRESS'] === 'Y'): ?>
-				<div class="product-item-image-slider-progress-bar-container">
-					<div class="product-item-image-slider-progress-bar" id="<?= $itemIds['PICT_SLIDER'] ?>_progress_bar" style="width: 0;"></div>
-				</div>
-			<? endif; ?>
-
 			<? if ($itemHasDetailUrl): ?>
 		</a>
 	<? else: ?>
 </div>
 <? endif; ?>
-
-<style>
-	.product-item-image-wrapper * {
-		z-index: 8;
-	}
-
-	.swiper {
-		width: 100%;
-		height: 100%;
-		z-index: 7;
-	}
-
-	.swiper-slide {
-		display: flex;
-		padding: 16px;
-	}
-
-	.swiper-slide img {
-		width: 100%;
-		height: auto;
-		object-fit: contain;
-	}
-</style>
 
 <? if ($itemHasDetailUrl): ?>
 	<a class="product-item-title" href="<?= $item['DETAIL_PAGE_URL'] ?>" title="<?= $productTitle ?>">
@@ -233,7 +189,7 @@ if (!empty($arParams['PRODUCT_BLOCKS_ORDER'])) {
 			case 'quantity':
 				// готово
 				$showQuantityBlock = (
-					!$haveOffers && $actualItem['CAN_BUY'] && $arParams['USE_PRODUCT_QUANTITY']
+					!$haveOffers && $actualItem['CAN_BUY'] && $arParams['USE_PRODUCT_QUANTITY'] && $arParams['PRODUCT_DISPLAY_MODE'] === 'Y'
 				) || (
 					$haveOffers && $arParams['PRODUCT_DISPLAY_MODE'] === 'Y' && $arParams['USE_PRODUCT_QUANTITY']
 				);
@@ -273,11 +229,23 @@ if (!empty($arParams['PRODUCT_BLOCKS_ORDER'])) {
 				<div class="product-item-info-container" data-entity="buttons-block">
 					<? if (!$haveOffers): ?>
 						<? if ($actualItem['CAN_BUY']): ?>
-							<div class="product-item-button-container" id="<?= $itemIds['BASKET_ACTIONS'] ?>">
-								<button type="button" class="1 main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
-									<?= ($arParams['ADD_TO_BASKET_ACTION'] === 'BUY' ? $arParams['MESS_BTN_BUY'] : $arParams['MESS_BTN_ADD_TO_BASKET']) ?>
-								</button>
-							</div>
+
+
+							<? if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y'): // расширенный режим показа карточки товара 
+							?>
+								<div class="product-item-button-container" id="<?= $itemIds['BASKET_ACTIONS'] ?>">
+									<button type="button" class="1 main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
+										<?= ($arParams['ADD_TO_BASKET_ACTION'] === 'BUY' ? $arParams['MESS_BTN_BUY'] : $arParams['MESS_BTN_ADD_TO_BASKET']) ?>
+									</button>
+								</div>
+							<? else: ?>
+
+								<div class="product-item-button-container">
+									<a class="main-btn outlined" href="<?= $item['DETAIL_PAGE_URL'] ?>">
+										<?= $arParams['MESS_BTN_DETAIL'] ?>
+									</a>
+								</div>
+							<? endif; ?>
 						<? else: ?>
 							<div class="product-item-button-container">
 								<?
@@ -303,7 +271,7 @@ if (!empty($arParams['PRODUCT_BLOCKS_ORDER'])) {
 							</div>
 						<? endif; ?>
 					<? else: ?>
-						<? if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y'): // расширенный режим показа карточки товара
+						<? if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y'): // расширенный режим показа карточки товара 
 						?>
 							<? if ($showSubscribe) {
 								// Разобраться !!!
