@@ -87,7 +87,9 @@ a {
 	text-decoration: none;
 	cursor: pointer;
 
-	@extend %hover-opacity;
+	&:not(.product-item-image-wrapper) {
+		@extend %hover-opacity;
+	}
 }
 
 address {

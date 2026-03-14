@@ -241,103 +241,42 @@
 				flex-direction: column;
 				gap: 4px;
 
-				.product-label-container {
-					display: flex;
-					flex-wrap: wrap;
-					gap: 4px;
-				}
+				// .product-label-container {
+				// 	display: flex;
+				// 	flex-wrap: wrap;
+				// 	gap: 4px;
+				// }
 			}
 
-			&-prop {
-				position: relative;
-				display: flex;
-				align-items: flex-end;
-				gap: 4px;
-				padding: 4px 0;
+			// &-prop {
+			// 	position: relative;
+			// 	display: flex;
+			// 	align-items: flex-end;
+			// 	gap: 4px;
+			// 	padding: 4px 0;
 
-				&::before {
-					content: "";
-					flex-grow: 1;
-					border-bottom: 1px dashed var(--gray-600);
-					margin: 0 6px;
-					order: 1;
-				}
+			// 	&::before {
+			// 		content: "";
+			// 		flex-grow: 1;
+			// 		border-bottom: 1px dashed var(--gray-600);
+			// 		margin: 0 6px;
+			// 		order: 1;
+			// 	}
 
-				&-name {
-					font-size: 14px;
-					line-height: 1;
-					color: var(--gray-700);
-				}
+			// 	&-name {
+			// 		font-size: 14px;
+			// 		line-height: 1;
+			// 		color: var(--gray-700);
+			// 	}
 
-				&-value {
-					font-size: 14px;
-					line-height: 1;
-					text-align: right;
-					color: var(--primary);
-					order: 2;
-				}
-			}
-
-			&-scu-prop {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 6px 12px;
-				align-items: center;
-				padding: 4px 0;
-
-				&-name {
-					font-size: 14px;
-					color: var(--gray-700);
-				}
-
-				&-list {
-					list-style: none;
-					margin: 0;
-					padding: 0;
-					display: flex;
-					flex-wrap: wrap;
-					gap: 4px;
-
-					button {
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						width: fit-content;
-						min-width: 32px;
-						height: auto;
-						min-height: 32px;
-
-						padding: 4px;
-						border: 1px solid var(--gray-500);
-						background-color: var(--gray-800);
-						border-radius: 4px;
-
-						&.selected {
-							border-color: var(--primary);
-						}
-
-						&.disabled {
-							pointer-events: none;
-							opacity: 0.6;
-						}
-
-						span {
-							font-size: 14px;
-							font-weight: 600;
-							line-height: 1;
-							color: var(--primary);
-						}
-
-						img {
-							width: 20px;
-							height: 20px;
-							object-fit: cover;
-							border-radius: 4px;
-							aspect-ratio: 1/1;
-						}
-					}
-				}
-			}
+			// 	&-value {
+			// 		font-size: 14px;
+			// 		line-height: 1;
+			// 		text-align: right;
+			// 		color: var(--primary);
+			// 		order: 2;
+			// 	}
+			// }
 		}
 	}
 }

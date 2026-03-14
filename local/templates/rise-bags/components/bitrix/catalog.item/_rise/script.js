@@ -5,8 +5,8 @@
 
 	var BasketButton = function (params) {
 		BasketButton.superclass.constructor.apply(this, arguments);
-		this.buttonNode = BX.create("span", {
-			props: { className: "btn btn-default btn-buy btn-sm", id: this.id },
+		this.buttonNode = BX.create("button", {
+			props: { className: "main-btn", id: this.id },
 			style: typeof params.style === "object" ? params.style : {},
 			text: params.text,
 			events: this.contextEvents,
@@ -19,11 +19,10 @@
 	BX.extend(BasketButton, BX.PopupWindowButton);
 
 	window.JCCatalogItem = function (arParams) {
-		this.swiperInstance = null;
 		this.productType = 0;
-		this.showQuantity = true;
+		this.showQuantity = false;
 		this.showAbsent = true;
-		// this.secondPict = false;
+		this.secondPict = false;
 		this.showOldPrice = false;
 		this.showMaxQuantity = "N";
 		this.relativeQuantityFactor = 5;
@@ -36,7 +35,7 @@
 		this.visual = {
 			ID: "",
 			PICT_ID: "",
-			// SECOND_PICT_ID: "",
+			SECOND_PICT_ID: "",
 			PICT_SLIDER_ID: "",
 			QUANTITY_ID: "",
 			QUANTITY_UP_ID: "",
@@ -81,26 +80,25 @@
 			comparePath: "",
 		};
 
-		// console.log("arParams:", arParams);
-		// this.defaultPict = {
-		// 	pict: arParams.DEFAULT_PICTURE,
-		// 	// secondPict: null,
-		// };
+		this.defaultPict = {
+			pict: null,
+			secondPict: null,
+		};
 
-		// this.defaultSliderOptions = {
-		// 	interval: 3000,
-		// 	wrap: true,
-		// };
-		// this.slider = {
-		// 	options: {},
-		// 	items: [],
-		// 	active: null,
-		// 	sliding: null,
-		// 	paused: null,
-		// 	interval: null,
-		// 	progress: null,
-		// };
-		// this.touch = null;
+		this.defaultSliderOptions = {
+			interval: 3000,
+			wrap: true,
+		};
+		this.slider = {
+			options: {},
+			items: [],
+			active: null,
+			sliding: null,
+			paused: null,
+			interval: null,
+			progress: null,
+		};
+		this.touch = null;
 
 		this.quantityDelay = null;
 		this.quantityTimer = null;
@@ -136,6 +134,7 @@
 		this.obQuantityDown = null;
 		this.obQuantityLimit = {};
 		this.obPict = null;
+		this.node = {};
 		this.obSecondPict = null;
 		this.obPictSlider = null;
 		this.obPictSliderIndicator = null;
@@ -171,9 +170,9 @@
 				this.productType = parseInt(arParams.PRODUCT_TYPE, 10);
 			}
 
-			this.showQuantity = arParams.SHOW_QUANTITY;
+			this.showQuantity = false; //убераю коунтер на странице. arParams.SHOW_QUANTITY;
 			this.showAbsent = arParams.SHOW_ABSENT;
-			// this.secondPict = arParams.SECOND_PICT;
+			this.secondPict = arParams.SECOND_PICT;
 			this.showOldPrice = arParams.SHOW_OLD_PRICE;
 			this.showMaxQuantity = arParams.SHOW_MAX_QUANTITY;
 			this.relativeQuantityFactor = parseInt(arParams.RELATIVE_QUANTITY_FACTOR);
@@ -233,7 +232,7 @@
 									? parseFloat(
 											this.currentPrices[this.currentPriceSelected]
 												.MIN_QUANTITY,
-										)
+									  )
 									: this.stepQuantity;
 
 							if (this.isDblQuantity) {
@@ -274,7 +273,6 @@
 						}
 					} else {
 						this.errorCode = -1;
-						console.log("КОД ОШИБКИ:", this.errorCode);
 					}
 
 					break;
@@ -308,9 +306,9 @@
 						}
 
 						if (arParams.DEFAULT_PICTURE) {
-							this.defaultPict = arParams.DEFAULT_PICTURE;
-							// this.defaultPict.secondPict =
-							// 	arParams.DEFAULT_PICTURE.PICTURE_SECOND;
+							this.defaultPict.pict = arParams.DEFAULT_PICTURE.PICTURE;
+							this.defaultPict.secondPict =
+								arParams.DEFAULT_PICTURE.PICTURE_SECOND;
 						}
 					}
 
@@ -347,7 +345,6 @@
 
 				if (this.basketData.add_url === "" && this.basketData.buy_url === "") {
 					this.errorCode = -1024;
-					console.log("КОД ОШИБКИ:", this.errorCode);
 				}
 			}
 
@@ -374,8 +371,8 @@
 				}
 			}
 
-			this.isFacebookConversionCustomizeProductEventEnabled =
-				arParams.IS_FACEBOOK_CONVERSION_CUSTOMIZE_PRODUCT_EVENT_ENABLED;
+			// this.isFacebookConversionCustomizeProductEventEnabled =
+			// 	arParams.IS_FACEBOOK_CONVERSION_CUSTOMIZE_PRODUCT_EVENT_ENABLED;
 		}
 
 		if (this.errorCode === 0) {
@@ -385,46 +382,66 @@
 
 	window.JCCatalogItem.prototype = {
 		init: function () {
-			// console.log("ФУНКЦИЯ INIT || 385");
 			var i = 0,
 				treeItems = null;
 
 			this.obProduct = BX(this.visual.ID);
 			if (!this.obProduct) {
 				this.errorCode = -1;
-				console.log("КОД ОШИБКИ:", this.errorCode);
 			}
 
-			this.obPict = BX(this.visual.PICT_ID);
-			this.obPictSlider = BX(this.visual.PICT_SLIDER_ID);
-
-			if (!this.obPict && !this.obPictSlider) {
-				this.errorCode = -2;
-				console.log("КОД ОШИБКИ:", this.errorCode);
-			}
+			// this.obPict = BX(this.visual.PICT_ID);
+			// if (!this.obPict) {
+			// 	this.errorCode = -2;
+			// }
 
 			// if (this.secondPict && this.visual.SECOND_PICT_ID) {
 			// 	this.obSecondPict = BX(this.visual.SECOND_PICT_ID);
 			// }
 
+			// this.obPictSlider = BX(this.visual.PICT_SLIDER_ID);
 			// this.obPictSliderIndicator = BX(
 			// 	this.visual.PICT_SLIDER_ID + "_indicator",
 			// );
 			// this.obPictSliderProgressBar = BX(
 			// 	this.visual.PICT_SLIDER_ID + "_progress_bar",
 			// );
+			// if (!this.obPictSlider) {
+			// 	this.errorCode = -4;
+			// }
 
-			if (!this.obPictSlider) {
-				this.errorCode = -4;
-				console.log("КОД ОШИБКИ:", this.errorCode);
+			// custom slider
+
+			// Ищем Swiper-контейнер
+			this.node.pictSliderWrapper = this.obProduct.querySelector(
+				'[data-entity="pict-slider"]',
+			);
+
+			// Инициализируем Swiper один раз
+			if (this.node.pictSliderWrapper && !this.pictSwiper) {
+				var swiperContainer = this.node.pictSliderWrapper.closest(
+					".product-item-slider",
+				);
+				if (swiperContainer) {
+					this.pictSwiper = new Swiper(swiperContainer, {
+						preloadImages: false,
+						updateOnImagesReady: true,
+						loop: false,
+						pagination: {
+							el: ".product-item-slider-pagination",
+							clickable: true,
+							type: "bullets",
+						},
+					});
+				}
 			}
+			// custom slider end
 
 			this.obPrice = BX(this.visual.PRICE_ID);
 			this.obPriceOld = BX(this.visual.PRICE_OLD_ID);
 			this.obPriceTotal = BX(this.visual.PRICE_TOTAL_ID);
 			if (!this.obPrice) {
 				this.errorCode = -16;
-				console.log("КОД ОШИБКИ:", this.errorCode);
 			}
 
 			if (this.showQuantity && this.visual.QUANTITY_ID) {
@@ -433,10 +450,10 @@
 					'[data-entity="quantity-block"]',
 				);
 
-				if (!this.isTouchDevice) {
-					BX.bind(this.obQuantity, "focus", BX.proxy(this.onFocus, this));
-					BX.bind(this.obQuantity, "blur", BX.proxy(this.onBlur, this));
-				}
+				// if (!this.isTouchDevice) {
+				// 	BX.bind(this.obQuantity, "focus", BX.proxy(this.onFocus, this));
+				// 	BX.bind(this.obQuantity, "blur", BX.proxy(this.onBlur, this));
+				// }
 
 				if (this.visual.QUANTITY_UP_ID) {
 					this.obQuantityUp = BX(this.visual.QUANTITY_UP_ID);
@@ -464,7 +481,6 @@
 					this.obTree = BX(this.visual.TREE_ID);
 					if (!this.obTree) {
 						this.errorCode = -256;
-						console.log("КОД ОШИБКИ:", this.errorCode);
 					}
 				}
 
@@ -490,9 +506,9 @@
 				if (this.visual.DSC_PERC) {
 					this.obDscPerc = BX(this.visual.DSC_PERC);
 				}
-				// if (this.secondPict && this.visual.SECOND_DSC_PERC) {
-				// 	this.obSecondDscPerc = BX(this.visual.SECOND_DSC_PERC);
-				// }
+				if (this.secondPict && this.visual.SECOND_DSC_PERC) {
+					this.obSecondDscPerc = BX(this.visual.SECOND_DSC_PERC);
+				}
 			}
 
 			if (this.showSkuProps) {
@@ -500,48 +516,48 @@
 					this.obSkuProps = BX(this.visual.DISPLAY_PROP_DIV);
 				}
 			}
-			if (this.errorCode === 0) {
-				console.log("КОД ОШИБКИ:", this.errorCode);
-				// product slider events
-				// if (this.isTouchDevice) {
-				// 	BX.bind(
-				// 		this.obPictSlider,
-				// 		"touchstart",
-				// 		BX.proxy(this.touchStartEvent, this),
-				// 	);
-				// 	BX.bind(
-				// 		this.obPictSlider,
-				// 		"touchend",
-				// 		BX.proxy(this.touchEndEvent, this),
-				// 	);
-				// 	BX.bind(
-				// 		this.obPictSlider,
-				// 		"touchcancel",
-				// 		BX.proxy(this.touchEndEvent, this),
-				// 	);
-				// } else {
-				// 	if (this.viewMode === "CARD") {
-				// 		// product hover events
-				// 		BX.bind(this.obProduct, "mouseenter", BX.proxy(this.hoverOn, this));
-				// 		BX.bind(
-				// 			this.obProduct,
-				// 			"mouseleave",
-				// 			BX.proxy(this.hoverOff, this),
-				// 		);
-				// 	}
 
-				// 	// product slider events
-				// 	BX.bind(
-				// 		this.obProduct,
-				// 		"mouseenter",
-				// 		BX.proxy(this.cycleSlider, this),
-				// 	);
-				// 	BX.bind(
-				// 		this.obProduct,
-				// 		"mouseleave",
-				// 		BX.proxy(this.stopSlider, this),
-				// 	);
-				// }
+			if (this.errorCode === 0) {
+				// product slider events
+				if (this.isTouchDevice) {
+					BX.bind(
+						this.obPictSlider,
+						"touchstart",
+						BX.proxy(this.touchStartEvent, this),
+					);
+					BX.bind(
+						this.obPictSlider,
+						"touchend",
+						BX.proxy(this.touchEndEvent, this),
+					);
+					BX.bind(
+						this.obPictSlider,
+						"touchcancel",
+						BX.proxy(this.touchEndEvent, this),
+					);
+				} else {
+					// if (this.viewMode === "CARD") {
+					// 	// product hover events
+					// 	BX.bind(this.obProduct, "mouseenter", BX.proxy(this.hoverOn, this));
+					// 	BX.bind(
+					// 		this.obProduct,
+					// 		"mouseleave",
+					// 		BX.proxy(this.hoverOff, this),
+					// 	);
+					// }
+
+					// product slider events
+					BX.bind(
+						this.obProduct,
+						"mouseenter",
+						BX.proxy(this.cycleSlider, this),
+					);
+					BX.bind(
+						this.obProduct,
+						"mouseleave",
+						BX.proxy(this.stopSlider, this),
+					);
+				}
 
 				if (this.bigData) {
 					var links = BX.findChildren(this.obProduct, { tag: "a" }, true);
@@ -621,36 +637,75 @@
 					}
 				}
 
-				console.log("productType перед switch:", this.productType);
 				switch (this.productType) {
 					case 0: // no catalog
 					case 1: // product
 					case 2: // set
 					case 7: // service
-						if (this.obPictSlider) {
-							this.initializeSlider();
-						}
+						// if (
+						// 	parseInt(this.product.morePhotoCount) > 1 &&
+						// 	this.obPictSlider
+						// ) {
+						// 	this.initializeSlider();
+						// }
 
-						this.checkQuantityControls();
+						// this.checkQuantityControls();
 
 						break;
 					case 3: // sku
-						if (this.offers.length > 0) {
-							treeItems = BX.findChildren(this.obTree, { tagName: "li" }, true);
+						// if (this.offers.length > 0) {
+						// 		treeItems = BX.findChildren(this.obTree, { tagName: "li" }, true);
 
-							if (treeItems && treeItems.length) {
-								for (i = 0; i < treeItems.length; i++) {
+						// 		if (treeItems && treeItems.length) {
+						// 			for (i = 0; i < treeItems.length; i++) {
+						// 				BX.bind(
+						// 					treeItems[i],
+						// 					"click",
+						// 					BX.delegate(this.selectOfferProp, this),
+						// 				);
+						// 			}
+						// 		}
+
+						// 		this.setCurrent();
+						if (this.offers.length > 0) {
+							// логика добавления торг пр с помощью кнопок
+							// treeItems = BX.findChildren(this.obTree, { tagName: "li" }, true);
+
+							// if (treeItems && treeItems.length) {
+							// 	for (i = 0; i < treeItems.length; i++) {
+							// 		BX.bind(
+							// 			treeItems[i],
+							// 			"click",
+							// 			BX.delegate(this.selectOfferProp, this),
+							// 		);
+							// 	}
+							// }
+
+							// логика добавления торг пр с помощью select
+							var selectElements = BX.findChildren(
+								this.obTree,
+								{ tagName: "select" },
+								true,
+							);
+							if (selectElements && selectElements.length) {
+								for (i = 0; i < selectElements.length; i++) {
 									BX.bind(
-										treeItems[i],
-										"click",
-										BX.delegate(this.selectOfferProp, this),
+										selectElements[i],
+										"change",
+										BX.delegate(this.selectOfferPropFromSelect, this),
 									);
 								}
 							}
+
 							this.setCurrent();
-						} else if (this.obPictSlider) {
-							this.initializeSlider();
 						}
+
+						// else if (
+						// 	parseInt(this.product.morePhotoCount) > 1 &&
+						// 	this.obPictSlider
+						// ) {
+						// 	this.initializeSlider();
+						// }
 
 						break;
 				}
@@ -668,13 +723,42 @@
 					if (this.obCompare) {
 						BX.bind(this.obCompare, "click", BX.proxy(this.compare, this));
 					}
-
 					BX.addCustomEvent(
 						"onCatalogDeleteCompare",
 						BX.proxy(this.checkDeletedCompare, this),
 					);
 				}
 			}
+		},
+
+		// функция добавления торг предложения с помощью select
+		selectOfferPropFromSelect: function (event) {
+			var target = event.target,
+				propertyId = target.getAttribute("data-property-id"),
+				valueId = target.value;
+
+			if (!propertyId || !valueId) return;
+
+			var strTreeValue = propertyId + "_" + valueId;
+
+			// Имитируем поведение как при клике на кнопку
+			var context = {
+				hasAttribute: function (attr) {
+					return attr === "data-treevalue";
+				},
+				getAttribute: function (attr) {
+					if (attr === "data-treevalue") return strTreeValue;
+					if (attr === "data-onevalue") return valueId;
+					return null;
+				},
+				className: "",
+				// Нужно эмулировать наличие/отсутствие класса "selected"
+				// Но в случае select это не нужно — просто вызываем логику
+			};
+
+			// Сохраняем контекст и вызываем оригинальную логику
+			BX.proxy_context = context;
+			this.selectOfferProp();
 		},
 
 		setAnalyticsDataLayer: function (action) {
@@ -1092,7 +1176,7 @@
 						this.currentPriceMode === "Q"
 							? parseFloat(
 									this.currentPrices[this.currentPriceSelected].MIN_QUANTITY,
-								)
+							  )
 							: this.stepQuantity;
 				} else {
 					this.stepQuantity = parseInt(newOffer.STEP_QUANTITY, 10);
@@ -1101,7 +1185,7 @@
 						this.currentPriceMode === "Q"
 							? parseInt(
 									this.currentPrices[this.currentPriceSelected].MIN_QUANTITY,
-								)
+							  )
 							: this.stepQuantity;
 				}
 
@@ -1175,57 +1259,55 @@
 			}
 		},
 
-		initializeSlider: function () {
-			// console.log("initializeSlider", this.swiperInstance);
-			// Если Swiper уже инициализирован, уничтожаем его
-			if (this.swiperInstance) {
-				this.swiperInstance.destroy(true, true);
-				this.swiperInstance = null;
-			}
+		// initializeSlider: function () {
+		// 	var wrap = this.obPictSlider.getAttribute("data-slider-wrap");
+		// 	if (wrap) {
+		// 		this.slider.options.wrap = wrap === "true";
+		// 	} else {
+		// 		this.slider.options.wrap = this.defaultSliderOptions.wrap;
+		// 	}
 
-			// Инициализируем новый Swiper
-			if (typeof Swiper !== "undefined" && this.obPictSlider) {
-				// Находим родительский контейнер swiper для текущего слайдера
-				var swiperContainer = this.obPictSlider.closest(".swiper");
-				var slideCount =
-					this.obPictSlider.querySelectorAll(".swiper-slide").length;
+		// 	if (this.isTouchDevice) {
+		// 		this.slider.options.interval = false;
+		// 	} else {
+		// 		this.slider.options.interval =
+		// 			parseInt(this.obPictSlider.getAttribute("data-slider-interval")) ||
+		// 			this.defaultSliderOptions.interval;
+		// 		// slider interval must be more than 700ms because of css transitions
+		// 		if (this.slider.options.interval < 700) {
+		// 			this.slider.options.interval = 700;
+		// 		}
 
-				if (swiperContainer && slideCount > 0) {
-					this.swiperInstance = new Swiper(swiperContainer, {
-						// Базовые настройки
-						slidesPerView: 1,
-						spaceBetween: 0,
-						loop: slideCount > 1,
+		// 		if (this.obPictSliderIndicator) {
+		// 			var controls =
+		// 				this.obPictSliderIndicator.querySelectorAll("[data-go-to]");
+		// 			for (var i in controls) {
+		// 				if (controls.hasOwnProperty(i)) {
+		// 					BX.bind(
+		// 						controls[i],
+		// 						"click",
+		// 						BX.proxy(this.sliderClickHandler, this),
+		// 					);
+		// 				}
+		// 			}
+		// 		}
 
-						// Пагинация - ищем внутри текущего контейнера
-						pagination: {
-							el: swiperContainer.parentNode.querySelector(
-								".swiper-pagination",
-							),
-							clickable: true,
-						},
-
-						// Навигация (если нужны стрелки)
-						// navigation: {
-						// 	nextEl: swiperContainer.querySelector('.swiper-button-next'),
-						// 	prevEl: swiperContainer.querySelector('.swiper-button-prev'),
-						// },
-
-						// Автопрокрутка (опционально)
-						autoplay:
-							slideCount > 1
-								? {
-										delay: 5000,
-										disableOnInteraction: false,
-										pauseOnMouseEnter: true,
-									}
-								: false,
-					});
-				} else if (!swiperContainer) {
-					console.error("Swiper container not found");
-				}
-			}
-		},
+		// 		if (this.obPictSliderProgressBar) {
+		// 			if (this.slider.progress) {
+		// 				this.resetProgress();
+		// 				this.cycleSlider();
+		// 			} else {
+		// 				this.slider.progress = new BX.easing({
+		// 					transition: BX.easing.transitions.linear,
+		// 					step: BX.delegate(function (state) {
+		// 						this.obPictSliderProgressBar.style.width =
+		// 							state.width / 10 + "%";
+		// 					}, this),
+		// 				});
+		// 			}
+		// 		}
+		// 	}
+		// },
 
 		// checkTouch: function (event) {
 		// 	if (!event || !event.changedTouches) return false;
@@ -1454,38 +1536,33 @@
 				target = BX.proxy_context;
 
 			if (target && target.hasAttribute("data-treevalue")) {
-				if (
-					BX.hasClass(
-						BX.findChild(target, { tagName: "button" }, false),
-						"selected",
-					)
-				)
-					return;
+				if (BX.hasClass(target, "selected")) return;
 
 				strTreeValue = target.getAttribute("data-treevalue");
 				arTreeItem = strTreeValue.split("_");
 				if (this.searchOfferPropIndex(arTreeItem[0], arTreeItem[1])) {
 					rowItems = BX.findChildren(
 						target.parentNode,
-						{ tagName: "li" },
+						{ tagName: "button" },
 						false,
 					);
 					if (rowItems && 0 < rowItems.length) {
 						for (i = 0; i < rowItems.length; i++) {
 							value = rowItems[i].getAttribute("data-onevalue");
 							if (value === arTreeItem[1]) {
-								BX.addClass(
-									BX.findChild(rowItems[i], { tagName: "button" }, false),
-									"selected",
-								);
+								BX.addClass(rowItems[i], "selected");
 							} else {
-								BX.removeClass(
-									BX.findChild(rowItems[i], { tagName: "button" }, false),
-									"selected",
-								);
+								BX.removeClass(rowItems[i], "selected");
 							}
 						}
 					}
+
+					this.obProduct
+						.querySelector("[data-1clickbuy-id]")
+						?.setAttribute("data-1clickbuy-id", this.offers[this.offerNum].ID);
+					this.obProduct
+						.querySelector("[data-quickview-offer-id]")
+						?.setAttribute("data-quickview-offer-id", this.offerNum);
 
 					// if (
 					// 	this.isFacebookConversionCustomizeProductEventEnabled &&
@@ -1573,55 +1650,41 @@
 			return true;
 		},
 
+		// custom
 		updateRow: function (intNumber, activeID, showID, canBuyID) {
-			var i = 0,
-				value = "",
-				isCurrent = false,
-				rowItems = null;
-
 			var lineContainer = this.obTree.querySelectorAll(
 					'[data-entity="sku-line-block"]',
 				),
-				listContainer;
+				selectElement;
 
 			if (intNumber > -1 && intNumber < lineContainer.length) {
-				listContainer = lineContainer[intNumber].querySelector("ul");
-				rowItems = BX.findChildren(listContainer, { tagName: "li" }, false);
-				if (rowItems && 0 < rowItems.length) {
-					for (i = 0; i < rowItems.length; i++) {
-						value = rowItems[i].getAttribute("data-onevalue");
-						isCurrent = value === activeID;
+				selectElement = lineContainer[intNumber].querySelector("select");
+				if (!selectElement) return;
 
-						if (isCurrent) {
-							// BX.addClass(rowItems[i], "selected");
-							BX.addClass(
-								BX.findChild(rowItems[i], { tagName: "button" }, false),
-								"selected",
-							);
-							// BX.addClass(item, "__selected");
-						} else {
-							// BX.removeClass(rowItems[i], "selected");
-							BX.removeClass(
-								BX.findChild(rowItems[i], { tagName: "button" }, false),
-								"selected",
-							);
-						}
+				var options = selectElement.querySelectorAll("option");
+				for (var i = 0; i < options.length; i++) {
+					var value = options[i].value;
+					options[i].style.display = BX.util.in_array(value, showID)
+						? ""
+						: "none";
+					options[i].disabled = !BX.util.in_array(value, canBuyID);
+				}
 
-						if (BX.util.in_array(value, canBuyID)) {
-							BX.removeClass(rowItems[i], "notallowed");
-						} else {
-							BX.addClass(rowItems[i], "notallowed");
-						}
+				var newValue = null;
+				if (BX.util.in_array(activeID, showID)) {
+					newValue = activeID;
+				} else if (showID.length > 0) {
+					newValue = showID[0];
+				}
 
-						rowItems[i].style.display = BX.util.in_array(value, showID)
-							? ""
-							: "none";
+				if (newValue !== null && selectElement.value !== newValue) {
+					selectElement.value = newValue;
 
-						if (isCurrent) {
-							lineContainer[intNumber].style.display =
-								value == 0 && canBuyID.length == 1 ? "none" : "";
-						}
-					}
+					var changeEvent = new Event("change", {
+						bubbles: true,
+						cancelable: false,
+					});
+					selectElement.dispatchEvent(changeEvent);
 				}
 			}
 		},
@@ -1723,18 +1786,26 @@
 				this.updateRow(i, arFilter[strName], arShowValues, arCanBuyValues);
 			}
 			this.selectedValues = arFilter;
+
+			// this.obProduct
+			// 	.querySelector(".item")
+			// 	?.setAttribute("data-offer-id", this.offers[this.offerNum].ID);
+
+			this.obProduct
+				.querySelector("[data-1clickbuy-id]")
+				?.setAttribute("data-1clickbuy-id", this.offers[this.offerNum].ID);
+			this.obProduct
+				.querySelector("[data-quickview-offer-id]")
+				?.setAttribute("data-quickview-offer-id", this.offerNum);
+
 			this.changeInfo();
 		},
 
 		changeInfo: function () {
-			// console.log("changeInfo");
-			var i,
-				j,
-				index = -1,
-				boolOneSearch = true,
-				quantityChanged;
-
-			for (i = 0; i < this.offers.length; i++) {
+			var index = -1,
+				j = 0,
+				boolOneSearch = true;
+			for (var i = 0; i < this.offers.length; i++) {
 				boolOneSearch = true;
 				for (j in this.selectedValues) {
 					if (this.selectedValues[j] !== this.offers[i].TREE[j]) {
@@ -1747,58 +1818,77 @@
 					break;
 				}
 			}
+
 			if (index > -1) {
-				if (this.obPictSlider) {
-					// console.log("OFFER_DATA:", this.offers[index]);
-					// console.log(this.defaultPict);
+				// Собираем все изображения
+				var images = [];
 
-					var offer = this.offers[index];
-					var slides = [];
-
-					if (offer.MORE_PHOTO.length) {
-						for (i in offer.MORE_PHOTO) {
-							if (offer.MORE_PHOTO[i].SRC) {
-								slides.push(offer.MORE_PHOTO[i]);
-							}
-						}
-					}
-
-					// console.log("SLIDES TO VIEW:", slides);
-
-					BX.cleanNode(this.obPictSlider);
-					for (i = 0; i < slides.length; i++) {
-						this.obPictSlider.appendChild(
-							BX.create("div", {
-								props: {
-									className: "swiper-slide",
-								},
-								children: [
-									BX.create("img", {
-										props: {
-											src: slides[i].SRC,
-											alt: this.product.name || "product image",
-										},
-										attrs: {
-											loading: "lazy",
-										},
-									}),
-								],
-							}),
-						);
-					}
-					if (slides.length > 0) {
-						this.obPictSlider.style.display = "";
-						this.initializeSlider();
-					} else {
-						this.obPictSlider.style.display = "none";
-						if (this.swiperInstance) {
-							this.swiperInstance.destroy(true, true);
-							this.swiperInstance = null;
-						}
-					}
-					// this.initializeSlider();
+				// 1. Основное изображение
+				if (this.offers[index].PREVIEW_PICTURE) {
+					images.push(this.offers[index].PREVIEW_PICTURE);
+				} else if (this.defaultPict.pict) {
+					images.push(this.defaultPict.pict);
 				}
 
+				// 2. Второе изображение (если есть и отличается)
+				if (this.offers[index].PREVIEW_PICTURE_SECOND) {
+					var secondSrc = this.offers[index].PREVIEW_PICTURE_SECOND.SRC;
+					var firstSrc = images.length ? images[0].SRC : "";
+					if (secondSrc !== firstSrc) {
+						images.push(this.offers[index].PREVIEW_PICTURE_SECOND);
+					}
+				}
+
+				// 4. фото товара
+				if (this.product.morePhoto) {
+					images = [...this.product.morePhoto, ...images];
+				}
+
+				// 5. Дополнительные фото из ТП
+				if (
+					this.offers[index].MORE_PHOTO &&
+					this.offers[index].MORE_PHOTO.length
+				) {
+					images = images.concat(this.offers[index].MORE_PHOTO);
+				}
+
+				// Удаляем дубликаты по SRC
+				var seen = new Set();
+				images = images.filter(function (img) {
+					if (seen.has(img.SRC)) return false;
+					seen.add(img.SRC);
+					return true;
+				});
+
+				// Обновляем Swiper
+				if (this.node.pictSliderWrapper) {
+					this.node.pictSliderWrapper.innerHTML = "";
+
+					images.forEach(function (img) {
+						var slide = BX.create("DIV", {
+							props: { className: "swiper-slide" },
+						});
+
+						var imageEl = BX.create("IMG", {
+							props: {
+								src: img.SRC,
+								alt: this.config?.alt || this.product?.name || "",
+								title: this.config?.title || "",
+							},
+							style: {},
+						});
+
+						slide.appendChild(imageEl);
+						this.node.pictSliderWrapper.appendChild(slide);
+					}, this);
+
+					if (this.pictSwiper) {
+						this.pictSwiper.update();
+						this.pictSwiper.slideTo(0, 0);
+					}
+				}
+
+				// Остальная логика (цена, свойства и т.д.)
 				if (this.showSkuProps && this.obSkuProps) {
 					if (this.offers[index].DISPLAY_PROPERTIES.length) {
 						BX.adjust(this.obSkuProps, {
@@ -1816,10 +1906,189 @@
 				this.quantitySet(index);
 				this.setPrice();
 				this.setCompared(this.offers[index].COMPARED);
-
 				this.offerNum = index;
 			}
 		},
+
+		// changeInfo: function () {
+		// 	var i,
+		// 		j,
+		// 		index = -1,
+		// 		boolOneSearch = true,
+		// 		quantityChanged;
+
+		// 	for (i = 0; i < this.offers.length; i++) {
+		// 		boolOneSearch = true;
+		// 		for (j in this.selectedValues) {
+		// 			if (this.selectedValues[j] !== this.offers[i].TREE[j]) {
+		// 				boolOneSearch = false;
+		// 				break;
+		// 			}
+		// 		}
+		// 		if (boolOneSearch) {
+		// 			index = i;
+		// 			break;
+		// 		}
+		// 	}
+		// 	if (index > -1) {
+		// 		if (
+		// 			parseInt(this.offers[index].MORE_PHOTO_COUNT) > 1 &&
+		// 			this.obPictSlider
+		// 		) {
+		// 			// hide pict and second_pict containers
+		// 			if (this.obPict) {
+		// 				this.obPict.style.display = "none";
+		// 			}
+
+		// 			if (this.obSecondPict) {
+		// 				this.obSecondPict.style.display = "none";
+		// 			}
+
+		// 			// clear slider container
+		// 			BX.cleanNode(this.obPictSlider);
+
+		// 			// fill slider container with slides
+		// 			for (i in this.offers[index].MORE_PHOTO) {
+		// 				if (this.offers[index].MORE_PHOTO.hasOwnProperty(i)) {
+		// 					this.obPictSlider.appendChild(
+		// 						BX.create("SPAN", {
+		// 							props: {
+		// 								className:
+		// 									"product-item-image-slide item" +
+		// 									(i == 0 ? " active" : ""),
+		// 							},
+		// 							style: {
+		// 								backgroundImage:
+		// 									"url('" + this.offers[index].MORE_PHOTO[i].SRC + "')",
+		// 							},
+		// 						}),
+		// 					);
+		// 				}
+		// 			}
+
+		// 			// fill slider indicator if exists
+		// 			if (this.obPictSliderIndicator) {
+		// 				BX.cleanNode(this.obPictSliderIndicator);
+
+		// 				for (i in this.offers[index].MORE_PHOTO) {
+		// 					if (this.offers[index].MORE_PHOTO.hasOwnProperty(i)) {
+		// 						this.obPictSliderIndicator.appendChild(
+		// 							BX.create("DIV", {
+		// 								attrs: { "data-go-to": i },
+		// 								props: {
+		// 									className:
+		// 										"product-item-image-slider-control" +
+		// 										(i == 0 ? " active" : ""),
+		// 								},
+		// 							}),
+		// 						);
+		// 						this.obPictSliderIndicator.appendChild(
+		// 							document.createTextNode(" "),
+		// 						);
+		// 					}
+		// 				}
+
+		// 				this.obPictSliderIndicator.style.display = "";
+		// 			}
+
+		// 			if (this.obPictSliderProgressBar) {
+		// 				this.obPictSliderProgressBar.style.display = "";
+		// 			}
+
+		// 			// show slider container
+		// 			this.obPictSlider.style.display = "";
+		// 			this.initializeSlider();
+		// 		} else {
+		// 			// hide slider container
+		// 			if (this.obPictSlider) {
+		// 				this.obPictSlider.style.display = "none";
+		// 			}
+
+		// 			if (this.obPictSliderIndicator) {
+		// 				this.obPictSliderIndicator.style.display = "none";
+		// 			}
+
+		// 			if (this.obPictSliderProgressBar) {
+		// 				this.obPictSliderProgressBar.style.display = "none";
+		// 			}
+
+		// 			// show pict and pict_second containers
+		// 			if (this.obPict) {
+		// 				if (this.offers[index].PREVIEW_PICTURE) {
+		// 					BX.adjust(this.obPict, {
+		// 						style: {
+		// 							backgroundImage:
+		// 								"url('" + this.offers[index].PREVIEW_PICTURE.SRC + "')",
+		// 						},
+		// 					});
+		// 				} else {
+		// 					BX.adjust(this.obPict, {
+		// 						style: {
+		// 							backgroundImage: "url('" + this.defaultPict.pict.SRC + "')",
+		// 						},
+		// 					});
+		// 				}
+
+		// 				this.obPict.style.display = "";
+		// 			}
+
+		// 			if (this.secondPict && this.obSecondPict) {
+		// 				if (this.offers[index].PREVIEW_PICTURE_SECOND) {
+		// 					BX.adjust(this.obSecondPict, {
+		// 						style: {
+		// 							backgroundImage:
+		// 								"url('" +
+		// 								this.offers[index].PREVIEW_PICTURE_SECOND.SRC +
+		// 								"')",
+		// 						},
+		// 					});
+		// 				} else if (this.offers[index].PREVIEW_PICTURE.SRC) {
+		// 					BX.adjust(this.obSecondPict, {
+		// 						style: {
+		// 							backgroundImage:
+		// 								"url('" + this.offers[index].PREVIEW_PICTURE.SRC + "')",
+		// 						},
+		// 					});
+		// 				} else if (this.defaultPict.secondPict) {
+		// 					BX.adjust(this.obSecondPict, {
+		// 						style: {
+		// 							backgroundImage:
+		// 								"url('" + this.defaultPict.secondPict.SRC + "')",
+		// 						},
+		// 					});
+		// 				} else {
+		// 					BX.adjust(this.obSecondPict, {
+		// 						style: {
+		// 							backgroundImage: "url('" + this.defaultPict.pict.SRC + "')",
+		// 						},
+		// 					});
+		// 				}
+
+		// 				this.obSecondPict.style.display = "";
+		// 			}
+		// 		}
+
+		// 		if (this.showSkuProps && this.obSkuProps) {
+		// 			if (this.offers[index].DISPLAY_PROPERTIES.length) {
+		// 				BX.adjust(this.obSkuProps, {
+		// 					style: { display: "" },
+		// 					html: this.offers[index].DISPLAY_PROPERTIES,
+		// 				});
+		// 			} else {
+		// 				BX.adjust(this.obSkuProps, {
+		// 					style: { display: "none" },
+		// 					html: "",
+		// 				});
+		// 			}
+		// 		}
+
+		// 		this.quantitySet(index);
+		// 		this.setPrice();
+		// 		this.setCompared(this.offers[index].COMPARED);
+
+		// 		this.offerNum = index;
+		// 	}
+		// },
 
 		checkPriceRange: function (quantity) {
 			if (typeof quantity === "undefined" || this.currentPriceMode != "Q")
@@ -1891,15 +2160,34 @@
 					this.minQuantity;
 
 			if (reachedTopLimit) {
-				BX.addClass(this.obQuantityUp, "disabled");
-			} else if (BX.hasClass(this.obQuantityUp, "disabled")) {
-				BX.removeClass(this.obQuantityUp, "disabled");
+				BX.addClass(
+					this.obQuantityUp,
+					"product-item-amount-field-btn-disabled",
+				);
+			} else if (
+				BX.hasClass(this.obQuantityUp, "product-item-amount-field-btn-disabled")
+			) {
+				BX.removeClass(
+					this.obQuantityUp,
+					"product-item-amount-field-btn-disabled",
+				);
 			}
 
 			if (reachedBottomLimit) {
-				BX.addClass(this.obQuantityDown, "disabled");
-			} else if (BX.hasClass(this.obQuantityDown, "disabled")) {
-				BX.removeClass(this.obQuantityDown, "disabled");
+				BX.addClass(
+					this.obQuantityDown,
+					"product-item-amount-field-btn-disabled",
+				);
+			} else if (
+				BX.hasClass(
+					this.obQuantityDown,
+					"product-item-amount-field-btn-disabled",
+				)
+			) {
+				BX.removeClass(
+					this.obQuantityDown,
+					"product-item-amount-field-btn-disabled",
+				);
 			}
 
 			if (reachedTopLimit && reachedBottomLimit) {
@@ -2073,7 +2361,7 @@
 							events: {
 								click: BX.delegate(this.compareRedirect, this),
 							},
-							style: { marginRight: "10px" },
+							style: {},
 						}),
 						new BasketButton({
 							text: BX.message("BTN_MESSAGE_CLOSE_POPUP"),
@@ -2387,16 +2675,12 @@
 						case 3: // sku
 							strPict = this.offers[this.offerNum].PREVIEW_PICTURE
 								? this.offers[this.offerNum].PREVIEW_PICTURE.SRC
-								: this.defaultPict;
+								: this.defaultPict.pict.SRC;
 							break;
 					}
 
 					strContent =
-						'<div style="width: 100%; margin: 0; text-align: center;"><img src="' +
-						strPict +
-						'" height="130" style="max-height:130px"><p>' +
-						this.product.name +
-						"</p></div>";
+						'<img src="' + strPict + '"><span>' + this.product.name + "</span>";
 
 					if (this.showClosePopup) {
 						buttons = [
@@ -2405,7 +2689,7 @@
 								events: {
 									click: BX.delegate(this.basketRedirect, this),
 								},
-								style: { marginRight: "10px" },
+								style: {},
 							}),
 							new BasketButton({
 								text: BX.message("BTN_MESSAGE_CLOSE_POPUP"),
@@ -2426,11 +2710,11 @@
 					}
 				} else {
 					strContent =
-						'<div style="width: 100%; margin: 0; text-align: center;"><p>' +
+						"<span>" +
 						(arResult.MESSAGE
 							? arResult.MESSAGE
 							: BX.message("BASKET_UNKNOWN_ERROR")) +
-						"</p></div>";
+						"</span>";
 					buttons = [
 						new BasketButton({
 							text: BX.message("BTN_MESSAGE_CLOSE"),
@@ -2475,6 +2759,20 @@
 					className: this.templateTheme ? "bx-" + this.templateTheme : "",
 				},
 			);
+
+			// custom popup transition
+			const originalShow = this.obPopupWin.show.bind(this.obPopupWin);
+			this.obPopupWin.show = function () {
+				this.popupContainer.style.opacity = "0";
+				this.popupContainer.style.transform = "translateY(100px)";
+				originalShow();
+				setTimeout(() => {
+					this.popupContainer.style.transition =
+						"opacity 0.5s ease, transform 0.5s ease";
+					this.popupContainer.style.opacity = "1";
+					this.popupContainer.style.transform = "translateY(0)";
+				}, 10);
+			};
 		},
 	};
 })(window);

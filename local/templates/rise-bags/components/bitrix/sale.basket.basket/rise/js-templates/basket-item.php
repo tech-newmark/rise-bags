@@ -165,47 +165,53 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 
 									{{#SKU_BLOCK_LIST}}
 										{{#IS_IMAGE}}
-											<div class="bx-basket__list-item-scu-prop" data-entity="basket-item-sku-block">
-												<span class="bx-basket__list-item-scu-prop-name">{{NAME}}</span>
-												<ul class="bx-basket__list-item-scu-prop-list">
-													{{#SKU_VALUES_LIST}}
-														<li
-															title="{{NAME}}"
-															data-entity="basket-item-sku-field"
-															data-initial="{{#SELECTED}}true{{/SELECTED}}{{^SELECTED}}false{{/SELECTED}}"
-															data-value-id="{{VALUE_ID}}"
-															data-sku-name="{{NAME}}"
-															data-property="{{PROP_CODE}}">
+											<div class="bx-basket__list-item-scu-prop scu-prop-block" data-entity="basket-item-sku-block">
+												<div class="scu-prop-container">
+													<span class="scu-prop-name">{{NAME}}</span>
+													<ul class="scu-prop-list">
+														{{#SKU_VALUES_LIST}}
+															<li
+																title="{{NAME}}"
+																data-entity="basket-item-sku-field"
+																data-initial="{{#SELECTED}}true{{/SELECTED}}{{^SELECTED}}false{{/SELECTED}}"
+																data-value-id="{{VALUE_ID}}"
+																data-sku-name="{{NAME}}"
+																data-property="{{PROP_CODE}}"
+																class="scu-prop-list-item">
 
-															<button type="button" class="bx-basket__list-item-scu-prop-value {{#SELECTED}}selected{{/SELECTED}} {{#NOT_AVAILABLE_OFFER}}disabled{{/NOT_AVAILABLE_OFFER}}">
-																<img src="{{PICT}}" alt="{{NAME}}" width="40" height="40">
-															</button>
-														</li>
-													{{/SKU_VALUES_LIST}}
-												</ul>
+																<button type="button" class="scu-prop-list-item-value {{#SELECTED}}selected{{/SELECTED}} {{#NOT_AVAILABLE_OFFER}}disabled{{/NOT_AVAILABLE_OFFER}}">
+																	<img src="{{PICT}}" alt="{{NAME}}" width="40" height="40">
+																</button>
+															</li>
+														{{/SKU_VALUES_LIST}}
+													</ul>
+												</div>
 											</div>
 										{{/IS_IMAGE}}
 
 										{{^IS_IMAGE}}
-											<div class="bx-basket__list-item-scu-prop" data-entity="basket-item-sku-block">
-												<span class="bx-basket__list-item-scu-prop-name">{{NAME}}</span>
-												<ul class="bx-basket__list-item-scu-prop-list">
-													{{#SKU_VALUES_LIST}}
-														<li
-															title="{{NAME}}"
-															data-entity="basket-item-sku-field"
-															data-initial="{{#SELECTED}}true{{/SELECTED}}{{^SELECTED}}false{{/SELECTED}}"
-															data-value-id="{{VALUE_ID}}"
-															data-sku-name="{{NAME}}"
-															data-property="{{PROP_CODE}}">
+											<div class="bx-basket__list-item-scu-prop scu-prop-block" data-entity="basket-item-sku-block">
+												<div class="scu-prop-container">
+													<span class="scu-prop-name">{{NAME}}</span>
+													<ul class="scu-prop-list">
+														{{#SKU_VALUES_LIST}}
+															<li
+																title="{{NAME}}"
+																data-entity="basket-item-sku-field"
+																data-initial="{{#SELECTED}}true{{/SELECTED}}{{^SELECTED}}false{{/SELECTED}}"
+																data-value-id="{{VALUE_ID}}"
+																data-sku-name="{{NAME}}"
+																data-property="{{PROP_CODE}}"
+																class="scu-prop-list-item">
 
-															<button type="button"
-																class="bx-basket__list-item-scu-prop-value {{#SELECTED}}selected{{/SELECTED}} {{#NOT_AVAILABLE_OFFER}}disabled{{/NOT_AVAILABLE_OFFER}}">
-																<span>{{NAME}}</span>
-															</button>
-														</li>
-													{{/SKU_VALUES_LIST}}
-												</ul>
+																<button type="button"
+																	class="scu-prop-list-item-value {{#SELECTED}}selected{{/SELECTED}} {{#NOT_AVAILABLE_OFFER}}disabled{{/NOT_AVAILABLE_OFFER}}">
+																	<span>{{NAME}}</span>
+																</button>
+															</li>
+														{{/SKU_VALUES_LIST}}
+													</ul>
+												</div>
 											</div>
 										{{/IS_IMAGE}}
 									{{/SKU_BLOCK_LIST}}
@@ -217,11 +223,11 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 								?>
 									{{#COLUMN_LIST}}
 										{{#IS_IMAGE}}
-											<div class="bx-basket__list-item-prop" data-entity="basket-item-property">
-												<span class="bx-basket__list-item-prop-name">{{NAME}}</span>
-												<span class="bx-basket__list-item-prop-value">
+											<div class="prop-list-item" data-entity="basket-item-property">
+												<span class="prop-list-item-name">{{NAME}}</span>
+												<span class="prop-list-item-value">
 													{{#VALUE}}
-														<img class="bx-basket__list-item-prop-img"
+														<img class="prop-list-item-img"
 															src="{{{IMAGE_SRC}}}" data-image-index="{{INDEX}}"
 															data-column-property-code="{{CODE}}" width="32" height="32" alt="{{NAME}}">
 													{{/VALUE}}
@@ -230,9 +236,9 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 										{{/IS_IMAGE}}
 
 										{{#IS_TEXT}}
-											<div class="bx-basket__list-item-prop" data-entity="basket-item-property">
-												<span class="bx-basket__list-item-prop-name">{{NAME}}</span>
-												<span class="bx-basket__list-item-prop-value"
+											<div class="prop-list-item" data-entity="basket-item-property">
+												<span class="prop-list-item-name">{{NAME}}</span>
+												<span class="prop-list-item-value"
 													data-column-property-code="{{CODE}}"
 													data-entity="basket-item-property-column-value">
 													{{VALUE}}
@@ -241,9 +247,9 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 										{{/IS_TEXT}}
 
 										{{#IS_HTML}}
-											<div class="bx-basket__list-item-prop" data-entity="basket-item-property">
-												<span class="bx-basket__list-item-prop-name">{{NAME}}</span>
-												<span class="bx-basket__list-item-prop-value" data-column-property-code="{{CODE}}"
+											<div class="prop-list-item" data-entity="basket-item-property">
+												<span class="prop-list-item-name">{{NAME}}</span>
+												<span class="prop-list-item-value" data-column-property-code="{{CODE}}"
 													data-entity="basket-item-property-column-value">
 													{{{VALUE}}}
 												</span>
@@ -251,9 +257,9 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 										{{/IS_HTML}}
 
 										{{#IS_LINK}}
-											<div class="bx-basket__list-item-prop" data-entity="basket-item-property">
-												<span class="bx-basket__list-item-prop-name">{{NAME}}</span>
-												<span class="bx-basket__list-item-prop-value" data-column-property-code="{{CODE}}"
+											<div class="prop-list-item" data-entity="basket-item-property">
+												<span class="prop-list-item-name">{{NAME}}</span>
+												<span class="prop-list-item-value" data-column-property-code="{{CODE}}"
 													data-entity="basket-item-property-column-value">
 													{{#VALUE}}
 														{{{LINK}}}{{^IS_LAST}}<br>{{/IS_LAST}}
@@ -309,7 +315,7 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 
 			<div class="bx-basket__list-item-section bx-basket__list-item-section--counter">
 
-				<div class="counter {{#NOT_AVAILABLE}}disabled{{/NOT_AVAILABLE}}" data-entity="basket-item-quantity-block">
+				<div class="counter{{#NOT_AVAILABLE}}disabled{{/NOT_AVAILABLE}}" data-entity="basket-item-quantity-block">
 					<button type="button" class="counter-btn counter-btn--dec" data-entity="basket-item-quantity-minus">
 						<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
 							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-minus'></use>

@@ -55,7 +55,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		],
 		"SHOW_TOP_ELEMENTS" => "Y",
 		"SECTION_COUNT_ELEMENTS" => "Y",
-		"SECTION_TOP_DEPTH" => "3",
+		"SECTION_TOP_DEPTH" => "2",
 		"SECTIONS_VIEW_MODE" => "LIST",
 		"SECTIONS_SHOW_PARENT_NAME" => "Y",
 		"PAGE_ELEMENT_COUNT" => "15",
@@ -76,9 +76,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"LIST_BROWSER_TITLE" => "-",
 		"LIST_OFFERS_FIELD_CODE" => [
 			0 => "NAME",
-			1 => "PREVIEW_PICTURE",
-			2 => "DETAIL_PICTURE",
-			3 => "",
+			1 => "",
 		],
 		"LIST_OFFERS_PROPERTY_CODE" => [
 			0 => "SIZES_SHOES",
@@ -130,8 +128,11 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"PAGER_DESC_NUMBERING" => "N",
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000000",
 		"PAGER_SHOW_ALL" => "N",
-		"ADD_PICT_PROP" => "-",
+		"ADD_PICT_PROP" => "MORE_PHOTO",
 		"LABEL_PROP" => [
+			0 => "NEW",
+			1 => "HIT",
+			2 => "POPULAR",
 		],
 		"PRODUCT_DISPLAY_MODE" => "Y",
 		"OFFER_ADD_PICT_PROP" => "MORE_PHOTO",
@@ -173,14 +174,12 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 			2 => "",
 		],
 		"COMPATIBLE_MODE" => "N",
-		"SIDEBAR_SECTION_SHOW" => "N",
-		"SIDEBAR_DETAIL_SHOW" => "Y",
+		"SIDEBAR_SECTION_SHOW" => "Y",
+		"SIDEBAR_DETAIL_SHOW" => "N",
 		"SIDEBAR_PATH" => "/catalog/sidebar.php",
 		"COMPONENT_TEMPLATE" => "rise-catalog",
 		"HIDE_NOT_AVAILABLE_OFFERS" => "N",
-		"LABEL_PROP_MOBILE" => [
-			0 => "PROP_1",
-		],
+		"LABEL_PROP_MOBILE" => "",
 		"LABEL_PROP_POSITION" => "top-left",
 		"COMMON_SHOW_CLOSE_POPUP" => "Y",
 		"PRODUCT_SUBSCRIPTION" => "Y",
@@ -219,7 +218,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"SECTIONS_HIDE_SECTION_NAME" => "N",
 		"LIST_PRODUCT_BLOCKS_ORDER" => "price,props,sku,quantityLimit,quantity,buttons",
 		"LIST_PRODUCT_ROW_VARIANTS" => "[{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false}]",
-		"LIST_ENLARGE_PRODUCT" => "STRICT",
+		"LIST_ENLARGE_PRODUCT" => "PROP",
 		"LIST_SHOW_SLIDER" => "Y",
 		"LIST_SLIDER_INTERVAL" => "3000",
 		"LIST_SLIDER_PROGRESS" => "N",
@@ -238,7 +237,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 			0 => "POPUP",
 			1 => "MAGNIFIER",
 		],
-		"DETAIL_ADD_DETAIL_TO_SLIDER" => "N",
+		"DETAIL_ADD_DETAIL_TO_SLIDER" => "Y",
 		"DETAIL_DISPLAY_PREVIEW_TEXT_MODE" => "E",
 		"MESS_PRICE_RANGES_TITLE" => "Цены",
 		"MESS_DESCRIPTION_TAB" => "Описание",
@@ -287,8 +286,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"DETAIL_ADD_TO_BASKET_ACTION_PRIMARY" => [
 			0 => "BUY",
 		],
-		"LIST_PROPERTY_CODE_MOBILE" => [
-		],
+		"LIST_PROPERTY_CODE_MOBILE" => "",
 		"DETAIL_MAIN_BLOCK_PROPERTY_CODE" => [
 		],
 		"DETAIL_MAIN_BLOCK_OFFERS_PROPERTY_CODE" => [
@@ -328,6 +326,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"TOP_SHOW_SLIDER" => "Y",
 		"TOP_SLIDER_INTERVAL" => "3000",
 		"TOP_SLIDER_PROGRESS" => "N",
+		"LIST_ENLARGE_PROP" => "NEW",
 		"SEF_URL_TEMPLATES" => [
 			"sections" => "",
 			"section" => "#SECTION_CODE#/",
