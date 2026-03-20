@@ -1,0 +1,14 @@
+@use "@scss/base/container-queries" as *;
+
+.catalog-section {
+	outline: 1px solid red;
+
+	&-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--base-gap);
+
+		&-item {
+		}
+	}
+}

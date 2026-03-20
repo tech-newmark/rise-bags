@@ -1,10 +1,11 @@
 <?
 define("HIDE_SIDEBAR", true);
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetTitle("Каталог");
 ?>
-<?$APPLICATION->IncludeComponent(
+<? $APPLICATION->IncludeComponent(
 	"bitrix:catalog", 
-	"rise-catalog", 
+	"littleweb", 
 	[
 		"IBLOCK_TYPE" => "catalog",
 		"IBLOCK_ID" => "2",
@@ -58,10 +59,10 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"SECTION_TOP_DEPTH" => "2",
 		"SECTIONS_VIEW_MODE" => "LIST",
 		"SECTIONS_SHOW_PARENT_NAME" => "Y",
-		"PAGE_ELEMENT_COUNT" => "15",
-		"LINE_ELEMENT_COUNT" => "3",
-		"ELEMENT_SORT_FIELD" => "desc",
-		"ELEMENT_SORT_ORDER" => "asc",
+		"PAGE_ELEMENT_COUNT" => "3",
+		"LINE_ELEMENT_COUNT" => "1",
+		"ELEMENT_SORT_FIELD" => "SCALED_PRICE_1",
+		"ELEMENT_SORT_ORDER" => "desc",
 		"ELEMENT_SORT_FIELD2" => "id",
 		"ELEMENT_SORT_ORDER2" => "desc",
 		"LIST_PROPERTY_CODE" => [
@@ -127,7 +128,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_DESC_NUMBERING" => "N",
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000000",
-		"PAGER_SHOW_ALL" => "N",
+		"PAGER_SHOW_ALL" => "Y",
 		"ADD_PICT_PROP" => "MORE_PHOTO",
 		"LABEL_PROP" => [
 			0 => "NEW",
@@ -177,7 +178,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"SIDEBAR_SECTION_SHOW" => "Y",
 		"SIDEBAR_DETAIL_SHOW" => "N",
 		"SIDEBAR_PATH" => "/catalog/sidebar.php",
-		"COMPONENT_TEMPLATE" => "rise-catalog",
+		"COMPONENT_TEMPLATE" => "littleweb",
 		"HIDE_NOT_AVAILABLE_OFFERS" => "N",
 		"LABEL_PROP_MOBILE" => "",
 		"LABEL_PROP_POSITION" => "top-left",
@@ -217,7 +218,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"SEARCH_USE_SEARCH_RESULT_ORDER" => "N",
 		"SECTIONS_HIDE_SECTION_NAME" => "N",
 		"LIST_PRODUCT_BLOCKS_ORDER" => "price,props,sku,quantityLimit,quantity,buttons",
-		"LIST_PRODUCT_ROW_VARIANTS" => "[{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false}]",
+		"LIST_PRODUCT_ROW_VARIANTS" => "[{'VARIANT':'2','BIG_DATA':false}]",
 		"LIST_ENLARGE_PRODUCT" => "PROP",
 		"LIST_SHOW_SLIDER" => "Y",
 		"LIST_SLIDER_INTERVAL" => "3000",
@@ -327,6 +328,8 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"TOP_SLIDER_INTERVAL" => "3000",
 		"TOP_SLIDER_PROGRESS" => "N",
 		"LIST_ENLARGE_PROP" => "NEW",
+		"PRODUCT_ROW_VARIANTS_BIG_DATA" => "N",
+		"PRODUCT_ROW_VARIANTS_JSON" => "[{\"VARIANT\":2,\"BIG_DATA\":false},{\"VARIANT\":2,\"BIG_DATA\":false},{\"VARIANT\":2,\"BIG_DATA\":false},{\"VARIANT\":2,\"BIG_DATA\":false}]",
 		"SEF_URL_TEMPLATES" => [
 			"sections" => "",
 			"section" => "#SECTION_CODE#/",
@@ -336,5 +339,5 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		]
 	],
 	false
-);?>
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+); ?>
+<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
