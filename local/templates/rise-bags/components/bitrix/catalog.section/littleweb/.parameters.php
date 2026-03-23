@@ -36,35 +36,35 @@ if ($boolCatalog && (isset($arCurrentValues['IBLOCK_ID']) && 0 < intval($arCurre
 	}
 }
 
-$arThemes = array();
-if (ModuleManager::isModuleInstalled('bitrix.eshop')) {
-	$arThemes['site'] = GetMessage('CP_BCS_TPL_THEME_SITE');
-}
+// $arThemes = array();
+// if (ModuleManager::isModuleInstalled('bitrix.eshop')) {
+// 	$arThemes['site'] = GetMessage('CP_BCS_TPL_THEME_SITE');
+// }
 
-$arThemesList = array(
-	'blue' => GetMessage('CP_BCS_TPL_THEME_BLUE'),
-	'green' => GetMessage('CP_BCS_TPL_THEME_GREEN'),
-	'red' => GetMessage('CP_BCS_TPL_THEME_RED'),
-	'yellow' => GetMessage('CP_BCS_TPL_THEME_YELLOW')
-);
-$dir = trim(preg_replace("'[\\\\/]+'", '/', __DIR__ . '/themes/'));
-if (is_dir($dir)) {
-	foreach ($arThemesList as $themeID => $themeName) {
-		if (!is_file($dir . $themeID . '/style.css'))
-			continue;
+// $arThemesList = array(
+// 	'blue' => GetMessage('CP_BCS_TPL_THEME_BLUE'),
+// 	'green' => GetMessage('CP_BCS_TPL_THEME_GREEN'),
+// 	'red' => GetMessage('CP_BCS_TPL_THEME_RED'),
+// 	'yellow' => GetMessage('CP_BCS_TPL_THEME_YELLOW')
+// );
+// $dir = trim(preg_replace("'[\\\\/]+'", '/', __DIR__ . '/themes/'));
+// if (is_dir($dir)) {
+// 	foreach ($arThemesList as $themeID => $themeName) {
+// 		if (!is_file($dir . $themeID . '/style.css'))
+// 			continue;
 
-		$arThemes[$themeID] = $themeName;
-	}
-}
+// 		$arThemes[$themeID] = $themeName;
+// 	}
+// }
 
-$arTemplateParameters['TEMPLATE_THEME'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CP_BCS_TPL_TEMPLATE_THEME'),
-	'TYPE' => 'LIST',
-	'VALUES' => $arThemes,
-	'DEFAULT' => 'blue',
-	'ADDITIONAL_VALUES' => 'Y'
-);
+// $arTemplateParameters['TEMPLATE_THEME'] = array(
+// 	'PARENT' => 'VISUAL',
+// 	'NAME' => GetMessage('CP_BCS_TPL_TEMPLATE_THEME'),
+// 	'TYPE' => 'LIST',
+// 	'VALUES' => $arThemes,
+// 	'DEFAULT' => 'blue',
+// 	'ADDITIONAL_VALUES' => 'Y'
+// );
 
 $lineElementCount = (int)($arCurrentValues['LINE_ELEMENT_COUNT'] ?? 3);
 $pageElementCount = (int)($arCurrentValues['PAGE_ELEMENT_COUNT'] ?? 18);

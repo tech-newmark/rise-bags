@@ -366,6 +366,9 @@ JCSmartFilter.prototype.values2post = function (values) {
 // bitrix select //
 JCSmartFilter.prototype.showDropDownPopup = function (element, popupId) {
 	var contentNode = element.querySelector('[data-role="dropdownContent"]');
+
+	// Получаем ширину родительского элемента
+	var parentWidth = element.offsetWidth;
 	this.popups["smartFilterDropDown" + popupId] = BX.PopupWindowManager.create(
 		"smartFilterDropDown" + popupId,
 		element,
@@ -377,9 +380,31 @@ JCSmartFilter.prototype.showDropDownPopup = function (element, popupId) {
 			draggable: { restrict: true },
 			closeByEsc: true,
 			content: BX.clone(contentNode),
+
+			events: {
+				onPopupShow: function () {
+					// Добавляем обработчик ресайза при открытии попапа
+					window.addEventListener("resize", function onResize() {
+						var popup = BX.PopupWindowManager.getPopupById(
+							"smartFilterDropDown" + popupId,
+						);
+						if (popup && popup.isShown()) {
+							popup.close();
+						}
+						// Удаляем обработчик после закрытия
+						window.removeEventListener("resize", onResize);
+					});
+				},
+			},
 		},
 	);
-	this.popups["smartFilterDropDown" + popupId].show();
+
+	// Устанавливаем ширину попапа
+	var popup = this.popups["smartFilterDropDown" + popupId];
+	popup.setWidth(parentWidth);
+	// Опционально: устанавливаем минимальную ширину
+	popup.setMinWidth(parentWidth);
+	popup.show();
 };
 
 JCSmartFilter.prototype.selectDropDownItem = function (element, controlId) {
@@ -387,7 +412,7 @@ JCSmartFilter.prototype.selectDropDownItem = function (element, controlId) {
 
 	var wrapContainer = BX.findParent(
 		BX(controlId),
-		{ className: "bx-filter-select-container" },
+		{ className: "bx-filter-select" },
 		false,
 	);
 

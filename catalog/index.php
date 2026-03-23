@@ -175,7 +175,7 @@ $APPLICATION->SetTitle("Каталог");
 			2 => "",
 		],
 		"COMPATIBLE_MODE" => "N",
-		"SIDEBAR_SECTION_SHOW" => "Y",
+		"SIDEBAR_SECTION_SHOW" => "N",
 		"SIDEBAR_DETAIL_SHOW" => "N",
 		"SIDEBAR_PATH" => "/catalog/sidebar.php",
 		"COMPONENT_TEMPLATE" => "littleweb",

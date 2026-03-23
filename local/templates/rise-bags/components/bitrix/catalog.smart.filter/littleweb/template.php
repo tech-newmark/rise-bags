@@ -14,14 +14,6 @@
 use Bitrix\Iblock\SectionPropertyTable;
 
 $this->setFrameMode(true);
-
-$vite = new ViteManifest('rise-bags');
-$cssPath = $vite->getComponentCss('catalog.smart.filter/horizontal');
-$jsPath = $vite->getComponentJs('catalog.smart.filter/horizontal');
-
-if ($cssPath) $this->addExternalCss($cssPath);
-if ($jsPath) $this->addExternalJs($jsPath);
-
 ?>
 
 <svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
@@ -70,7 +62,7 @@ if ($jsPath) $this->addExternalJs($jsPath);
 								<div class="bx-filter-input-group">
 									<div class="bx-filter-parameters-box-container-block">
 										<label class="bx-filter-input-container">
-											<span><?= GetMessage("CT_BCSF_FILTER_FROM") ?></span>
+											<?/*<span><?= GetMessage("CT_BCSF_FILTER_FROM") ?></span> */ ?>
 											<input
 												type="text"
 												name="<?= $arItem["VALUES"]["MIN"]["CONTROL_NAME"] ?>"
@@ -83,7 +75,7 @@ if ($jsPath) $this->addExternalJs($jsPath);
 									</div>
 									<div class="bx-filter-parameters-box-container-block">
 										<label class="bx-filter-input-container">
-											<span><?= GetMessage("CT_BCSF_FILTER_TO") ?></span>
+											<? /* <span><?= GetMessage("CT_BCSF_FILTER_TO") ?></span> */ ?>
 											<input
 												class="max-price"
 												type="text"
@@ -185,11 +177,11 @@ if ($jsPath) $this->addExternalJs($jsPath);
 							switch ($arItem["DISPLAY_TYPE"]) {
 								case SectionPropertyTable::NUMBERS_WITH_SLIDER: //NUMBERS_WITH_SLIDER
 							?>
-									!!NUMBERS_WITH_SLIDER!!
+									<!-- !!NUMBERS_WITH_SLIDER!! -->
 									<div class="bx-filter-input-group">
 										<div class="bx-filter-parameters-box-container-block">
 											<label class="bx-filter-input-container">
-												<span><?= GetMessage("CT_BCSF_FILTER_FROM") ?></span>
+												<?/*<span><?= GetMessage("CT_BCSF_FILTER_FROM") ?></span> */ ?>
 												<input
 													type="text"
 													name="<?= $arItem["VALUES"]["MIN"]["CONTROL_NAME"] ?>"
@@ -202,7 +194,7 @@ if ($jsPath) $this->addExternalJs($jsPath);
 										</div>
 										<div class="bx-filter-parameters-box-container-block">
 											<label class="bx-filter-input-container">
-												<span><?= GetMessage("CT_BCSF_FILTER_TO") ?></span>
+												<?/*<span><?= GetMessage("CT_BCSF_FILTER_TO") ?></span> */ ?>
 												<input
 													type="text"
 													name="<?= $arItem["VALUES"]["MAX"]["CONTROL_NAME"] ?>"
@@ -255,17 +247,18 @@ if ($jsPath) $this->addExternalJs($jsPath);
 									break;
 								case SectionPropertyTable::NUMBERS: //NUMBERS
 								?>
-									!!NUMBERS!!
+									<!-- !!NUMBERS!! -->
 									<div class="bx-filter-input-group">
 										<div class="bx-filter-parameters-box-container-block">
 											<label class="bx-filter-input-container">
-												<span><?= GetMessage("CT_BCSF_FILTER_FROM") ?></span>
+												<?/*<span><?= GetMessage("CT_BCSF_FILTER_FROM") ?></span>*/ ?>
+												<!-- change the type -->
 												<input
 													class="min-price"
 													type="text"
-													name="<? echo $arItem["VALUES"]["MIN"]["CONTROL_NAME"] ?>"
-													id="<? echo $arItem["VALUES"]["MIN"]["CONTROL_ID"] ?>"
-													value="<? echo $arItem["VALUES"]["MIN"]["HTML_VALUE"] ?>"
+													name="<?= $arItem["VALUES"]["MIN"]["CONTROL_NAME"] ?>"
+													id="<?= $arItem["VALUES"]["MIN"]["CONTROL_ID"] ?>"
+													value="<?= $arItem["VALUES"]["MIN"]["HTML_VALUE"] ?>"
 													placeholder="<?= $arItem["VALUES"]["MIN"]["VALUE"] ?>"
 													size="5"
 													onkeyup="smartFilter.keyup(this)" />
@@ -274,7 +267,7 @@ if ($jsPath) $this->addExternalJs($jsPath);
 
 										<div class="bx-filter-parameters-box-container-block">
 											<label class="bx-filter-input-container">
-												<span><?= GetMessage("CT_BCSF_FILTER_FROM") ?></span>
+												<?/*<span><?= GetMessage("CT_BCSF_FILTER_FROM") ?></span>*/ ?>
 												<input
 													class="max-price"
 													type="text"
@@ -291,210 +284,196 @@ if ($jsPath) $this->addExternalJs($jsPath);
 									break;
 								case SectionPropertyTable::CHECKBOXES_WITH_PICTURES: //CHECKBOXES_WITH_PICTURES
 								?>
-									!!CHECKBOXES_WITH_PICTURES!!
-									<div class="col-xs-12">
-										<div class="bx-filter-param-btn-inline">
-											<? foreach ($arItem["VALUES"] as $val => $ar): ?>
+									<div class="bx-filter-block bx-filter-block--row">
+										<!-- !!CHECKBOXES_WITH_PICTURES!! -->
+										<? foreach ($arItem["VALUES"] as $val => $ar): ?>
+											<label class="bx-filter-image-checkbox<?= $ar["DISABLED"] ? ' disabled' : '' ?>" data-role="label_<?= $ar["CONTROL_ID"] ?>" onclick="smartFilter.keyup(BX('<?= CUtil::JSEscape($ar["CONTROL_ID"]) ?>')); BX.toggleClass(this, '');">
 												<input
 													style="display: none"
 													type="checkbox"
 													name="<?= $ar["CONTROL_NAME"] ?>"
 													id="<?= $ar["CONTROL_ID"] ?>"
 													value="<?= $ar["HTML_VALUE"] ?>"
-													<? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?> />
-												<?
-												$class = "";
-												if ($ar["CHECKED"])
-													$class .= " ";
-												if ($ar["DISABLED"])
-													$class .= " disabled";
-												?>
-												<label for="<?= $ar["CONTROL_ID"] ?>" data-role="label_<?= $ar["CONTROL_ID"] ?>" class="bx-filter-param-label <?= $class ?>" onclick="smartFilter.keyup(BX('<?= CUtil::JSEscape($ar["CONTROL_ID"]) ?>')); BX.toggleClass(this, '');">
-													<span class="bx-filter-param-btn bx-color-sl">
-														<? if (isset($ar["FILE"]) && !empty($ar["FILE"]["SRC"])): ?>
-															<span class="bx-filter-btn-color-icon" style="background-image:url('<?= $ar["FILE"]["SRC"] ?>');"></span>
-														<? endif ?>
-													</span>
-												</label>
-											<? endforeach ?>
-										</div>
+													<?= $ar["CHECKED"] ? 'checked="checked"' : '' ?> />
+
+												<? if (isset($ar["FILE"]) && !empty($ar["FILE"]["SRC"])): ?>
+													<div class="bx-filter-image-checkbox__img-wrapper">
+														<img src="<?= $ar["FILE"]["SRC"] ?>" alt="<?= $ar["VALUE"]; ?>" width="24" height="24">
+													</div>
+												<? endif ?>
+											</label>
+										<? endforeach ?>
 									</div>
 								<?
 									break;
 								case SectionPropertyTable::CHECKBOXES_WITH_PICTURES_AND_LABELS: //CHECKBOXES_WITH_PICTURES_AND_LABELS
 								?>
-									!!CHECKBOXES_WITH_PICTURES_AND_LABELS!!
-									<div class="col-xs-12">
-										<div class="bx-filter-param-btn-block">
-											<? foreach ($arItem["VALUES"] as $val => $ar): ?>
+									<!-- !!CHECKBOXES_WITH_PICTURES_AND_LABELS!! -->
+									<div class="bx-filter-block bx-filter-block--row">
+										<? foreach ($arItem["VALUES"] as $val => $ar): ?>
+											<label class="bx-filter-image-checkbox<?= $ar["DISABLED"] ? ' disabled' : '' ?>" data-role="label_<?= $ar["CONTROL_ID"] ?>"
+												onclick="smartFilter.keyup(BX('<?= CUtil::JSEscape($ar["CONTROL_ID"]) ?>')); BX.toggleClass(this, '');">
 												<input
-													style="display: none"
 													type="checkbox"
 													name="<?= $ar["CONTROL_NAME"] ?>"
 													id="<?= $ar["CONTROL_ID"] ?>"
 													value="<?= $ar["HTML_VALUE"] ?>"
-													<? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?> />
-												<?
-												$class = "";
-												if ($ar["CHECKED"])
-													$class .= " ";
-												if ($ar["DISABLED"])
-													$class .= " disabled";
-												?>
-												<label for="<?= $ar["CONTROL_ID"] ?>" data-role="label_<?= $ar["CONTROL_ID"] ?>" class="bx-filter-param-label<?= $class ?>" onclick="smartFilter.keyup(BX('<?= CUtil::JSEscape($ar["CONTROL_ID"]) ?>')); BX.toggleClass(this, '');">
-													<span class="bx-filter-param-btn bx-color-sl">
-														<? if (isset($ar["FILE"]) && !empty($ar["FILE"]["SRC"])): ?>
-															<span class="bx-filter-btn-color-icon" style="background-image:url('<?= $ar["FILE"]["SRC"] ?>');"></span>
-														<? endif ?>
-													</span>
-													<span class="bx-filter-param-text" title="<?= $ar["VALUE"]; ?>"><?= $ar["VALUE"]; ?>
-														<?
-														if ($arParams["DISPLAY_ELEMENT_COUNT"] !== "N" && isset($ar["ELEMENT_COUNT"])):
-														?> (<span data-role="count_<?= $ar["CONTROL_ID"] ?>"><? echo $ar["ELEMENT_COUNT"]; ?></span>)
-														<?
-														endif; ?></span>
-												</label>
-											<? endforeach ?>
-										</div>
+													<?= $ar["CHECKED"] ? 'checked="checked"' : '' ?> />
+
+												<? if (isset($ar["FILE"]) && !empty($ar["FILE"]["SRC"])): ?>
+													<div class="bx-filter-image-checkbox__img-wrapper">
+														<img src="<?= $ar["FILE"]["SRC"] ?>" alt="<?= $ar["VALUE"]; ?>" width="24" height="24">
+													</div>
+												<? endif ?>
+
+												<span>
+													<?= $ar["VALUE"]; ?>
+													<?
+													if ($arParams["DISPLAY_ELEMENT_COUNT"] !== "N" && isset($ar["ELEMENT_COUNT"])):
+													?> (<span data-role="count_<?= $ar["CONTROL_ID"] ?>"><?= $ar["ELEMENT_COUNT"]; ?></span>)
+													<?
+													endif; ?>
+												</span>
+											</label>
+										<? endforeach ?>
 									</div>
 								<?
 									break;
 								case SectionPropertyTable::DROPDOWN: //DROPDOWN
 									$checkedItemExist = false;
 								?>
-									DROPDOWN
-									<div class="col-xs-12">
-										<div class="bx-filter-select-container">
-											<div class="bx-filter-select-block" onclick="smartFilter.showDropDownPopup(this, '<?= CUtil::JSEscape($key) ?>')">
-												<div class="bx-filter-select-text" data-role="currentOption">
-													<?
-													foreach ($arItem["VALUES"] as $val => $ar) {
-														if ($ar["CHECKED"]) {
-															echo $ar["VALUE"];
-															$checkedItemExist = true;
-														}
-													}
-													if (!$checkedItemExist) {
-														echo GetMessage("CT_BCSF_FILTER_ALL");
-													}
-													?>
-												</div>
-												<div class="bx-filter-select-arrow"></div>
-												<input
-													style="display: none"
-													type="radio"
-													name="<?= $arCur["CONTROL_NAME_ALT"] ?>"
-													id="<? echo "all_" . $arCur["CONTROL_ID"] ?>"
-													value="" />
-												<? foreach ($arItem["VALUES"] as $val => $ar): ?>
-													<input
-														style="display: none"
-														type="radio"
-														name="<?= $ar["CONTROL_NAME_ALT"] ?>"
-														id="<?= $ar["CONTROL_ID"] ?>"
-														value="<? echo $ar["HTML_VALUE_ALT"] ?>"
-														<? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?> />
+									<!-- DROPDOWN -->
+									<div class="bx-filter-select" onclick="smartFilter.showDropDownPopup(this, '<?= CUtil::JSEscape($key) ?>')">
+										<div class="bx-filter-select-header" data-role="currentOption">
+											<?
+											foreach ($arItem["VALUES"] as $val => $ar) {
+												if ($ar["CHECKED"]) {
+													echo $ar["VALUE"];
+													$checkedItemExist = true;
+												}
+											}
+											if (!$checkedItemExist) {
+												echo GetMessage("CT_BCSF_FILTER_ALL");
+											}
+											?>
+
+											<!-- <svg width="24" height="24" role="img" aria-hidden="true" focusable="false">
+												<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#chevron"></use>
+											</svg> -->
+										</div>
+
+										<input
+											style="display: none"
+											type="radio"
+											name="<?= $arCur["CONTROL_NAME_ALT"] ?>"
+											id="<?= "all_" . $arCur["CONTROL_ID"] ?>"
+											value="" />
+										<? foreach ($arItem["VALUES"] as $val => $ar): ?>
+											<input
+												style="display: none"
+												type="radio"
+												name="<?= $ar["CONTROL_NAME_ALT"] ?>"
+												id="<?= $ar["CONTROL_ID"] ?>"
+												value="<?= $ar["HTML_VALUE_ALT"] ?>"
+												<?= $ar["CHECKED"] ? 'checked="checked"' : '' ?> />
+										<? endforeach ?>
+
+										<div class="bx-filter-select-content" data-role="dropdownContent" style="display: none;">
+											<ul>
+												<li>
+													<label for="<?= "all_" . $arCur["CONTROL_ID"] ?>" class="" data-role="label_<?= "all_" . $arCur["CONTROL_ID"] ?>" onclick="smartFilter.selectDropDownItem(this, '<?= CUtil::JSEscape("all_" . $arCur["CONTROL_ID"]) ?>')">
+														<? echo GetMessage("CT_BCSF_FILTER_ALL"); ?>
+													</label>
+												</li>
+												<?
+												foreach ($arItem["VALUES"] as $val => $ar):
+													$class = "";
+													if ($ar["CHECKED"])
+														$class .= " selected";
+													if ($ar["DISABLED"])
+														$class .= " disabled";
+												?>
+													<li>
+														<label for="<?= $ar["CONTROL_ID"] ?>" class="<?= $class ?>" data-role="label_<?= $ar["CONTROL_ID"] ?>" onclick="smartFilter.selectDropDownItem(this, '<?= CUtil::JSEscape($ar["CONTROL_ID"]) ?>')"><?= $ar["VALUE"] ?></label>
+													</li>
 												<? endforeach ?>
-												<div class="bx-filter-select-popup" data-role="dropdownContent" style="display: none;">
-													<ul>
-														<li>
-															<label for="<?= "all_" . $arCur["CONTROL_ID"] ?>" class="bx-filter-param-label" data-role="label_<?= "all_" . $arCur["CONTROL_ID"] ?>" onclick="smartFilter.selectDropDownItem(this, '<?= CUtil::JSEscape("all_" . $arCur["CONTROL_ID"]) ?>')">
-																<? echo GetMessage("CT_BCSF_FILTER_ALL"); ?>
-															</label>
-														</li>
-														<?
-														foreach ($arItem["VALUES"] as $val => $ar):
-															$class = "";
-															if ($ar["CHECKED"])
-																$class .= " selected";
-															if ($ar["DISABLED"])
-																$class .= " disabled";
-														?>
-															<li>
-																<label for="<?= $ar["CONTROL_ID"] ?>" class="bx-filter-param-label<?= $class ?>" data-role="label_<?= $ar["CONTROL_ID"] ?>" onclick="smartFilter.selectDropDownItem(this, '<?= CUtil::JSEscape($ar["CONTROL_ID"]) ?>')"><?= $ar["VALUE"] ?></label>
-															</li>
-														<? endforeach ?>
-													</ul>
-												</div>
-											</div>
+											</ul>
 										</div>
 									</div>
 								<?
 									break;
 								case SectionPropertyTable::DROPDOWN_WITH_PICTURES_AND_LABELS: //DROPDOWN_WITH_PICTURES_AND_LABELS
 								?>
-									!!DROPDOWN_WITH_PICTURES_AND_LABELS!!
-									<div class="col-xs-12">
-										<div class="bx-filter-select-container">
-											<div class="bx-filter-select-block" onclick="smartFilter.showDropDownPopup(this, '<?= CUtil::JSEscape($key) ?>')">
-												<div class="bx-filter-select-text fix" data-role="currentOption">
+									<!-- !!DROPDOWN_WITH_PICTURES_AND_LABELS!! -->
+									<div class="bx-filter-select-container">
+										<div class="bx-filter-select-block" onclick="smartFilter.showDropDownPopup(this, '<?= CUtil::JSEscape($key) ?>')">
+											<div class="bx-filter-select-text fix" data-role="currentOption">
+												<?
+												$checkedItemExist = false;
+												foreach ($arItem["VALUES"] as $val => $ar):
+													if ($ar["CHECKED"]) {
+												?>
+														<? if (isset($ar["FILE"]) && !empty($ar["FILE"]["SRC"])): ?>
+															<span class="bx-filter-btn-color-icon" style="background-image:url('<?= $ar["FILE"]["SRC"] ?>');"></span>
+														<? endif ?>
+														<span class="bx-filter-param-text">
+															<?= $ar["VALUE"] ?>
+														</span>
 													<?
-													$checkedItemExist = false;
-													foreach ($arItem["VALUES"] as $val => $ar):
-														if ($ar["CHECKED"]) {
-													?>
-															<? if (isset($ar["FILE"]) && !empty($ar["FILE"]["SRC"])): ?>
-																<span class="bx-filter-btn-color-icon" style="background-image:url('<?= $ar["FILE"]["SRC"] ?>');"></span>
-															<? endif ?>
-															<span class="bx-filter-param-text">
-																<?= $ar["VALUE"] ?>
-															</span>
-														<?
-															$checkedItemExist = true;
-														}
-													endforeach;
-													if (!$checkedItemExist) {
-														?><span class="bx-filter-btn-color-icon all"></span>
-													<?
-														echo GetMessage("CT_BCSF_FILTER_ALL");
+														$checkedItemExist = true;
 													}
-													?>
-												</div>
-												<div class="bx-filter-select-arrow"></div>
+												endforeach;
+												if (!$checkedItemExist) {
+													?><span class="bx-filter-btn-color-icon all"></span>
+												<?
+													echo GetMessage("CT_BCSF_FILTER_ALL");
+												}
+												?>
+											</div>
+											<div class="bx-filter-select-arrow"></div>
+											<input
+												style="display: none"
+												type="radio"
+												name="<?= $arCur["CONTROL_NAME_ALT"] ?>"
+												id="<? echo "all_" . $arCur["CONTROL_ID"] ?>"
+												value="" />
+											<? foreach ($arItem["VALUES"] as $val => $ar): ?>
 												<input
 													style="display: none"
 													type="radio"
-													name="<?= $arCur["CONTROL_NAME_ALT"] ?>"
-													id="<? echo "all_" . $arCur["CONTROL_ID"] ?>"
-													value="" />
-												<? foreach ($arItem["VALUES"] as $val => $ar): ?>
-													<input
-														style="display: none"
-														type="radio"
-														name="<?= $ar["CONTROL_NAME_ALT"] ?>"
-														id="<?= $ar["CONTROL_ID"] ?>"
-														value="<?= $ar["HTML_VALUE_ALT"] ?>"
-														<? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?> />
-												<? endforeach ?>
-												<div class="bx-filter-select-popup" data-role="dropdownContent" style="display: none">
-													<ul>
-														<li style="border-bottom: 1px solid #e5e5e5;padding-bottom: 5px;margin-bottom: 5px;">
-															<label for="<?= "all_" . $arCur["CONTROL_ID"] ?>" class="bx-filter-param-label" data-role="label_<?= "all_" . $arCur["CONTROL_ID"] ?>" onclick="smartFilter.selectDropDownItem(this, '<?= CUtil::JSEscape("all_" . $arCur["CONTROL_ID"]) ?>')">
-																<span class="bx-filter-btn-color-icon all"></span>
-																<? echo GetMessage("CT_BCSF_FILTER_ALL"); ?>
+													name="<?= $ar["CONTROL_NAME_ALT"] ?>"
+													id="<?= $ar["CONTROL_ID"] ?>"
+													value="<?= $ar["HTML_VALUE_ALT"] ?>"
+													<? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?> />
+											<? endforeach ?>
+											<div class="bx-filter-select-popup" data-role="dropdownContent" style="display: none">
+												<ul>
+													<li style="border-bottom: 1px solid #e5e5e5;padding-bottom: 5px;margin-bottom: 5px;">
+														<label for="<?= "all_" . $arCur["CONTROL_ID"] ?>" class="" data-role="label_<?= "all_" . $arCur["CONTROL_ID"] ?>" onclick="smartFilter.selectDropDownItem(this, '<?= CUtil::JSEscape("all_" . $arCur["CONTROL_ID"]) ?>')">
+															<span class="bx-filter-btn-color-icon all"></span>
+															<? echo GetMessage("CT_BCSF_FILTER_ALL"); ?>
+														</label>
+													</li>
+													<?
+													foreach ($arItem["VALUES"] as $val => $ar):
+														$class = "";
+														if ($ar["CHECKED"])
+															$class .= " selected";
+														if ($ar["DISABLED"])
+															$class .= " disabled";
+													?>
+														<li>
+															<label for="<?= $ar["CONTROL_ID"] ?>" data-role="label_<?= $ar["CONTROL_ID"] ?>" class="<?= $class ?>" onclick="smartFilter.selectDropDownItem(this, '<?= CUtil::JSEscape($ar["CONTROL_ID"]) ?>')">
+																<? if (isset($ar["FILE"]) && !empty($ar["FILE"]["SRC"])): ?>
+																	<span class="bx-filter-btn-color-icon" style="background-image:url('<?= $ar["FILE"]["SRC"] ?>');"></span>
+																<? endif ?>
+																<span class="bx-filter-param-text">
+																	<?= $ar["VALUE"] ?>
+																</span>
 															</label>
 														</li>
-														<?
-														foreach ($arItem["VALUES"] as $val => $ar):
-															$class = "";
-															if ($ar["CHECKED"])
-																$class .= " selected";
-															if ($ar["DISABLED"])
-																$class .= " disabled";
-														?>
-															<li>
-																<label for="<?= $ar["CONTROL_ID"] ?>" data-role="label_<?= $ar["CONTROL_ID"] ?>" class="bx-filter-param-label<?= $class ?>" onclick="smartFilter.selectDropDownItem(this, '<?= CUtil::JSEscape($ar["CONTROL_ID"]) ?>')">
-																	<? if (isset($ar["FILE"]) && !empty($ar["FILE"]["SRC"])): ?>
-																		<span class="bx-filter-btn-color-icon" style="background-image:url('<?= $ar["FILE"]["SRC"] ?>');"></span>
-																	<? endif ?>
-																	<span class="bx-filter-param-text">
-																		<?= $ar["VALUE"] ?>
-																	</span>
-																</label>
-															</li>
-														<? endforeach ?>
-													</ul>
-												</div>
+													<? endforeach ?>
+												</ul>
 											</div>
 										</div>
 									</div>
@@ -502,115 +481,103 @@ if ($jsPath) $this->addExternalJs($jsPath);
 									break;
 								case SectionPropertyTable::RADIO_BUTTONS: //RADIO_BUTTONS
 								?>
-									!!RADIO_BUTTONS!!
-									<div class="col-xs-12">
+									<!-- !!RADIO_BUTTONS!! -->
+									<div class="radio">
+										<label class="" for="<? echo "all_" . $arCur["CONTROL_ID"] ?>">
+											<span class="bx-filter-input-checkbox">
+												<input
+													type="radio"
+													value=""
+													name="<? echo $arCur["CONTROL_NAME_ALT"] ?>"
+													id="<? echo "all_" . $arCur["CONTROL_ID"] ?>"
+													onclick="smartFilter.click(this)" />
+												<span class="bx-filter-param-text"><? echo GetMessage("CT_BCSF_FILTER_ALL"); ?></span>
+											</span>
+										</label>
+									</div>
+									<? foreach ($arItem["VALUES"] as $val => $ar): ?>
 										<div class="radio">
-											<label class="bx-filter-param-label" for="<? echo "all_" . $arCur["CONTROL_ID"] ?>">
-												<span class="bx-filter-input-checkbox">
+											<label data-role="label_<?= $ar["CONTROL_ID"] ?>" class="" for="<? echo $ar["CONTROL_ID"] ?>">
+												<span class="bx-filter-input-checkbox <? echo $ar["DISABLED"] ? 'disabled' : '' ?>">
 													<input
 														type="radio"
-														value=""
-														name="<? echo $arCur["CONTROL_NAME_ALT"] ?>"
-														id="<? echo "all_" . $arCur["CONTROL_ID"] ?>"
+														value="<? echo $ar["HTML_VALUE_ALT"] ?>"
+														name="<? echo $ar["CONTROL_NAME_ALT"] ?>"
+														id="<? echo $ar["CONTROL_ID"] ?>"
+														<? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?>
 														onclick="smartFilter.click(this)" />
-													<span class="bx-filter-param-text"><? echo GetMessage("CT_BCSF_FILTER_ALL"); ?></span>
+													<span class="bx-filter-param-text" title="<?= $ar["VALUE"]; ?>"><?= $ar["VALUE"]; ?>
+														<?
+														if ($arParams["DISPLAY_ELEMENT_COUNT"] !== "N" && isset($ar["ELEMENT_COUNT"])):
+														?>&nbsp;(<span data-role="count_<?= $ar["CONTROL_ID"] ?>"><? echo $ar["ELEMENT_COUNT"]; ?></span>)
+													<?
+														endif; ?></span>
 												</span>
 											</label>
 										</div>
-										<? foreach ($arItem["VALUES"] as $val => $ar): ?>
-											<div class="radio">
-												<label data-role="label_<?= $ar["CONTROL_ID"] ?>" class="bx-filter-param-label" for="<? echo $ar["CONTROL_ID"] ?>">
-													<span class="bx-filter-input-checkbox <? echo $ar["DISABLED"] ? 'disabled' : '' ?>">
-														<input
-															type="radio"
-															value="<? echo $ar["HTML_VALUE_ALT"] ?>"
-															name="<? echo $ar["CONTROL_NAME_ALT"] ?>"
-															id="<? echo $ar["CONTROL_ID"] ?>"
-															<? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?>
-															onclick="smartFilter.click(this)" />
-														<span class="bx-filter-param-text" title="<?= $ar["VALUE"]; ?>"><?= $ar["VALUE"]; ?>
-															<?
-															if ($arParams["DISPLAY_ELEMENT_COUNT"] !== "N" && isset($ar["ELEMENT_COUNT"])):
-															?>&nbsp;(<span data-role="count_<?= $ar["CONTROL_ID"] ?>"><? echo $ar["ELEMENT_COUNT"]; ?></span>)
-														<?
-															endif; ?></span>
-													</span>
-												</label>
-											</div>
-										<? endforeach; ?>
-									</div>
+									<? endforeach; ?>
 								<?
 									break;
 								case SectionPropertyTable::CALENDAR: //CALENDAR
 								?>
-									<div class="col-xs-12">
-										<div class="bx-filter-parameters-box-container-block">
-											<div class="bx-filter-input-container bx-filter-calendar-container">
-												<? $APPLICATION->IncludeComponent(
-													'bitrix:main.calendar',
-													'',
-													array(
-														'FORM_NAME' => $arResult["FILTER_NAME"] . "_form",
-														'SHOW_INPUT' => 'Y',
-														'INPUT_ADDITIONAL_ATTR' => 'class="calendar" placeholder="' . FormatDate("SHORT", $arItem["VALUES"]["MIN"]["VALUE"]) . '" onkeyup="smartFilter.keyup(this)" onchange="smartFilter.keyup(this)"',
-														'INPUT_NAME' => $arItem["VALUES"]["MIN"]["CONTROL_NAME"],
-														'INPUT_VALUE' => $arItem["VALUES"]["MIN"]["HTML_VALUE"],
-														'SHOW_TIME' => 'N',
-														'HIDE_TIMEBAR' => 'Y',
-													),
-													null,
-													array('HIDE_ICONS' => 'Y')
-												); ?>
-											</div>
+									<div class="bx-filter-parameters-box-container-block">
+										<div class="bx-filter-input-container bx-filter-calendar-container">
+											<? $APPLICATION->IncludeComponent(
+												'bitrix:main.calendar',
+												'',
+												array(
+													'FORM_NAME' => $arResult["FILTER_NAME"] . "_form",
+													'SHOW_INPUT' => 'Y',
+													'INPUT_ADDITIONAL_ATTR' => 'class="calendar" placeholder="' . FormatDate("SHORT", $arItem["VALUES"]["MIN"]["VALUE"]) . '" onkeyup="smartFilter.keyup(this)" onchange="smartFilter.keyup(this)"',
+													'INPUT_NAME' => $arItem["VALUES"]["MIN"]["CONTROL_NAME"],
+													'INPUT_VALUE' => $arItem["VALUES"]["MIN"]["HTML_VALUE"],
+													'SHOW_TIME' => 'N',
+													'HIDE_TIMEBAR' => 'Y',
+												),
+												null,
+												array('HIDE_ICONS' => 'Y')
+											); ?>
 										</div>
-										<div class="bx-filter-parameters-box-container-block">
-											<div class="bx-filter-input-container bx-filter-calendar-container">
-												<? $APPLICATION->IncludeComponent(
-													'bitrix:main.calendar',
-													'',
-													array(
-														'FORM_NAME' => $arResult["FILTER_NAME"] . "_form",
-														'SHOW_INPUT' => 'Y',
-														'INPUT_ADDITIONAL_ATTR' => 'class="calendar" placeholder="' . FormatDate("SHORT", $arItem["VALUES"]["MAX"]["VALUE"]) . '" onkeyup="smartFilter.keyup(this)" onchange="smartFilter.keyup(this)"',
-														'INPUT_NAME' => $arItem["VALUES"]["MAX"]["CONTROL_NAME"],
-														'INPUT_VALUE' => $arItem["VALUES"]["MAX"]["HTML_VALUE"],
-														'SHOW_TIME' => 'N',
-														'HIDE_TIMEBAR' => 'Y',
-													),
-													null,
-													array('HIDE_ICONS' => 'Y')
-												); ?>
-											</div>
+									</div>
+									<div class="bx-filter-parameters-box-container-block">
+										<div class="bx-filter-input-container bx-filter-calendar-container">
+											<? $APPLICATION->IncludeComponent(
+												'bitrix:main.calendar',
+												'',
+												array(
+													'FORM_NAME' => $arResult["FILTER_NAME"] . "_form",
+													'SHOW_INPUT' => 'Y',
+													'INPUT_ADDITIONAL_ATTR' => 'class="calendar" placeholder="' . FormatDate("SHORT", $arItem["VALUES"]["MAX"]["VALUE"]) . '" onkeyup="smartFilter.keyup(this)" onchange="smartFilter.keyup(this)"',
+													'INPUT_NAME' => $arItem["VALUES"]["MAX"]["CONTROL_NAME"],
+													'INPUT_VALUE' => $arItem["VALUES"]["MAX"]["HTML_VALUE"],
+													'SHOW_TIME' => 'N',
+													'HIDE_TIMEBAR' => 'Y',
+												),
+												null,
+												array('HIDE_ICONS' => 'Y')
+											); ?>
 										</div>
 									</div>
 								<?
 									break;
 								default: //CHECKBOXES
 								?>
-									!!CHECKBOXES!!
-									<div class="col-xs-12">
-										<? foreach ($arItem["VALUES"] as $val => $ar): ?>
-											<div class="checkbox">
-												<label data-role="label_<?= $ar["CONTROL_ID"] ?>" class="bx-filter-param-label <? echo $ar["DISABLED"] ? 'disabled' : '' ?>" for="<? echo $ar["CONTROL_ID"] ?>">
-													<span class="bx-filter-input-checkbox">
-														<input
-															type="checkbox"
-															value="<? echo $ar["HTML_VALUE"] ?>"
-															name="<? echo $ar["CONTROL_NAME"] ?>"
-															id="<? echo $ar["CONTROL_ID"] ?>"
-															<? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?>
-															onclick="smartFilter.click(this)" />
-														<span class="bx-filter-param-text" title="<?= $ar["VALUE"]; ?>"><?= $ar["VALUE"]; ?>
-															<?
-															if ($arParams["DISPLAY_ELEMENT_COUNT"] !== "N" && isset($ar["ELEMENT_COUNT"])):
-															?>&nbsp;(<span data-role="count_<?= $ar["CONTROL_ID"] ?>"><? echo $ar["ELEMENT_COUNT"]; ?></span>)
-														<?
-															endif; ?></span>
-													</span>
-												</label>
-											</div>
-										<? endforeach; ?>
-									</div>
+									<!-- !!CHECKBOXES!! -->
+									<? foreach ($arItem["VALUES"] as $val => $ar): ?>
+										<label class="main-checkbox" data-role="label_<?= $ar["CONTROL_ID"] ?>" class=" <? echo $ar["DISABLED"] ? 'disabled' : '' ?>" for="<? echo $ar["CONTROL_ID"] ?>">
+											<input
+												type="checkbox"
+												value="<? echo $ar["HTML_VALUE"] ?>"
+												name="<? echo $ar["CONTROL_NAME"] ?>"
+												id="<? echo $ar["CONTROL_ID"] ?>"
+												<?= $ar["CHECKED"] ? 'checked="checked"' : '' ?>
+												onclick="smartFilter.click(this)" />
+
+											<span>
+												<?= $ar["VALUE"]; ?><? if ($arParams["DISPLAY_ELEMENT_COUNT"] !== "N" && isset($ar["ELEMENT_COUNT"])): ?>&nbsp;(<span data-role="count_<?= $ar["CONTROL_ID"] ?>"><? echo $ar["ELEMENT_COUNT"]; ?></span>)<? endif; ?>
+											</span>
+										</label>
+									<? endforeach; ?>
 							<?
 							}
 							?>
@@ -623,7 +590,7 @@ if ($jsPath) $this->addExternalJs($jsPath);
 		</div><!--//row-->
 
 		<div class="row">
-			<div class="col-xs-12 bx-filter-button-box">
+			<div class="bx-filter-button-box">
 				<div class="bx-filter-block">
 					<div class="bx-filter-parameters-box-container">
 						<input

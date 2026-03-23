@@ -9,10 +9,10 @@ includeComponentAssets('catalog.section/littleweb');
 
 global $APPLICATION;
 
-if (isset($templateData['TEMPLATE_THEME'])) {
-	$APPLICATION->SetAdditionalCSS($templateFolder . '/themes/' . $templateData['TEMPLATE_THEME'] . '/style.css');
-	$APPLICATION->SetAdditionalCSS('/bitrix/css/main/themes/' . $templateData['TEMPLATE_THEME'] . '/style.css', true);
-}
+// if (isset($templateData['TEMPLATE_THEME'])) {
+// 	$APPLICATION->SetAdditionalCSS($templateFolder . '/themes/' . $templateData['TEMPLATE_THEME'] . '/style.css');
+// 	$APPLICATION->SetAdditionalCSS('/bitrix/css/main/themes/' . $templateData['TEMPLATE_THEME'] . '/style.css', true);
+// }
 
 if (!empty($templateData['TEMPLATE_LIBRARY'])) {
 	$loadCurrency = false;
