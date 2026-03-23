@@ -46,10 +46,9 @@
     "file": "components/bitrix/!__catalog/rise-catalog/style.BwaaaPlD.css",
     "src": "local/templates/rise-bags/components/bitrix/!__catalog/rise-catalog/_src/scss/index.scss",
     "isEntry": true,
-    "name": "bitrix_catalog_littleweb_scss",
+    "name": "bitrix_!__catalog_rise-catalog_scss",
     "names": [
-      "bitrix_!__catalog_rise-catalog_scss.css",
-      "bitrix_catalog_littleweb_scss.css"
+      "bitrix_!__catalog_rise-catalog_scss.css"
     ]
   },
   "local/templates/rise-bags/components/bitrix/catalog.item/littleweb/_src/js/index.js": {
@@ -59,7 +58,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/components/bitrix/catalog.item/littleweb/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog.item/littleweb/style.DKx1oz08.css",
+    "file": "components/bitrix/catalog.item/littleweb/style.BqFX-myo.css",
     "src": "local/templates/rise-bags/components/bitrix/catalog.item/littleweb/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_item_littleweb_scss",
@@ -83,7 +82,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/catalog.section/littleweb/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog.section/littleweb/style.Dzv0kThX.css",
+    "file": "components/bitrix/catalog.section/littleweb/style.BLSnn507.css",
     "src": "local/templates/rise-bags/components/bitrix/catalog.section/littleweb/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_section_littleweb_scss",
@@ -101,12 +100,11 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/catalog/littleweb/_src/scss/index.scss": {
-    "file": "components/bitrix/!__catalog/rise-catalog/style.BwaaaPlD.css",
-    "src": "local/templates/rise-bags/components/bitrix/!__catalog/rise-catalog/_src/scss/index.scss",
+    "file": "components/bitrix/catalog/littleweb/style.BEvxnGII.css",
+    "src": "local/templates/rise-bags/components/bitrix/catalog/littleweb/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_littleweb_scss",
     "names": [
-      "bitrix_!__catalog_rise-catalog_scss.css",
       "bitrix_catalog_littleweb_scss.css"
     ]
   },

@@ -17,11 +17,11 @@ require_once $includesPath . 'core_init.php';
 require_once $includesPath . 'debug.php';
 
 // Подключаю глобальные стили и скрипты(Если делаю так, ломаются битриксовые стили. Почему ??)
-EventManager::getInstance()->addEventHandler(
-  'main',
-  'OnPageStart',
-  function () {
-    includeGlobalAssets();
-    initBitrixCore('popup');
-  }
-);
+// EventManager::getInstance()->addEventHandler(
+//   'main',
+//   'OnPageStart',
+//   function () {
+//     includeGlobalAssets();
+//     initBitrixCore('popup');
+//   }
+// );

@@ -17,11 +17,12 @@ if (isset($arParams['USE_COMMON_SETTINGS_BASKET_POPUP']) && $arParams['USE_COMMO
 	$basketAction = $arParams['SECTION_ADD_TO_BASKET_ACTION'] ?? '';
 }
 
+
 $sectionListParams = array(
 	"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 	"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-	"SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"],
-	// "SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"], // чтобы выводился только текущий раздел каталога
+	// "SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"], // убераю эти две настройки, чтобы выводились все разделы всегда
+	// "SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"], // убераю эти две настройки, чтобы выводились все разделы всегда
 	"CACHE_TYPE" => $arParams["CACHE_TYPE"],
 	"CACHE_TIME" => $arParams["CACHE_TIME"],
 	"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
@@ -43,6 +44,10 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 
 <div class="catalog">
 	<div class="container">
+		<div class="catalog__header">
+			<? $APPLICATION->ShowViewContent("SECTION_HEADER"); ?>
+		</div>
+
 		<div class="grid">
 			<div class="grid-item grid-item--sidebar">
 				<?
@@ -262,7 +267,7 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 
 		if (!empty($arRecomData) && $arParams['USE_GIFTS_SECTION'] === 'Y'):
 	?>
-			<h1>GIFTS??</h1>
+			<span>GIFTS??</span>
 			<div data-entity="parent-container">
 				<? if (!isset($arParams['GIFTS_SECTION_LIST_HIDE_BLOCK_TITLE']) || $arParams['GIFTS_SECTION_LIST_HIDE_BLOCK_TITLE'] !== 'Y'): ?>
 					<div class="catalog-block-header" data-entity="header" data-showed="false" style="display: none; opacity: 0;">

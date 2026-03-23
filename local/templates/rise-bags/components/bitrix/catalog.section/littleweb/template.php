@@ -6,6 +6,22 @@ use Bitrix\Catalog\ProductTable;
 
 $this->setFrameMode(true);
 
+$this->SetViewTarget("SECTION_HEADER");
+?>
+<h1 class="title"><?= $arResult["NAME"] ?></h1>
+
+<? if (!isset($arParams['HIDE_SECTION_DESCRIPTION']) || $arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y'): ?>
+	<? if (!empty(trim($arResult['DESCRIPTION']))): ?>
+		<? if ($arResult["DESCRIPTION_TYPE"] === 'html') : ?>
+			<?= $arResult['~DESCRIPTION'] ?>
+		<? else: ?>
+			<p class="text"><?= $arResult['~DESCRIPTION'] ?></p>
+		<? endif; ?>
+	<? endif; ?>
+<? endif; ?>
+
+<? $this->EndViewTarget();
+
 if (!empty($arResult['NAV_RESULT'])) {
 	$navParams =  array(
 		'NavPageCount' => $arResult['NAV_RESULT']->NavPageCount,
@@ -106,19 +122,8 @@ $containerName = 'container-' . $navParams['NavNum'];
 			'OFFER_ADD_PICT_PROP' => $arParams['OFFER_ADD_PICT_PROP'],
 			'ADD_PICT_PROP' => $arParams['ADD_PICT_PROP']
 		]; ?>
-		<h1><?= $arResult["NAME"] ?></h1>
 
-		<? if (!isset($arParams['HIDE_SECTION_DESCRIPTION']) || $arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y'): ?>
-			<? if (!empty(trim($arResult['DESCRIPTION']))): ?>
-				<? if ($arResult["DESCRIPTION_TYPE"] === 'html') : ?>
-					<?= $arResult['~DESCRIPTION'] ?>
-				<? else: ?>
-					<p class="text"><?= $arResult['~DESCRIPTION'] ?></p>
-				<? endif; ?>
-			<? endif; ?>
-		<? endif; ?>
-
-		<div class="catalog-section-gid" data-entity="<?= $containerName ?>">
+		<div class="catalog-section-grid" data-entity="<?= $containerName ?>">
 			<? foreach ($arResult['ITEMS'] as $item):
 				$uniqueId = $item['ID'] . '_' . md5($this->randString() . $component->getAction());
 				$areaId = $this->GetEditAreaId($uniqueId);

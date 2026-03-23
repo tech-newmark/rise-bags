@@ -33,7 +33,7 @@ $APPLICATION->SetTitle("Каталог");
 		"SET_STATUS_404" => "Y",
 		"DETAIL_DISPLAY_NAME" => "Y",
 		"USE_ELEMENT_COUNTER" => "Y",
-		"USE_FILTER" => "N",
+		"USE_FILTER" => "Y",
 		"FILTER_NAME" => "",
 		"FILTER_VIEW_MODE" => "HORIZONTAL",
 		"USE_COMPARE" => "Y",
@@ -129,7 +129,7 @@ $APPLICATION->SetTitle("Каталог");
 		"PAGER_DESC_NUMBERING" => "N",
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000000",
 		"PAGER_SHOW_ALL" => "Y",
-		"ADD_PICT_PROP" => "MORE_PHOTO",
+		"ADD_PICT_PROP" => "-",
 		"LABEL_PROP" => [
 			0 => "NEW",
 			1 => "HIT",
@@ -332,10 +332,10 @@ $APPLICATION->SetTitle("Каталог");
 		"PRODUCT_ROW_VARIANTS_JSON" => "[{\"VARIANT\":2,\"BIG_DATA\":false},{\"VARIANT\":2,\"BIG_DATA\":false},{\"VARIANT\":2,\"BIG_DATA\":false},{\"VARIANT\":2,\"BIG_DATA\":false}]",
 		"SEF_URL_TEMPLATES" => [
 			"sections" => "",
-			"section" => "#SECTION_CODE#/",
-			"element" => "#SECTION_CODE#/#ELEMENT_CODE#/",
+			"section" => "#SECTION_CODE_PATH#/",
+			"element" => "#SECTION_CODE_PATH#/#ELEMENT_CODE#/",
 			"compare" => "compare/",
-			"smart_filter" => "#SECTION_CODE#/filter/#SMART_FILTER_PATH#/apply/",
+			"smart_filter" => "#SECTION_CODE_PATH#/filter/#SMART_FILTER_PATH#/apply/",
 		]
 	],
 	false

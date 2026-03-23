@@ -1,6 +1,9 @@
 @use "@scss/base/container-queries" as *;
 
 .catalog {
+	&__header {
+		margin-bottom: 32px;
+	}
 	.grid {
 		display: grid;
 		grid-template-columns: 320px auto;
@@ -10,7 +13,6 @@
 			&--sidebar {
 				position: sticky;
 				top: 40px;
-				outline: 1px solid red;
 				height: fit-content;
 			}
 		}
