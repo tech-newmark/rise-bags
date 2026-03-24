@@ -144,7 +144,7 @@ JCSmartFilter.prototype.updateItem = function (PID, arItem) {
 JCSmartFilter.prototype.postHandler = function (result, fromCache) {
 	var hrefFILTER, url, curProp;
 	var modef = BX("modef");
-	var modef_num = BX("modef_num");
+	var modef_num = BX("filter_count");
 
 	if (!!result && !!result.ITEMS) {
 		for (var popupId in this.popups) {
@@ -153,7 +153,6 @@ JCSmartFilter.prototype.postHandler = function (result, fromCache) {
 			}
 		}
 		this.popups = [];
-
 		for (var PID in result.ITEMS) {
 			if (result.ITEMS.hasOwnProperty(PID)) {
 				this.updateItem(PID, result.ITEMS[PID]);
@@ -161,55 +160,41 @@ JCSmartFilter.prototype.postHandler = function (result, fromCache) {
 		}
 
 		if (!!modef && !!modef_num) {
-			modef_num.innerHTML = result.ELEMENT_COUNT;
-			hrefFILTER = BX.findChildren(modef, { tag: "A" }, true);
+			if (result.ELEMENT_COUNT > 0) {
+				modef_num.innerHTML = "(" + result.ELEMENT_COUNT + ")";
+				hrefFILTER = BX.findChildren(modef, { tag: "A" }, true);
+				if (result.FILTER_URL && hrefFILTER) {
+					hrefFILTER[0].href = BX.util.htmlspecialcharsback(result.FILTER_URL);
+				}
+				if (result.FILTER_AJAX_URL && result.COMPONENT_CONTAINER_ID) {
+					BX.unbindAll(hrefFILTER[0]);
+					BX.bind(hrefFILTER[0], "click", function (e) {
+						url = BX.util.htmlspecialcharsback(result.FILTER_AJAX_URL);
+						BX.ajax.insertToNode(url, result.COMPONENT_CONTAINER_ID);
+						return BX.PreventDefault(e);
+					});
+				}
 
-			if (result.FILTER_URL && hrefFILTER) {
-				hrefFILTER[0].href = BX.util.htmlspecialcharsback(result.FILTER_URL);
-			}
-
-			if (result.FILTER_AJAX_URL && result.COMPONENT_CONTAINER_ID) {
-				BX.unbindAll(hrefFILTER[0]);
-				BX.bind(hrefFILTER[0], "click", function (e) {
+				if (result.INSTANT_RELOAD && result.COMPONENT_CONTAINER_ID) {
 					url = BX.util.htmlspecialcharsback(result.FILTER_AJAX_URL);
 					BX.ajax.insertToNode(url, result.COMPONENT_CONTAINER_ID);
-					return BX.PreventDefault(e);
-				});
-			}
-
-			if (result.INSTANT_RELOAD && result.COMPONENT_CONTAINER_ID) {
-				url = BX.util.htmlspecialcharsback(result.FILTER_AJAX_URL);
-				BX.ajax.insertToNode(url, result.COMPONENT_CONTAINER_ID);
+				} else {
+					if (result.SEF_SET_FILTER_URL) {
+						this.bindUrlToButton("set_filter", result.SEF_SET_FILTER_URL);
+					}
+				}
 			} else {
-				if (modef.style.display === "none") {
-					modef.style.display = "inline-block";
-				}
-
-				if (this.viewMode == "VERTICAL") {
-					curProp = BX.findChild(
-						BX.findParent(this.curFilterinput, {
-							class: "bx-filter-parameters-box",
-						}),
-						{ class: "bx-filter-container-modef" },
-						true,
-						false,
-					);
-					curProp.appendChild(modef);
-				}
-
-				if (result.SEF_SET_FILTER_URL) {
-					this.bindUrlToButton("set_filter", result.SEF_SET_FILTER_URL);
-				}
+				modef_num.innerHTML = "";
+				var set_filter = BX("set_filter");
+				set_filter.disabled = true;
 			}
 		}
 	}
 
-	if (this.sef) {
+	if (this.sef && result.ELEMENT_COUNT > 0) {
 		var set_filter = BX("set_filter");
 		set_filter.disabled = false;
-		// set_filter.focus();
 	}
-
 	if (!fromCache && this.cacheKey !== "") {
 		this.cache[this.cacheKey] = result;
 	}

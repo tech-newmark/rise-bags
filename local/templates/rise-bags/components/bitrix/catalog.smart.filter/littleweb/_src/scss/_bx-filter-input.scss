@@ -19,29 +19,27 @@
 		gap: 12px;
 	}
 
-	&-container {
-		display: flex;
-		flex-direction: column;
-		gap: var(--bx-filter-input-container-gap);
+	display: flex;
+	flex-direction: column;
+	gap: var(--bx-filter-input-container-gap);
 
-		span {
-			font-size: 16px;
-			color: var(--bx-filter-input-label-color);
-		}
+	span {
+		font-size: 16px;
+		color: var(--bx-filter-input-label-color);
+	}
 
-		input {
-			min-height: var(--bx-filter-input-min-height);
+	input {
+		min-height: var(--bx-filter-input-min-height);
+		font-size: var(--bx-filter-input-text-size);
+		font-weight: var(--bx-filter-input-text-weight);
+		color: var(--bx-filter-input-text-color);
+		border: 1px solid var(--bx-filter-input-border-color);
+		border-radius: var(--bx-filter-input-border-radius);
+		padding: var(--bx-filter-input-inner-offset);
+
+		&::placeholder {
 			font-size: var(--bx-filter-input-text-size);
-			font-weight: var(--bx-filter-input-text-weight);
-			color: var(--bx-filter-input-text-color);
-			border: 1px solid var(--bx-filter-input-border-color);
-			border-radius: var(--bx-filter-input-border-radius);
-			padding: var(--bx-filter-input-inner-offset);
-
-			&::placeholder {
-				font-size: var(--bx-filter-input-text-size);
-				color: var(--bx-filter-input-placeholder-color);
-			}
+			color: var(--bx-filter-input-placeholder-color);
 		}
 	}
 }
