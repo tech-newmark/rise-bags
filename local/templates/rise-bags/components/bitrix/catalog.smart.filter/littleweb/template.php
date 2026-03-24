@@ -51,9 +51,8 @@ $this->setFrameMode(true);
 						$prices[$step_num] = number_format($arItem["VALUES"]["MAX"]["VALUE"], $precision, ".", "");
 					}
 			?>
-					<div class="bx-filter-section ">
-						<span class="bx-filter-container-modef"></span>
-						<span><?= $arItem["NAME"] ?></span>
+					<div class="bx-filter-section">
+						<span class="bx-filter-section-title"><?= $arItem["NAME"] ?></span>
 
 						<div class="bx-filter-block" data-role="bx_filter_block">
 							<div class="bx-filter-block-wrapper">
@@ -142,23 +141,19 @@ $this->setFrameMode(true);
 					continue;
 				?>
 				<div class="bx-filter-section">
-					<span class="bx-filter-container-modef"></span>
 					<span class="bx-filter-section-title">
 						<?= $arItem["NAME"] ?>
-						<? if ($arItem["FILTER_HINT"] <> ""): ?>
-							<i id="item_title_hint_<?= $arItem["ID"] ?>" class="fa fa-question-circle"></i>
-							<script>
-								new top.BX.CHint({
-									parent: top.BX("item_title_hint_<?= $arItem["ID"] ?>"),
-									show_timeout: 10,
-									hide_timeout: 200,
-									dx: 2,
-									preventHide: true,
-									min_width: 250,
-									hint: '<?= CUtil::JSEscape($arItem["FILTER_HINT"]) ?>'
-								});
-							</script>
-						<? endif ?>
+						<? if ($arItem["FILTER_HINT"]): ?>
+							<div class="bx-filter-tooltip-opener">
+								<svg width="19" height="19" role="img" aria-hidden="true" focusable="false">
+									<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#icon-question"></use>
+								</svg>
+							</div>
+
+							<div class="bx-filter-tooltip">
+								<?= $arItem["FILTER_HINT"] ?>
+							</div>
+						<? endif; ?>
 					</span>
 
 					<div class="bx-filter-block" data-role="bx_filter_block">
@@ -546,7 +541,7 @@ $this->setFrameMode(true);
 				name="set_filter"
 				value="<?= GetMessage("CT_BCSF_SET_FILTER") ?>"
 				disabled>
-				<span>Показать&nbsp;<small id="filter_count"></small></span>
+				<span>Показать&nbsp;<span id="filter_count"></span></span>
 			</button>
 
 			<button
