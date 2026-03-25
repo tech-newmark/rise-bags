@@ -1,11 +1,13 @@
-function JCSmartFilter(ajaxURL, viewMode, params) {
+function JCSmartFilter(ajaxURL, params) {
+	console.log("PARAMS:", params);
 	this.ajaxURL = ajaxURL;
 	this.form = null;
 	this.timer = null;
 	this.cacheKey = "";
 	this.cache = [];
 	this.popups = [];
-	this.viewMode = viewMode;
+	this.formOpenedID = params.FILTER_OPENER_ID;
+
 	if (params && params.SEF_SET_FILTER_URL) {
 		this.bindUrlToButton("set_filter", params.SEF_SET_FILTER_URL);
 		this.sef = true;
@@ -13,7 +15,51 @@ function JCSmartFilter(ajaxURL, viewMode, params) {
 	if (params && params.SEF_DEL_FILTER_URL) {
 		this.bindUrlToButton("del_filter", params.SEF_DEL_FILTER_URL);
 	}
+
+	this.initFilterOpener();
 }
+
+// !!
+// Метод для привязки кнопки открытия фильтра
+JCSmartFilter.prototype.bindFilterOpener = function () {
+	var openerBtn = BX(this.formOpenedID);
+	var filterForm = BX("smartfilter_form");
+
+	if (!openerBtn || !filterForm) return;
+
+	// Удаляем старые обработчики
+	var newBtn = openerBtn.cloneNode(true);
+	openerBtn.parentNode.replaceChild(newBtn, openerBtn);
+	openerBtn = newBtn;
+
+	// Добавляем новый обработчик
+	BX.bind(openerBtn, "click", function (e) {
+		e.preventDefault();
+		if (filterForm.style.display === "none") {
+			filterForm.style.display = "block";
+		} else {
+			filterForm.style.display = "none";
+		}
+	});
+
+	// Сохраняем ссылку
+	this.filterOpenerBtn = openerBtn;
+};
+
+// Метод для инициализации кнопки при создании фильтра
+JCSmartFilter.prototype.initFilterOpener = function () {
+	var filterForm = BX("smartfilter_form");
+	var openerBtn = BX(this.formOpenedID);
+
+	if (!openerBtn || !filterForm) return;
+
+	// По умолчанию фильтр скрыт
+	filterForm.style.display = "none";
+
+	// Привязываем обработчик
+	this.bindFilterOpener();
+};
+// !!
 
 JCSmartFilter.prototype.keyup = function (input) {
 	if (!!this.timer) {
@@ -166,6 +212,7 @@ JCSmartFilter.prototype.postHandler = function (result, fromCache) {
 				if (result.FILTER_URL && hrefFILTER) {
 					hrefFILTER[0].href = BX.util.htmlspecialcharsback(result.FILTER_URL);
 				}
+
 				if (result.FILTER_AJAX_URL && result.COMPONENT_CONTAINER_ID) {
 					BX.unbindAll(hrefFILTER[0]);
 					BX.bind(hrefFILTER[0], "click", function (e) {

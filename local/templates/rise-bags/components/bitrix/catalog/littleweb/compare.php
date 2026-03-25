@@ -1,4 +1,4 @@
-<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 /** @var array $arParams */
 /** @var array $arResult */
 /** @global CMain $APPLICATION */
@@ -12,16 +12,16 @@
 /** @var CBitrixComponent $component */
 
 $this->setFrameMode(true);
-$this->addExternalCss("/bitrix/css/main/bootstrap.css");
+// $this->addExternalCss("/bitrix/css/main/bootstrap.css");
 ?>
-<?$APPLICATION->IncludeComponent(
+<? $APPLICATION->IncludeComponent(
 	"bitrix:catalog.compare.result",
 	"",
 	array(
 		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 		"BASKET_URL" => $arParams["BASKET_URL"],
-		"ACTION_VARIABLE" => (!empty($arParams["ACTION_VARIABLE"]) ? $arParams["ACTION_VARIABLE"] : "action")."_ccr",
+		"ACTION_VARIABLE" => (!empty($arParams["ACTION_VARIABLE"]) ? $arParams["ACTION_VARIABLE"] : "action") . "_ccr",
 		"PRODUCT_ID_VARIABLE" => $arParams["PRODUCT_ID_VARIABLE"],
 		"SECTION_ID_VARIABLE" => $arParams["SECTION_ID_VARIABLE"],
 		"FIELD_CODE" => $arParams["COMPARE_FIELD_CODE"],
@@ -41,7 +41,7 @@ $this->addExternalCss("/bitrix/css/main/bootstrap.css");
 		"ELEMENT_SORT_ORDER_BOX2" => $arParams["ELEMENT_SORT_ORDER_BOX2"],
 		"ELEMENT_SORT_FIELD" => $arParams["COMPARE_ELEMENT_SORT_FIELD"],
 		"ELEMENT_SORT_ORDER" => $arParams["COMPARE_ELEMENT_SORT_ORDER"],
-		"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"],
+		"DETAIL_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["element"],
 		"OFFERS_FIELD_CODE" => $arParams["COMPARE_OFFERS_FIELD_CODE"],
 		"OFFERS_PROPERTY_CODE" => (isset($arParams["COMPARE_OFFERS_PROPERTY_CODE"]) ? $arParams["COMPARE_OFFERS_PROPERTY_CODE"] : array()),
 		"OFFERS_CART_PROPERTIES" => $arParams["OFFERS_CART_PROPERTIES"],
@@ -52,4 +52,4 @@ $this->addExternalCss("/bitrix/css/main/bootstrap.css");
 	),
 	$component,
 	array("HIDE_ICONS" => "Y")
-);?>
+); ?>

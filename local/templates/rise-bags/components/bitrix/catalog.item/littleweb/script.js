@@ -587,6 +587,7 @@
 				}
 
 				if (this.useCompare) {
+					console.log(this.useCompare, "TEST");
 					this.obCompare = BX(this.visual.COMPARE_LINK_ID);
 					if (this.obCompare) {
 						BX.bind(this.obCompare, "click", BX.proxy(this.compare, this));
@@ -1053,7 +1054,6 @@
 		},
 
 		initializeSlider: function () {
-			console.log("initializeSlider");
 			// Если Swiper уже инициализирован, уничтожаем его
 			if (this.swiperInstance) {
 				this.swiperInstance.destroy(true, true);
@@ -1396,30 +1396,23 @@
 				}
 			}
 			if (index > -1) {
-				console.log("off:", this.offers[index], this.offers[index].MORE_PHOTO);
 				if (this.obPictSlider) {
 					var offer = this.offers[index];
 					var slides = [];
 
 					if (this.showSlider === "Y" && offer.MORE_PHOTO.length) {
-						// console.log("!1");
 						for (i in offer.MORE_PHOTO) {
 							if (offer.MORE_PHOTO[i].SRC) {
 								slides.push(offer.MORE_PHOTO[i]);
 							}
 						}
 					} else if (this.showSlider === "N" && offer.MORE_PHOTO.length) {
-						// console.log("!2");
 						slides.push(offer.MORE_PHOTO[0]);
 					} else if (!offer.MORE_PHOTO.length) {
-						// console.log("!3", this.showSlider, offer.MORE_PHOTO.length);
 						slides.push(this.defaultPict);
-					} else {
-						// console.log("!4");
 					}
 
 					BX.cleanNode(this.obPictSlider);
-					// console.log("slides", slides);
 
 					if (slides.length > 0) {
 						for (i = 0; i < slides.length; i++) {
@@ -1789,10 +1782,10 @@
 		},
 
 		setCompareInfo: function (comparedIds) {
-			if (!BX.type.isArray(comparedIds)) return;
-
-			for (var i in this.offers) {
-				if (this.offers.hasOwnProperty(i)) {
+			if (!BX.type.isArray(comparedIds) || !BX.type.isArray(this.offers))
+				return;
+			for (var i = 0; i < this.offers.length; i++) {
+				if (this.offers[i] && this.offers[i].ID) {
 					this.offers[i].COMPARED = BX.util.in_array(
 						this.offers[i].ID,
 						comparedIds,

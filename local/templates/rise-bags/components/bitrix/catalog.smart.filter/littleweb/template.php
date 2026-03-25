@@ -16,11 +16,17 @@ use Bitrix\Iblock\SectionPropertyTable;
 $this->setFrameMode(true);
 ?>
 
-<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-	<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#pen-icon'></use>
-</svg>
 <div class="bx-filter">
-	<form name="<?= $arResult["FILTER_NAME"] . "_form" ?>" action="<?= $arResult["FORM_ACTION"] ?>" method="get" class="smartfilter">
+	<button type="button" class="main-btn outlined filter-opener-btn" id="smartfilter_form_opener">
+		<svg width='16' height='16' role='img' aria-hidden='true' focusable='false'>
+			<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-filter'></use>
+		</svg>
+
+		<span>Фильтр</span>
+	</button>
+
+	<!-- <form name="<?= $arResult["FILTER_NAME"] . "_form" ?>" action="<?= $arResult["FORM_ACTION"] ?>" method="get" class="smartfilter"> -->
+	<form name="<?= $arResult["FILTER_NAME"] . "_form" ?>" action="<?= $arResult["FORM_ACTION"] ?>" method="get" class="smartfilter" id="smartfilter_form">
 
 		<? foreach ($arResult["HIDDEN"] as $arItem): ?>
 			<input type="hidden" name="<?= $arItem["CONTROL_NAME"] ?>" id="<?= $arItem["CONTROL_ID"] ?>" value="<?= $arItem["HTML_VALUE"] ?>" />
@@ -443,17 +449,9 @@ $this->setFrameMode(true);
 							case SectionPropertyTable::RADIO_BUTTONS: //RADIO_BUTTONS
 							?>
 								<div class="bx-filter-block-wrapper bx-filter-block-wrapper--row">
-									<label class="bx-filter-checkbox">
-										<input
-											type="radio"
-											value=""
-											name="<?= $arCur["CONTROL_NAME_ALT"] ?>"
-											id="<?= "all_" . $arCur["CONTROL_ID"] ?>"
-											onclick="smartFilter.click(this)" />
-										<span class="bx-filter-param-text"><?= GetMessage("CT_BCSF_FILTER_ALL"); ?></span>
-									</label>
 									<? foreach ($arItem["VALUES"] as $val => $ar): ?>
 										<label data-role="label_<?= $ar["CONTROL_ID"] ?>" class="bx-filter-checkbox <?= $ar["DISABLED"] ? 'disabled' : '' ?>">
+
 											<input
 												type="radio"
 												value="<?= $ar["HTML_VALUE_ALT"] ?>"
@@ -466,7 +464,17 @@ $this->setFrameMode(true);
 											</span>
 										</label>
 									<? endforeach; ?>
+									<label class="bx-filter-checkbox bx-filter-checkbox--show-all">
+										<input
+											type="radio"
+											value=""
+											name="<?= $arCur["CONTROL_NAME_ALT"] ?>"
+											id="<?= "all_" . $arCur["CONTROL_ID"] ?>"
+											onclick="smartFilter.click(this)" />
+										<span class="bx-filter-param-text" title="<?= $ar["VALUE"]; ?>"><?= GetMessage("CT_BCSF_FILTER_ALL"); ?></span>
+									</label>
 								</div>
+
 							<?
 								break;
 							case SectionPropertyTable::CALENDAR: //CALENDAR
@@ -558,6 +566,10 @@ $this->setFrameMode(true);
 <div id="modef" style="display: none;">
 	<a href="<?= $arResult["FILTER_URL"] ?>" target=""><?= GetMessage("CT_BCSF_FILTER_SHOW") ?></a>
 </div>
+
+<?
+// Добавил кнопку открытия фильтра в передаваемые скрипту параметры
+$arResult["JS_FILTER_PARAMS"]["FILTER_OPENER_ID"] =  'smartfilter_form_opener' ?>
 <script>
-	var smartFilter = new JCSmartFilter('<?= CUtil::JSEscape($arResult["FORM_ACTION"]) ?>', '<?= CUtil::JSEscape($arParams["FILTER_VIEW_MODE"]) ?>', <?= CUtil::PhpToJSObject($arResult["JS_FILTER_PARAMS"]) ?>);
+	var smartFilter = new JCSmartFilter('<?= CUtil::JSEscape($arResult["FORM_ACTION"]) ?>', <?= CUtil::PhpToJSObject($arResult["JS_FILTER_PARAMS"]) ?>);
 </script>

@@ -15,6 +15,20 @@
 				top: 40px;
 				height: fit-content;
 			}
+
+			&--main {
+				display: flex;
+				flex-direction: column;
+				gap: 24px;
+			}
 		}
 	}
+}
+
+.catalog-action-row {
+	position: relative;
+
+	display: flex;
+	align-items: center;
+	gap: 24px;
 }

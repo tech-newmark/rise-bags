@@ -45,7 +45,9 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 <div class="catalog">
 	<div class="container">
 		<div class="catalog__header">
-			<? $APPLICATION->ShowViewContent("SECTION_HEADER"); ?>
+			<?
+			// Динамически вывожу заголовок и описание раздела из catalog.section
+			$APPLICATION->ShowViewContent("SECTION_HEADER"); ?>
 		</div>
 
 		<div class="grid">
@@ -78,40 +80,76 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 				<? endif; ?>
 			</div>
 			<div class="grid-item grid-item--main">
-				<? if ($isFilter): ?>
-					<?
-					$APPLICATION->IncludeComponent(
-						"bitrix:catalog.smart.filter",
-						"littleweb",
+
+				<div class="catalog-action-row">
+
+					<? if ($isFilter): ?>
+						<?
+						$APPLICATION->IncludeComponent(
+							"bitrix:catalog.smart.filter",
+							"littleweb",
+							array(
+								"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+								"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+								"SECTION_ID" => $arCurSection['ID'],
+								"FILTER_NAME" => $arParams["FILTER_NAME"],
+								"PRICE_CODE" => $arParams["~PRICE_CODE"],
+								"CACHE_TYPE" => $arParams["CACHE_TYPE"],
+								"CACHE_TIME" => $arParams["CACHE_TIME"],
+								"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+								"SAVE_IN_SESSION" => "N",
+								"FILTER_VIEW_MODE" => $arParams["FILTER_VIEW_MODE"],
+								"XML_EXPORT" => "N",
+								"SECTION_TITLE" => "NAME",
+								"SECTION_DESCRIPTION" => "DESCRIPTION",
+								'HIDE_NOT_AVAILABLE' => $arParams["HIDE_NOT_AVAILABLE"],
+								"TEMPLATE_THEME" => $arParams["TEMPLATE_THEME"],
+								'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
+								'CURRENCY_ID' => $arParams['CURRENCY_ID'],
+								"SEF_MODE" => $arParams["SEF_MODE"],
+								"SEF_RULE" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["smart_filter"],
+								"SMART_FILTER_PATH" => $arResult["VARIABLES"]["SMART_FILTER_PATH"],
+								"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
+								"INSTANT_RELOAD" => $arParams["INSTANT_RELOAD"],
+							),
+							$component,
+							array('HIDE_ICONS' => 'Y')
+						);
+						?>
+					<? endif ?>
+
+
+					<?/* include_once($_SERVER["DOCUMENT_ROOT"] . "/local/templates/rise-bags/components/bitrix/catalog/littleweb/search.php"); */ ?>
+					<? $APPLICATION->IncludeComponent(
+						"bitrix:search.title",
+						"",  // создайте свой шаблон
 						array(
-							"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-							"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-							"SECTION_ID" => $arCurSection['ID'],
-							"FILTER_NAME" => $arParams["FILTER_NAME"],
-							"PRICE_CODE" => $arParams["~PRICE_CODE"],
-							"CACHE_TYPE" => $arParams["CACHE_TYPE"],
-							"CACHE_TIME" => $arParams["CACHE_TIME"],
-							"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
-							"SAVE_IN_SESSION" => "N",
-							"FILTER_VIEW_MODE" => $arParams["FILTER_VIEW_MODE"],
-							"XML_EXPORT" => "N",
-							"SECTION_TITLE" => "NAME",
-							"SECTION_DESCRIPTION" => "DESCRIPTION",
-							'HIDE_NOT_AVAILABLE' => $arParams["HIDE_NOT_AVAILABLE"],
-							"TEMPLATE_THEME" => $arParams["TEMPLATE_THEME"],
-							'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
-							'CURRENCY_ID' => $arParams['CURRENCY_ID'],
-							"SEF_MODE" => $arParams["SEF_MODE"],
-							"SEF_RULE" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["smart_filter"],
-							"SMART_FILTER_PATH" => $arResult["VARIABLES"]["SMART_FILTER_PATH"],
-							"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
-							"INSTANT_RELOAD" => $arParams["INSTANT_RELOAD"],
+							"NUM_CATEGORIES" => "1",
+							"TOP_COUNT" => "10",
+							"CHECK_DATES" => "N",
+							"SHOW_OTHERS" => "N",
+							"PAGE" => $arResult["FOLDER"] . "search.php",
+							"CATEGORY_0_TITLE" => "Товары",
+							"CATEGORY_0" => array(
+								0 => "iblock_catalog",
+							),
+							"CATEGORY_0_iblock_catalog" => array(
+								0 => $arParams["IBLOCK_ID"],
+							),
+							"SHOW_INPUT" => "Y",
+							"INPUT_ID" => "title-search-input",
+							"CONTAINER_ID" => "title-search",
+							"PRICE_CODE" => $arParams["PRICE_CODE"],
+							"CONVERT_CURRENCY" => $arParams["CONVERT_CURRENCY"],
+							"CURRENCY_ID" => $arParams["CURRENCY_ID"],
+							"AJAX_MODE" => "Y",
 						),
 						$component,
-						array('HIDE_ICONS' => 'Y')
-					);
-					?>
-				<? endif ?>
+						array('HIDE_ICONS' => 'N')
+					); ?>
+				</div>
+
+
 
 				<?
 				$intSectionID = $APPLICATION->IncludeComponent(
