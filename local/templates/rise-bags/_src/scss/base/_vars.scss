@@ -1,3 +1,5 @@
+$base-font-size: 16px;
+
 :root {
   --primary-font: "Inter", sans-serif;
   --secondary-font: "SegoeUI", sans-serif;
@@ -39,7 +41,7 @@
 
   --site-base-font-family: var(--primary-font);
   --site-base-font-weight: 400;
-  --site-base-font-size: 16px;
+  --site-base-font-size: $base-font-size;
   --site-base-line-height: 1.2;
   --site-base-letter-spacing: 0.015em;
   --site-base-text-color: var(--dark);
