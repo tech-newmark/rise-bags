@@ -413,6 +413,7 @@
 				}
 			}
 
+			console.log("TSTST", this.showMaxQuantity, this.visual.QUANTITY_LIMIT);
 			if (this.visual.QUANTITY_LIMIT && this.showMaxQuantity !== "N") {
 				this.obQuantityLimit.all = BX(this.visual.QUANTITY_LIMIT);
 				if (this.obQuantityLimit.all) {
@@ -1419,7 +1420,7 @@
 							this.obPictSlider.appendChild(
 								BX.create("div", {
 									props: {
-										className: "swiper-slide 3",
+										className: "swiper-slide",
 									},
 									children: [
 										BX.create("img", {
@@ -1436,7 +1437,6 @@
 							);
 						}
 						this.obPictSlider.style.display = "";
-						// this.initializeSlider();
 					} else {
 						if (this.swiperInstance) {
 							this.swiperInstance.destroy(true, true);

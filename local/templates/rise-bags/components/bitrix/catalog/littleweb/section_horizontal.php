@@ -80,7 +80,6 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 				<? endif; ?>
 			</div>
 			<div class="grid-item grid-item--main">
-
 				<div class="catalog-action-row">
 
 					<? if ($isFilter): ?>
@@ -111,45 +110,14 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 								"SMART_FILTER_PATH" => $arResult["VARIABLES"]["SMART_FILTER_PATH"],
 								"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
 								"INSTANT_RELOAD" => $arParams["INSTANT_RELOAD"],
+								"FILTER_EXPANDED" => $arParams["FILTER_EXPANDED"]
 							),
 							$component,
 							array('HIDE_ICONS' => 'Y')
 						);
 						?>
 					<? endif ?>
-
-
-					<?/* include_once($_SERVER["DOCUMENT_ROOT"] . "/local/templates/rise-bags/components/bitrix/catalog/littleweb/search.php"); */ ?>
-					<? $APPLICATION->IncludeComponent(
-						"bitrix:search.title",
-						"",  // создайте свой шаблон
-						array(
-							"NUM_CATEGORIES" => "1",
-							"TOP_COUNT" => "10",
-							"CHECK_DATES" => "N",
-							"SHOW_OTHERS" => "N",
-							"PAGE" => $arResult["FOLDER"] . "search.php",
-							"CATEGORY_0_TITLE" => "Товары",
-							"CATEGORY_0" => array(
-								0 => "iblock_catalog",
-							),
-							"CATEGORY_0_iblock_catalog" => array(
-								0 => $arParams["IBLOCK_ID"],
-							),
-							"SHOW_INPUT" => "Y",
-							"INPUT_ID" => "title-search-input",
-							"CONTAINER_ID" => "title-search",
-							"PRICE_CODE" => $arParams["PRICE_CODE"],
-							"CONVERT_CURRENCY" => $arParams["CONVERT_CURRENCY"],
-							"CURRENCY_ID" => $arParams["CURRENCY_ID"],
-							"AJAX_MODE" => "Y",
-						),
-						$component,
-						array('HIDE_ICONS' => 'N')
-					); ?>
 				</div>
-
-
 
 				<?
 				$intSectionID = $APPLICATION->IncludeComponent(
@@ -269,7 +237,7 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 						'BRAND_PROPERTY' => (isset($arParams['BRAND_PROPERTY']) ? $arParams['BRAND_PROPERTY'] : ''),
 
 						'TEMPLATE_THEME' => (isset($arParams['TEMPLATE_THEME']) ? $arParams['TEMPLATE_THEME'] : ''),
-						"ADD_SECTIONS_CHAIN" => "N",
+						"ADD_SECTIONS_CHAIN" => $arParams["ADD_SECTION_CHAIN"],
 						'ADD_TO_BASKET_ACTION' => $basketAction,
 						'SHOW_CLOSE_POPUP' => isset($arParams['COMMON_SHOW_CLOSE_POPUP']) ? $arParams['COMMON_SHOW_CLOSE_POPUP'] : '',
 						'COMPARE_PATH' => $arResult['FOLDER'] . $arResult['URL_TEMPLATES']['compare'],
@@ -281,6 +249,7 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 					),
 					$component
 				);
+
 				?>
 			</div>
 		</div>

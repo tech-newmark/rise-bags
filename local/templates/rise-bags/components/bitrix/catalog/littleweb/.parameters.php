@@ -53,6 +53,14 @@ $arTemplateParameters["INSTANT_RELOAD"] = array(
 	"HIDDEN" => (!isset($arCurrentValues['USE_FILTER']) || 'N' == $arCurrentValues['USE_FILTER'] ? 'Y' : 'N')
 );
 
+$arTemplateParameters["FILTER_EXPANDED"] = array(
+	"PARENT" => "FILTER_SETTINGS",
+	"NAME" => "Показывать фильтр всегда развернутым",
+	"TYPE" => "CHECKBOX",
+	"DEFAULT" => "N",
+	"HIDDEN" => (!isset($arCurrentValues['USE_FILTER']) || 'N' == $arCurrentValues['USE_FILTER'] ? 'Y' : 'N')
+);
+
 $arTemplateParameters['SEARCH_PAGE_RESULT_COUNT'] = array(
 	'PARENT' => 'SEARCH_SETTINGS',
 	'NAME' => GetMessage("CP_BC_TPL_SEARCH_PAGE_RESULT_COUNT_MSGVER_1"),

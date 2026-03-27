@@ -14,16 +14,19 @@
 use Bitrix\Iblock\SectionPropertyTable;
 
 $this->setFrameMode(true);
+
 ?>
 
-<div class="bx-filter">
-	<button type="button" class="main-btn outlined filter-opener-btn" id="smartfilter_form_opener">
-		<svg width='16' height='16' role='img' aria-hidden='true' focusable='false'>
-			<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-filter'></use>
-		</svg>
+<div class="bx-filter <?= $arParams["FILTER_EXPANDED"] && $arParams["FILTER_EXPANDED"] === "Y" ? 'expanded' : '' ?>">
+	<? if ($arParams["FILTER_EXPANDED"] && $arParams["FILTER_EXPANDED"] !== "Y"): ?>
+		<button type="button" class="main-btn outlined filter-opener-btn" id="smartfilter_form_opener">
+			<svg width='16' height='16' role='img' aria-hidden='true' focusable='false'>
+				<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-filter'></use>
+			</svg>
 
-		<span>Фильтр</span>
-	</button>
+			<span>Фильтр</span>
+		</button>
+	<? endif; ?>
 
 	<!-- <form name="<?= $arResult["FILTER_NAME"] . "_form" ?>" action="<?= $arResult["FORM_ACTION"] ?>" method="get" class="smartfilter"> -->
 	<form name="<?= $arResult["FILTER_NAME"] . "_form" ?>" action="<?= $arResult["FORM_ACTION"] ?>" method="get" class="smartfilter" id="smartfilter_form">

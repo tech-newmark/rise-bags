@@ -157,7 +157,7 @@
 }
 
 .bx-filter {
-	width: fit-content;
+	width: 100%;
 	font-family: var(--primary-font);
 	font-weight: 400;
 
@@ -167,14 +167,17 @@
 	}
 
 	form {
-		position: absolute;
-		top: calc(100% + 20px);
-		left: 0;
 		width: 100%;
-		z-index: 99;
 		padding: var(--bx-filter-padding);
 		border-radius: var(--bx-filter-border-radius);
 		background-color: var(--bx-filter-bg);
+	}
+
+	&:not(.expanded) form {
+		position: absolute;
+		top: calc(100% + 20px);
+		left: 0;
+		z-index: 99;
 	}
 
 	&-section {

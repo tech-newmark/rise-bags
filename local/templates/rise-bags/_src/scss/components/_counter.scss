@@ -50,4 +50,37 @@
 			opacity: 0.6;
 		}
 	}
+
+	&--sm {
+		border: none;
+		border-radius: 0;
+		width: 78px;
+		min-width: initial;
+		height: fit-content;
+
+		.counter-btn {
+			width: 24px;
+			height: 24px;
+
+			padding: 2px;
+			border-radius: 50%;
+			background-color: transparent;
+			border: 1px solid var(--primary);
+
+			svg {
+				width: 16px;
+				height: 16px;
+				fill: var(--primary);
+			}
+		}
+
+		input {
+			width: 30px;
+			font-size: 14px;
+
+			&::placeholder {
+				font-size: 14px;
+			}
+		}
+	}
 }
