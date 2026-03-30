@@ -11,6 +11,6 @@ $MESS["CPST_SUBSCRIBE_CAPTCHA_TITLE"] = "Введите слово на карт
 $MESS["CPST_STATUS_SUCCESS"] = "Успешно";
 $MESS["CPST_STATUS_ERROR"] = "Произошла ошибка";
 $MESS["CPST_ENTER_WORD_PICTURE"] = "Введите слово на картинке";
-$MESS["CPST_TITLE_ALREADY_SUBSCRIBED"] = "Вы подписаны на этот товар";
+$MESS["CPST_TITLE_ALREADY_SUBSCRIBED"] = "Вы подписаны";
 $MESS["CPST_POPUP_SUBSCRIBED_TITLE"] = "Вы подписаны";
 $MESS["CPST_POPUP_SUBSCRIBED_TEXT"] = "Список товаров на которые вы подписаны можно увидеть по ссылке #URL#";

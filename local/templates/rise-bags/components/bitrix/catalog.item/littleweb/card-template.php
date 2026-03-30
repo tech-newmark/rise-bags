@@ -30,10 +30,11 @@ use Bitrix\Main\Localization\Loc;
 ?>
 
 <div class="product-item">
+	<?/* product-item-header  */ ?>
 	<? if ($itemHasDetailUrl): ?>
-		<a class="product-item-image-wrapper" href="<?= $item['DETAIL_PAGE_URL'] ?>" title="<?= $imgTitle ?>" data-entity="image-wrapper">
+		<a class="product-item-header" href="<?= $item['DETAIL_PAGE_URL'] ?>" title="<?= $imgTitle ?>" data-entity="image-wrapper">
 		<? else: ?>
-			<div class="product-item-image-wrapper" data-entity="image-wrapper">
+			<div class="product-item-header" data-entity="image-wrapper">
 			<? endif; ?>
 
 			<div class="swiper product-item-slider">
@@ -70,42 +71,6 @@ use Bitrix\Main\Localization\Loc;
 								<?= $value ?>
 							</span>
 						<? endforeach; ?>
-					<? endif; ?>
-
-					<? //Вывод доступного количества товара(настраивается в параметрах и в самом товаре)
-					?>
-					<? if ($arParams['SHOW_MAX_QUANTITY'] !== 'N'): ?>
-						<? if ($haveOffers): ?>
-							<? if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y'): ?>
-								<span class="product-label" id="<?= $itemIds['QUANTITY_LIMIT'] ?>" data-entity="quantity-limit-block">
-									<?= $arParams['MESS_SHOW_MAX_QUANTITY'] ?>:&nbsp;<span class="product-item-quantity" data-entity="quantity-limit-value"></span>
-								</span>
-							<? endif; ?>
-						<? else : ?>
-							<? if (
-								$measureRatio
-								&& (float)$actualItem['CATALOG_QUANTITY'] > 0
-								&& $actualItem['CATALOG_QUANTITY_TRACE'] === 'Y'
-								&& $actualItem['CATALOG_CAN_BUY_ZERO'] === 'N'
-							):
-							?>
-								<span class="product-label" id="<?= $itemIds['QUANTITY_LIMIT'] ?>">
-									<?= $arParams['MESS_SHOW_MAX_QUANTITY'] ?>:&nbsp;<span class="product-item-quantity">
-										<?
-										if ($arParams['SHOW_MAX_QUANTITY'] === 'M') {
-											if ((float)$actualItem['CATALOG_QUANTITY'] / $measureRatio >= $arParams['RELATIVE_QUANTITY_FACTOR']) {
-												echo $arParams['MESS_RELATIVE_QUANTITY_MANY'];
-											} else {
-												echo $arParams['MESS_RELATIVE_QUANTITY_FEW'];
-											}
-										} else {
-											echo $actualItem['CATALOG_QUANTITY'] . ' ' . $actualItem['ITEM_MEASURE']['TITLE'];
-										}
-										?>
-									</span>
-								</span>
-							<? endif; ?>
-						<? endif; ?>
 					<? endif; ?>
 				</div>
 			<? endif; ?>
@@ -144,7 +109,9 @@ use Bitrix\Main\Localization\Loc;
 </div>
 <? endif; ?>
 
-<div class="product-item-content-wrapper">
+<?/* product-item-view-content  */ ?>
+
+<div class="product-item-body">
 	<? if ($itemHasDetailUrl): ?>
 		<a class="product-item-title" href="<?= $item['DETAIL_PAGE_URL'] ?>" title="<?= $productTitle ?>">
 		<? endif; ?>
@@ -153,8 +120,43 @@ use Bitrix\Main\Localization\Loc;
 		</a>
 	<? endif; ?>
 
+	<? //Вывод доступного количества товара(настраивается в параметрах и в самом товаре)
+	?>
+	<? if ($arParams['SHOW_MAX_QUANTITY'] !== 'N'): ?>
+		<? if ($haveOffers): ?>
+			<? if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y'): ?>
+				<span class="product-label product-label--quantity" id="<?= $itemIds['QUANTITY_LIMIT'] ?>" data-entity="quantity-limit-block">
+					<?= $arParams['MESS_SHOW_MAX_QUANTITY'] ?>:&nbsp;<span class="product-item-quantity" data-entity="quantity-limit-value"></span>
+				</span>
+			<? endif; ?>
+		<? else : ?>
+			<? if (
+				$measureRatio
+				&& (float)$actualItem['CATALOG_QUANTITY'] > 0
+				&& $actualItem['CATALOG_QUANTITY_TRACE'] === 'Y'
+				&& $actualItem['CATALOG_CAN_BUY_ZERO'] === 'N'
+			):
+			?>
+				<span class="product-label product-label--quantity" id="<?= $itemIds['QUANTITY_LIMIT'] ?>">
+					<?= $arParams['MESS_SHOW_MAX_QUANTITY'] ?>:&nbsp;<span class="product-item-quantity">
+						<?
+						if ($arParams['SHOW_MAX_QUANTITY'] === 'M') {
+							if ((float)$actualItem['CATALOG_QUANTITY'] / $measureRatio >= $arParams['RELATIVE_QUANTITY_FACTOR']) {
+								echo $arParams['MESS_RELATIVE_QUANTITY_MANY'];
+							} else {
+								echo $arParams['MESS_RELATIVE_QUANTITY_FEW'];
+							}
+						} else {
+							echo $actualItem['CATALOG_QUANTITY'] . ' ' . $actualItem['ITEM_MEASURE']['TITLE'];
+						}
+						?>
+					</span>
+				</span>
+			<? endif; ?>
+		<? endif; ?>
+	<? endif; ?>
 
-	<? if (!empty($price)): ?>
+	<? if (!empty($price) && $actualItem['CAN_BUY']): ?>
 		<div class="product-item-price-container" data-entity="price-block">
 			<? if ($arParams['SHOW_OLD_PRICE'] === 'Y' && !empty($price)): ?>
 				<span class="product-item-price product-item-price--old" id="<?= $itemIds['PRICE_OLD'] ?>"
@@ -183,21 +185,42 @@ use Bitrix\Main\Localization\Loc;
 		</div>
 	<? endif; ?>
 
-	<!-- !! -->
+	<? if (!$actualItem["CAN_BUY"]): ?>
+		<div class="product-item-subscribe-block">
+			<span class="product-item-subscribe-text" id="<?= $itemIds['NOT_AVAILABLE_MESS'] ?>">
+				<?= $arParams['MESS_NOT_AVAILABLE'] ?>
+			</span>
+
+			<? if ($showSubscribe):
+				$APPLICATION->IncludeComponent(
+					'bitrix:catalog.product.subscribe',
+					'littleweb',
+					array(
+						'PRODUCT_ID' => $item['ID'],
+						'BUTTON_ID' => $itemIds['SUBSCRIBE_LINK'],
+						'BUTTON_CLASS' => 'product-item-subscribe-btn',
+						'DEFAULT_DISPLAY' => !$actualItem['CAN_BUY'],
+						'MESS_BTN_SUBSCRIBE' => $arParams['~MESS_BTN_SUBSCRIBE'],
+					),
+					$component,
+					array('HIDE_ICONS' => 'N')
+				);
+			endif; ?>
+		</div>
+	<? endif; ?>
 
 	<? if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y' && $haveOffers && !empty($item['OFFERS_PROP'])): ?>
-		<div id="<?= $itemIds['PROP_DIV'] ?>">
+		<div class="product-item-sku-props-container" id="<?= $itemIds['PROP_DIV'] ?>">
 			<? foreach ($arParams['SKU_PROPS'] as $skuProperty):
 				$propertyId = $skuProperty['ID'];
 				$skuProperty['NAME'] = htmlspecialcharsbx($skuProperty['NAME']);
 				if (!isset($item['SKU_TREE_VALUES'][$propertyId]))
 					continue;
 			?>
-
-				<div class="scu-prop-block" data-entity="sku-block">
-					<div class="scu-prop-container" data-entity="sku-line-block">
-						<span class="scu-prop-name"><?= $skuProperty['NAME'] ?></span>
-						<ul class="scu-prop-list">
+				<div class="sku-prop-block" data-entity="sku-block">
+					<div class="sku-prop-container" data-entity="sku-line-block">
+						<span class="sku-prop-name"><?= $skuProperty['NAME'] ?>:</span>
+						<ul class="sku-prop-list">
 
 							<? foreach ($skuProperty['VALUES'] as $value):
 								if (!isset($item['SKU_TREE_VALUES'][$propertyId][$value['ID']]))
@@ -207,14 +230,14 @@ use Bitrix\Main\Localization\Loc;
 
 								if ($skuProperty['SHOW_MODE'] === 'PICT'):
 							?>
-									<li class="scu-prop-list-item" title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
-										<button type="button" class="scu-prop-list-item-value">
+									<li class="sku-prop-list-item" title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
+										<button type="button" class="sku-prop-list-item-value">
 											<img src="<?= $value['PICT']['SRC'] ?>" alt="<?= $value['NAME'] ?>" width="40" height="40">
 										</button>
 									</li>
 								<? else: ?>
 									<li title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
-										<button type="button" class="scu-prop-list-item-value">
+										<button type="button" class="sku-prop-list-item-value">
 											<span><?= $value['NAME'] ?></span>
 										</button>
 									</li>
@@ -223,7 +246,6 @@ use Bitrix\Main\Localization\Loc;
 						</ul>
 					</div>
 				</div>
-
 			<? endforeach; ?>
 		</div>
 
@@ -259,145 +281,15 @@ use Bitrix\Main\Localization\Loc;
 			unset($jsOffer, $strProps); ?>
 		<? endif; ?>
 	<? endif; ?>
+</div>
 
-	<? $showQuantityBlock = (
-		!$haveOffers && $actualItem['CAN_BUY'] && $arParams['USE_PRODUCT_QUANTITY'] && $arParams['PRODUCT_DISPLAY_MODE'] === 'Y'
-	) || (
-		$haveOffers && $arParams['PRODUCT_DISPLAY_MODE'] === 'Y' && $arParams['USE_PRODUCT_QUANTITY']
-	);
-
-	if ($showQuantityBlock):
-	?>
-		<div class="counter-block">
-			<div class="counter counter--sm" data-entity="quantity-block">
-				<button type="button" class="counter-btn counter-btn--dec" id="<?= $itemIds['QUANTITY_DOWN'] ?>">
-					<svg width="24" height="24" role="img" aria-hidden="true" focusable="false">
-						<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#icon-minus"></use>
-					</svg>
-				</button>
-				<input type="number" value="1" disabled="disabled" data-value="1" id="<?= $itemIds['QUANTITY'] ?>" type="number"
-					name="<?= $arParams['PRODUCT_QUANTITY_VARIABLE'] ?>"
-					value="<?= $measureRatio ?>">
-				<button type="button" class="counter-btn counter-btn--inc" id="<?= $itemIds['QUANTITY_UP'] ?>">
-					<svg width="24" height="24" role="img" aria-hidden="true" focusable="false">
-						<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#icon-plus"></use>
-					</svg>
-				</button>
-			</div>
-			<span class="product-item-amount-description-container">
-				<small id="<?= $itemIds['QUANTITY_MEASURE'] ?>">
-					<?= $actualItem['ITEM_MEASURE']['TITLE'] ?>
-				</small>
-				<small id="<?= $itemIds['PRICE_TOTAL'] ?>"></small>
-			</span>
-		</div>
-	<? endif; ?>
-
-	<div class="product-item-btn-block" data-entity="buttons-block">
-		<? if (!$haveOffers): ?>
-			<? if ($actualItem['CAN_BUY']): ?>
-				<? // расширенный режим показа карточки товара
-				if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y'):
-				?>
-					<div class="product-item-button-container" id="<?= $itemIds['BASKET_ACTIONS'] ?>">
-						<button type="button" class="main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
-							<?= ($arParams['ADD_TO_BASKET_ACTION'] === 'BUY' ? $arParams['MESS_BTN_BUY'] : $arParams['MESS_BTN_ADD_TO_BASKET']) ?>
-						</button>
-						<button type="button" class="main-btn">
-							<span>Купить в 1 клик</span>
-						</button>
-					</div>
-				<? else: ?>
-					<div class="product-item-button-container">
-						<a class="main-btn outlined" href="<?= $item['DETAIL_PAGE_URL'] ?>">
-							<?= $arParams['MESS_BTN_DETAIL'] ?>
-						</a>
-						<button type="button" class="main-btn">
-							<span>Купить в 1 клик</span>
-						</button>
-					</div>
-				<? endif; ?>
-			<? else: ?>
-				<div class="product-item-button-container 3">
-					<div class="product-item-subscribe-block">
-						<span class="product-item-subscribe-text" id="<?= $itemIds['NOT_AVAILABLE_MESS'] ?>">
-							<?= $arParams['MESS_NOT_AVAILABLE'] ?>
-						</span>
-						<?
-						if ($showSubscribe):
-							$APPLICATION->IncludeComponent(
-								'bitrix:catalog.product.subscribe',
-								'littleweb',
-								array(
-									'PRODUCT_ID' => $actualItem['ID'],
-									'BUTTON_ID' => $itemIds['SUBSCRIBE_LINK'],
-									'BUTTON_CLASS' => 'product-item-subscribe-btn',
-									'DEFAULT_DISPLAY' => true,
-									'MESS_BTN_SUBSCRIBE' => $arParams['~MESS_BTN_SUBSCRIBE'],
-								),
-								$component,
-								array('HIDE_ICONS' => 'Y')
-							);
-						endif;
-						?>
-					</div>
-
-				</div>
-			<? endif; ?>
-		<? else: ?>
-			<? // расширенный режим показа карточки товара
-			if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y'):
-			?>
-				<? if ($showSubscribe): ?>
-					<div class="product-item-subscribe-block">
-						<? $APPLICATION->IncludeComponent(
-							'bitrix:catalog.product.subscribe',
-							'littleweb',
-							array(
-								'PRODUCT_ID' => $item['ID'],
-								'BUTTON_ID' => $itemIds['SUBSCRIBE_LINK'],
-								'BUTTON_CLASS' => 'product-item-subscribe-btn',
-								'DEFAULT_DISPLAY' => !$actualItem['CAN_BUY'],
-								'MESS_BTN_SUBSCRIBE' => $arParams['~MESS_BTN_SUBSCRIBE'],
-							),
-							$component,
-							array('HIDE_ICONS' => 'N')
-						); ?>
-					</div>
-				<? endif; ?>
-
-				<div class="product-item-button-container 4" <? if ($actualItem['CAN_BUY']): ?> id="<?= $itemIds['BASKET_ACTIONS'] ?>" <? endif; ?>>
-					<? if ($actualItem['CAN_BUY']): ?>
-						<button type="button" class="main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
-							<?= ($arParams['ADD_TO_BASKET_ACTION'] === 'BUY' ? $arParams['MESS_BTN_BUY'] : $arParams['MESS_BTN_ADD_TO_BASKET']) ?>
-						</button>
-
-						<button type="button" class="main-btn">
-							<span>Купить в 1 клик</span>
-						</button>
-					<? else: ?>
-						<span class="text" id="<?= $itemIds['NOT_AVAILABLE_MESS'] ?>">
-							<?= $arParams['MESS_NOT_AVAILABLE'] ?>
-						</span>
-					<? endif; ?>
-				</div>
-			<? else: ?>
-				<div class="product-item-button-container">
-					<a class="main-btn outlined" href="<?= $item['DETAIL_PAGE_URL'] ?>">
-						<?= $arParams['MESS_BTN_DETAIL'] ?>
-					</a>
-					<button type="button" class="main-btn">
-						<span>Купить в 1 клик</span>
-					</button>
-				</div>
-			<? endif; ?>
-		<? endif; ?>
-	</div>
-
-	<div class="product-item-props-block">
+<?/* product-item-hover-content */ ?>
+<div class="product-item-footer">
+	<? if ($actualItem['CAN_BUY']): ?>
 		<? if (!$haveOffers): ?>
 			<? if (!empty($item['DISPLAY_PROPERTIES'])): ?>
-				<div class="product-item-info-container" data-entity="props-block">
+				<div class="product-item-props" data-entity="props-block">
+					<small class="product-item-props-title">Характеристики товара:</small>
 					<ul class="prop-list">
 						<? foreach ($item['DISPLAY_PROPERTIES'] as $code => $displayProperty): ?>
 							<li class="prop-list-item">
@@ -414,7 +306,7 @@ use Bitrix\Main\Localization\Loc;
 			<? endif; ?>
 
 			<? if ($arParams['ADD_PROPERTIES_TO_BASKET'] === 'Y' && !empty($item['PRODUCT_PROPERTIES'])): ?>
-				<div id="<?= $itemIds['BASKET_PROP_DIV'] ?>" style="display: none;">
+				<div id="<?= $itemIds['BASKET_PROP_DIV'] ?>">
 					<? if (!empty($item['PRODUCT_PROPERTIES_FILL'])): ?>
 						<? foreach ($item['PRODUCT_PROPERTIES_FILL'] as $propID => $propInfo): ?>
 							<input type="hidden" name="<?= $arParams['PRODUCT_PROPS_VARIABLE'] ?>[<?= $propID ?>]"
@@ -424,7 +316,8 @@ use Bitrix\Main\Localization\Loc;
 						endforeach; ?>
 					<? endif; ?>
 
-					<? if (!empty($item['PRODUCT_PROPERTIES'])): ?>
+					<?/* if (!empty($item['PRODUCT_PROPERTIES'])): ?>
+
 						<table>
 							<? foreach ($item['PRODUCT_PROPERTIES'] as $propID => $propInfo): ?>
 								<tr>
@@ -469,36 +362,124 @@ use Bitrix\Main\Localization\Loc;
 							endforeach;
 							?>
 						</table>
-					<? endif; ?>
+					<? endif; */ ?>
 				</div>
 			<? endif; ?>
-			<? else:
+
+		<? else: ?>
+			<?
 			$showProductProps = !empty($item['DISPLAY_PROPERTIES']);
 			$showOfferProps = $arParams['PRODUCT_DISPLAY_MODE'] === 'Y' && $item['OFFERS_PROPS_DISPLAY'];
 
 			if ($showProductProps || $showOfferProps): ?>
-				<div class="product-item-info-container" data-entity="props-block">
-					<div class="prop-list">
+				<div class="product-item-props" data-entity="props-block">
+					<small class=" product-item-props-title">Характеристики товара:</small>
+					<ul class="prop-list">
 						<? if ($showProductProps): ?>
 							<? foreach ($item['DISPLAY_PROPERTIES'] as $code => $displayProperty): ?>
-								<div class="prop-list-item">
+								<li class="prop-list-item">
 									<span class="prop-list-item-name"><?= $displayProperty['NAME'] ?></span>
 									<span class="prop-list-item-value">
 										<?= (is_array($displayProperty['DISPLAY_VALUE'])
 											? implode(' / ', $displayProperty['DISPLAY_VALUE'])
 											: $displayProperty['DISPLAY_VALUE']) ?>
 									</span>
-								</div>
+								</li>
 							<? endforeach; ?>
 						<? endif; ?>
-					</div>
+					</ul>
 					<? if ($showOfferProps && $item['JS_OFFERS']): ?>
-						<div class="prop-list prop-list--scu" id="<?= $itemIds['DISPLAY_PROP_DIV'] ?>"></div>
+						<div class="prop-list prop-list--sku" id="<?= $itemIds['DISPLAY_PROP_DIV'] ?>"></div>
 					<? endif; ?>
 				</div>
 			<? endif; ?>
 		<? endif; ?>
-	</div>
+	<? endif; ?>
 
+	<? $showQuantityBlock = (
+		!$haveOffers && $actualItem['CAN_BUY'] && $arParams['USE_PRODUCT_QUANTITY'] && $arParams['PRODUCT_DISPLAY_MODE'] === 'Y'
+	) || (
+		$haveOffers && $arParams['PRODUCT_DISPLAY_MODE'] === 'Y' && $arParams['USE_PRODUCT_QUANTITY']
+	);
+
+	if ($showQuantityBlock):
+	?>
+		<div class="counter-block">
+			<div class="counter counter--sm" data-entity="quantity-block">
+				<button type="button" class="counter-btn counter-btn--dec" id="<?= $itemIds['QUANTITY_DOWN'] ?>">
+					<svg width="24" height="24" role="img" aria-hidden="true" focusable="false">
+						<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#icon-minus"></use>
+					</svg>
+				</button>
+				<input type="number" value="1" disabled="disabled" data-value="1" id="<?= $itemIds['QUANTITY'] ?>" type="number"
+					name="<?= $arParams['PRODUCT_QUANTITY_VARIABLE'] ?>"
+					value="<?= $measureRatio ?>">
+				<button type="button" class="counter-btn counter-btn--inc" id="<?= $itemIds['QUANTITY_UP'] ?>">
+					<svg width="24" height="24" role="img" aria-hidden="true" focusable="false">
+						<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#icon-plus"></use>
+					</svg>
+				</button>
+			</div>
+			<span class="product-item-amount-description-container">
+				<small id="<?= $itemIds['QUANTITY_MEASURE'] ?>">
+					<?= $actualItem['ITEM_MEASURE']['TITLE'] ?>
+				</small>
+				<small id="<?= $itemIds['PRICE_TOTAL'] ?>"></small>
+			</span>
+		</div>
+	<? endif; ?>
+
+
+	<? if (!$haveOffers): ?>
+		<? if ($actualItem['CAN_BUY']): ?>
+			<? // расширенный режим показа карточки товара
+			if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y'):
+			?>
+				<div class="product-item-button-container" id="<?= $itemIds['BASKET_ACTIONS'] ?>">
+					<button type="button" class="main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
+						<?= ($arParams['ADD_TO_BASKET_ACTION'] === 'BUY' ? $arParams['MESS_BTN_BUY'] : $arParams['MESS_BTN_ADD_TO_BASKET']) ?>
+					</button>
+					<button type="button" class="main-btn">
+						<span>Купить в 1 клик</span>
+					</button>
+				</div>
+			<? else: ?>
+				<div class="product-item-button-container">
+					<a class="main-btn outlined" href="<?= $item['DETAIL_PAGE_URL'] ?>">
+						<?= $arParams['MESS_BTN_DETAIL'] ?>
+					</a>
+					<button type="button" class="main-btn">
+						<span>Купить в 1 клик</span>
+					</button>
+				</div>
+			<? endif; ?>
+
+		<? endif; ?>
+	<? else: ?>
+		<? // расширенный режим показа карточки товара
+		if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y'):
+		?>
+			<div class="product-item-button-container" <? if ($actualItem['CAN_BUY']): ?> id="<?= $itemIds['BASKET_ACTIONS'] ?>" <? endif; ?>>
+				<? if ($actualItem['CAN_BUY']): ?>
+					<button type="button" class="main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
+						<?= ($arParams['ADD_TO_BASKET_ACTION'] === 'BUY' ? $arParams['MESS_BTN_BUY'] : $arParams['MESS_BTN_ADD_TO_BASKET']) ?>
+					</button>
+
+					<button type="button" class="main-btn">
+						<span>Купить в 1 клик</span>
+					</button>
+				<? endif; ?>
+			</div>
+		<? else: ?>
+			<div class="product-item-button-container">
+				<a class="main-btn outlined" href="<?= $item['DETAIL_PAGE_URL'] ?>">
+					<?= $arParams['MESS_BTN_DETAIL'] ?>
+				</a>
+				<button type="button" class="main-btn">
+					<span>Купить в 1 клик</span>
+				</button>
+			</div>
+		<? endif; ?>
+	<? endif; ?>
 </div>
 </div>
