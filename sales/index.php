@@ -35,7 +35,7 @@ $APPLICATION->SetTitle("Новости");
 		"DETAIL_PAGER_TEMPLATE" => "",
 		"DETAIL_PAGER_TITLE" => "Страница",
 		"DETAIL_PROPERTY_CODE" => [
-			0 => "",
+			0 => "LINKED_ARTICLES",
 			1 => "",
 		],
 		"DETAIL_SET_CANONICAL_URL" => "N",
@@ -92,6 +92,9 @@ $APPLICATION->SetTitle("Новости");
 		"USE_SHARE" => "N",
 		"COMPONENT_TEMPLATE" => "articles",
 		"SEF_FOLDER" => "/sales/",
+		"TITLE_IN_LINKED_ARTICLES" => "Рекомендации",
+		"DESC_IN_LINKED_ARTICLES" => "",
+		"BUTTON_NAME_IN_LINKED_ARTICLES" => "",
 		"SEF_URL_TEMPLATES" => [
 			"news" => "",
 			"section" => "",

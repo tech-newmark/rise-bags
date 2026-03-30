@@ -67,7 +67,7 @@ $this->setFrameMode(true);
 							"USE_PERMISSIONS" => "N",
 							"USE_SHARE" => "N",
 							"SHOW_DATE_ACTIVE_FROM" => $arParams["SHOW_DATE_ACTIVE_FROM"],
-							"SHOW_DATE_ACTIVE_TO" => $arParams["SHOW_DATE_ACTIVE_TO"]
+							"SHOW_DATE_ACTIVE_TO" => $arParams["SHOW_DATE_ACTIVE_TO"],
 						),
 						$component,
 						array("HIDE_ICONS" => $index > 0 ?? "Y")

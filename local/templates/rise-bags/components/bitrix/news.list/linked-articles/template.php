@@ -5,9 +5,11 @@ $this->setFrameMode(true);
 
 <section class="linked-articles">
 	<div class="linked-articles__header">
-		<h2>Рекомендуем ещё статьи</h2>
-		<span>Описание к другим новостям</span>
-		<a class="main-btn" href="<?= $arResult['LIST_PAGE_URL'] ?>"><span>Все статьи</span></a>
+		<h2><?= $arParams["TITLE_IN_LINKED_ARTICLES"] ? $arParams["TITLE_IN_LINKED_ARTICLES"] : 'Рекомендуем' ?></h2>
+		<? if ($arParams["DESC_IN_LINKED_ARTICLES"]) : ?>
+			<span><?= $arParams["DESC_IN_LINKED_ARTICLES"] ?></span>
+		<? endif; ?>
+		<a class="main-btn" href="<?= $arResult['LIST_PAGE_URL'] ?>"><span><?= $arParams["BUTTON_NAME_IN_LINKED_ARTICLES"] ? $arParams["BUTTON_NAME_IN_LINKED_ARTICLES"] : 'Смотреть все' ?></span></a>
 	</div>
 	<div class="linked-articles__list">
 		<? foreach ($arResult["ITEMS"] as $arItem): ?>
@@ -68,7 +70,7 @@ $this->setFrameMode(true);
 						"USE_SHARE" => "N",
 						"DETAIL_PAGE_URL" => $arItem['DETAIL_PAGE_URL'],
 						"SHOW_DATE_ACTIVE_FROM" => $arParams["SHOW_DATE_ACTIVE_FROM"],
-						"SHOW_DATE_ACTIVE_TO" => $arParams["SHOW_DATE_ACTIVE_TO"]
+						"SHOW_DATE_ACTIVE_TO" => $arParams["SHOW_DATE_ACTIVE_TO"],
 					),
 					$component,
 					array("HIDE_ICONS" => "Y")

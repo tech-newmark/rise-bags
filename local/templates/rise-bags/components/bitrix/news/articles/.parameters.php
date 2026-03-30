@@ -39,6 +39,24 @@ $arTemplateParameters = array(
 		"DEFAULT" => "N",
 		"SORT" => 100
 	),
+	"TITLE_IN_LINKED_ARTICLES" => array(
+		"NAME" => "Заголовок над рекомендациями",
+		"TYPE" => "STRING",
+		"DEFAULT" => "Рекомендуем",
+		"SORT" => 100
+	),
+	"DESC_IN_LINKED_ARTICLES" => array(
+		"NAME" => "Описание над рекомендациями",
+		"TYPE" => "STRING",
+		"DEFAULT" => "Возможно вам так же будет интересно",
+		"SORT" => 100
+	),
+	"BUTTON_NAME_IN_LINKED_ARTICLES" => array(
+		"NAME" => "Текст на кнопке в рекомендациях",
+		"TYPE" => "STRING",
+		"DEFAULT" => "Смотреть все",
+		"SORT" => 100
+	),
 );
 
 if (($arCurrentValues['USE_SHARE'] ?? 'N') === 'Y') {

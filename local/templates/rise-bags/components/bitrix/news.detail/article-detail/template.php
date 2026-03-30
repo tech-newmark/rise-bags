@@ -10,7 +10,7 @@ $this->setFrameMode(true);
 			<article class="article-detail">
 				<div class="article-detail__header">
 					<? if ($arResult['DETAIL_PICTURE']['SRC'] || $arResult['PREVIEW_PICTURE']['SRC']): ?>
-						<img src="<?= ($arResult['DETAIL_PICTURE']['SRC']) ? $arResult['DETAIL_PICTURE']['SRC'] : $arResult['PREVIEW_PICTURE']['SRC'] ?>" alt="<?= $arResult['NAME'] ?>" width="540" height="270">
+						<img src="<?= ($arResult['DETAIL_PICTURE']['SRC']) ? $arResult['DETAIL_PICTURE']['SRC'] : $arResult['PREVIEW_PICTURE']['SRC'] ?>" alt="<?= $arResult['NAME'] ?>" width="560" height="280">
 					<? endif; ?>
 					<div class="article-detail__header-content">
 						<h1><?= $arResult['NAME'] ?></h1>
@@ -94,6 +94,9 @@ $this->setFrameMode(true);
 					"SORT_ORDER1" => "DESC",
 					"SORT_ORDER2" => "ASC",
 					"STRICT_SECTION_CHECK" => "N",
+					"TITLE_IN_LINKED_ARTICLES" => $arParams["TITLE_IN_LINKED_ARTICLES"],
+					"DESC_IN_LINKED_ARTICLES" => $arParams["DESC_IN_LINKED_ARTICLES"],
+					"BUTTON_NAME_IN_LINKED_ARTICLES" => $arParams["BUTTON_NAME_IN_LINKED_ARTICLES"],
 				),
 				$component
 			);
