@@ -335,6 +335,7 @@ $APPLICATION->SetTitle("Каталог");
 		"RELATIVE_QUANTITY_FACTOR" => "5",
 		"MESS_RELATIVE_QUANTITY_MANY" => "много",
 		"MESS_RELATIVE_QUANTITY_FEW" => "мало",
+		"SHOW_COMPARE_LIST" => "Y",
 		"SEF_URL_TEMPLATES" => [
 			"sections" => "",
 			"section" => "#SECTION_CODE_PATH#/",

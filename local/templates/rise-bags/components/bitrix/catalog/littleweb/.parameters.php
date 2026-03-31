@@ -975,28 +975,46 @@ if (isset($arCurrentValues['SHOW_TOP_ELEMENTS']) && 'Y' == $arCurrentValues['SHO
 if (isset($arCurrentValues['USE_COMPARE']) && $arCurrentValues['USE_COMPARE'] == 'Y') {
 	$arTemplateParameters['COMPARE_POSITION_FIXED'] = array(
 		'PARENT' => 'COMPARE_SETTINGS',
-		'NAME' => GetMessage('CPT_BC_TPL_COMPARE_POSITION_FIXED'),
+		'NAME' => "Показывать виджет сравниваемых товаров поверх страницы",
 		'TYPE' => 'CHECKBOX',
 		'DEFAULT' => 'Y',
 		'REFRESH' => 'Y'
 	);
 	if (!isset($arCurrentValues['COMPARE_POSITION_FIXED']) || $arCurrentValues['COMPARE_POSITION_FIXED'] == 'Y') {
-		$positionList = array(
-			'top left' => GetMessage('CPT_BC_TPL_PARAM_COMPARE_POSITION_TOP_LEFT'),
-			'top right' => GetMessage('CPT_BC_TPL_PARAM_COMPARE_POSITION_TOP_RIGHT'),
-			'bottom left' => GetMessage('CPT_BC_TPL_PARAM_COMPARE_POSITION_BOTTOM_LEFT'),
-			'bottom right' => GetMessage('CPT_BC_TPL_PARAM_COMPARE_POSITION_BOTTOM_RIGHT')
-		);
-		$arTemplateParameters['COMPARE_POSITION'] = array(
+		$arTemplateParameters['SHOW_COMPARE_LIST'] = array(
 			'PARENT' => 'COMPARE_SETTINGS',
-			'NAME' => GetMessage('CPT_BC_TPL_COMPARE_POSITION'),
-			'TYPE' => 'LIST',
-			'VALUES' => $positionList,
-			'DEFAULT' => 'top left'
+			'NAME' => "Показывать в виджете список сравниваемых товаров",
+			'TYPE' => 'CHECKBOX',
+			'DEFAULT' => 'N',
 		);
-		unset($positionList);
 	}
 }
+
+// if (isset($arCurrentValues['USE_COMPARE']) && $arCurrentValues['USE_COMPARE'] == 'Y') {
+// 	$arTemplateParameters['COMPARE_POSITION_FIXED'] = array(
+// 		'PARENT' => 'COMPARE_SETTINGS',
+// 		'NAME' => GetMessage('CPT_BC_TPL_COMPARE_POSITION_FIXED'),
+// 		'TYPE' => 'CHECKBOX',
+// 		'DEFAULT' => 'Y',
+// 		'REFRESH' => 'Y'
+// 	);
+// 	if (!isset($arCurrentValues['COMPARE_POSITION_FIXED']) || $arCurrentValues['COMPARE_POSITION_FIXED'] == 'Y') {
+// 		$positionList = array(
+// 			'top left' => GetMessage('CPT_BC_TPL_PARAM_COMPARE_POSITION_TOP_LEFT'),
+// 			'top right' => GetMessage('CPT_BC_TPL_PARAM_COMPARE_POSITION_TOP_RIGHT'),
+// 			'bottom left' => GetMessage('CPT_BC_TPL_PARAM_COMPARE_POSITION_BOTTOM_LEFT'),
+// 			'bottom right' => GetMessage('CPT_BC_TPL_PARAM_COMPARE_POSITION_BOTTOM_RIGHT')
+// 		);
+// 		$arTemplateParameters['COMPARE_POSITION'] = array(
+// 			'PARENT' => 'COMPARE_SETTINGS',
+// 			'NAME' => GetMessage('CPT_BC_TPL_COMPARE_POSITION'),
+// 			'TYPE' => 'LIST',
+// 			'VALUES' => $positionList,
+// 			'DEFAULT' => 'top left'
+// 		);
+// 		unset($positionList);
+// 	}
+// }
 
 $arTemplateParameters['SIDEBAR_SECTION_SHOW'] = array(
 	'PARENT' => 'VISUAL',

@@ -57,7 +57,7 @@ use Bitrix\Main\Localization\Loc;
 				<div class="swiper-pagination" aria-label="Пагинация"></div>
 			</div>
 
-			<!-- метки(хит и тд) и скидка-->
+			<!-- метки(хит и тд) и скидка -->
 			<? if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y' && !empty($price) && $price['PERCENT'] > 0): ?>
 				<span class="product-label product-label--discount" id="<?= $itemIds['DSC_PERC'] ?>">
 					<?= -$price['PERCENT'] ?>%
