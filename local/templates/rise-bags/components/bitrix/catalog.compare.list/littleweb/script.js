@@ -8,7 +8,6 @@
 		this.obAdminPanel = null;
 		this.visual = params.VISUAL;
 		this.ajax = params.AJAX;
-		this.position = params.POSITION;
 
 		BX.ready(BX.proxy(this.init, this));
 	};
@@ -47,10 +46,6 @@
 
 		if (!BX.hasClass(this.obCompare, "active")) {
 			BX.addClass(this.obCompare, "active");
-
-			setTimeout(() => {
-				BX.removeClass(this.obCompare, "active");
-			}, 3000);
 		}
 
 		if (!isFilled) {

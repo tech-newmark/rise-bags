@@ -76,27 +76,27 @@ use Bitrix\Main\Localization\Loc;
 			<? endif; ?>
 
 			<div class="product-item-sidebar">
-				<button class="favourite-add-btn active" type="button" aria-label="Добавить товар в избранное">
+				<button class="favourite-add-btn" type="button" aria-label="Добавить товар в избранное">
 					<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
 						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-heart'></use>
 					</svg>
 				</button>
-
-				<? if ($arParams['DISPLAY_COMPARE'] && (!$haveOffers || $arParams['PRODUCT_DISPLAY_MODE'] === 'Y')): ?>
-					<label id="<?= $itemIds['COMPARE_LINK'] ?>" class="compare">
-						<input type="checkbox" data-entity="compare-checkbox">
-						<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-compare'></use>
-						</svg>
-					</label>
+				<? if (!empty($price) && $actualItem['CAN_BUY']): ?>
+					<? if ($arParams['DISPLAY_COMPARE'] && (!$haveOffers || $arParams['PRODUCT_DISPLAY_MODE'] === 'Y')): ?>
+						<label id="<?= $itemIds['COMPARE_LINK'] ?>" class="compare">
+							<input type="checkbox" data-entity="compare-checkbox">
+							<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
+								<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-compare'></use>
+							</svg>
+						</label>
+					<? endif; ?>
 				<? endif; ?>
-
 				<button class="fast-view-btn" type="button" aria-label="Быстрый просмотр">
 					<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
 						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-info'></use>
 					</svg>
 				</button>
-				<button class="oneclickbuy-btn" type="button" aria-label="Купить в 1 клик">
+				<button class="oneclickbuy-btn" type="button" aria-label="Информация о доставке">
 					<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
 						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-cube'></use>
 					</svg>
@@ -439,7 +439,7 @@ use Bitrix\Main\Localization\Loc;
 					<button type="button" class="main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
 						<?= ($arParams['ADD_TO_BASKET_ACTION'] === 'BUY' ? $arParams['MESS_BTN_BUY'] : $arParams['MESS_BTN_ADD_TO_BASKET']) ?>
 					</button>
-					<button type="button" class="main-btn">
+					<button type="button" class="main-btn" data-1clickbuy-id="<?= $item["ID"] ?>">
 						<span>Купить в 1 клик</span>
 					</button>
 				</div>
@@ -448,7 +448,7 @@ use Bitrix\Main\Localization\Loc;
 					<a class="main-btn outlined" href="<?= $item['DETAIL_PAGE_URL'] ?>">
 						<?= $arParams['MESS_BTN_DETAIL'] ?>
 					</a>
-					<button type="button" class="main-btn">
+					<button type="button" class="main-btn" data-1clickbuy-id="<?= $item["ID"] ?>">
 						<span>Купить в 1 клик</span>
 					</button>
 				</div>
@@ -465,7 +465,7 @@ use Bitrix\Main\Localization\Loc;
 						<?= ($arParams['ADD_TO_BASKET_ACTION'] === 'BUY' ? $arParams['MESS_BTN_BUY'] : $arParams['MESS_BTN_ADD_TO_BASKET']) ?>
 					</button>
 
-					<button type="button" class="main-btn">
+					<button type="button" class="main-btn" data-1clickbuy-id="<?= $item["ID"] ?>">
 						<span>Купить в 1 клик</span>
 					</button>
 				<? endif; ?>
@@ -475,7 +475,7 @@ use Bitrix\Main\Localization\Loc;
 				<a class="main-btn outlined" href="<?= $item['DETAIL_PAGE_URL'] ?>">
 					<?= $arParams['MESS_BTN_DETAIL'] ?>
 				</a>
-				<button type="button" class="main-btn">
+				<button type="button" class="main-btn" data-1clickbuy-id="<?= $item["ID"] ?>">
 					<span>Купить в 1 клик</span>
 				</button>
 			</div>

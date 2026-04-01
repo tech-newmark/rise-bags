@@ -1,17 +1,28 @@
 @use "./blockquotes";
 @use "./tables";
-@use "./textarea";
-@use "./main-input";
-@use "./main-checkbox";
+
 @use "./alert";
 @use "./main-btn";
 @use "./main-link";
-@use "./bx-authform";
+
 @use "./bx-coupon";
-@use "./captcha-block";
+
 @use "./loader";
 @use "./product-label";
 @use "./counter";
 @use "./accordeon";
 @use "./prop-list";
 @use "./sku-prop-list";
+
+// forms controls, partials, templates
+
+@use "./forms/templates/_bx-popup";
+@use "./forms/templates/_popup-form";
+@use "./forms/templates/_oneclickbuy";
+@use "./forms/templates/_bx-authform";
+
+@use "./forms/partials/_captcha-block";
+
+@use "./forms/controls/main-textarea";
+@use "./forms/controls/main-input";
+@use "./forms/controls/main-checkbox";

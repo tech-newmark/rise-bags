@@ -413,7 +413,6 @@
 				}
 			}
 
-			console.log("TSTST", this.showMaxQuantity, this.visual.QUANTITY_LIMIT);
 			if (this.visual.QUANTITY_LIMIT && this.showMaxQuantity !== "N") {
 				this.obQuantityLimit.all = BX(this.visual.QUANTITY_LIMIT);
 				if (this.obQuantityLimit.all) {
@@ -588,7 +587,6 @@
 				}
 
 				if (this.useCompare) {
-					console.log(this.useCompare, "TEST");
 					this.obCompare = BX(this.visual.COMPARE_LINK_ID);
 					if (this.obCompare) {
 						BX.bind(this.obCompare, "click", BX.proxy(this.compare, this));
@@ -1397,6 +1395,16 @@
 				}
 			}
 			if (index > -1) {
+				console.log("OFFER", this.offers[index].ID);
+				console.log("THIS", this);
+
+				const btns = this.obProduct.querySelectorAll("[data-1clickbuy-id]");
+
+				console.log("btns", btns);
+
+				btns.forEach((btn) => {
+					btn.setAttribute("data-1clickbuy-id", this.offers[index].ID);
+				});
 				if (this.obPictSlider) {
 					var offer = this.offers[index];
 					var slides = [];
@@ -1691,15 +1699,7 @@
 		},
 
 		compareResult: function (result) {
-			var popupContent, popupButtons;
-
-			if (this.obPopupWin) {
-				this.obPopupWin.close();
-			}
-
 			if (!BX.type.isPlainObject(result)) return;
-
-			this.initPopupWindow();
 
 			if (this.offers.length > 0) {
 				this.offers[this.offerNum].COMPARED = result.STATUS === "OK";
@@ -1707,59 +1707,8 @@
 
 			if (result.STATUS === "OK") {
 				BX.onCustomEvent("OnCompareChange");
-
-				popupContent =
-					'<div style="width: 100%; margin: 0; text-align: center;"><p>' +
-					BX.message("COMPARE_MESSAGE_OK") +
-					"</p></div>";
-
-				if (this.showClosePopup) {
-					popupButtons = [
-						new BasketButton({
-							text: BX.message("BTN_MESSAGE_COMPARE_REDIRECT"),
-							events: {
-								click: BX.delegate(this.compareRedirect, this),
-							},
-							style: { marginRight: "10px" },
-						}),
-						new BasketButton({
-							text: BX.message("BTN_MESSAGE_CLOSE_POPUP"),
-							events: {
-								click: BX.delegate(this.obPopupWin.close, this.obPopupWin),
-							},
-						}),
-					];
-				} else {
-					popupButtons = [
-						new BasketButton({
-							text: BX.message("BTN_MESSAGE_COMPARE_REDIRECT"),
-							events: {
-								click: BX.delegate(this.compareRedirect, this),
-							},
-						}),
-					];
-				}
-			} else {
-				popupContent =
-					'<div style="width: 100%; margin: 0; text-align: center;"><p>' +
-					(result.MESSAGE
-						? result.MESSAGE
-						: BX.message("COMPARE_UNKNOWN_ERROR")) +
-					"</p></div>";
-				popupButtons = [
-					new BasketButton({
-						text: BX.message("BTN_MESSAGE_CLOSE"),
-						events: {
-							click: BX.delegate(this.obPopupWin.close, this.obPopupWin),
-						},
-					}),
-				];
+				// Если нужно показать какое то окно или уведомление, то пишем тут
 			}
-
-			this.obPopupWin.setTitleBar(BX.message("COMPARE_TITLE"));
-			this.obPopupWin.setContent(popupContent);
-			this.obPopupWin.setButtons(popupButtons);
-			this.obPopupWin.show();
 		},
 
 		compareDeleteResult: function () {
