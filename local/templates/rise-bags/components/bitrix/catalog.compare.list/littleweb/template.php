@@ -17,7 +17,7 @@ $idCompareCount = 'compareList' . $this->randString();
 $obCompare = 'ob' . $idCompareCount;
 
 $isHidden = isset($arParams["POSITION_FIXED"]) ? $arParams["POSITION_FIXED"] : 'N';
-$showComparedList = isset($arParams["SHOW_COMPARE_LIST"]) ? $arParams["SHOW_COMPARE_LIST"] : 'N';
+$showComparedList = isset($arParams["SHOW_COMPARED_LIST"]) ? $arParams["SHOW_COMPARED_LIST"] : 'N';
 ?>
 
 <div id="<?= $idCompareCount; ?>" class="bx-catalog-compare<?= $itemCount > 0 ? ' active' : '' ?>" <?= $isHidden === "N" ? 'style="display:none;"' : '' ?>>

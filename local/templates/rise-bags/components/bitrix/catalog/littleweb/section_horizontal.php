@@ -382,7 +382,7 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 				"ACTION_VARIABLE" => (!empty($arParams["ACTION_VARIABLE"]) ? $arParams["ACTION_VARIABLE"] : "action"),
 				"PRODUCT_ID_VARIABLE" => $arParams["PRODUCT_ID_VARIABLE"],
 				'POSITION_FIXED' => isset($arParams['COMPARE_POSITION_FIXED']) ? $arParams['COMPARE_POSITION_FIXED'] : '',
-				'SHOW_COMPARE_LIST' => isset($arParams['SHOW_COMPARE_LIST']) ? $arParams['SHOW_COMPARE_LIST'] : 'N'
+				'SHOW_COMPARED_LIST' => isset($arParams['SHOW_COMPARED_LIST']) ? $arParams['SHOW_COMPARED_LIST'] : 'N'
 			),
 			$component,
 			array("HIDE_ICONS" => "N")

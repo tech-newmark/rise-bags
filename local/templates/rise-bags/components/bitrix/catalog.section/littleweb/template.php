@@ -79,8 +79,7 @@ $containerName = 'container-' . $navParams['NavNum'];
 
 <div class="catalog-section">
 	<!-- items-container -->
-	<? if (!empty($arResult['ITEMS'])): ?>
-		<?
+	<? if (!empty($arResult['ITEMS'])):
 		$generalParams = [
 			'SHOW_SLIDER' => $arParams["SHOW_SLIDER"],
 			'SHOW_DISCOUNT_PERCENT' => $arParams['SHOW_DISCOUNT_PERCENT'],
@@ -121,8 +120,8 @@ $containerName = 'container-' . $navParams['NavNum'];
 			// custom
 			'OFFER_ADD_PICT_PROP' => $arParams['OFFER_ADD_PICT_PROP'],
 			'ADD_PICT_PROP' => $arParams['ADD_PICT_PROP']
-		]; ?>
-
+		];
+	?>
 		<div class="catalog-section-grid" data-entity="<?= $containerName ?>">
 			<? foreach ($arResult['ITEMS'] as $item):
 				$uniqueId = $item['ID'] . '_' . md5($this->randString() . $component->getAction());
@@ -158,8 +157,8 @@ $containerName = 'container-' . $navParams['NavNum'];
 				</div>
 			<? endforeach; ?>
 		</div>
-	<? else: ?>
-		<? // load css for bigData/deferred load
+	<? else:
+		// load css for bigData/deferred load
 		$APPLICATION->IncludeComponent(
 			'bitrix:catalog.item',
 			'littleweb',
@@ -167,8 +166,7 @@ $containerName = 'container-' . $navParams['NavNum'];
 			$component,
 			array('HIDE_ICONS' => 'Y')
 		);
-		?>
-	<? endif; ?>
+	endif; ?>
 	<!-- items-container -->
 </div>
 

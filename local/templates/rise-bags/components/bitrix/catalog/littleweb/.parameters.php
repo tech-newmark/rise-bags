@@ -873,104 +873,104 @@ if (ModuleManager::isModuleInstalled("sale")) {
 	}
 }
 
-if (isset($arCurrentValues['SHOW_TOP_ELEMENTS']) && 'Y' == $arCurrentValues['SHOW_TOP_ELEMENTS']) {
-	$arTemplateParameters['TOP_VIEW_MODE'] = array(
-		'PARENT' => 'TOP_SETTINGS',
-		'NAME' => GetMessage('CPT_BC_TPL_TOP_VIEW_MODE'),
-		'TYPE' => 'LIST',
-		'VALUES' => array(
-			'BANNER' => GetMessage('CPT_BC_TPL_VIEW_MODE_BANNER'),
-			'SLIDER' => GetMessage('CPT_BC_TPL_VIEW_MODE_SLIDER'),
-			'SECTION' => GetMessage('CPT_BC_TPL_VIEW_MODE_SECTION')
-		),
-		'MULTIPLE' => 'N',
-		'DEFAULT' => 'SECTION',
-		'REFRESH' => 'Y'
-	);
+// if (isset($arCurrentValues['SHOW_TOP_ELEMENTS']) && 'Y' == $arCurrentValues['SHOW_TOP_ELEMENTS']) {
+// 	$arTemplateParameters['TOP_VIEW_MODE'] = array(
+// 		'PARENT' => 'TOP_SETTINGS',
+// 		'NAME' => GetMessage('CPT_BC_TPL_TOP_VIEW_MODE'),
+// 		'TYPE' => 'LIST',
+// 		'VALUES' => array(
+// 			'BANNER' => GetMessage('CPT_BC_TPL_VIEW_MODE_BANNER'),
+// 			'SLIDER' => GetMessage('CPT_BC_TPL_VIEW_MODE_SLIDER'),
+// 			'SECTION' => GetMessage('CPT_BC_TPL_VIEW_MODE_SECTION')
+// 		),
+// 		'MULTIPLE' => 'N',
+// 		'DEFAULT' => 'SECTION',
+// 		'REFRESH' => 'Y'
+// 	);
 
-	if (isset($arCurrentValues['TOP_VIEW_MODE']) && ('SLIDER' == $arCurrentValues['TOP_VIEW_MODE'] || 'BANNER' == $arCurrentValues['TOP_VIEW_MODE'])) {
-		$arTemplateParameters['TOP_ROTATE_TIMER'] = array(
-			'PARENT' => 'TOP_SETTINGS',
-			'NAME' => GetMessage('CPT_BC_TPL_TOP_ROTATE_TIMER'),
-			'TYPE' => 'STRING',
-			'DEFAULT' => '30'
-		);
-	}
+// 	if (isset($arCurrentValues['TOP_VIEW_MODE']) && ('SLIDER' == $arCurrentValues['TOP_VIEW_MODE'] || 'BANNER' == $arCurrentValues['TOP_VIEW_MODE'])) {
+// 		$arTemplateParameters['TOP_ROTATE_TIMER'] = array(
+// 			'PARENT' => 'TOP_SETTINGS',
+// 			'NAME' => GetMessage('CPT_BC_TPL_TOP_ROTATE_TIMER'),
+// 			'TYPE' => 'STRING',
+// 			'DEFAULT' => '30'
+// 		);
+// 	}
 
-	if (isset($arCurrentValues['TOP_VIEW_MODE']) && $arCurrentValues['TOP_VIEW_MODE'] === 'SECTION') {
-		if (!empty($arCurrentValues['TOP_PROPERTY_CODE'])) {
-			$selected = array();
+// 	if (isset($arCurrentValues['TOP_VIEW_MODE']) && $arCurrentValues['TOP_VIEW_MODE'] === 'SECTION') {
+// 		if (!empty($arCurrentValues['TOP_PROPERTY_CODE'])) {
+// 			$selected = array();
 
-			foreach ($arCurrentValues['TOP_PROPERTY_CODE'] as $code) {
-				if (isset($arAllPropList[$code])) {
-					$selected[$code] = $arAllPropList[$code];
-				}
-			}
+// 			foreach ($arCurrentValues['TOP_PROPERTY_CODE'] as $code) {
+// 				if (isset($arAllPropList[$code])) {
+// 					$selected[$code] = $arAllPropList[$code];
+// 				}
+// 			}
 
-			$arTemplateParameters['TOP_PROPERTY_CODE_MOBILE'] = array(
-				'PARENT' => 'TOP_SETTINGS',
-				'NAME' => GetMessage('CP_BC_TPL_PROPERTY_CODE_MOBILE'),
-				'TYPE' => 'LIST',
-				'MULTIPLE' => 'Y',
-				'VALUES' => $selected
-			);
-		}
+// 			$arTemplateParameters['TOP_PROPERTY_CODE_MOBILE'] = array(
+// 				'PARENT' => 'TOP_SETTINGS',
+// 				'NAME' => GetMessage('CP_BC_TPL_PROPERTY_CODE_MOBILE'),
+// 				'TYPE' => 'LIST',
+// 				'MULTIPLE' => 'Y',
+// 				'VALUES' => $selected
+// 			);
+// 		}
 
-		$arTemplateParameters['TOP_ENLARGE_PRODUCT'] = array(
-			'PARENT' => 'TOP_SETTINGS',
-			'NAME' => GetMessage('CP_BC_TPL_ENLARGE_PRODUCT'),
-			'TYPE' => 'LIST',
-			'MULTIPLE' => 'N',
-			'ADDITIONAL_VALUES' => 'N',
-			'REFRESH' => 'Y',
-			'DEFAULT' => 'N',
-			'VALUES' => array(
-				'STRICT' => GetMessage('CP_BC_TPL_ENLARGE_PRODUCT_STRICT'),
-				'PROP' => GetMessage('CP_BC_TPL_ENLARGE_PRODUCT_PROP')
-			)
-		);
+// 		$arTemplateParameters['TOP_ENLARGE_PRODUCT'] = array(
+// 			'PARENT' => 'TOP_SETTINGS',
+// 			'NAME' => GetMessage('CP_BC_TPL_ENLARGE_PRODUCT'),
+// 			'TYPE' => 'LIST',
+// 			'MULTIPLE' => 'N',
+// 			'ADDITIONAL_VALUES' => 'N',
+// 			'REFRESH' => 'Y',
+// 			'DEFAULT' => 'N',
+// 			'VALUES' => array(
+// 				'STRICT' => GetMessage('CP_BC_TPL_ENLARGE_PRODUCT_STRICT'),
+// 				'PROP' => GetMessage('CP_BC_TPL_ENLARGE_PRODUCT_PROP')
+// 			)
+// 		);
 
-		if (isset($arCurrentValues['TOP_ENLARGE_PRODUCT']) && $arCurrentValues['TOP_ENLARGE_PRODUCT'] === 'PROP') {
-			$arTemplateParameters['TOP_ENLARGE_PROP'] = array(
-				'PARENT' => 'TOP_SETTINGS',
-				'NAME' => GetMessage('CP_BC_TPL_ENLARGE_PROP'),
-				'TYPE' => 'LIST',
-				'MULTIPLE' => 'N',
-				'ADDITIONAL_VALUES' => 'N',
-				'REFRESH' => 'N',
-				'DEFAULT' => '-',
-				'VALUES' => $defaultValue + $arListPropList
-			);
-		}
-		$arTemplateParameters['TOP_SHOW_SLIDER'] = array(
-			'PARENT' => 'TOP_SETTINGS',
-			'NAME' => GetMessage('CP_BC_TPL_SHOW_SLIDER'),
-			'TYPE' => 'CHECKBOX',
-			'MULTIPLE' => 'N',
-			'REFRESH' => 'Y',
-			'DEFAULT' => 'Y'
-		);
+// 		if (isset($arCurrentValues['TOP_ENLARGE_PRODUCT']) && $arCurrentValues['TOP_ENLARGE_PRODUCT'] === 'PROP') {
+// 			$arTemplateParameters['TOP_ENLARGE_PROP'] = array(
+// 				'PARENT' => 'TOP_SETTINGS',
+// 				'NAME' => GetMessage('CP_BC_TPL_ENLARGE_PROP'),
+// 				'TYPE' => 'LIST',
+// 				'MULTIPLE' => 'N',
+// 				'ADDITIONAL_VALUES' => 'N',
+// 				'REFRESH' => 'N',
+// 				'DEFAULT' => '-',
+// 				'VALUES' => $defaultValue + $arListPropList
+// 			);
+// 		}
+// 		$arTemplateParameters['TOP_SHOW_SLIDER'] = array(
+// 			'PARENT' => 'TOP_SETTINGS',
+// 			'NAME' => GetMessage('CP_BC_TPL_SHOW_SLIDER'),
+// 			'TYPE' => 'CHECKBOX',
+// 			'MULTIPLE' => 'N',
+// 			'REFRESH' => 'Y',
+// 			'DEFAULT' => 'Y'
+// 		);
 
-		// if (!isset($arCurrentValues['TOP_SHOW_SLIDER']) || $arCurrentValues['TOP_SHOW_SLIDER'] === 'Y') {
-		// 	$arTemplateParameters['TOP_SLIDER_INTERVAL'] = array(
-		// 		'PARENT' => 'TOP_SETTINGS',
-		// 		'NAME' => GetMessage('CP_BC_TPL_SLIDER_INTERVAL'),
-		// 		'TYPE' => 'TEXT',
-		// 		'MULTIPLE' => 'N',
-		// 		'REFRESH' => 'N',
-		// 		'DEFAULT' => '3000'
-		// 	);
-		// 	$arTemplateParameters['TOP_SLIDER_PROGRESS'] = array(
-		// 		'PARENT' => 'TOP_SETTINGS',
-		// 		'NAME' => GetMessage('CP_BC_TPL_SLIDER_PROGRESS'),
-		// 		'TYPE' => 'CHECKBOX',
-		// 		'MULTIPLE' => 'N',
-		// 		'REFRESH' => 'N',
-		// 		'DEFAULT' => 'N'
-		// 	);
-		// }
-	}
-}
+// 		// if (!isset($arCurrentValues['TOP_SHOW_SLIDER']) || $arCurrentValues['TOP_SHOW_SLIDER'] === 'Y') {
+// 		// 	$arTemplateParameters['TOP_SLIDER_INTERVAL'] = array(
+// 		// 		'PARENT' => 'TOP_SETTINGS',
+// 		// 		'NAME' => GetMessage('CP_BC_TPL_SLIDER_INTERVAL'),
+// 		// 		'TYPE' => 'TEXT',
+// 		// 		'MULTIPLE' => 'N',
+// 		// 		'REFRESH' => 'N',
+// 		// 		'DEFAULT' => '3000'
+// 		// 	);
+// 		// 	$arTemplateParameters['TOP_SLIDER_PROGRESS'] = array(
+// 		// 		'PARENT' => 'TOP_SETTINGS',
+// 		// 		'NAME' => GetMessage('CP_BC_TPL_SLIDER_PROGRESS'),
+// 		// 		'TYPE' => 'CHECKBOX',
+// 		// 		'MULTIPLE' => 'N',
+// 		// 		'REFRESH' => 'N',
+// 		// 		'DEFAULT' => 'N'
+// 		// 	);
+// 		// }
+// 	}
+// }
 
 if (isset($arCurrentValues['USE_COMPARE']) && $arCurrentValues['USE_COMPARE'] == 'Y') {
 	$arTemplateParameters['COMPARE_POSITION_FIXED'] = array(
@@ -981,7 +981,7 @@ if (isset($arCurrentValues['USE_COMPARE']) && $arCurrentValues['USE_COMPARE'] ==
 		'REFRESH' => 'Y'
 	);
 	if (!isset($arCurrentValues['COMPARE_POSITION_FIXED']) || $arCurrentValues['COMPARE_POSITION_FIXED'] == 'Y') {
-		$arTemplateParameters['SHOW_COMPARE_LIST'] = array(
+		$arTemplateParameters['SHOW_COMPARED_LIST'] = array(
 			'PARENT' => 'COMPARE_SETTINGS',
 			'NAME' => "Показывать в виджете список сравниваемых товаров",
 			'TYPE' => 'CHECKBOX',
