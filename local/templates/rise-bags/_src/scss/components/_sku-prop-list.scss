@@ -20,6 +20,19 @@
 		flex-wrap: wrap;
 		gap: 4px;
 
+		&-item.selected {
+			button {
+				border-color: var(--primary);
+
+				&:has(span) {
+					background-color: var(--primary);
+					span {
+						color: var(--white);
+					}
+				}
+			}
+		}
+
 		button {
 			display: flex;
 			align-items: center;

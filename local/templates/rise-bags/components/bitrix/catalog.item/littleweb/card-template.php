@@ -236,7 +236,7 @@ use Bitrix\Main\Localization\Loc;
 										</button>
 									</li>
 								<? else: ?>
-									<li title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
+									<li class="sku-prop-list-item" title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
 										<button type="button" class="sku-prop-list-item-value">
 											<span><?= $value['NAME'] ?></span>
 										</button>

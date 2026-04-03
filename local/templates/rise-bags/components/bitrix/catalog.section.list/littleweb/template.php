@@ -37,12 +37,11 @@ if ($arResult["SECTIONS"]): ?>
 
 					<a href="<?= $arSection["SECTION_PAGE_URL"]; ?>">
 						<?= $arSection["NAME"]; ?>
-						<? if ($arParams["COUNT_ELEMENTS"] && $arSection['ELEMENT_CNT'] !== null): ?>
+						<? if ($arParams["COUNT_ELEMENTS"] && $arSection['ELEMENT_CNT'] > 0): ?>
 							<span>(<?= $arSection["ELEMENT_CNT"]; ?>)</span>
 						<? endif; ?>
 					</a>
 				<?
-
 				$intCurrentDepth = $arSection['RELATIVE_DEPTH_LEVEL'];
 				$boolFirst = false;
 			endforeach;

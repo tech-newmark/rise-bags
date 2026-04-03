@@ -456,9 +456,6 @@
 				if (this.visual.DSC_PERC) {
 					this.obDscPerc = BX(this.visual.DSC_PERC);
 				}
-				// if (this.secondPict && this.visual.SECOND_DSC_PERC) {
-				// 	this.obSecondDscPerc = BX(this.visual.SECOND_DSC_PERC);
-				// }
 			}
 
 			if (this.showSkuProps) {
@@ -1102,13 +1099,7 @@
 				target = BX.proxy_context;
 
 			if (target && target.hasAttribute("data-treevalue")) {
-				if (
-					BX.hasClass(
-						BX.findChild(target, { tagName: "button" }, false),
-						"selected",
-					)
-				)
-					return;
+				if (BX.hasClass(target, "selected")) return;
 
 				strTreeValue = target.getAttribute("data-treevalue");
 				arTreeItem = strTreeValue.split("_");
@@ -1122,30 +1113,12 @@
 						for (i = 0; i < rowItems.length; i++) {
 							value = rowItems[i].getAttribute("data-onevalue");
 							if (value === arTreeItem[1]) {
-								BX.addClass(
-									BX.findChild(rowItems[i], { tagName: "button" }, false),
-									"selected",
-								);
+								BX.addClass(rowItems[i], "selected");
 							} else {
-								BX.removeClass(
-									BX.findChild(rowItems[i], { tagName: "button" }, false),
-									"selected",
-								);
+								BX.removeClass(rowItems[i], "selected");
 							}
 						}
 					}
-
-					// if (
-					// 	this.isFacebookConversionCustomizeProductEventEnabled &&
-					// 	BX.Type.isArrayFilled(this.offers) &&
-					// 	BX.Type.isObject(this.offers[this.offerNum])
-					// ) {
-					// 	BX.ajax.runAction("sale.facebookconversion.customizeProduct", {
-					// 		data: {
-					// 			offerId: this.offers[this.offerNum]["ID"],
-					// 		},
-					// 	});
-					// }
 				}
 			}
 		},
@@ -1239,20 +1212,10 @@
 					for (i = 0; i < rowItems.length; i++) {
 						value = rowItems[i].getAttribute("data-onevalue");
 						isCurrent = value === activeID;
-
 						if (isCurrent) {
-							// BX.addClass(rowItems[i], "selected");
-							BX.addClass(
-								BX.findChild(rowItems[i], { tagName: "button" }, false),
-								"selected",
-							);
-							// BX.addClass(item, "__selected");
+							BX.addClass(rowItems[i], "selected");
 						} else {
-							// BX.removeClass(rowItems[i], "selected");
-							BX.removeClass(
-								BX.findChild(rowItems[i], { tagName: "button" }, false),
-								"selected",
-							);
+							BX.removeClass(rowItems[i], "selected");
 						}
 
 						if (BX.util.in_array(value, canBuyID)) {
@@ -1395,13 +1358,7 @@
 				}
 			}
 			if (index > -1) {
-				console.log("OFFER", this.offers[index].ID);
-				console.log("THIS", this);
-
 				const btns = this.obProduct.querySelectorAll("[data-1clickbuy-id]");
-
-				console.log("btns", btns);
-
 				btns.forEach((btn) => {
 					btn.setAttribute("data-1clickbuy-id", this.offers[index].ID);
 				});
