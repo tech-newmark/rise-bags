@@ -11,8 +11,11 @@
   <? $APPLICATION->ShowHead(); ?>
   <title><? $APPLICATION->ShowTitle() ?></title>
 
-  <?/* includeGlobalAssets();
-  initBitrixCore('popup'); */ ?>
+  <?
+  includeGlobalAssets();
+  initBitrixCore('popup');
+  ?>
+
 </head>
 
 <body>
@@ -212,4 +215,19 @@
   */ ?>
 
   <a href="/personal/order/make/">order</a>
-  <main class="workarea">
+  <main id="workarea" class="workarea">
+    <?
+    if ($curPage != '/' && !defined("ERROR_404")) {
+      $APPLICATION->IncludeComponent(
+        "bitrix:breadcrumb",
+        "",
+        array(
+          "PATH" => "",
+          "SITE_ID" => "s1",
+          "START_FROM" => "0",
+          "COMPONENT_TEMPLATE" => "lw-breadcrumb"
+        ),
+        false
+      );
+    }
+    ?>

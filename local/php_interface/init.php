@@ -16,14 +16,12 @@ require_once $includesPath . 'assets_init.php';
 require_once $includesPath . 'core_init.php';
 require_once $includesPath . 'debug.php';
 
-// Подключаю глобальные стили и скрипты(Если делаю так, ломаются битриксовые механизмы. Почему ??)
-EventManager::getInstance()->addEventHandler(
-  'main',
-  'OnPageStart',
-  function () {
-    if (!defined('ADMIN_SECTION') || !ADMIN_SECTION) {
-      includeGlobalAssets();
-      initBitrixCore('popup');
-    }
-  }
-);
+// Подключаю глобальные стили и скрипты(Если делаю так, ломаются битриксовые стили. Почему ??)
+// EventManager::getInstance()->addEventHandler(
+//   'main',
+//   'OnPageStart',
+//   function () {
+//     includeGlobalAssets();
+//     initBitrixCore('popup');
+//   }
+// );
