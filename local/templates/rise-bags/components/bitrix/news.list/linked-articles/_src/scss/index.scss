@@ -25,13 +25,9 @@
     max-width: 300px;
   }
 
-  @include container-up(linked-articles, 768px) {
+  @include container-up(linked-articles, 700px) {
     .linked-articles__header {
       grid-template-columns: 1fr auto;
-    }
-
-    .linked-articles__list {
-      grid-template-columns: repeat(auto-fit, minmax(390px, auto));
     }
 
     .main-btn {
@@ -40,6 +36,22 @@
 
       align-self: start;
       justify-self: end;
+    }
+
+    .linked-articles__list {
+      grid-template-columns: repeat(2, auto);
+    }
+  }
+
+  @include container-up(linked-articles, 1000px) {
+    .linked-articles__list {
+      grid-template-columns: repeat(3, auto);
+    }
+  }
+
+  @include container-up(linked-articles, 1300px) {
+    .linked-articles__list {
+      grid-template-columns: repeat(4, auto);
     }
   }
 }

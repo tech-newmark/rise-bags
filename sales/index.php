@@ -51,8 +51,14 @@ $APPLICATION->SetTitle("Новости");
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
 		"LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"LIST_FIELD_CODE" => [
-			0 => "DATE_ACTIVE_TO",
-			1 => "",
+			0 => "NAME",
+			1 => "PREVIEW_TEXT",
+			2 => "PREVIEW_PICTURE",
+			3 => "DETAIL_TEXT",
+			4 => "DETAIL_PICTURE",
+			5 => "DATE_ACTIVE_FROM",
+			6 => "DATE_ACTIVE_TO",
+			7 => "",
 		],
 		"LIST_PROPERTY_CODE" => [
 			0 => "",

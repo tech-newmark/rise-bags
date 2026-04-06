@@ -2,8 +2,6 @@
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 $this->setFrameMode(true);
 ?>
-
-
 <div class="section article-page">
 	<div class="container">
 		<div class="article-detail-container">
@@ -63,9 +61,9 @@ $this->setFrameMode(true);
 					"DISPLAY_PREVIEW_TEXT" => "Y",
 					"DISPLAY_TOP_PAGER" => "N",
 					"FIELD_CODE" => array("", ""),
-					"FILTER_NAME" => "",
+					"FILTER_NAME" => "arLinkedFilter",
 					"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-					"IBLOCK_ID" => "10",
+					"IBLOCK_ID" => $arResult['IBLOCK_ID'],
 					"IBLOCK_TYPE" => "site_content",
 					"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
 					"INCLUDE_SUBSECTIONS" => "Y",

@@ -11,8 +11,8 @@
   <? $APPLICATION->ShowHead(); ?>
   <title><? $APPLICATION->ShowTitle() ?></title>
 
-  <?/* includeGlobalAssets();
-  initBitrixCore('popup'); */ ?>
+  <? includeGlobalAssets();
+  initBitrixCore('popup'); ?>
 </head>
 
 <body>

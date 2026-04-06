@@ -63,21 +63,50 @@ class ViteManifest
   /**
    * Получить путь к CSS файлу компонента
    */
+  // public function getComponentCss($componentPath)
+  // {
+
+  //   if (!$this->isManifestExists) {
+  //     $folderPath = str_replace('.', '/', $componentPath);
+
+  //     return $this->templatePath . '/components/bitrix/' . $folderPath . '/style.css';
+  //   }
+
+  //   $sourceKey = 'local/templates/rise-bags/components/bitrix/' . $componentPath . '/_src/scss/index.scss';
+  //   debug($componentPath);
+
+  //   debug($sourceKey);
+  //   if (isset($this->manifest[$sourceKey])) {
+  //     return $this->templatePath . '/' . $this->buildDir . '/' . $this->manifest[$sourceKey]['file'];
+  //   }
+
+  //   $folderPath = str_replace('.', '/', $componentPath);
+  //   return $this->templatePath . '/components/bitrix/' . $folderPath . '/style.css';
+  // }
+
   public function getComponentCss($componentPath)
   {
-    if (!$this->isManifestExists) {
-      $folderPath = str_replace('.', '/', $componentPath);
-      return $this->templatePath . '/components/bitrix/' . $folderPath . '/style.css';
+    $namespace = 'bitrix';
+
+    // Если есть двоеточие, разделяем неймспейс и путь (например, custom:cards/article-card)
+    if (strpos($componentPath, ':') !== false) {
+      $parts = explode(':', $componentPath, 2);
+      if (!empty($parts[0])) {
+        $namespace = $parts[0];
+        $componentPath = $parts[1];
+      }
     }
 
-    $sourceKey = 'local/templates/rise-bags/components/bitrix/' . $componentPath . '/_src/scss/index.scss';
+    if (!$this->isManifestExists) {
+      return $this->templatePath . '/components/' . $namespace . '/' . $componentPath . '/style.css';
+    }
 
+    $sourceKey = 'local/templates/rise-bags/components/' . $namespace . '/' . $componentPath . '/_src/scss/index.scss';
     if (isset($this->manifest[$sourceKey])) {
       return $this->templatePath . '/' . $this->buildDir . '/' . $this->manifest[$sourceKey]['file'];
     }
 
-    $folderPath = str_replace('.', '/', $componentPath);
-    return $this->templatePath . '/components/bitrix/' . $folderPath . '/style.css';
+    return $this->templatePath . '/components/' . $namespace . '/' . $cleanPath . '/style.css';
   }
 
   /**
