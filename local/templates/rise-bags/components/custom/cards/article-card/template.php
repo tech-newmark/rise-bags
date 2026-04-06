@@ -19,7 +19,7 @@ $arResult = $arParams["TEMPLATE_DATA"] ?? [];
                 <? if (($arResult['PREVIEW_TEXT']) || $arResult['DETAIL_TEXT']): ?>
                     <p><?= ($arResult['PREVIEW_TEXT']) ? $arResult['PREVIEW_TEXT'] : $arResult['DETAIL_TEXT'] ?></p>
                 <? endif; ?>
-                <a href="<?= $arResult['DETAIL_PAGE_URL'] ?>">Подробнее
+                <a class="clear-btn" href="<?= $arResult['DETAIL_PAGE_URL'] ?>">Подробнее
                     <svg width="9" height="16" viewBox="0 0 9 16" role="img" aria-hidden="true" focusable="false">
                         <use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#arrow-sm"></use>
                     </svg>

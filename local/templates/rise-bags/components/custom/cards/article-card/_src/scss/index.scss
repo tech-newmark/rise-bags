@@ -56,21 +56,5 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-
-    a {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 18px;
-      line-height: 1;
-      font-weight: 500;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-top: auto;
-
-      svg {
-        fill: var(--primary);
-      }
-    }
   }
 }
