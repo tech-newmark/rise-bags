@@ -34,7 +34,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/_src/scss/template.scss": {
-    "file": "template_styles.BquJBJ2O.css",
+    "file": "template_styles.Giba--QH.css",
     "src": "local/templates/rise-bags/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
@@ -208,7 +208,7 @@
     ]
   },
   "local/templates/rise-bags/components/custom/cards/article-card/_src/scss/index.scss": {
-    "file": "components/custom/cards/article-card/style.FOe9uJrd.css",
+    "file": "components/custom/cards/article-card/style.CmvlEKMa.css",
     "src": "local/templates/rise-bags/components/custom/cards/article-card/_src/scss/index.scss",
     "isEntry": true,
     "name": "custom_cards_article-card_scss",
@@ -217,7 +217,7 @@
     ]
   },
   "local/templates/rise-bags/components/custom/cards/review-card/_src/scss/index.scss": {
-    "file": "components/custom/cards/review-card/style.NSPfJbOG.css",
+    "file": "components/custom/cards/review-card/style.BB7INDOF.css",
     "src": "local/templates/rise-bags/components/custom/cards/review-card/_src/scss/index.scss",
     "isEntry": true,
     "name": "custom_cards_review-card_scss",

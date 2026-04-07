@@ -36,4 +36,17 @@ $this->setFrameMode(true);
 			</div>
 		</div>
 	</section>
+
+	<div class="modal-overlay">
+		<div class="modal main-modal review-modal" id="review-modal">
+			<div class="modal-wrapper">
+				<button class="modal-closer" type="button" aria-label="Закрыть">
+					<svg width="14" height="14">
+						<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/assets/sprite.svg#icon-close"></use>
+					</svg>
+				</button>
+				<div class="modal-content"><span class="modal-text"></span></div>
+			</div>
+		</div>
+	</div>
 <? endif; ?>
