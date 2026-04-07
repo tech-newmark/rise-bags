@@ -17,7 +17,7 @@ $arResult = $arParams["TEMPLATE_DATA"] ?? [];
                 </div>
             <? endif; ?>
             <? if ($arResult["PREVIEW_TEXT"]): ?>
-                <div><?= $arResult["~PREVIEW_TEXT"] ?></div>
+                <div class="review-card__text"><?= $arResult["~PREVIEW_TEXT"] ?></div>
             <? endif; ?>
             <button class="clear-btn" type="button">Читать полностью
                 <svg width="9" height="16" viewBox="0 0 9 16" role="img" aria-hidden="true" focusable="false">

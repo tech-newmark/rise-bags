@@ -15,6 +15,7 @@
   border-radius: var(--base-br);
 
   &__rating {
+    margin-bottom: auto;
     svg {
       fill: var(--gray-500);
     }
@@ -24,7 +25,15 @@
     }
   }
 
+  &__text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
   .clear-btn {
+    display: none;
     margin-top: auto;
   }
 
