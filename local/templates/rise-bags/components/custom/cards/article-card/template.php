@@ -10,10 +10,10 @@ $arResult = $arParams["TEMPLATE_DATA"] ?? [];
             <img src="<?= ($arResult['PREVIEW_PICTURE']['SRC']) ? $arResult['PREVIEW_PICTURE']['SRC'] : $arResult['DETAIL_PICTURE']['SRC'] ?>" alt="<?= $arResult['NAME'] ?>" width="480" height="240">
             <div class="article-card__body">
                 <? if ($arParams['SHOW_DATE_ACTIVE_FROM'] == "Y" && $arResult['DISPLAY_ACTIVE_FROM']): ?>
-                    <span><?= $arResult['DISPLAY_ACTIVE_FROM'] ?></span>
+                    <time><?= $arResult['DISPLAY_ACTIVE_FROM'] ?></time>
                 <? endif; ?>
                 <? if ($arParams['SHOW_DATE_ACTIVE_TO'] == "Y" && $arResult['DATE_ACTIVE_TO']): ?>
-                    <span>Действует до <?= FormatDate("j F Y", MakeTimeStamp($arResult['DATE_ACTIVE_TO'], "DD.MM.YYYY")) ?></span>
+                    <time>Действует до <?= FormatDate("j F Y", MakeTimeStamp($arResult['DATE_ACTIVE_TO'], "DD.MM.YYYY")) ?></time>
                 <? endif; ?>
                 <h2><?= $arResult['NAME'] ?></h2>
                 <? if (($arResult['PREVIEW_TEXT']) || $arResult['DETAIL_TEXT']): ?>
