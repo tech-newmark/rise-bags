@@ -58,16 +58,16 @@
 				}
 			}
 
-			&.selected {
-				border-color: var(--primary);
+			// &.selected {
+			// 	border-color: var(--primary);
 
-				&:has(span) {
-					background-color: var(--primary);
-					span {
-						color: var(--white);
-					}
-				}
-			}
+			// 	&:has(span) {
+			// 		background-color: var(--primary);
+			// 		span {
+			// 			color: var(--white);
+			// 		}
+			// 	}
+			// }
 
 			&.disabled {
 				pointer-events: none;

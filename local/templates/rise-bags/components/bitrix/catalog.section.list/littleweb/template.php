@@ -4,6 +4,7 @@ $this->setFrameMode(true);
 
 if ($arResult["SECTIONS"]): ?>
 	<div class="catalog-section-list">
+
 		<ul>
 			<? $intCurrentDepth = 1;
 			$boolFirst = true;

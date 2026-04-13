@@ -55,7 +55,7 @@ $arTemplateParameters["INSTANT_RELOAD"] = array(
 
 $arTemplateParameters["FILTER_EXPANDED"] = array(
 	"PARENT" => "FILTER_SETTINGS",
-	"NAME" => "Показывать фильтр всегда развернутым",
+	"NAME" => "Показывать фильтр по умолчанию развернутым",
 	"TYPE" => "CHECKBOX",
 	"DEFAULT" => "N",
 	"HIDDEN" => (!isset($arCurrentValues['USE_FILTER']) || 'N' == $arCurrentValues['USE_FILTER'] ? 'Y' : 'N')
