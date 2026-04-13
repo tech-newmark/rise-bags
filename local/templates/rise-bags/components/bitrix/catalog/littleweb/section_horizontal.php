@@ -120,11 +120,6 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 				<? endif; ?>
 			</div>
 			<div class="grid-item grid-item--main">
-				<div class="catalog-action-row">
-
-
-				</div>
-
 				<?
 				$intSectionID = $APPLICATION->IncludeComponent(
 					"bitrix:catalog.section",
@@ -255,7 +250,6 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 					),
 					$component
 				);
-
 				?>
 			</div>
 		</div>

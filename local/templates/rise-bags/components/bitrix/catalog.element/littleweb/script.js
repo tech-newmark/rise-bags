@@ -451,71 +451,10 @@
 			this.obTabContainers = BX(this.visual.TAB_CONTAINERS_ID);
 			this.obTabsPanel = BX(this.visual.TABS_PANEL_ID);
 
-			this.smallCardNodes.panel = BX(this.visual.SMALL_CARD_PANEL_ID);
-			if (this.smallCardNodes.panel) {
-				this.smallCardNodes.picture = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-picture",
-				);
-				this.smallCardNodes.title = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-title",
-				);
-				this.smallCardNodes.price = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-price",
-				);
-				this.smallCardNodes.sku = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-sku-container",
-				);
-				this.smallCardNodes.oldPrice = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-old-price",
-				);
-				this.smallCardNodes.buyButton = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-buy-button",
-				);
-				this.smallCardNodes.addButton = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-add-button",
-				);
-				this.smallCardNodes.notAvailableButton = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-not-available-button",
-				);
-				this.smallCardNodes.aligner = this.getEntity(
-					this.obProduct,
-					"main-button-container",
-				);
-			}
-
 			this.initPopup();
 			this.initTabs();
 
-			if (this.smallCardNodes.panel) {
-				this.smallCardNodes.picture &&
-					BX.bind(
-						this.smallCardNodes.picture.parentNode,
-						"click",
-						BX.proxy(this.scrollToProduct, this),
-					);
-				this.smallCardNodes.title &&
-					BX.bind(
-						this.smallCardNodes.title,
-						"click",
-						BX.proxy(this.scrollToProduct, this),
-					);
-				this.smallCardNodes.sku &&
-					BX.bind(
-						this.smallCardNodes.sku,
-						"click",
-						BX.proxy(this.scrollToProduct, this),
-					);
-			}
-
-			if (this.obTabsPanel || this.smallCardNodes.panel) {
+			if (this.obTabsPanel) {
 				this.checkTopPanels();
 				BX.bind(window, "scroll", BX.proxy(this.checkTopPanels, this));
 			}
@@ -1183,40 +1122,36 @@
 		},
 
 		initTabs: function () {
-			var tabs = this.getEntities(this.obTabs, "tab"),
-				panelTabs = this.getEntities(this.obTabsPanel, "tab");
-
-			var tabValue,
-				targetTab,
-				haveActive = false;
-
-			if (tabs.length !== panelTabs.length) return;
-
-			for (var i in tabs) {
-				if (tabs.hasOwnProperty(i) && BX.type.isDomNode(tabs[i])) {
-					tabValue = tabs[i].getAttribute("data-value");
-					if (tabValue) {
-						targetTab = this.obTabContainers.querySelector(
-							'[data-value="' + tabValue + '"]',
-						);
-						if (BX.type.isDomNode(targetTab)) {
-							BX.bind(tabs[i], "click", BX.proxy(this.changeTab, this));
-							BX.bind(panelTabs[i], "click", BX.proxy(this.changeTab, this));
-
-							if (!haveActive) {
-								BX.addClass(tabs[i], "active");
-								BX.addClass(panelTabs[i], "active");
-								BX.show(targetTab);
-								haveActive = true;
-							} else {
-								BX.removeClass(tabs[i], "active");
-								BX.removeClass(panelTabs[i], "active");
-								BX.hide(targetTab);
-							}
-						}
-					}
-				}
-			}
+			// var tabs = this.getEntities(this.obTabs, "tab"),
+			// 	panelTabs = this.getEntities(this.obTabsPanel, "tab");
+			// var tabValue,
+			// 	targetTab,
+			// 	haveActive = false;
+			// if (tabs.length !== panelTabs.length) return;
+			// for (var i in tabs) {
+			// 	if (tabs.hasOwnProperty(i) && BX.type.isDomNode(tabs[i])) {
+			// 		tabValue = tabs[i].getAttribute("data-value");
+			// 		if (tabValue) {
+			// 			targetTab = this.obTabContainers.querySelector(
+			// 				'[data-value="' + tabValue + '"]',
+			// 			);
+			// 			if (BX.type.isDomNode(targetTab)) {
+			// 				BX.bind(tabs[i], "click", BX.proxy(this.changeTab, this));
+			// 				BX.bind(panelTabs[i], "click", BX.proxy(this.changeTab, this));
+			// 				if (!haveActive) {
+			// 					BX.addClass(tabs[i], "active");
+			// 					BX.addClass(panelTabs[i], "active");
+			// 					BX.show(targetTab);
+			// 					haveActive = true;
+			// 				} else {
+			// 					BX.removeClass(tabs[i], "active");
+			// 					BX.removeClass(panelTabs[i], "active");
+			// 					BX.hide(targetTab);
+			// 				}
+			// 			}
+			// 		}
+			// 	}
+			// }
 		},
 
 		checkTouch: function (event) {
@@ -1365,16 +1300,6 @@
 		checkTopPanels: function () {
 			var scrollTop = BX.GetWindowScrollPos().scrollTop,
 				targetPos;
-
-			if (this.smallCardNodes.panel) {
-				targetPos = BX.pos(this.smallCardNodes.aligner).bottom - 50;
-
-				if (scrollTop > targetPos) {
-					BX.addClass(this.smallCardNodes.panel, "active");
-				} else if (BX.hasClass(this.smallCardNodes.panel, "active")) {
-					BX.removeClass(this.smallCardNodes.panel, "active");
-				}
-			}
 
 			if (this.obTabsPanel) {
 				targetPos = BX.pos(this.obTabs).top;
@@ -2198,24 +2123,6 @@
 
 				BX.addClass(target, "selected");
 
-				if (this.smallCardNodes.panel) {
-					smallCardItem = this.smallCardNodes.panel.querySelector(
-						'[data-treevalue="' + strTreeValue + '"]',
-					);
-					if (smallCardItem) {
-						rowItems = this.smallCardNodes.panel.querySelectorAll(
-							'[data-sku-line="' +
-								smallCardItem.getAttribute("data-sku-line") +
-								'"]',
-						);
-						for (i = 0; i < rowItems.length; i++) {
-							rowItems[i].style.display = "none";
-						}
-
-						smallCardItem.style.display = "";
-					}
-				}
-
 				if (
 					this.isFacebookConversionCustomizeProductEventEnabled &&
 					BX.Type.isArrayFilled(this.offers) &&
@@ -2336,33 +2243,6 @@
 					if (isCurrent) {
 						lineContainer[intNumber].style.display =
 							value == 0 && canBuyId.length == 1 ? "none" : "";
-					}
-				}
-
-				if (this.smallCardNodes.panel) {
-					rowItems = this.smallCardNodes.panel.querySelectorAll(
-						'[data-sku-line="' + intNumber + '"]',
-					);
-					for (i = 0; i < rowItems.length; i++) {
-						value = rowItems[i].getAttribute("data-onevalue");
-						isCurrent = value === activeId;
-
-						if (isCurrent) {
-							rowItems[i].style.display = "";
-						} else {
-							rowItems[i].style.display = "none";
-						}
-
-						if (BX.util.in_array(value, canBuyId)) {
-							BX.removeClass(rowItems[i], "notallowed");
-						} else {
-							BX.addClass(rowItems[i], "notallowed");
-						}
-
-						if (isCurrent) {
-							rowItems[i].style.display =
-								value == 0 && canBuyId.length == 1 ? "none" : "";
-						}
 					}
 				}
 			}

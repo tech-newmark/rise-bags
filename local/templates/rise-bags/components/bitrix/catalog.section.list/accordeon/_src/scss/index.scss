@@ -12,6 +12,7 @@
 	.accordeon {
 		// border: none;
 		border: 1px solid var(--gray-500);
+		border-radius: 16px;
 
 		&-body-content {
 			display: flex;

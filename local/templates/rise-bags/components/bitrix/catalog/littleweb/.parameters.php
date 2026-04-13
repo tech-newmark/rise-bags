@@ -449,27 +449,6 @@ if (isset($arCurrentValues['DETAIL_USE_COMMENTS']) && 'Y' == $arCurrentValues['D
 	}
 }
 
-if (ModuleManager::isModuleInstalled("highloadblock")) {
-	$arTemplateParameters['DETAIL_BRAND_USE'] = array(
-		'PARENT' => 'DETAIL_SETTINGS',
-		'NAME' => GetMessage('CP_BC_TPL_DETAIL_BRAND_USE'),
-		'TYPE' => 'CHECKBOX',
-		'DEFAULT' => 'N',
-		'REFRESH' => 'Y'
-	);
-
-	if (isset($arCurrentValues['DETAIL_BRAND_USE']) && 'Y' == $arCurrentValues['DETAIL_BRAND_USE']) {
-		$arTemplateParameters['DETAIL_BRAND_PROP_CODE'] = array(
-			'PARENT' => 'DETAIL_SETTINGS',
-			"NAME" => GetMessage("CP_BC_TPL_DETAIL_PROP_CODE"),
-			"TYPE" => "LIST",
-			"VALUES" => $arHighloadPropList,
-			"MULTIPLE" => "Y",
-			"ADDITIONAL_VALUES" => "Y"
-		);
-	}
-}
-
 $arTemplateParameters['DETAIL_DISPLAY_NAME'] = array(
 	'PARENT' => 'DETAIL_SETTINGS',
 	'NAME' => GetMessage('CP_BC_TPL_DETAIL_DISPLAY_NAME'),
@@ -486,34 +465,34 @@ $arTemplateParameters['DETAIL_IMAGE_RESOLUTION'] = array(
 	),
 	'DEFAULT' => '16by9'
 );
-$arTemplateParameters['DETAIL_PRODUCT_INFO_BLOCK_ORDER'] = array(
-	'PARENT' => 'DETAIL_SETTINGS',
-	'NAME' => GetMessage('CP_BC_TPL_PRODUCT_INFO_BLOCK_ORDER'),
-	'TYPE' => 'CUSTOM',
-	'JS_FILE' => CatalogElementComponent::getSettingsScript('/bitrix/components/bitrix/catalog.element', 'dragdrop_order'),
-	'JS_EVENT' => 'initDraggableOrderControl',
-	'JS_DATA' => Json::encode(array(
-		'sku' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_SKU'),
-		'props' => GetMessage('CP_BC_TPL_PRODUCT_BLOCK_PROPS')
-	)),
-	'DEFAULT' => 'sku,props'
-);
-$arTemplateParameters['DETAIL_PRODUCT_PAY_BLOCK_ORDER'] = array(
-	'PARENT' => 'DETAIL_SETTINGS',
-	'NAME' => GetMessage('CP_BC_TPL_PRODUCT_PAY_BLOCK_ORDER'),
-	'TYPE' => 'CUSTOM',
-	'JS_FILE' => CatalogElementComponent::getSettingsScript('/bitrix/components/bitrix/catalog.element', 'dragdrop_order'),
-	'JS_EVENT' => 'initDraggableOrderControl',
-	'JS_DATA' => Json::encode(array(
-		'rating' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_RATING'),
-		'price' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_PRICE'),
-		'priceRanges' => GetMessage('CP_BC_TPL_PRODUCT_BLOCK_PRICE_RANGES'),
-		'quantityLimit' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_QUANTITY_LIMIT'),
-		'quantity' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_QUANTITY'),
-		'buttons' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_BUTTONS')
-	)),
-	'DEFAULT' => 'rating,price,priceRanges,quantityLimit,quantity,buttons'
-);
+// $arTemplateParameters['DETAIL_PRODUCT_INFO_BLOCK_ORDER'] = array(
+// 	'PARENT' => 'DETAIL_SETTINGS',
+// 	'NAME' => GetMessage('CP_BC_TPL_PRODUCT_INFO_BLOCK_ORDER'),
+// 	'TYPE' => 'CUSTOM',
+// 	'JS_FILE' => CatalogElementComponent::getSettingsScript('/bitrix/components/bitrix/catalog.element', 'dragdrop_order'),
+// 	'JS_EVENT' => 'initDraggableOrderControl',
+// 	'JS_DATA' => Json::encode(array(
+// 		'sku' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_SKU'),
+// 		'props' => GetMessage('CP_BC_TPL_PRODUCT_BLOCK_PROPS')
+// 	)),
+// 	'DEFAULT' => 'sku,props'
+// );
+// $arTemplateParameters['DETAIL_PRODUCT_PAY_BLOCK_ORDER'] = array(
+// 	'PARENT' => 'DETAIL_SETTINGS',
+// 	'NAME' => GetMessage('CP_BC_TPL_PRODUCT_PAY_BLOCK_ORDER'),
+// 	'TYPE' => 'CUSTOM',
+// 	'JS_FILE' => CatalogElementComponent::getSettingsScript('/bitrix/components/bitrix/catalog.element', 'dragdrop_order'),
+// 	'JS_EVENT' => 'initDraggableOrderControl',
+// 	'JS_DATA' => Json::encode(array(
+// 		'rating' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_RATING'),
+// 		'price' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_PRICE'),
+// 		'priceRanges' => GetMessage('CP_BC_TPL_PRODUCT_BLOCK_PRICE_RANGES'),
+// 		'quantityLimit' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_QUANTITY_LIMIT'),
+// 		'quantity' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_QUANTITY'),
+// 		'buttons' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_BUTTONS')
+// 	)),
+// 	'DEFAULT' => 'rating,price,priceRanges,quantityLimit,quantity,buttons'
+// );
 $arTemplateParameters['DETAIL_SHOW_SLIDER'] = array(
 	'PARENT' => 'DETAIL_SETTINGS',
 	'NAME' => GetMessage('CP_BC_TPL_DETAIL_SHOW_SLIDER'),

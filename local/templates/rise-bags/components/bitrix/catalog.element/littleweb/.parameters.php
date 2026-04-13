@@ -25,15 +25,13 @@ $defaultValue = array('-' => GetMessage('CP_BCE_TPL_PROP_EMPTY'));
 $arSKU = false;
 $boolSKU = false;
 
-if ($boolCatalog && $iblockExists)
-{
+if ($boolCatalog && $iblockExists) {
 	$arSKU = CCatalogSku::GetInfoByProductIBlock($arCurrentValues['IBLOCK_ID']);
 	$boolSKU = !empty($arSKU) && is_array($arSKU);
 }
 
 $arThemes = array();
-if (ModuleManager::isModuleInstalled('bitrix.eshop'))
-{
+if (ModuleManager::isModuleInstalled('bitrix.eshop')) {
 	$arThemes['site'] = GetMessage('CP_BCE_TPL_THEME_SITE');
 }
 
@@ -45,12 +43,10 @@ $arThemesList = array(
 	'yellow' => GetMessage('CP_BCE_TPL_THEME_YELLOW'),
 	'black' => GetMessage('CP_BCE_TPL_THEME_BLACK')
 );
-$dir = trim(preg_replace("'[\\\\/]+'", "/", __DIR__.'/themes/'));
-if (is_dir($dir))
-{
-	foreach ($arThemesList as $themeID => $themeName)
-	{
-		if (!is_file($dir.$themeID.'/style.css'))
+$dir = trim(preg_replace("'[\\\\/]+'", "/", __DIR__ . '/themes/'));
+if (is_dir($dir)) {
+	foreach ($arThemesList as $themeID => $themeName) {
+		if (!is_file($dir . $themeID . '/style.css'))
 			continue;
 
 		$arThemes[$themeID] = $themeName;
@@ -101,34 +97,28 @@ $arFilePropList = $defaultValue;
 $arListPropList = array();
 $arHighloadPropList = array();
 
-if ($iblockExists)
-{
+if ($iblockExists) {
 	$rsProps = CIBlockProperty::GetList(
 		array('SORT' => 'ASC', 'ID' => 'ASC'),
 		array('IBLOCK_ID' => $arCurrentValues['IBLOCK_ID'], 'ACTIVE' => 'Y')
 	);
-	while ($arProp = $rsProps->Fetch())
-	{
-		$strPropName = '['.$arProp['ID'].']'.('' != $arProp['CODE'] ? '['.$arProp['CODE'].']' : '').' '.$arProp['NAME'];
-		if ($arProp['CODE'] == '')
-		{
+	while ($arProp = $rsProps->Fetch()) {
+		$strPropName = '[' . $arProp['ID'] . ']' . ('' != $arProp['CODE'] ? '[' . $arProp['CODE'] . ']' : '') . ' ' . $arProp['NAME'];
+		if ($arProp['CODE'] == '') {
 			$arProp['CODE'] = $arProp['ID'];
 		}
 
 		$arAllPropList[$arProp['CODE']] = $strPropName;
 
-		if ($arProp['PROPERTY_TYPE'] === 'F')
-		{
+		if ($arProp['PROPERTY_TYPE'] === 'F') {
 			$arFilePropList[$arProp['CODE']] = $strPropName;
 		}
 
-		if ($arProp['PROPERTY_TYPE'] === 'L')
-		{
+		if ($arProp['PROPERTY_TYPE'] === 'L') {
 			$arListPropList[$arProp['CODE']] = $strPropName;
 		}
 
-		if ($arProp['PROPERTY_TYPE'] === 'S' && $arProp['USER_TYPE'] === 'directory' && CIBlockPriceTools::checkPropDirectory($arProp))
-		{
+		if ($arProp['PROPERTY_TYPE'] === 'S' && $arProp['USER_TYPE'] === 'directory' && CIBlockPriceTools::checkPropDirectory($arProp)) {
 			$arHighloadPropList[$arProp['CODE']] = $strPropName;
 		}
 	}
@@ -136,36 +126,30 @@ if ($iblockExists)
 	$arAllOfferPropList = array();
 	$arTreeOfferPropList = $arFileOfferPropList = $defaultValue;
 
-	if ($boolSKU)
-	{
+	if ($boolSKU) {
 		$rsProps = CIBlockProperty::GetList(
 			array('SORT' => 'ASC', 'ID' => 'ASC'),
 			array('IBLOCK_ID' => $arSKU['IBLOCK_ID'], 'ACTIVE' => 'Y')
 		);
-		while ($arProp = $rsProps->Fetch())
-		{
-			if ($arProp['ID'] == $arSKU['SKU_PROPERTY_ID'])
-			{
+		while ($arProp = $rsProps->Fetch()) {
+			if ($arProp['ID'] == $arSKU['SKU_PROPERTY_ID']) {
 				continue;
 			}
 
 			$arProp['USER_TYPE'] = (string)$arProp['USER_TYPE'];
-			$strPropName = '['.$arProp['ID'].']'.('' != $arProp['CODE'] ? '['.$arProp['CODE'].']' : '').' '.$arProp['NAME'];
+			$strPropName = '[' . $arProp['ID'] . ']' . ('' != $arProp['CODE'] ? '[' . $arProp['CODE'] . ']' : '') . ' ' . $arProp['NAME'];
 
-			if ($arProp['CODE'] == '')
-			{
+			if ($arProp['CODE'] == '') {
 				$arProp['CODE'] = $arProp['ID'];
 			}
 
 			$arAllOfferPropList[$arProp['CODE']] = $strPropName;
 
-			if ($arProp['PROPERTY_TYPE'] === 'F')
-			{
+			if ($arProp['PROPERTY_TYPE'] === 'F') {
 				$arFileOfferPropList[$arProp['CODE']] = $strPropName;
 			}
 
-			if ($arProp['MULTIPLE'] != 'N')
-			{
+			if ($arProp['MULTIPLE'] != 'N') {
 				continue;
 			}
 
@@ -177,18 +161,15 @@ if ($iblockExists)
 					&& $arProp['USER_TYPE'] === 'directory'
 					&& CIBlockPriceTools::checkPropDirectory($arProp)
 				)
-			)
-			{
+			) {
 				$arTreeOfferPropList[$arProp['CODE']] = $strPropName;
 			}
 		}
 	}
 
 	$showedProperties = [];
-	if ($usePropertyFeatures)
-	{
-		if ($iblockExists)
-		{
+	if ($usePropertyFeatures) {
+		if ($iblockExists) {
 			$showedProperties = Iblock\Model\PropertyFeature::getDetailPageShowProperties(
 				$arCurrentValues['IBLOCK_ID'],
 				['CODE' => 'Y']
@@ -196,22 +177,16 @@ if ($iblockExists)
 			if ($showedProperties === null)
 				$showedProperties = [];
 		}
-	}
-	else
-	{
-		if (!empty($arCurrentValues['PROPERTY_CODE']) && is_array($arCurrentValues['PROPERTY_CODE']))
-		{
+	} else {
+		if (!empty($arCurrentValues['PROPERTY_CODE']) && is_array($arCurrentValues['PROPERTY_CODE'])) {
 			$showedProperties = $arCurrentValues['PROPERTY_CODE'];
 		}
 	}
-	if (!empty($showedProperties))
-	{
+	if (!empty($showedProperties)) {
 		$selected = array();
 
-		foreach ($showedProperties as $code)
-		{
-			if (isset($arAllPropList[$code]))
-			{
+		foreach ($showedProperties as $code) {
+			if (isset($arAllPropList[$code])) {
 				$selected[$code] = $arAllPropList[$code];
 			}
 		}
@@ -227,34 +202,26 @@ if ($iblockExists)
 	}
 	unset($showedProperties);
 
-	if ($boolSKU)
-	{
+	if ($boolSKU) {
 		$showedProperties = [];
-		if ($usePropertyFeatures)
-		{
+		if ($usePropertyFeatures) {
 			$showedProperties = Iblock\Model\PropertyFeature::getDetailPageShowProperties(
 				$arSKU['IBLOCK_ID'],
 				['CODE' => 'Y']
 			);
 			if ($showedProperties === null)
 				$showedProperties = [];
-		}
-		else
-		{
-			if (!empty($arCurrentValues['OFFERS_PROPERTY_CODE']) && is_array($arCurrentValues['OFFERS_PROPERTY_CODE']))
-			{
+		} else {
+			if (!empty($arCurrentValues['OFFERS_PROPERTY_CODE']) && is_array($arCurrentValues['OFFERS_PROPERTY_CODE'])) {
 				$showedProperties = $arCurrentValues['OFFERS_PROPERTY_CODE'];
 			}
 		}
 
-		if (!empty($showedProperties))
-		{
+		if (!empty($showedProperties)) {
 			$selected = array();
 
-			foreach ($showedProperties as $code)
-			{
-				if (isset($arAllOfferPropList[$code]))
-				{
+			foreach ($showedProperties as $code) {
+				if (isset($arAllOfferPropList[$code])) {
 					$selected[$code] = $arAllOfferPropList[$code];
 				}
 			}
@@ -292,18 +259,14 @@ if ($iblockExists)
 		'VALUES' => $arListPropList
 	);
 
-	if (!empty($arCurrentValues['LABEL_PROP']))
-	{
-		if (!is_array($arCurrentValues['LABEL_PROP']))
-		{
+	if (!empty($arCurrentValues['LABEL_PROP'])) {
+		if (!is_array($arCurrentValues['LABEL_PROP'])) {
 			$arCurrentValues['LABEL_PROP'] = array($arCurrentValues['LABEL_PROP']);
 		}
 
 		$selected = array();
-		foreach ($arCurrentValues['LABEL_PROP'] as $name)
-		{
-			if (isset($arListPropList[$name]))
-			{
+		foreach ($arCurrentValues['LABEL_PROP'] as $name) {
+			if (isset($arListPropList[$name])) {
 				$selected[$name] = $arListPropList[$name];
 			}
 		}
@@ -320,28 +283,33 @@ if ($iblockExists)
 		);
 		unset($selected);
 
-		$arTemplateParameters['LABEL_PROP_POSITION'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BCE_TPL_LABEL_PROP_POSITION'),
-			'TYPE' => 'CUSTOM',
-			'JS_FILE' => CatalogElementComponent::getSettingsScript($componentPath, 'position'),
-			'JS_EVENT' => 'initPositionControl',
-			'JS_DATA' => Json::encode(
-				array(
-					'positions' => array(
-						'top-left', 'top-center', 'top-right',
-						'middle-left', 'middle-center', 'middle-right',
-						'bottom-left', 'bottom-center', 'bottom-right'
-					),
-					'className' => ''
-				)
-			),
-			'DEFAULT' => 'top-left'
-		);
+		// $arTemplateParameters['LABEL_PROP_POSITION'] = array(
+		// 	'PARENT' => 'VISUAL',
+		// 	'NAME' => GetMessage('CP_BCE_TPL_LABEL_PROP_POSITION'),
+		// 	'TYPE' => 'CUSTOM',
+		// 	'JS_FILE' => CatalogElementComponent::getSettingsScript($componentPath, 'position'),
+		// 	'JS_EVENT' => 'initPositionControl',
+		// 	'JS_DATA' => Json::encode(
+		// 		array(
+		// 			'positions' => array(
+		// 				'top-left',
+		// 				'top-center',
+		// 				'top-right',
+		// 				'middle-left',
+		// 				'middle-center',
+		// 				'middle-right',
+		// 				'bottom-left',
+		// 				'bottom-center',
+		// 				'bottom-right'
+		// 			),
+		// 			'className' => ''
+		// 		)
+		// 	),
+		// 	'DEFAULT' => 'top-left'
+		// );
 	}
 
-	if ($boolSKU)
-	{
+	if ($boolSKU) {
 		$arTemplateParameters['OFFER_ADD_PICT_PROP'] = array(
 			'PARENT' => 'VISUAL',
 			'NAME' => GetMessage('CP_BCE_TPL_OFFER_ADD_PICT_PROP'),
@@ -352,8 +320,7 @@ if ($iblockExists)
 			'DEFAULT' => '-',
 			'VALUES' => $arFileOfferPropList
 		);
-		if (!$usePropertyFeatures)
-		{
+		if (!$usePropertyFeatures) {
 			$arTemplateParameters['OFFER_TREE_PROPS'] = array(
 				'PARENT' => 'VISUAL',
 				'NAME' => GetMessage('CP_BCE_TPL_OFFER_TREE_PROPS'),
@@ -393,8 +360,7 @@ $arTemplateParameters['SHOW_SLIDER'] = array(
 	'DEFAULT' => 'N'
 );
 
-if (isset($arCurrentValues['SHOW_SLIDER']) && $arCurrentValues['SHOW_SLIDER'] === 'Y')
-{
+if (isset($arCurrentValues['SHOW_SLIDER']) && $arCurrentValues['SHOW_SLIDER'] === 'Y') {
 	$arTemplateParameters['SLIDER_INTERVAL'] = array(
 		'PARENT' => 'VISUAL',
 		'NAME' => GetMessage('CP_BCE_TPL_SLIDER_INTERVAL'),
@@ -442,8 +408,7 @@ $arTemplateParameters['DISPLAY_PREVIEW_TEXT_MODE'] = array(
 	'DEFAULT' => 'E'
 );
 
-if ($boolCatalog)
-{
+if ($boolCatalog) {
 	$arTemplateParameters['PRODUCT_SUBSCRIPTION'] = array(
 		'PARENT' => 'VISUAL',
 		'NAME' => GetMessage('CP_BCE_TPL_PRODUCT_SUBSCRIPTION'),
@@ -458,8 +423,7 @@ if ($boolCatalog)
 		'DEFAULT' => 'N'
 	);
 
-	if (isset($arCurrentValues['SHOW_DISCOUNT_PERCENT']) && $arCurrentValues['SHOW_DISCOUNT_PERCENT'] === 'Y')
-	{
+	if (isset($arCurrentValues['SHOW_DISCOUNT_PERCENT']) && $arCurrentValues['SHOW_DISCOUNT_PERCENT'] === 'Y') {
 		$arTemplateParameters['DISCOUNT_PERCENT_POSITION'] = array(
 			'PARENT' => 'VISUAL',
 			'NAME' => GetMessage('CP_BCE_TPL_DISCOUNT_PERCENT_POSITION'),
@@ -469,9 +433,15 @@ if ($boolCatalog)
 			'JS_DATA' => Json::encode(
 				array(
 					'positions' => array(
-						'top-left', 'top-center', 'top-right',
-						'middle-left', 'middle-center', 'middle-right',
-						'bottom-left', 'bottom-center', 'bottom-right'
+						'top-left',
+						'top-center',
+						'top-right',
+						'middle-left',
+						'middle-center',
+						'middle-right',
+						'bottom-left',
+						'bottom-center',
+						'bottom-right'
 					),
 					'className' => 'bx-pos-parameter-block-circle'
 				)
@@ -500,10 +470,8 @@ if ($boolCatalog)
 		'DEFAULT' => array('N'),
 	);
 
-	if (isset($arCurrentValues['SHOW_MAX_QUANTITY']))
-	{
-		if ($arCurrentValues['SHOW_MAX_QUANTITY'] !== 'N')
-		{
+	if (isset($arCurrentValues['SHOW_MAX_QUANTITY'])) {
+		if ($arCurrentValues['SHOW_MAX_QUANTITY'] !== 'N') {
 			$arTemplateParameters['MESS_SHOW_MAX_QUANTITY'] = array(
 				'PARENT' => 'VISUAL',
 				'NAME' => GetMessage('CP_BCE_TPL_MESS_SHOW_MAX_QUANTITY'),
@@ -512,8 +480,7 @@ if ($boolCatalog)
 			);
 		}
 
-		if ($arCurrentValues['SHOW_MAX_QUANTITY'] === 'M')
-		{
+		if ($arCurrentValues['SHOW_MAX_QUANTITY'] === 'M') {
 			$arTemplateParameters['RELATIVE_QUANTITY_FACTOR'] = array(
 				'PARENT' => 'VISUAL',
 				'NAME' => GetMessage('CP_BCE_TPL_RELATIVE_QUANTITY_FACTOR'),
@@ -549,19 +516,15 @@ if ($boolCatalog)
 		'REFRESH' => 'Y'
 	);
 
-	if (!empty($arCurrentValues['ADD_TO_BASKET_ACTION']))
-	{
+	if (!empty($arCurrentValues['ADD_TO_BASKET_ACTION'])) {
 		$selected = array();
 
-		if (!is_array($arCurrentValues['ADD_TO_BASKET_ACTION']))
-		{
+		if (!is_array($arCurrentValues['ADD_TO_BASKET_ACTION'])) {
 			$arCurrentValues['ADD_TO_BASKET_ACTION'] = array($arCurrentValues['ADD_TO_BASKET_ACTION']);
 		}
 
-		foreach ($arCurrentValues['ADD_TO_BASKET_ACTION'] as $action)
-		{
-			if (isset($basketActions[$action]))
-			{
+		foreach ($arCurrentValues['ADD_TO_BASKET_ACTION'] as $action) {
+			if (isset($basketActions[$action])) {
 				$selected[$action] = $basketActions[$action];
 			}
 		}
@@ -605,8 +568,7 @@ $arTemplateParameters['MESS_BTN_SUBSCRIBE'] = array(
 	'DEFAULT' => GetMessage('CP_BCE_TPL_MESS_BTN_SUBSCRIBE_DEFAULT')
 );
 
-if (isset($arCurrentValues['DISPLAY_COMPARE']) && $arCurrentValues['DISPLAY_COMPARE'] === 'Y')
-{
+if (isset($arCurrentValues['DISPLAY_COMPARE']) && $arCurrentValues['DISPLAY_COMPARE'] === 'Y') {
 	$arTemplateParameters['MESS_BTN_COMPARE'] = array(
 		'PARENT' => 'COMPARE',
 		'NAME' => GetMessage('CP_BCE_TPL_MESS_BTN_COMPARE'),
@@ -635,8 +597,7 @@ $arTemplateParameters['USE_VOTE_RATING'] = array(
 	'DEFAULT' => 'N',
 	'REFRESH' => 'Y'
 );
-if (isset($arCurrentValues['USE_VOTE_RATING']) && $arCurrentValues['USE_VOTE_RATING'] === 'Y')
-{
+if (isset($arCurrentValues['USE_VOTE_RATING']) && $arCurrentValues['USE_VOTE_RATING'] === 'Y') {
 	$arTemplateParameters['VOTE_DISPLAY_AS_RATING'] = array(
 		'NAME' => GetMessage('CP_BCE_TPL_VOTE_DISPLAY_AS_RATING'),
 		'TYPE' => 'LIST',
@@ -656,10 +617,8 @@ $arTemplateParameters['USE_COMMENTS'] = array(
 	'REFRESH' => 'Y'
 );
 
-if (isset($arCurrentValues['USE_COMMENTS']) && $arCurrentValues['USE_COMMENTS'] === 'Y')
-{
-	if (ModuleManager::isModuleInstalled('blog'))
-	{
+if (isset($arCurrentValues['USE_COMMENTS']) && $arCurrentValues['USE_COMMENTS'] === 'Y') {
+	if (ModuleManager::isModuleInstalled('blog')) {
 		$arTemplateParameters['BLOG_USE'] = array(
 			'PARENT' => 'VISUAL',
 			'NAME' => GetMessage('CP_BCE_TPL_BLOG_USE'),
@@ -668,8 +627,7 @@ if (isset($arCurrentValues['USE_COMMENTS']) && $arCurrentValues['USE_COMMENTS'] 
 			'REFRESH' => 'Y'
 		);
 
-		if (isset($arCurrentValues['BLOG_USE']) && $arCurrentValues['BLOG_USE'] === 'Y')
-		{
+		if (isset($arCurrentValues['BLOG_USE']) && $arCurrentValues['BLOG_USE'] === 'Y') {
 			$arTemplateParameters['BLOG_URL'] = array(
 				'PARENT' => 'VISUAL',
 				'NAME' => GetMessage('CP_BCE_TPL_BLOG_URL'),
@@ -686,14 +644,12 @@ if (isset($arCurrentValues['USE_COMMENTS']) && $arCurrentValues['USE_COMMENTS'] 
 	}
 
 	$boolRus = false;
-	$rsLangs = CLanguage::GetList('id', 'asc', array('ID' => 'ru','ACTIVE' => 'Y'));
-	if ($arLang = $rsLangs->Fetch())
-	{
+	$rsLangs = CLanguage::GetList('id', 'asc', array('ID' => 'ru', 'ACTIVE' => 'Y'));
+	if ($arLang = $rsLangs->Fetch()) {
 		$boolRus = true;
 	}
 
-	if ($boolRus)
-	{
+	if ($boolRus) {
 		$arTemplateParameters['VK_USE'] = array(
 			'PARENT' => 'VISUAL',
 			'NAME' => GetMessage('CP_BCE_TPL_VK_USE'),
@@ -702,8 +658,7 @@ if (isset($arCurrentValues['USE_COMMENTS']) && $arCurrentValues['USE_COMMENTS'] 
 			'REFRESH' => 'Y'
 		);
 
-		if (isset($arCurrentValues['VK_USE']) && $arCurrentValues['VK_USE'] === 'Y')
-		{
+		if (isset($arCurrentValues['VK_USE']) && $arCurrentValues['VK_USE'] === 'Y') {
 			$arTemplateParameters['VK_API_ID'] = array(
 				'PARENT' => 'VISUAL',
 				'NAME' => GetMessage('CP_BCE_TPL_VK_API_ID'),
@@ -721,36 +676,12 @@ if (isset($arCurrentValues['USE_COMMENTS']) && $arCurrentValues['USE_COMMENTS'] 
 		'REFRESH' => 'Y'
 	);
 
-	if (isset($arCurrentValues['FB_USE']) && $arCurrentValues['FB_USE'] === 'Y')
-	{
+	if (isset($arCurrentValues['FB_USE']) && $arCurrentValues['FB_USE'] === 'Y') {
 		$arTemplateParameters['FB_APP_ID'] = array(
 			'PARENT' => 'VISUAL',
 			'NAME' => GetMessage('CP_BCE_TPL_FB_APP_ID'),
 			'TYPE' => 'STRING',
 			'DEFAULT' => ''
-		);
-	}
-}
-
-if (ModuleManager::isModuleInstalled('highloadblock'))
-{
-	$arTemplateParameters['BRAND_USE'] = array(
-		'PARENT' => 'VISUAL',
-		'NAME' => GetMessage('CP_BCE_TPL_BRAND_USE'),
-		'TYPE' => 'CHECKBOX',
-		'DEFAULT' => 'N',
-		'REFRESH' => 'Y'
-	);
-
-	if (isset($arCurrentValues['BRAND_USE']) && $arCurrentValues['BRAND_USE'] === 'Y')
-	{
-		$arTemplateParameters['BRAND_PROP_CODE'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BCE_TPL_BRAND_PROP_CODE'),
-			'TYPE' => 'LIST',
-			'VALUES' => $arHighloadPropList,
-			'MULTIPLE' => 'Y',
-			'ADDITIONAL_VALUES' => 'Y'
 		);
 	}
 }
@@ -787,8 +718,7 @@ $arTemplateParameters['USE_ENHANCED_ECOMMERCE'] = array(
 	'DEFAULT' => 'N'
 );
 
-if (isset($arCurrentValues['USE_ENHANCED_ECOMMERCE']) && $arCurrentValues['USE_ENHANCED_ECOMMERCE'] === 'Y')
-{
+if (isset($arCurrentValues['USE_ENHANCED_ECOMMERCE']) && $arCurrentValues['USE_ENHANCED_ECOMMERCE'] === 'Y') {
 	$arTemplateParameters['DATA_LAYER_NAME'] = array(
 		'PARENT' => 'ANALYTICS_SETTINGS',
 		'NAME' => GetMessage('CP_BCE_TPL_DATA_LAYER_NAME'),
