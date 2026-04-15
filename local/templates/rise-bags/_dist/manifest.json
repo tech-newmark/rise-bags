@@ -51,6 +51,15 @@
       "bitrix_catalog_compare_list_littleweb_scss.css"
     ]
   },
+  "local/templates/rise-bags/components/bitrix/catalog.element/littleweb/_src/scss/index.scss": {
+    "file": "components/bitrix/catalog.element/littleweb/style.BKPgAL4r.css",
+    "src": "local/templates/rise-bags/components/bitrix/catalog.element/littleweb/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_catalog_element_littleweb_scss",
+    "names": [
+      "bitrix_catalog_element_littleweb_scss.css"
+    ]
+  },
   "local/templates/rise-bags/components/bitrix/catalog.item/littleweb/_src/js/index.js": {
     "file": "components/bitrix/catalog.item/littleweb/script.DfHZ6Q6a.js",
     "name": "bitrix_catalog_item_littleweb_js",

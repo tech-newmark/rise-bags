@@ -159,7 +159,7 @@
 			value: null,
 		};
 		this.obCompare = null;
-		this.obTabsPanel = null;
+		// this.obTabsPanel = null;
 
 		this.node = {};
 		// top panel small card
@@ -449,15 +449,15 @@
 
 			this.obTabs = BX(this.visual.TABS_ID);
 			this.obTabContainers = BX(this.visual.TAB_CONTAINERS_ID);
-			this.obTabsPanel = BX(this.visual.TABS_PANEL_ID);
+			// this.obTabsPanel = BX(this.visual.TABS_ID);
 
 			this.initPopup();
 			this.initTabs();
 
-			if (this.obTabsPanel) {
-				this.checkTopPanels();
-				BX.bind(window, "scroll", BX.proxy(this.checkTopPanels, this));
-			}
+			// if (this.obTabsPanel) {
+			// 	this.checkTopPanels();
+			// 	BX.bind(window, "scroll", BX.proxy(this.checkTopPanels, this));
+			// }
 
 			if (this.errorCode === 0) {
 				// product slider events
@@ -1122,36 +1122,39 @@
 		},
 
 		initTabs: function () {
-			// var tabs = this.getEntities(this.obTabs, "tab"),
-			// 	panelTabs = this.getEntities(this.obTabsPanel, "tab");
-			// var tabValue,
-			// 	targetTab,
-			// 	haveActive = false;
-			// if (tabs.length !== panelTabs.length) return;
-			// for (var i in tabs) {
-			// 	if (tabs.hasOwnProperty(i) && BX.type.isDomNode(tabs[i])) {
-			// 		tabValue = tabs[i].getAttribute("data-value");
-			// 		if (tabValue) {
-			// 			targetTab = this.obTabContainers.querySelector(
-			// 				'[data-value="' + tabValue + '"]',
-			// 			);
-			// 			if (BX.type.isDomNode(targetTab)) {
-			// 				BX.bind(tabs[i], "click", BX.proxy(this.changeTab, this));
-			// 				BX.bind(panelTabs[i], "click", BX.proxy(this.changeTab, this));
-			// 				if (!haveActive) {
-			// 					BX.addClass(tabs[i], "active");
-			// 					BX.addClass(panelTabs[i], "active");
-			// 					BX.show(targetTab);
-			// 					haveActive = true;
-			// 				} else {
-			// 					BX.removeClass(tabs[i], "active");
-			// 					BX.removeClass(panelTabs[i], "active");
-			// 					BX.hide(targetTab);
-			// 				}
-			// 			}
-			// 		}
-			// 	}
-			// }
+			var tabs = this.getEntities(this.obTabs, "tab");
+			var tabValue,
+				targetTab,
+				haveActive = false;
+
+			for (var i = 0; i < tabs.length; i++) {
+				if (BX.type.isDomNode(tabs[i])) {
+					tabValue = tabs[i].getAttribute("data-value");
+					if (tabValue) {
+						targetTab = this.obTabContainers.querySelector(
+							'.tabs-content[data-value="' + tabValue + '"]',
+						);
+
+						if (BX.type.isDomNode(targetTab)) {
+							// Удаляем старые обработчики, если есть
+							BX.unbindAll(tabs[i]);
+
+							// Добавляем обработчик клика
+							BX.bind(tabs[i], "click", BX.proxy(this.changeTab, this));
+
+							// Активируем первый таб, остальные скрываем
+							if (!haveActive) {
+								BX.addClass(tabs[i], "active");
+								BX.show(targetTab);
+								haveActive = true;
+							} else {
+								BX.removeClass(tabs[i], "active");
+								BX.hide(targetTab);
+							}
+						}
+					}
+				}
+			}
 		},
 
 		checkTouch: function (event) {
@@ -1297,76 +1300,118 @@
 			}
 		},
 
-		checkTopPanels: function () {
-			var scrollTop = BX.GetWindowScrollPos().scrollTop,
-				targetPos;
+		// checkTopPanels: function () {
+		// 	var scrollTop = BX.GetWindowScrollPos().scrollTop,
+		// 		targetPos;
 
-			if (this.obTabsPanel) {
-				targetPos = BX.pos(this.obTabs).top;
+		// 	if (this.obTabsPanel) {
+		// 		targetPos = BX.pos(this.obTabs).top;
 
-				if (scrollTop + 73 > targetPos) {
-					BX.addClass(this.obTabsPanel, "active");
-				} else if (BX.hasClass(this.obTabsPanel, "active")) {
-					BX.removeClass(this.obTabsPanel, "active");
-				}
-			}
-		},
+		// 		if (scrollTop + 73 > targetPos) {
+		// 			BX.addClass(this.obTabsPanel, "active");
+		// 		} else if (BX.hasClass(this.obTabsPanel, "active")) {
+		// 			BX.removeClass(this.obTabsPanel, "active");
+		// 		}
+		// 	}
+		// },
 
 		changeTab: function (event) {
-			BX.PreventDefault(event);
+			var target = event.target;
 
-			var targetTabValue =
-					BX.proxy_context && BX.proxy_context.getAttribute("data-value"),
-				containers,
-				tabs,
-				panelTabs;
-
-			if (!BX.hasClass(BX.proxy_context, "active") && targetTabValue) {
-				containers = this.getEntities(this.obTabContainers, "tab-container");
-				for (var i in containers) {
-					if (
-						containers.hasOwnProperty(i) &&
-						BX.type.isDomNode(containers[i])
-					) {
-						if (containers[i].getAttribute("data-value") === targetTabValue) {
-							BX.show(containers[i]);
-						} else {
-							BX.hide(containers[i]);
-						}
-					}
-				}
-
-				tabs = this.getEntities(this.obTabs, "tab");
-				panelTabs = this.getEntities(this.obTabsPanel, "tab");
-
-				for (i in tabs) {
-					if (tabs.hasOwnProperty(i) && BX.type.isDomNode(tabs[i])) {
-						if (tabs[i].getAttribute("data-value") === targetTabValue) {
-							BX.addClass(tabs[i], "active");
-							BX.addClass(panelTabs[i], "active");
-						} else {
-							BX.removeClass(tabs[i], "active");
-							BX.removeClass(panelTabs[i], "active");
-						}
-					}
-				}
+			// Находим кнопку таба, по которой кликнули
+			while (target && !target.hasAttribute("data-entity")) {
+				target = target.parentNode;
 			}
 
-			var scrollTop = BX.GetWindowScrollPos().scrollTop,
-				containerTop = BX.pos(this.obTabContainers).top;
+			if (!target || target.getAttribute("data-entity") !== "tab") return;
 
-			if (scrollTop + 150 > containerTop) {
-				new BX.easing({
-					duration: 500,
-					start: { scroll: scrollTop },
-					finish: { scroll: containerTop - 150 },
-					transition: BX.easing.makeEaseOut(BX.easing.transitions.quint),
-					step: BX.delegate(function (state) {
-						window.scrollTo(0, state.scroll);
-					}, this),
-				}).animate();
+			var tabValue = target.getAttribute("data-value");
+			if (!tabValue) return;
+
+			// Находим соответствующий контейнер
+			var targetContainer = this.obTabContainers.querySelector(
+				'.tabs-content[data-value="' + tabValue + '"]',
+			);
+
+			if (!targetContainer) return;
+
+			// Получаем все кнопки табов
+			var allTabs = this.getEntities(this.obTabs, "tab");
+
+			// Скрываем все контейнеры и деактивируем все кнопки
+			for (var i = 0; i < allTabs.length; i++) {
+				var tabBtn = allTabs[i];
+				var btnValue = tabBtn.getAttribute("data-value");
+				var container = this.obTabContainers.querySelector(
+					'.tabs-content[data-value="' + btnValue + '"]',
+				);
+
+				if (container) {
+					BX.hide(container);
+				}
+				BX.removeClass(tabBtn, "active");
 			}
+
+			// Активируем текущий таб
+			BX.addClass(target, "active");
+			BX.show(targetContainer);
 		},
+
+		// changeTab: function (event) {
+		// 	BX.PreventDefault(event);
+
+		// 	var targetTabValue =
+		// 			BX.proxy_context && BX.proxy_context.getAttribute("data-value"),
+		// 		containers,
+		// 		tabs,
+		// 		panelTabs;
+
+		// 	if (!BX.hasClass(BX.proxy_context, "active") && targetTabValue) {
+		// 		containers = this.getEntities(this.obTabContainers, "tab-container");
+		// 		for (var i in containers) {
+		// 			if (
+		// 				containers.hasOwnProperty(i) &&
+		// 				BX.type.isDomNode(containers[i])
+		// 			) {
+		// 				if (containers[i].getAttribute("data-value") === targetTabValue) {
+		// 					BX.show(containers[i]);
+		// 				} else {
+		// 					BX.hide(containers[i]);
+		// 				}
+		// 			}
+		// 		}
+
+		// 		tabs = this.getEntities(this.obTabs, "tab");
+		// 		panelTabs = this.getEntities(this.obTabsPanel, "tab");
+
+		// 		for (i in tabs) {
+		// 			if (tabs.hasOwnProperty(i) && BX.type.isDomNode(tabs[i])) {
+		// 				if (tabs[i].getAttribute("data-value") === targetTabValue) {
+		// 					BX.addClass(tabs[i], "active");
+		// 					BX.addClass(panelTabs[i], "active");
+		// 				} else {
+		// 					BX.removeClass(tabs[i], "active");
+		// 					BX.removeClass(panelTabs[i], "active");
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+
+		// 	var scrollTop = BX.GetWindowScrollPos().scrollTop,
+		// 		containerTop = BX.pos(this.obTabContainers).top;
+
+		// 	if (scrollTop + 150 > containerTop) {
+		// 		new BX.easing({
+		// 			duration: 500,
+		// 			start: { scroll: scrollTop },
+		// 			finish: { scroll: containerTop - 150 },
+		// 			transition: BX.easing.makeEaseOut(BX.easing.transitions.quint),
+		// 			step: BX.delegate(function (state) {
+		// 				window.scrollTo(0, state.scroll);
+		// 			}, this),
+		// 		}).animate();
+		// 	}
+		// },
 
 		initPopup: function () {
 			if (this.config.usePopup) {
@@ -2453,6 +2498,7 @@
 					}
 
 					if (this.obMainSkuProps) {
+						console.log(this.offers[index].DISPLAY_PROPERTIES_MAIN_BLOCK);
 						if (!this.offers[index].DISPLAY_PROPERTIES_MAIN_BLOCK) {
 							BX.adjust(this.obMainSkuProps, {
 								style: { display: "none" },

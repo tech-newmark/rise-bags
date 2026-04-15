@@ -1,0 +1,50 @@
+.bx-catalog-element {
+	.product-item-detail-slider-container img {
+		width: 100%;
+		height: auto;
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: 500px auto 360px;
+		gap: 24px;
+
+		&-item {
+			outline: 1px solid red;
+
+			&--fullwidth {
+				grid-column: -1/1;
+			}
+		}
+	}
+
+	.counter-block {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		min-height: 36px;
+		margin: 4px 0;
+	}
+
+	&-amount-description-container {
+		font-size: 14px;
+	}
+
+	&-button-container {
+		outline: 1px solid red;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px 16px;
+
+		button {
+			flex-grow: 1;
+		}
+
+		.oneclickbuy-btn {
+			width: 100%;
+		}
+	}
+
+	&-buy-info {
+		outline: 1px solid red;
+	}
+}
