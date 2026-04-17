@@ -18,18 +18,15 @@ $this->setFrameMode(true);
 ?>
 
 <div class="bx-filter <?= $arParams["FILTER_EXPANDED"] && $arParams["FILTER_EXPANDED"] === "Y" ? 'expanded' : '' ?>">
-	<? if ($arParams["FILTER_EXPANDED"] && $arParams["FILTER_EXPANDED"] !== "Y"): ?>
-		<button type="button" class="main-btn outlined filter-opener-btn" id="smartfilter_form_opener">
-			<svg width='16' height='16' role='img' aria-hidden='true' focusable='false'>
-				<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-filter'></use>
-			</svg>
+	<button type="button" class="main-btn filter-opener-btn" id="smartfilter_form_opener">
+		<svg width='16' height='16' role='img' aria-hidden='true' focusable='false'>
+			<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-filter'></use>
+		</svg>
 
-			<span>Фильтр</span>
-		</button>
-	<? endif; ?>
+		<span>Фильтр</span>
+	</button>
 
-	<!-- <form name="<?= $arResult["FILTER_NAME"] . "_form" ?>" action="<?= $arResult["FORM_ACTION"] ?>" method="get" class="smartfilter"> -->
-	<form name="<?= $arResult["FILTER_NAME"] . "_form" ?>" action="<?= $arResult["FORM_ACTION"] ?>" method="get" class="smartfilter" id="smartfilter_form">
+	<form style="<?= $arParams["FILTER_EXPANDED"] && $arParams["FILTER_EXPANDED"] !== "Y" ? 'display: none' : '' ?>" name="<?= $arResult["FILTER_NAME"] . "_form" ?>" action="<?= $arResult["FORM_ACTION"] ?>" method="get" class="smartfilter" id="smartfilter_form">
 
 		<? foreach ($arResult["HIDDEN"] as $arItem): ?>
 			<input type="hidden" name="<?= $arItem["CONTROL_NAME"] ?>" id="<?= $arItem["CONTROL_ID"] ?>" value="<?= $arItem["HTML_VALUE"] ?>" />

@@ -55,7 +55,7 @@ $arTemplateParameters["INSTANT_RELOAD"] = array(
 
 $arTemplateParameters["FILTER_EXPANDED"] = array(
 	"PARENT" => "FILTER_SETTINGS",
-	"NAME" => "Показывать фильтр всегда развернутым",
+	"NAME" => "Показывать фильтр по умолчанию развернутым",
 	"TYPE" => "CHECKBOX",
 	"DEFAULT" => "N",
 	"HIDDEN" => (!isset($arCurrentValues['USE_FILTER']) || 'N' == $arCurrentValues['USE_FILTER'] ? 'Y' : 'N')
@@ -197,25 +197,6 @@ if ($iblockExists) {
 		'REFRESH' => 'Y',
 		'DEFAULT' => 'Y'
 	);
-
-	// if (!isset($arCurrentValues['LIST_SHOW_SLIDER']) || $arCurrentValues['LIST_SHOW_SLIDER'] === 'Y') {
-	// 	$arTemplateParameters['LIST_SLIDER_INTERVAL'] = array(
-	// 		'PARENT' => 'LIST_SETTINGS',
-	// 		'NAME' => GetMessage('CP_BC_TPL_SLIDER_INTERVAL'),
-	// 		'TYPE' => 'TEXT',
-	// 		'MULTIPLE' => 'N',
-	// 		'REFRESH' => 'N',
-	// 		'DEFAULT' => '3000'
-	// 	);
-	// 	$arTemplateParameters['LIST_SLIDER_PROGRESS'] = array(
-	// 		'PARENT' => 'LIST_SETTINGS',
-	// 		'NAME' => GetMessage('CP_BC_TPL_SLIDER_PROGRESS'),
-	// 		'TYPE' => 'CHECKBOX',
-	// 		'MULTIPLE' => 'N',
-	// 		'REFRESH' => 'N',
-	// 		'DEFAULT' => 'N'
-	// 	);
-	// }
 
 	$arTemplateParameters['ADD_PICT_PROP'] = array(
 		'PARENT' => 'VISUAL',
@@ -394,81 +375,60 @@ if ($boolSKU) {
 	unset($showedProperties);
 }
 
-$arTemplateParameters['DETAIL_USE_VOTE_RATING'] = array(
-	'PARENT' => 'DETAIL_SETTINGS',
-	'NAME' => GetMessage('CP_BC_TPL_DETAIL_USE_VOTE_RATING'),
-	'TYPE' => 'CHECKBOX',
-	'DEFAULT' => 'N',
-	'REFRESH' => 'Y'
-);
+// $arTemplateParameters['DETAIL_USE_VOTE_RATING'] = array(
+// 	'PARENT' => 'DETAIL_SETTINGS',
+// 	'NAME' => GetMessage('CP_BC_TPL_DETAIL_USE_VOTE_RATING'),
+// 	'TYPE' => 'CHECKBOX',
+// 	'DEFAULT' => 'N',
+// 	'REFRESH' => 'Y'
+// );
 
-if (isset($arCurrentValues['DETAIL_USE_VOTE_RATING']) && 'Y' == $arCurrentValues['DETAIL_USE_VOTE_RATING']) {
-	$arTemplateParameters['DETAIL_VOTE_DISPLAY_AS_RATING'] = array(
-		'PARENT' => 'DETAIL_SETTINGS',
-		'NAME' => GetMessage('CP_BC_TPL_DETAIL_VOTE_DISPLAY_AS_RATING'),
-		'TYPE' => 'LIST',
-		'VALUES' => array(
-			'rating' => GetMessage('CP_BC_TPL_DVDAR_RATING'),
-			'vote_avg' => GetMessage('CP_BC_TPL_DVDAR_AVERAGE'),
-		),
-		'DEFAULT' => 'rating'
-	);
-}
+// if (isset($arCurrentValues['DETAIL_USE_VOTE_RATING']) && 'Y' == $arCurrentValues['DETAIL_USE_VOTE_RATING']) {
+// 	$arTemplateParameters['DETAIL_VOTE_DISPLAY_AS_RATING'] = array(
+// 		'PARENT' => 'DETAIL_SETTINGS',
+// 		'NAME' => GetMessage('CP_BC_TPL_DETAIL_VOTE_DISPLAY_AS_RATING'),
+// 		'TYPE' => 'LIST',
+// 		'VALUES' => array(
+// 			'rating' => GetMessage('CP_BC_TPL_DVDAR_RATING'),
+// 			'vote_avg' => GetMessage('CP_BC_TPL_DVDAR_AVERAGE'),
+// 		),
+// 		'DEFAULT' => 'rating'
+// 	);
+// }
 
-$arTemplateParameters['DETAIL_USE_COMMENTS'] = array(
-	'PARENT' => 'DETAIL_SETTINGS',
-	'NAME' => GetMessage('CP_BC_TPL_DETAIL_USE_COMMENTS'),
-	'TYPE' => 'CHECKBOX',
-	'DEFAULT' => 'N',
-	'REFRESH' => 'Y'
-);
+// $arTemplateParameters['DETAIL_USE_COMMENTS'] = array(
+// 	'PARENT' => 'DETAIL_SETTINGS',
+// 	'NAME' => GetMessage('CP_BC_TPL_DETAIL_USE_COMMENTS'),
+// 	'TYPE' => 'CHECKBOX',
+// 	'DEFAULT' => 'N',
+// 	'REFRESH' => 'Y'
+// );
 
-if (isset($arCurrentValues['DETAIL_USE_COMMENTS']) && 'Y' == $arCurrentValues['DETAIL_USE_COMMENTS']) {
-	if (ModuleManager::isModuleInstalled("blog")) {
-		$arTemplateParameters['DETAIL_BLOG_USE'] = array(
-			'PARENT' => 'DETAIL_SETTINGS',
-			'NAME' => GetMessage('CP_BC_TPL_DETAIL_BLOG_USE'),
-			'TYPE' => 'CHECKBOX',
-			'DEFAULT' => 'N',
-			'REFRESH' => 'Y'
-		);
-		if (isset($arCurrentValues['DETAIL_BLOG_USE']) && $arCurrentValues['DETAIL_BLOG_USE'] == 'Y') {
-			$arTemplateParameters['DETAIL_BLOG_URL'] = array(
-				'PARENT' => 'DETAIL_SETTINGS',
-				'NAME' => GetMessage('CP_BC_DETAIL_TPL_BLOG_URL'),
-				'TYPE' => 'STRING',
-				'DEFAULT' => 'catalog_comments'
-			);
-			$arTemplateParameters['DETAIL_BLOG_EMAIL_NOTIFY'] = array(
-				'PARENT' => 'DETAIL_SETTINGS',
-				'NAME' => GetMessage('CP_BC_TPL_DETAIL_BLOG_EMAIL_NOTIFY'),
-				'TYPE' => 'CHECKBOX',
-				'DEFAULT' => 'N'
-			);
-		}
-	}
-}
-
-if (ModuleManager::isModuleInstalled("highloadblock")) {
-	$arTemplateParameters['DETAIL_BRAND_USE'] = array(
-		'PARENT' => 'DETAIL_SETTINGS',
-		'NAME' => GetMessage('CP_BC_TPL_DETAIL_BRAND_USE'),
-		'TYPE' => 'CHECKBOX',
-		'DEFAULT' => 'N',
-		'REFRESH' => 'Y'
-	);
-
-	if (isset($arCurrentValues['DETAIL_BRAND_USE']) && 'Y' == $arCurrentValues['DETAIL_BRAND_USE']) {
-		$arTemplateParameters['DETAIL_BRAND_PROP_CODE'] = array(
-			'PARENT' => 'DETAIL_SETTINGS',
-			"NAME" => GetMessage("CP_BC_TPL_DETAIL_PROP_CODE"),
-			"TYPE" => "LIST",
-			"VALUES" => $arHighloadPropList,
-			"MULTIPLE" => "Y",
-			"ADDITIONAL_VALUES" => "Y"
-		);
-	}
-}
+// if (isset($arCurrentValues['DETAIL_USE_COMMENTS']) && 'Y' == $arCurrentValues['DETAIL_USE_COMMENTS']) {
+// 	if (ModuleManager::isModuleInstalled("blog")) {
+// 		$arTemplateParameters['DETAIL_BLOG_USE'] = array(
+// 			'PARENT' => 'DETAIL_SETTINGS',
+// 			'NAME' => GetMessage('CP_BC_TPL_DETAIL_BLOG_USE'),
+// 			'TYPE' => 'CHECKBOX',
+// 			'DEFAULT' => 'N',
+// 			'REFRESH' => 'Y'
+// 		);
+// 		if (isset($arCurrentValues['DETAIL_BLOG_USE']) && $arCurrentValues['DETAIL_BLOG_USE'] == 'Y') {
+// 			$arTemplateParameters['DETAIL_BLOG_URL'] = array(
+// 				'PARENT' => 'DETAIL_SETTINGS',
+// 				'NAME' => GetMessage('CP_BC_DETAIL_TPL_BLOG_URL'),
+// 				'TYPE' => 'STRING',
+// 				'DEFAULT' => 'catalog_comments'
+// 			);
+// 			$arTemplateParameters['DETAIL_BLOG_EMAIL_NOTIFY'] = array(
+// 				'PARENT' => 'DETAIL_SETTINGS',
+// 				'NAME' => GetMessage('CP_BC_TPL_DETAIL_BLOG_EMAIL_NOTIFY'),
+// 				'TYPE' => 'CHECKBOX',
+// 				'DEFAULT' => 'N'
+// 			);
+// 		}
+// 	}
+// }
 
 $arTemplateParameters['DETAIL_DISPLAY_NAME'] = array(
 	'PARENT' => 'DETAIL_SETTINGS',
@@ -476,83 +436,18 @@ $arTemplateParameters['DETAIL_DISPLAY_NAME'] = array(
 	'TYPE' => 'CHECKBOX',
 	'DEFAULT' => 'Y'
 );
-$arTemplateParameters['DETAIL_IMAGE_RESOLUTION'] = array(
-	'PARENT' => 'DETAIL_SETTINGS',
-	'NAME' => GetMessage('CP_BC_TPL_DETAIL_IMAGE_RESOLUTION'),
-	'TYPE' => 'LIST',
-	'VALUES' => array(
-		'16by9' => GetMessage('CP_BC_TPL_DETAIL_IMAGE_RESOLUTION_16_BY_9'),
-		'1by1' => GetMessage('CP_BC_TPL_DETAIL_IMAGE_RESOLUTION_1_BY_1')
-	),
-	'DEFAULT' => '16by9'
-);
-$arTemplateParameters['DETAIL_PRODUCT_INFO_BLOCK_ORDER'] = array(
-	'PARENT' => 'DETAIL_SETTINGS',
-	'NAME' => GetMessage('CP_BC_TPL_PRODUCT_INFO_BLOCK_ORDER'),
-	'TYPE' => 'CUSTOM',
-	'JS_FILE' => CatalogElementComponent::getSettingsScript('/bitrix/components/bitrix/catalog.element', 'dragdrop_order'),
-	'JS_EVENT' => 'initDraggableOrderControl',
-	'JS_DATA' => Json::encode(array(
-		'sku' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_SKU'),
-		'props' => GetMessage('CP_BC_TPL_PRODUCT_BLOCK_PROPS')
-	)),
-	'DEFAULT' => 'sku,props'
-);
-$arTemplateParameters['DETAIL_PRODUCT_PAY_BLOCK_ORDER'] = array(
-	'PARENT' => 'DETAIL_SETTINGS',
-	'NAME' => GetMessage('CP_BC_TPL_PRODUCT_PAY_BLOCK_ORDER'),
-	'TYPE' => 'CUSTOM',
-	'JS_FILE' => CatalogElementComponent::getSettingsScript('/bitrix/components/bitrix/catalog.element', 'dragdrop_order'),
-	'JS_EVENT' => 'initDraggableOrderControl',
-	'JS_DATA' => Json::encode(array(
-		'rating' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_RATING'),
-		'price' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_PRICE'),
-		'priceRanges' => GetMessage('CP_BC_TPL_PRODUCT_BLOCK_PRICE_RANGES'),
-		'quantityLimit' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_QUANTITY_LIMIT'),
-		'quantity' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_QUANTITY'),
-		'buttons' => GetMessage('CP_BC_TPL_DETAIL_PRODUCT_BLOCK_BUTTONS')
-	)),
-	'DEFAULT' => 'rating,price,priceRanges,quantityLimit,quantity,buttons'
-);
-$arTemplateParameters['DETAIL_SHOW_SLIDER'] = array(
-	'PARENT' => 'DETAIL_SETTINGS',
-	'NAME' => GetMessage('CP_BC_TPL_DETAIL_SHOW_SLIDER'),
-	'TYPE' => 'CHECKBOX',
-	'MULTIPLE' => 'N',
-	'REFRESH' => 'Y',
-	'DEFAULT' => 'N'
-);
 
-// if (isset($arCurrentValues['DETAIL_SHOW_SLIDER']) && $arCurrentValues['DETAIL_SHOW_SLIDER'] === 'Y') {
-// 	$arTemplateParameters['DETAIL_SLIDER_INTERVAL'] = array(
-// 		'PARENT' => 'DETAIL_SETTINGS',
-// 		'NAME' => GetMessage('CP_BC_TPL_DETAIL_SLIDER_INTERVAL'),
-// 		'TYPE' => 'TEXT',
-// 		'MULTIPLE' => 'N',
-// 		'REFRESH' => 'N',
-// 		'DEFAULT' => '5000'
-// 	);
-// 	$arTemplateParameters['DETAIL_SLIDER_PROGRESS'] = array(
-// 		'PARENT' => 'DETAIL_SETTINGS',
-// 		'NAME' => GetMessage('CP_BC_TPL_DETAIL_SLIDER_PROGRESS'),
-// 		'TYPE' => 'CHECKBOX',
-// 		'MULTIPLE' => 'N',
-// 		'REFRESH' => 'N',
-// 		'DEFAULT' => 'N'
-// 	);
-// }
-
-$arTemplateParameters['DETAIL_DETAIL_PICTURE_MODE'] = array(
-	'PARENT' => 'DETAIL_SETTINGS',
-	'NAME' => GetMessage('CP_BC_TPL_DETAIL_DETAIL_PICTURE_MODE'),
-	'TYPE' => 'LIST',
-	'MULTIPLE' => 'Y',
-	'DEFAULT' => array('POPUP', 'MAGNIFIER'),
-	'VALUES' => array(
-		'POPUP' => GetMessage('DETAIL_DETAIL_PICTURE_MODE_POPUP'),
-		'MAGNIFIER' => GetMessage('DETAIL_DETAIL_PICTURE_MODE_MAGNIFIER'),
-	)
-);
+// $arTemplateParameters['DETAIL_DETAIL_PICTURE_MODE'] = array(
+// 	'PARENT' => 'DETAIL_SETTINGS',
+// 	'NAME' => GetMessage('CP_BC_TPL_DETAIL_DETAIL_PICTURE_MODE'),
+// 	'TYPE' => 'LIST',
+// 	'MULTIPLE' => 'Y',
+// 	'DEFAULT' => array('POPUP', 'MAGNIFIER'),
+// 	'VALUES' => array(
+// 		'POPUP' => GetMessage('DETAIL_DETAIL_PICTURE_MODE_POPUP'),
+// 		'MAGNIFIER' => GetMessage('DETAIL_DETAIL_PICTURE_MODE_MAGNIFIER'),
+// 	)
+// );
 
 $arTemplateParameters['DETAIL_ADD_DETAIL_TO_SLIDER'] = array(
 	'PARENT' => 'DETAIL_SETTINGS',
@@ -1077,3 +972,15 @@ $arTemplateParameters['DETAIL_SHOW_VIEWED'] = array(
 
 // hack to hide component parameters by templates
 $arTemplateParameters['HIDE_USE_ALSO_BUY'] = array();
+
+$arTemplateParameters['USE_GIFTS_DETAIL'] = array(
+	'HIDDEN' => 'N'
+);
+
+$arTemplateParameters['USE_GIFTS_SECTION'] = array(
+	'HIDDEN' => 'N'
+);
+
+$arTemplateParameters['USE_GIFTS_MAIN_PR_SECTION_LIST'] = array(
+	'HIDDEN' => 'N'
+);

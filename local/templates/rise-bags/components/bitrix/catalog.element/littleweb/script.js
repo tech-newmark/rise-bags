@@ -159,7 +159,6 @@
 			value: null,
 		};
 		this.obCompare = null;
-		this.obTabsPanel = null;
 
 		this.node = {};
 		// top panel small card
@@ -319,6 +318,7 @@
 			}
 
 			this.obBigSlider = BX(this.visual.BIG_SLIDER_ID);
+
 			this.node.imageContainer = this.getEntity(
 				this.obProduct,
 				"images-container",
@@ -327,18 +327,18 @@
 				this.obProduct,
 				"images-slider-block",
 			);
-			this.node.sliderProgressBar = this.getEntity(
-				this.obProduct,
-				"slider-progress-bar",
-			);
-			this.node.sliderControlLeft = this.getEntity(
-				this.obBigSlider,
-				"slider-control-left",
-			);
-			this.node.sliderControlRight = this.getEntity(
-				this.obBigSlider,
-				"slider-control-right",
-			);
+			// this.node.sliderProgressBar = this.getEntity(
+			// 	this.obProduct,
+			// 	"slider-progress-bar",
+			// );
+			// this.node.sliderControlLeft = this.getEntity(
+			// 	this.obBigSlider,
+			// 	"slider-control-left",
+			// );
+			// this.node.sliderControlRight = this.getEntity(
+			// 	this.obBigSlider,
+			// 	"slider-control-right",
+			// );
 
 			if (
 				!this.obBigSlider ||
@@ -449,121 +449,17 @@
 
 			this.obTabs = BX(this.visual.TABS_ID);
 			this.obTabContainers = BX(this.visual.TAB_CONTAINERS_ID);
-			this.obTabsPanel = BX(this.visual.TABS_PANEL_ID);
+			// this.obTabsPanel = BX(this.visual.TABS_ID);
 
-			this.smallCardNodes.panel = BX(this.visual.SMALL_CARD_PANEL_ID);
-			if (this.smallCardNodes.panel) {
-				this.smallCardNodes.picture = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-picture",
-				);
-				this.smallCardNodes.title = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-title",
-				);
-				this.smallCardNodes.price = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-price",
-				);
-				this.smallCardNodes.sku = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-sku-container",
-				);
-				this.smallCardNodes.oldPrice = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-old-price",
-				);
-				this.smallCardNodes.buyButton = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-buy-button",
-				);
-				this.smallCardNodes.addButton = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-add-button",
-				);
-				this.smallCardNodes.notAvailableButton = this.getEntity(
-					this.smallCardNodes.panel,
-					"panel-not-available-button",
-				);
-				this.smallCardNodes.aligner = this.getEntity(
-					this.obProduct,
-					"main-button-container",
-				);
-			}
-
-			this.initPopup();
+			// this.initPopup();
 			this.initTabs();
 
-			if (this.smallCardNodes.panel) {
-				this.smallCardNodes.picture &&
-					BX.bind(
-						this.smallCardNodes.picture.parentNode,
-						"click",
-						BX.proxy(this.scrollToProduct, this),
-					);
-				this.smallCardNodes.title &&
-					BX.bind(
-						this.smallCardNodes.title,
-						"click",
-						BX.proxy(this.scrollToProduct, this),
-					);
-				this.smallCardNodes.sku &&
-					BX.bind(
-						this.smallCardNodes.sku,
-						"click",
-						BX.proxy(this.scrollToProduct, this),
-					);
-			}
-
-			if (this.obTabsPanel || this.smallCardNodes.panel) {
-				this.checkTopPanels();
-				BX.bind(window, "scroll", BX.proxy(this.checkTopPanels, this));
-			}
+			// if (this.obTabsPanel) {
+			// 	this.checkTopPanels();
+			// 	BX.bind(window, "scroll", BX.proxy(this.checkTopPanels, this));
+			// }
 
 			if (this.errorCode === 0) {
-				// product slider events
-				if (this.config.showSlider && !this.isTouchDevice) {
-					BX.bind(
-						this.obBigSlider,
-						"mouseenter",
-						BX.proxy(this.stopSlider, this),
-					);
-					BX.bind(
-						this.obBigSlider,
-						"mouseleave",
-						BX.proxy(this.cycleSlider, this),
-					);
-				}
-
-				if (this.isTouchDevice) {
-					BX.bind(
-						this.node.imageContainer,
-						"touchstart",
-						BX.proxy(this.touchStartEvent, this),
-					);
-					BX.bind(
-						this.node.imageContainer,
-						"touchend",
-						BX.proxy(this.touchEndEvent, this),
-					);
-					BX.bind(
-						this.node.imageContainer,
-						"touchcancel",
-						BX.proxy(this.touchEndEvent, this),
-					);
-				}
-
-				BX.bind(
-					this.node.sliderControlLeft,
-					"click",
-					BX.proxy(this.slidePrev, this),
-				);
-				BX.bind(
-					this.node.sliderControlRight,
-					"click",
-					BX.proxy(this.slideNext, this),
-				);
-
 				if (this.config.showQuantity) {
 					var startEventName = this.isTouchDevice ? "touchstart" : "mousedown";
 					var endEventName = this.isTouchDevice ? "touchend" : "mouseup";
@@ -629,37 +525,8 @@
 					case 2: // set
 					case 7: // service
 						if (this.product.useSlider) {
-							this.product.slider = {
-								ID: this.visual.SLIDER_CONT_ID,
-								CONT: BX(this.visual.SLIDER_CONT_ID),
-								COUNT: this.product.sliderCount,
-							};
-							this.product.slider.ITEMS = this.getEntities(
-								this.product.slider.CONT,
-								"slider-control",
-							);
-							for (j = 0; j < this.product.slider.ITEMS.length; j++) {
-								BX.bind(
-									this.product.slider.ITEMS[j],
-									"mouseenter",
-									BX.delegate(this.onSliderControlHover, this),
-								);
-								BX.bind(
-									this.product.slider.ITEMS[j],
-									"mouseleave",
-									BX.delegate(this.onSliderControlLeave, this),
-								);
-								BX.bind(
-									this.product.slider.ITEMS[j],
-									"click",
-									BX.delegate(this.selectSliderImg, this),
-								);
-							}
-
 							this.setCurrentImg(this.product.sliderPict[0], true, true);
-							this.checkSliderControls(this.product.sliderCount);
-
-							if (this.product.slider.ITEMS.length > 1) {
+							if (this.product.sliderCount > 1) {
 								this.initSlider();
 							}
 						}
@@ -682,13 +549,7 @@
 							this.offers[i].SLIDER_COUNT =
 								parseInt(this.offers[i].SLIDER_COUNT, 10) || 0;
 
-							if (this.offers[i].SLIDER_COUNT === 0) {
-								this.slider.controls[i] = {
-									ID: "",
-									COUNT: this.offers[i].SLIDER_COUNT,
-									ITEMS: [],
-								};
-							} else {
+							if (this.offers[i].SLIDER_COUNT > 0) {
 								for (j = 0; j < this.offers[i].SLIDER.length; j++) {
 									this.offers[i].SLIDER[j].WIDTH = parseInt(
 										this.offers[i].SLIDER[j].WIDTH,
@@ -697,35 +558,6 @@
 									this.offers[i].SLIDER[j].HEIGHT = parseInt(
 										this.offers[i].SLIDER[j].HEIGHT,
 										10,
-									);
-								}
-
-								this.slider.controls[i] = {
-									ID: this.visual.SLIDER_CONT_OF_ID + this.offers[i].ID,
-									OFFER_ID: this.offers[i].ID,
-									CONT: BX(this.visual.SLIDER_CONT_OF_ID + this.offers[i].ID),
-									COUNT: this.offers[i].SLIDER_COUNT,
-								};
-
-								this.slider.controls[i].ITEMS = this.getEntities(
-									this.slider.controls[i].CONT,
-									"slider-control",
-								);
-								for (j = 0; j < this.slider.controls[i].ITEMS.length; j++) {
-									BX.bind(
-										this.slider.controls[i].ITEMS[j],
-										"mouseenter",
-										BX.delegate(this.onSliderControlHover, this),
-									);
-									BX.bind(
-										this.slider.controls[i].ITEMS[j],
-										"mouseleave",
-										BX.delegate(this.onSliderControlLeave, this),
-									);
-									BX.bind(
-										this.slider.controls[i].ITEMS[j],
-										"click",
-										BX.delegate(this.selectSliderImg, this),
 									);
 								}
 							}
@@ -1041,20 +873,32 @@
 		},
 
 		initSlider: function () {
-			if (this.node.sliderProgressBar) {
-				if (this.slider.progress) {
-					this.resetProgress();
-				} else {
-					this.slider.progress = new BX.easing({
-						transition: BX.easing.transitions.linear,
-						step: BX.delegate(function (state) {
-							this.node.sliderProgressBar.style.width = state.width / 10 + "%";
-						}, this),
-					});
-				}
+			if (this.swiperInstance) {
+				this.swiperInstance.destroy(true, true);
+				this.swiperInstance = null;
 			}
 
-			this.cycleSlider();
+			if (typeof Swiper === "undefined" || !this.node.imageSliderBlock) {
+				return;
+			}
+
+			var swiperContainer = this.node.imageSliderBlock;
+			var slideCount = swiperContainer.querySelectorAll(".swiper-slide").length;
+			if (slideCount < 1) {
+				return;
+			}
+
+			this.swiperInstance = new Swiper(swiperContainer, {
+				slidesPerView: 1,
+				spaceBetween: 0,
+				loop: slideCount > 1,
+				pagination: {
+					el:
+						swiperContainer.querySelector(".swiper-pagination") ||
+						swiperContainer.parentNode.querySelector(".swiper-pagination"),
+					clickable: true,
+				},
+			});
 		},
 
 		setAnalyticsDataLayer: function (action) {
@@ -1183,166 +1027,39 @@
 		},
 
 		initTabs: function () {
-			var tabs = this.getEntities(this.obTabs, "tab"),
-				panelTabs = this.getEntities(this.obTabsPanel, "tab");
-
+			var tabs = this.getEntities(this.obTabs, "tab");
 			var tabValue,
 				targetTab,
 				haveActive = false;
 
-			if (tabs.length !== panelTabs.length) return;
-
-			for (var i in tabs) {
-				if (tabs.hasOwnProperty(i) && BX.type.isDomNode(tabs[i])) {
+			for (var i = 0; i < tabs.length; i++) {
+				if (BX.type.isDomNode(tabs[i])) {
 					tabValue = tabs[i].getAttribute("data-value");
 					if (tabValue) {
 						targetTab = this.obTabContainers.querySelector(
-							'[data-value="' + tabValue + '"]',
+							'.tabs-content[data-value="' + tabValue + '"]',
 						);
-						if (BX.type.isDomNode(targetTab)) {
-							BX.bind(tabs[i], "click", BX.proxy(this.changeTab, this));
-							BX.bind(panelTabs[i], "click", BX.proxy(this.changeTab, this));
 
+						if (BX.type.isDomNode(targetTab)) {
+							// Удаляем старые обработчики, если есть
+							BX.unbindAll(tabs[i]);
+
+							// Добавляем обработчик клика
+							BX.bind(tabs[i], "click", BX.proxy(this.changeTab, this));
+
+							// Активируем первый таб, остальные скрываем
 							if (!haveActive) {
 								BX.addClass(tabs[i], "active");
-								BX.addClass(panelTabs[i], "active");
 								BX.show(targetTab);
 								haveActive = true;
 							} else {
 								BX.removeClass(tabs[i], "active");
-								BX.removeClass(panelTabs[i], "active");
 								BX.hide(targetTab);
 							}
 						}
 					}
 				}
 			}
-		},
-
-		checkTouch: function (event) {
-			if (!event || !event.changedTouches) return false;
-
-			return event.changedTouches[0].identifier === this.touch.identifier;
-		},
-
-		touchStartEvent: function (event) {
-			if (event.touches.length != 1) return;
-
-			this.touch = event.changedTouches[0];
-		},
-
-		touchEndEvent: function (event) {
-			if (!this.checkTouch(event)) return;
-
-			var deltaX = this.touch.pageX - event.changedTouches[0].pageX,
-				deltaY = this.touch.pageY - event.changedTouches[0].pageY;
-
-			if (Math.abs(deltaX) >= Math.abs(deltaY) + 10) {
-				if (deltaX > 0) {
-					this.slideNext();
-				}
-
-				if (deltaX < 0) {
-					this.slidePrev();
-				}
-			}
-		},
-
-		cycleSlider: function (event) {
-			event || (this.slider.paused = false);
-
-			this.slider.interval && clearInterval(this.slider.interval);
-
-			if (this.config.sliderInterval && !this.slider.paused) {
-				if (this.slider.progress) {
-					this.slider.progress.stop();
-
-					var width = parseInt(this.node.sliderProgressBar.style.width);
-
-					this.slider.progress.options.duration =
-						(this.config.sliderInterval * (100 - width)) / 100;
-					this.slider.progress.options.start = { width: width * 10 };
-					this.slider.progress.options.finish = { width: 1000 };
-					this.slider.progress.options.complete = BX.delegate(function () {
-						this.slider.interval = true;
-						this.slideNext();
-					}, this);
-					this.slider.progress.animate();
-				} else {
-					this.slider.interval = setInterval(
-						BX.proxy(this.slideNext, this),
-						this.config.sliderInterval,
-					);
-				}
-			}
-		},
-
-		stopSlider: function (event) {
-			event || (this.slider.paused = true);
-
-			this.slider.interval &&
-				(this.slider.interval = clearInterval(this.slider.interval));
-
-			if (this.slider.progress) {
-				this.slider.progress.stop();
-
-				var width = parseInt(this.node.sliderProgressBar.style.width);
-
-				this.slider.progress.options.duration =
-					(this.config.sliderInterval * width) / 200;
-				this.slider.progress.options.start = { width: width * 10 };
-				this.slider.progress.options.finish = { width: 0 };
-				this.slider.progress.options.complete = null;
-				this.slider.progress.animate();
-			}
-		},
-
-		resetProgress: function () {
-			this.slider.progress && this.slider.progress.stop();
-			this.node.sliderProgressBar.style.width = 0;
-		},
-
-		slideNext: function () {
-			return this.slide("next");
-		},
-
-		slidePrev: function () {
-			return this.slide("prev");
-		},
-
-		slide: function (type) {
-			if (!this.product.slider || !this.product.slider.CONT) return;
-
-			var active = this.getEntity(
-					this.product.slider.CONT,
-					"slider-control",
-					".active",
-				),
-				next = this.getItemForDirection(type, active);
-
-			BX.removeClass(active, "active");
-			this.selectSliderImg(next);
-
-			this.slider.interval && this.cycleSlider();
-		},
-
-		getItemForDirection: function (direction, active) {
-			var activeIndex = this.getItemIndex(active),
-				delta = direction === "prev" ? -1 : 1,
-				itemIndex = (activeIndex + delta) % this.product.slider.COUNT;
-
-			return this.eq(this.product.slider.ITEMS, itemIndex);
-		},
-
-		getItemIndex: function (item) {
-			return BX.util.array_values(this.product.slider.ITEMS).indexOf(item);
-		},
-
-		eq: function (obj, i) {
-			var len = obj.length,
-				j = +i + (i < 0 ? len : 0);
-
-			return j >= 0 && j < len ? obj[j] : {};
 		},
 
 		scrollToProduct: function () {
@@ -1362,111 +1079,46 @@
 			}
 		},
 
-		checkTopPanels: function () {
-			var scrollTop = BX.GetWindowScrollPos().scrollTop,
-				targetPos;
-
-			if (this.smallCardNodes.panel) {
-				targetPos = BX.pos(this.smallCardNodes.aligner).bottom - 50;
-
-				if (scrollTop > targetPos) {
-					BX.addClass(this.smallCardNodes.panel, "active");
-				} else if (BX.hasClass(this.smallCardNodes.panel, "active")) {
-					BX.removeClass(this.smallCardNodes.panel, "active");
-				}
-			}
-
-			if (this.obTabsPanel) {
-				targetPos = BX.pos(this.obTabs).top;
-
-				if (scrollTop + 73 > targetPos) {
-					BX.addClass(this.obTabsPanel, "active");
-				} else if (BX.hasClass(this.obTabsPanel, "active")) {
-					BX.removeClass(this.obTabsPanel, "active");
-				}
-			}
-		},
-
 		changeTab: function (event) {
-			BX.PreventDefault(event);
+			var target = event.target;
 
-			var targetTabValue =
-					BX.proxy_context && BX.proxy_context.getAttribute("data-value"),
-				containers,
-				tabs,
-				panelTabs;
-
-			if (!BX.hasClass(BX.proxy_context, "active") && targetTabValue) {
-				containers = this.getEntities(this.obTabContainers, "tab-container");
-				for (var i in containers) {
-					if (
-						containers.hasOwnProperty(i) &&
-						BX.type.isDomNode(containers[i])
-					) {
-						if (containers[i].getAttribute("data-value") === targetTabValue) {
-							BX.show(containers[i]);
-						} else {
-							BX.hide(containers[i]);
-						}
-					}
-				}
-
-				tabs = this.getEntities(this.obTabs, "tab");
-				panelTabs = this.getEntities(this.obTabsPanel, "tab");
-
-				for (i in tabs) {
-					if (tabs.hasOwnProperty(i) && BX.type.isDomNode(tabs[i])) {
-						if (tabs[i].getAttribute("data-value") === targetTabValue) {
-							BX.addClass(tabs[i], "active");
-							BX.addClass(panelTabs[i], "active");
-						} else {
-							BX.removeClass(tabs[i], "active");
-							BX.removeClass(panelTabs[i], "active");
-						}
-					}
-				}
+			// Находим кнопку таба, по которой кликнули
+			while (target && !target.hasAttribute("data-entity")) {
+				target = target.parentNode;
 			}
 
-			var scrollTop = BX.GetWindowScrollPos().scrollTop,
-				containerTop = BX.pos(this.obTabContainers).top;
+			if (!target || target.getAttribute("data-entity") !== "tab") return;
 
-			if (scrollTop + 150 > containerTop) {
-				new BX.easing({
-					duration: 500,
-					start: { scroll: scrollTop },
-					finish: { scroll: containerTop - 150 },
-					transition: BX.easing.makeEaseOut(BX.easing.transitions.quint),
-					step: BX.delegate(function (state) {
-						window.scrollTo(0, state.scroll);
-					}, this),
-				}).animate();
-			}
-		},
+			var tabValue = target.getAttribute("data-value");
+			if (!tabValue) return;
 
-		initPopup: function () {
-			if (this.config.usePopup) {
-				this.node.imageContainer.style.cursor = "zoom-in";
-				BX.bind(
-					this.node.imageContainer,
-					"click",
-					BX.delegate(this.toggleMainPictPopup, this),
+			// Находим соответствующий контейнер
+			var targetContainer = this.obTabContainers.querySelector(
+				'.tabs-content[data-value="' + tabValue + '"]',
+			);
+
+			if (!targetContainer) return;
+
+			// Получаем все кнопки табов
+			var allTabs = this.getEntities(this.obTabs, "tab");
+
+			// Скрываем все контейнеры и деактивируем все кнопки
+			for (var i = 0; i < allTabs.length; i++) {
+				var tabBtn = allTabs[i];
+				var btnValue = tabBtn.getAttribute("data-value");
+				var container = this.obTabContainers.querySelector(
+					'.tabs-content[data-value="' + btnValue + '"]',
 				);
-				BX.bind(document, "keyup", BX.proxy(this.closeByEscape, this));
-				BX.bind(
-					this.getEntity(this.obBigSlider, "close-popup"),
-					"click",
-					BX.proxy(this.hideMainPictPopup, this),
-				);
+
+				if (container) {
+					BX.hide(container);
+				}
+				BX.removeClass(tabBtn, "active");
 			}
-		},
 
-		checkSliderControls: function (count) {
-			var display = count > 1 ? "" : "none";
-
-			this.node.sliderControlLeft &&
-				(this.node.sliderControlLeft.style.display = display);
-			this.node.sliderControlRight &&
-				(this.node.sliderControlRight.style.display = display);
+			// Активируем текущий таб
+			BX.addClass(target, "active");
+			BX.show(targetContainer);
 		},
 
 		setCurrentImg: function (img, showImage, showPanelImage) {
@@ -1495,297 +1147,6 @@
 
 			if (showPanelImage && this.smallCardNodes.picture) {
 				this.smallCardNodes.picture.setAttribute("src", this.currentImg.src);
-			}
-
-			if (this.config.useMagnifier && !this.isTouchDevice) {
-				this.setMagnifierParams();
-
-				if (showImage) {
-					this.disableMagnifier(true);
-				}
-			}
-		},
-
-		setMagnifierParams: function () {
-			var images = this.getEntities(this.node.imageContainer, "image"),
-				l = images.length,
-				current;
-
-			while (l--) {
-				// disable image title show
-				current = images[l].querySelector("img");
-				current.setAttribute("data-title", current.getAttribute("title") || "");
-				current.removeAttribute("title");
-
-				if (images[l].getAttribute("data-id") == this.currentImg.id) {
-					BX.unbind(
-						this.currentImg.node,
-						"mouseover",
-						BX.proxy(this.enableMagnifier, this),
-					);
-
-					this.currentImg.node = current;
-					this.currentImg.node.style.backgroundImage =
-						"url('" + this.currentImg.src + "')";
-					this.currentImg.node.style.backgroundSize = "100% auto";
-
-					BX.bind(
-						this.currentImg.node,
-						"mouseover",
-						BX.proxy(this.enableMagnifier, this),
-					);
-				}
-			}
-		},
-
-		enableMagnifier: function () {
-			BX.bind(document, "mousemove", BX.proxy(this.moveMagnifierArea, this));
-		},
-
-		disableMagnifier: function (animateSize) {
-			if (!this.magnify.enabled) return;
-
-			clearTimeout(this.magnify.timer);
-			BX.removeClass(this.obBigSlider, "magnified");
-			this.magnify.enabled = false;
-
-			this.currentImg.node.style.backgroundSize = "100% auto";
-			if (animateSize) {
-				// set initial size for css animation
-				this.currentImg.node.style.height = this.magnify.height + "px";
-				this.currentImg.node.style.width = this.magnify.width + "px";
-
-				this.magnify.timer = setTimeout(
-					BX.delegate(function () {
-						this.currentImg.node.src = this.currentImg.src;
-						this.currentImg.node.style.height = "";
-						this.currentImg.node.style.width = "";
-					}, this),
-					250,
-				);
-			} else {
-				this.currentImg.node.src = this.currentImg.src;
-				this.currentImg.node.style.height = "";
-				this.currentImg.node.style.width = "";
-			}
-
-			BX.unbind(document, "mousemove", BX.proxy(this.moveMagnifierArea, this));
-		},
-
-		moveMagnifierArea: function (e) {
-			var posBigImg = BX.pos(this.currentImg.node),
-				currentPos = this.inRect(e, posBigImg);
-
-			if (this.inBound(posBigImg, currentPos)) {
-				var posPercentX = (currentPos.X / this.currentImg.node.width) * 100,
-					posPercentY = (currentPos.Y / this.currentImg.node.height) * 100,
-					resolution,
-					sliderWidth,
-					w,
-					h,
-					zoomPercent;
-
-				this.currentImg.node.style.backgroundPosition =
-					posPercentX + "% " + posPercentY + "%";
-
-				if (!this.magnify.enabled) {
-					clearTimeout(this.magnify.timer);
-					BX.addClass(this.obBigSlider, "magnified");
-
-					// set initial size for css animation
-					this.currentImg.node.style.height =
-						(this.magnify.height = this.currentImg.node.clientHeight) + "px";
-					this.currentImg.node.style.width =
-						(this.magnify.width = this.currentImg.node.offsetWidth) + "px";
-
-					resolution = this.currentImg.width / this.currentImg.height;
-					sliderWidth = this.obBigSlider.offsetWidth;
-
-					if (
-						sliderWidth > this.currentImg.width &&
-						!BX.hasClass(this.obBigSlider, "popup")
-					) {
-						w = sliderWidth;
-						h = w / resolution;
-						zoomPercent = 100;
-					} else {
-						w = this.currentImg.width;
-						h = this.currentImg.height;
-						zoomPercent =
-							this.config.magnifierZoomPercent > 100
-								? this.config.magnifierZoomPercent
-								: 100;
-					}
-
-					// base64 transparent pixel
-					this.currentImg.node.src =
-						"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12P4zwAAAgEBAKrChTYAAAAASUVORK5CYII=";
-					this.currentImg.node.style.backgroundSize = zoomPercent + "% auto";
-
-					// set target size
-					this.magnify.timer = setTimeout(
-						BX.delegate(function () {
-							this.currentImg.node.style.height = h + "px";
-							this.currentImg.node.style.width = w + "px";
-						}, this),
-						10,
-					);
-				}
-
-				this.magnify.enabled = true;
-			} else {
-				this.disableMagnifier(true);
-			}
-		},
-
-		inBound: function (rect, point) {
-			return (
-				point.Y >= 0 &&
-				rect.height >= point.Y &&
-				point.X >= 0 &&
-				rect.width >= point.X
-			);
-		},
-
-		inRect: function (e, rect) {
-			var wndSize = BX.GetWindowSize(),
-				currentPos = {
-					X: 0,
-					Y: 0,
-					globalX: 0,
-					globalY: 0,
-				};
-
-			currentPos.globalX = e.clientX + wndSize.scrollLeft;
-
-			if (e.offsetX && e.offsetX < 0) {
-				currentPos.globalX -= e.offsetX;
-			}
-
-			currentPos.X = currentPos.globalX - rect.left;
-			currentPos.globalY = e.clientY + wndSize.scrollTop;
-
-			if (e.offsetY && e.offsetY < 0) {
-				currentPos.globalY -= e.offsetY;
-			}
-
-			currentPos.Y = currentPos.globalY - rect.top;
-
-			return currentPos;
-		},
-
-		setProductMainPict: function (intPict) {
-			var indexPict = -1,
-				i = 0,
-				j = 0,
-				value = "";
-
-			if (this.product.sliderCount) {
-				for (j = 0; j < this.product.sliderPict.length; j++) {
-					if (intPict === this.product.sliderPict[j].ID) {
-						indexPict = j;
-						break;
-					}
-				}
-
-				if (indexPict > -1) {
-					if (this.product.sliderPict[indexPict]) {
-						this.setCurrentImg(this.product.sliderPict[indexPict], true);
-					}
-
-					for (i = 0; i < this.product.slider.ITEMS.length; i++) {
-						value = this.product.slider.ITEMS[i].getAttribute("data-value");
-
-						if (value === intPict) {
-							BX.addClass(this.product.slider.ITEMS[i], "active");
-						} else if (BX.hasClass(this.product.slider.ITEMS[i], "active")) {
-							BX.removeClass(this.product.slider.ITEMS[i], "active");
-						}
-					}
-				}
-			}
-		},
-
-		onSliderControlHover: function () {
-			var target = BX.proxy_context;
-
-			this.mouseTimer = setTimeout(
-				BX.delegate(function () {
-					this.selectSliderImg(target);
-				}, this),
-				200,
-			);
-		},
-
-		onSliderControlLeave: function () {
-			clearTimeout(this.mouseTimer);
-			this.mouseTimer = null;
-		},
-
-		selectSliderImg: function (target) {
-			var strValue = "",
-				arItem = [];
-
-			target = BX.type.isDomNode(target) ? target : BX.proxy_context;
-
-			if (target && target.hasAttribute("data-value")) {
-				strValue = target.getAttribute("data-value");
-
-				if (strValue.indexOf("_") !== -1) {
-					arItem = strValue.split("_");
-					this.setMainPict(arItem[0], arItem[1]);
-				} else {
-					this.setProductMainPict(strValue);
-				}
-			}
-		},
-
-		setMainPict: function (intSlider, intPict, changePanelPict) {
-			var index = -1,
-				indexPict = -1,
-				i,
-				j,
-				value = "",
-				strValue = "";
-
-			for (i = 0; i < this.offers.length; i++) {
-				if (intSlider === this.offers[i].ID) {
-					index = i;
-					break;
-				}
-			}
-
-			if (index > -1) {
-				if (this.offers[index].SLIDER_COUNT > 0) {
-					for (j = 0; j < this.offers[index].SLIDER.length; j++) {
-						if (intPict === this.offers[index].SLIDER[j].ID) {
-							indexPict = j;
-							break;
-						}
-					}
-
-					if (indexPict > -1) {
-						if (this.offers[index].SLIDER[indexPict]) {
-							this.setCurrentImg(
-								this.offers[index].SLIDER[indexPict],
-								true,
-								changePanelPict,
-							);
-						}
-
-						strValue = intSlider + "_" + intPict;
-
-						for (i = 0; i < this.product.slider.ITEMS.length; i++) {
-							value = this.product.slider.ITEMS[i].getAttribute("data-value");
-
-							if (value === strValue) {
-								BX.addClass(this.product.slider.ITEMS[i], "active");
-							} else if (BX.hasClass(this.product.slider.ITEMS[i], "active")) {
-								BX.removeClass(this.product.slider.ITEMS[i], "active");
-							}
-						}
-					}
-				}
 			}
 		},
 
@@ -1817,38 +1178,6 @@
 				if (boolSet) {
 					this.setCurrentImg(obNewPict, true, true);
 				}
-			}
-		},
-
-		toggleMainPictPopup: function () {
-			if (BX.hasClass(this.obBigSlider, "popup")) {
-				this.hideMainPictPopup();
-			} else {
-				this.showMainPictPopup();
-			}
-		},
-
-		showMainPictPopup: function () {
-			this.config.useMagnifier && this.disableMagnifier(false);
-			BX.addClass(this.obBigSlider, "popup");
-			this.node.imageContainer.style.cursor = "";
-			// remove double scroll bar
-			document.body.style.overflow = "hidden";
-		},
-
-		hideMainPictPopup: function () {
-			this.config.useMagnifier && this.disableMagnifier(false);
-			BX.removeClass(this.obBigSlider, "popup");
-			this.node.imageContainer.style.cursor = "zoom-in";
-			// remove double scroll bar
-			document.body.style.overflow = "";
-		},
-
-		closeByEscape: function (event) {
-			event = event || window.event;
-
-			if (event.keyCode == 27) {
-				this.hideMainPictPopup();
 			}
 		},
 
@@ -2198,24 +1527,6 @@
 
 				BX.addClass(target, "selected");
 
-				if (this.smallCardNodes.panel) {
-					smallCardItem = this.smallCardNodes.panel.querySelector(
-						'[data-treevalue="' + strTreeValue + '"]',
-					);
-					if (smallCardItem) {
-						rowItems = this.smallCardNodes.panel.querySelectorAll(
-							'[data-sku-line="' +
-								smallCardItem.getAttribute("data-sku-line") +
-								'"]',
-						);
-						for (i = 0; i < rowItems.length; i++) {
-							rowItems[i].style.display = "none";
-						}
-
-						smallCardItem.style.display = "";
-					}
-				}
-
 				if (
 					this.isFacebookConversionCustomizeProductEventEnabled &&
 					BX.Type.isArrayFilled(this.offers) &&
@@ -2336,33 +1647,6 @@
 					if (isCurrent) {
 						lineContainer[intNumber].style.display =
 							value == 0 && canBuyId.length == 1 ? "none" : "";
-					}
-				}
-
-				if (this.smallCardNodes.panel) {
-					rowItems = this.smallCardNodes.panel.querySelectorAll(
-						'[data-sku-line="' + intNumber + '"]',
-					);
-					for (i = 0; i < rowItems.length; i++) {
-						value = rowItems[i].getAttribute("data-onevalue");
-						isCurrent = value === activeId;
-
-						if (isCurrent) {
-							rowItems[i].style.display = "";
-						} else {
-							rowItems[i].style.display = "none";
-						}
-
-						if (BX.util.in_array(value, canBuyId)) {
-							BX.removeClass(rowItems[i], "notallowed");
-						} else {
-							BX.addClass(rowItems[i], "notallowed");
-						}
-
-						if (isCurrent) {
-							rowItems[i].style.display =
-								value == 0 && canBuyId.length == 1 ? "none" : "";
-						}
 					}
 				}
 			}
@@ -2512,7 +1796,6 @@
 				}
 
 				this.drawImages(this.offers[index].SLIDER);
-				this.checkSliderControls(this.offers[index].SLIDER_COUNT);
 
 				for (i = 0; i < this.offers.length; i++) {
 					if (this.config.showOfferGroup && this.offers[i].OFFER_GROUP) {
@@ -2522,36 +1805,15 @@
 							offerGroupNode.style.display = i == index ? "" : "none";
 						}
 					}
-
-					if (this.slider.controls[i].ID) {
-						if (i === index) {
-							this.product.slider = this.slider.controls[i];
-							this.slider.controls[i].CONT &&
-								BX.show(this.slider.controls[i].CONT);
-						} else {
-							this.slider.controls[i].CONT &&
-								BX.hide(this.slider.controls[i].CONT);
-						}
-					} else if (i === index) {
-						this.product.slider = {};
-					}
 				}
 
 				if (this.offers[index].SLIDER_COUNT > 0) {
-					this.setMainPict(
-						this.offers[index].ID,
-						this.offers[index].SLIDER[0].ID,
-						true,
-					);
+					this.setCurrentImg(this.offers[index].SLIDER[0], true, true);
 				} else {
 					this.setMainPictFromItem(index);
 				}
 
-				if (this.offers[index].SLIDER_COUNT > 1) {
-					this.initSlider();
-				} else {
-					this.stopSlider();
-				}
+				this.initSlider();
 
 				if (this.obDescription && this.config.showSkuDescription === "Y") {
 					this.changeSkuDescription(index);
@@ -2573,6 +1835,7 @@
 					}
 
 					if (this.obMainSkuProps) {
+						console.log(this.offers[index].DISPLAY_PROPERTIES_MAIN_BLOCK);
 						if (!this.offers[index].DISPLAY_PROPERTIES_MAIN_BLOCK) {
 							BX.adjust(this.obMainSkuProps, {
 								style: { display: "none" },
@@ -2679,8 +1942,7 @@
 							"data-id": images[i].ID,
 						},
 						props: {
-							className:
-								"product-item-detail-slider-image" + (i == 0 ? " active" : ""),
+							className: "swiper-slide" + (i == 0 ? " active" : ""),
 						},
 						children: [img],
 					}),

@@ -17,8 +17,9 @@ $strSectionDelete = CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "SECTION_DELET
 $arSectionDeleteParams = array("CONFIRM" => GetMessage('CT_BCSL_ELEMENT_DELETE_CONFIRM'));
 ?>
 
-<div class="catalog-section-list catalog-section-list--accordeon-view">
-  <? if ($arResult["SECTIONS_COUNT"] > 0): ?>
+<? if ($arResult["SECTIONS_COUNT"] > 0): ?>
+  <div class="catalog-section-list catalog-section-list--accordeon-view">
+    <span class="catalog-section-list__title">Каталог</span>
     <nav class="accordeon">
       <?
       $intCurrentDepth = 1;
@@ -73,5 +74,6 @@ $arSectionDeleteParams = array("CONFIRM" => GetMessage('CT_BCSL_ELEMENT_DELETE_C
       unset($arSection);
       ?>
     </nav>
-  <? endif; ?>
-</div>
+
+  </div>
+<? endif; ?>

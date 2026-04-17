@@ -34,7 +34,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/_src/scss/template.scss": {
-    "file": "template_styles.rJ3lBatK.css",
+    "file": "template_styles.DH7PVyVC.css",
     "src": "local/templates/rise-bags/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
@@ -49,6 +49,24 @@
     "name": "bitrix_catalog_compare_list_littleweb_scss",
     "names": [
       "bitrix_catalog_compare_list_littleweb_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/catalog.element/littleweb/_src/scss/index.scss": {
+    "file": "components/bitrix/catalog.element/littleweb/style.DB7k0LPj.css",
+    "src": "local/templates/rise-bags/components/bitrix/catalog.element/littleweb/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_catalog_element_littleweb_scss",
+    "names": [
+      "bitrix_catalog_element_littleweb_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/catalog.filter/date-filter/_src/scss/index.scss": {
+    "file": "components/bitrix/catalog.filter/date-filter/style.OKsM7mRK.css",
+    "src": "local/templates/rise-bags/components/bitrix/catalog.filter/date-filter/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_catalog_filter_date-filter_scss",
+    "names": [
+      "bitrix_catalog_filter_date-filter_scss.css"
     ]
   },
   "local/templates/rise-bags/components/bitrix/catalog.item/littleweb/_src/js/index.js": {
@@ -73,7 +91,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/components/bitrix/catalog.section.list/accordeon/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog.section.list/accordeon/style.DtlFXuG_.css",
+    "file": "components/bitrix/catalog.section.list/accordeon/style.SZbX3qlk.css",
     "src": "local/templates/rise-bags/components/bitrix/catalog.section.list/accordeon/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_section_list_accordeon_scss",
@@ -100,7 +118,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/catalog.smart.filter/littleweb/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog.smart.filter/littleweb/style.XdWwkplc.css",
+    "file": "components/bitrix/catalog.smart.filter/littleweb/style.douGnKr8.css",
     "src": "local/templates/rise-bags/components/bitrix/catalog.smart.filter/littleweb/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_smart_filter_littleweb_scss",
@@ -124,7 +142,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/components/bitrix/catalog/littleweb/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog/littleweb/style.CSRVcqkz.css",
+    "file": "components/bitrix/catalog/littleweb/style.BXWObzic.css",
     "src": "local/templates/rise-bags/components/bitrix/catalog/littleweb/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_littleweb_scss",

@@ -17,18 +17,23 @@
 			}
 
 			&--main {
+				position: sticky;
+				top: 32px;
+
 				display: flex;
 				flex-direction: column;
 				gap: 24px;
+
+				height: fit-content;
 			}
 		}
 	}
 }
 
-.catalog-action-row {
-	position: relative;
+// .catalog-action-row {
+// 	position: relative;
 
-	display: flex;
-	align-items: center;
-	gap: 24px;
-}
+// 	display: flex;
+// 	align-items: center;
+// 	gap: 24px;
+// }

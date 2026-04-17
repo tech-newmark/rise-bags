@@ -54,7 +54,7 @@ JCSmartFilter.prototype.initFilterOpener = function () {
 	if (!openerBtn || !filterForm) return;
 
 	// По умолчанию фильтр скрыт
-	filterForm.style.display = "none";
+	// filterForm.style.display = "none";
 
 	// Привязываем обработчик
 	this.bindFilterOpener();
