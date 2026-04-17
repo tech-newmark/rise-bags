@@ -12,21 +12,22 @@ $this->setFrameMode(true);
 					<p><?= $arResult['DESCRIPTION'] ?></p>
 				<? endif; ?>
 			</div>
+
 			<div class="articles__list">
-				<? foreach ($arResult["ITEMS"] as $index => $arItem): ?>
+				<? foreach ($arResult["ITEMS"] as $index => $arItemParams): ?>
 					<?
-					$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
-					$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+					$this->AddEditAction($arItemParams['ID'], $arItemParams['EDIT_LINK'], CIBlock::GetArrayByID($arItemParams["IBLOCK_ID"], "ELEMENT_EDIT"));
+					$this->AddDeleteAction($arItemParams['ID'], $arItemParams['DELETE_LINK'], CIBlock::GetArrayByID($arItemParams["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
 					?>
-					<div class="articles-item" id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
+					<div class="articles-item" id="<?= $this->GetEditAreaId($arItemParams['ID']); ?>">
 						<? $APPLICATION->IncludeComponent(
 							"custom:cards",
 							"article-card",
-							array(
-								"TEMPLATE_DATA" => $arItem,
+							$arItemParams + [
+								"FILTER_NAME" => "arrFilter",
 								"SHOW_DATE_ACTIVE_FROM" => $arParams["SHOW_DATE_ACTIVE_FROM"],
 								"SHOW_DATE_ACTIVE_TO" => $arParams["SHOW_DATE_ACTIVE_TO"],
-							),
+							],
 							$component,
 							array("HIDE_ICONS" => $index > 0 ?? "Y")
 						); ?>

@@ -5,7 +5,14 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 
 /** @var array $arCurrentValues */
 
+
 $arTemplateParameters = array(
+	"USE_DATE_FILTER" => array(
+		"PARENT" => "VISUAL",
+		"NAME" => "Использовать фильтр по году новости",
+		"TYPE" => "CHECKBOX",
+		"DEFAULT" => "Y",
+	),
 	"DISPLAY_DATE" => array(
 		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_DATE"),
 		"TYPE" => "CHECKBOX",

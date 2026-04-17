@@ -1,9 +1,10 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Отзывы");
-?><?$APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"reviews-list", 
+?>
+<? $APPLICATION->IncludeComponent(
+	"bitrix:news.list",
+	"reviews-list",
 	[
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "Y",
@@ -69,4 +70,5 @@ $APPLICATION->SetTitle("Отзывы");
 		"COMPONENT_TEMPLATE" => "reviews-list"
 	],
 	false
-);?><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
+); ?>
+<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

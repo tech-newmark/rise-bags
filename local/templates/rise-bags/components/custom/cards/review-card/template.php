@@ -1,7 +1,6 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 $this->setFrameMode(true);
-$arResult = $arParams["TEMPLATE_DATA"] ?? [];
-// includeComponentAssets('cards/article-card');
+$arResult = $arParams;
 ?>
 
 <? if ($arResult): ?>
@@ -16,20 +15,20 @@ $arResult = $arParams["TEMPLATE_DATA"] ?? [];
                     <? endfor; ?>
                 </div>
             <? endif; ?>
-            <? if ($arResult["PREVIEW_TEXT"]): ?>
+            <? if ($arResult["~PREVIEW_TEXT"]): ?>
                 <div class="review-card__text"><?= $arResult["~PREVIEW_TEXT"] ?></div>
             <? endif; ?>
             <button class="clear-btn" type="button">Читать полностью
-                <svg width="9" height="16" viewBox="0 0 9 16" role="img" aria-hidden="true" focusable="false">
+                <svg width="20" height="20" viewBox="0 0 20 20" role="img" aria-hidden="true" focusable="false">
                     <use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#arrow-sm"></use>
                 </svg></button>
             <div class="review-card__author">
                 <? if ($arResult["PREVIEW_PICTURE"]["SRC"]): ?>
                     <img src="<?= $arResult["PREVIEW_PICTURE"]["SRC"] ?>" alt="<?= $arResult["NAME"] ?>">
                 <? endif; ?>
-                <span><?= $arResult["NAME"] ?></span>
+                <p class="review-card__author-name"><?= $arResult["NAME"] ?></p>
                 <? if ($arResult["PROPERTIES"]["JOB_TITLE"]["VALUE"] || $arResult["PROPERTIES"]["COMPANY"]["VALUE"]): ?>
-                    <span><?= $arResult["PROPERTIES"]["JOB_TITLE"]["VALUE"] ?>, <?= $arResult["PROPERTIES"]["COMPANY"]["VALUE"] ?></span>
+                    <p class="review-card__author-job"><?= $arResult["PROPERTIES"]["JOB_TITLE"]["VALUE"] ?>, <?= $arResult["PROPERTIES"]["COMPANY"]["VALUE"] ?></p>
                 <? endif; ?>
             </div>
         </article>

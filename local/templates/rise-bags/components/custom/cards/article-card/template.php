@@ -1,7 +1,6 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 $this->setFrameMode(true);
-$arResult = $arParams["TEMPLATE_DATA"] ?? [];
-// includeComponentAssets('cards/article-card');
+$arResult = $arParams;
 ?>
 
 <? if ($arResult): ?>
@@ -16,11 +15,11 @@ $arResult = $arParams["TEMPLATE_DATA"] ?? [];
                     <time>Действует до <?= FormatDate("j F Y", MakeTimeStamp($arResult['DATE_ACTIVE_TO'], "DD.MM.YYYY")) ?></time>
                 <? endif; ?>
                 <h2><?= $arResult['NAME'] ?></h2>
-                <? if (($arResult['PREVIEW_TEXT']) || $arResult['DETAIL_TEXT']): ?>
-                    <p><?= ($arResult['PREVIEW_TEXT']) ? $arResult['PREVIEW_TEXT'] : $arResult['DETAIL_TEXT'] ?></p>
+                <? if ($arResult['~PREVIEW_TEXT'] || $arResult['~DETAIL_TEXT']): ?>
+                    <div><?= ($arResult['~PREVIEW_TEXT']) ?  $arResult['~PREVIEW_TEXT'] : $arResult['~DETAIL_TEXT'] ?></div>
                 <? endif; ?>
                 <a class="clear-btn" href="<?= $arResult['DETAIL_PAGE_URL'] ?>">Подробнее
-                    <svg width="9" height="16" viewBox="0 0 9 16" role="img" aria-hidden="true" focusable="false">
+                    <svg width="20" height="20" viewBox="0 0 20 20" role="img" aria-hidden="true" focusable="false">
                         <use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#arrow-sm"></use>
                     </svg>
                 </a>

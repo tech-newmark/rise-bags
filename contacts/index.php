@@ -1,5 +1,5 @@
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Задайте вопрос");
+$APPLICATION->SetTitle("Контакты");
 ?>
 
 <section class="section contacts">
@@ -182,7 +182,6 @@ $APPLICATION->SetTitle("Задайте вопрос");
 				<iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A8ee7ebca82150d2a24a665ba7846167dae4cc3770c533b389d977e7f7f392690&amp;source=constructor" width="100%" height="400" frameborder="0"></iframe>
 			</div>
 		</div>
-	</div>
 	</div>
 </section>
 

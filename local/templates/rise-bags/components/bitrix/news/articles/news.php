@@ -13,34 +13,32 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 /** @var string $templateFolder */
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
-$this->setFrameMode(true);
+$this->setFrameMode(true); ?>
 
-/*if ($arParams["USE_RSS"] == "Y"):
+<? if ($arParams["USE_RSS"] == "Y"):
 	if (method_exists($APPLICATION, 'addheadstring'))
 		$APPLICATION->AddHeadString('<link rel="alternate" type="application/rss+xml" title="' . $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["rss"] . '" href="' . $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["rss"] . '" />');
 ?>
 	<a href="<?= $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["rss"] ?>" title="rss" target="_self"><img alt="RSS" src="<?= $templateFolder ?>/images/gif-light/feed-icon-16x16.gif" border="0" align="right" /></a>
-<?
-endif;*/
+<? endif; ?>
 
-if ($arParams["USE_SEARCH"] == "Y"): ?>
-	<?= GetMessage("SEARCH_LABEL") ?><?php
-										$APPLICATION->IncludeComponent(
-											"bitrix:search.form",
-											"flat",
-											[
-												"PAGE" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["search"]
-											],
-											$component,
-											['HIDE_ICONS' => 'Y']
-										); ?>
-	<br />
-<?php
-endif;
-if ($arParams["USE_FILTER"] == "Y"):
+<? if ($arParams["USE_SEARCH"] == "Y"): ?>
+	<?= GetMessage("SEARCH_LABEL") ?>
+	<? APPLICATION->IncludeComponent(
+		"bitrix:search.form",
+		"flat",
+		[
+			"PAGE" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["search"]
+		],
+		$component,
+		['HIDE_ICONS' => 'Y']
+	); ?>
+<? endif; ?>
+
+<? if ($arParams["USE_FILTER"] == "Y"):
 	$APPLICATION->IncludeComponent(
 		"bitrix:catalog.filter",
-		"",
+		"bootstrap_v4",
 		[
 			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
@@ -56,18 +54,19 @@ if ($arParams["USE_FILTER"] == "Y"):
 		['HIDE_ICONS' => 'Y']
 	);
 ?>
-	<br />
-<?php
-endif; ?>
 
-<?
-$APPLICATION->IncludeComponent(
+<? endif; ?>
+
+<? $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"article-list",
 	[
+		"USE_FILTER" => $arParams["USE_DATE_FILTER"] === "Y" ? "Y" : $arParams["USE_FILTER"],
+		"FILTER_NAME" => $arParams["FILTER_NAME"],
 		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 		"NEWS_COUNT" => $arParams["NEWS_COUNT"],
+		"CUSTOM_SORT" => $_REQUEST["sort"] ?? '',
 		"SORT_BY1" => $arParams["SORT_BY1"],
 		"SORT_ORDER1" => $arParams["SORT_ORDER1"],
 		"SORT_BY2" => $arParams["SORT_BY2"],
@@ -107,7 +106,7 @@ $APPLICATION->IncludeComponent(
 		"ACTIVE_DATE_FORMAT" => $arParams["LIST_ACTIVE_DATE_FORMAT"],
 		"USE_PERMISSIONS" => $arParams["USE_PERMISSIONS"],
 		"GROUP_PERMISSIONS" => $arParams["GROUP_PERMISSIONS"],
-		"FILTER_NAME" => $arParams["FILTER_NAME"],
+
 		"HIDE_LINK_WHEN_NO_DETAIL" => $arParams["HIDE_LINK_WHEN_NO_DETAIL"],
 		"CHECK_DATES" => $arParams["CHECK_DATES"],
 		"SHOW_DATE_ACTIVE_FROM" => $arParams["SHOW_DATE_ACTIVE_FROM"],

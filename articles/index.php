@@ -109,6 +109,16 @@ $APPLICATION->SetTitle("Новости");
 		"TITLE_IN_LINKED_ARTICLES" => "Рекомендуем",
 		"DESC_IN_LINKED_ARTICLES" => "Возможно вам так же будет интересно",
 		"BUTTON_NAME_IN_LINKED_ARTICLES" => "Смотреть все",
+		"FILTER_NAME" => "",
+		"FILTER_FIELD_CODE" => [
+			0 => "",
+			1 => "",
+		],
+		"FILTER_PROPERTY_CODE" => [
+			0 => "",
+			1 => "",
+		],
+		"USE_DATE_FILTER" => "Y",
 		"SEF_URL_TEMPLATES" => [
 			"news" => "",
 			"section" => "",
