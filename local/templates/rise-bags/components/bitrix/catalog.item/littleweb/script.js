@@ -1521,6 +1521,23 @@
 			}
 		},
 
+		formatPrice: function (value, currency) {
+			if (
+				typeof BX !== "undefined" &&
+				BX.Currency &&
+				typeof BX.Currency.currencyFormat === "function"
+			) {
+				return BX.Currency.currencyFormat(value, currency, true);
+			}
+
+			var numericValue = parseFloat(value);
+			if (!isFinite(numericValue)) {
+				return value;
+			}
+
+			return currency ? numericValue + " " + currency : String(numericValue);
+		},
+
 		setPrice: function () {
 			var obData, price;
 
@@ -1535,11 +1552,7 @@
 			if (this.obPrice) {
 				if (price) {
 					BX.adjust(this.obPrice, {
-						html: BX.Currency.currencyFormat(
-							price.RATIO_PRICE,
-							price.CURRENCY,
-							true,
-						),
+						html: this.formatPrice(price.RATIO_PRICE, price.CURRENCY),
 					});
 				} else {
 					BX.adjust(this.obPrice, { html: "" });
@@ -1549,11 +1562,7 @@
 					if (price && price.RATIO_PRICE !== price.RATIO_BASE_PRICE) {
 						BX.adjust(this.obPriceOld, {
 							style: { display: "" },
-							html: BX.Currency.currencyFormat(
-								price.RATIO_BASE_PRICE,
-								price.CURRENCY,
-								true,
-							),
+							html: this.formatPrice(price.RATIO_BASE_PRICE, price.CURRENCY),
 						});
 					} else {
 						BX.adjust(this.obPriceOld, {
@@ -1573,10 +1582,9 @@
 							html:
 								BX.message("PRICE_TOTAL_PREFIX") +
 								" <strong>" +
-								BX.Currency.currencyFormat(
+								this.formatPrice(
 									price.PRICE * this.obQuantity.value,
 									price.CURRENCY,
-									true,
 								) +
 								"</strong>",
 							style: { display: "" },
