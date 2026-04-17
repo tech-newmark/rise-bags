@@ -4,11 +4,31 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
 includeComponentAssets('catalog.item/littleweb');
 
+use Bitrix\Main\Loader;
+
 /**
  * @var array $arResult
  * @var array $arParams
  * @var array $templateData
  */
+
+if (!empty($templateData['TEMPLATE_LIBRARY'])) {
+	$loadCurrency = false;
+
+	if (!empty($templateData['CURRENCIES'])) {
+		$loadCurrency = Loader::includeModule('currency');
+	}
+
+	CJSCore::Init($templateData['TEMPLATE_LIBRARY']);
+
+	if ($loadCurrency) {
+?>
+		<script>
+			BX.Currency.setCurrencies(<?= $templateData['CURRENCIES'] ?>);
+		</script>
+<?php
+	}
+}
 
 // check compared state
 if ($arParams['DISPLAY_COMPARE']) {

@@ -25,6 +25,7 @@ JCSmartFilter.prototype.bindFilterOpener = function () {
 	var openerBtn = BX(this.formOpenedID);
 	var filterForm = BX("smartfilter_form");
 
+	console.log(openerBtn);
 	if (!openerBtn || !filterForm) return;
 
 	// Удаляем старые обработчики
