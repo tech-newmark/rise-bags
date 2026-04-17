@@ -609,82 +609,82 @@ if (isset($arCurrentValues['USE_VOTE_RATING']) && $arCurrentValues['USE_VOTE_RAT
 	);
 }
 
-$arTemplateParameters['USE_COMMENTS'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CP_BCE_TPL_USE_COMMENTS'),
-	'TYPE' => 'CHECKBOX',
-	'DEFAULT' => 'N',
-	'REFRESH' => 'Y'
-);
+// $arTemplateParameters['USE_COMMENTS'] = array(
+// 	'PARENT' => 'VISUAL',
+// 	'NAME' => GetMessage('CP_BCE_TPL_USE_COMMENTS'),
+// 	'TYPE' => 'CHECKBOX',
+// 	'DEFAULT' => 'N',
+// 	'REFRESH' => 'Y'
+// );
 
-if (isset($arCurrentValues['USE_COMMENTS']) && $arCurrentValues['USE_COMMENTS'] === 'Y') {
-	if (ModuleManager::isModuleInstalled('blog')) {
-		$arTemplateParameters['BLOG_USE'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BCE_TPL_BLOG_USE'),
-			'TYPE' => 'CHECKBOX',
-			'DEFAULT' => 'N',
-			'REFRESH' => 'Y'
-		);
+// if (isset($arCurrentValues['USE_COMMENTS']) && $arCurrentValues['USE_COMMENTS'] === 'Y') {
+// 	if (ModuleManager::isModuleInstalled('blog')) {
+// 		$arTemplateParameters['BLOG_USE'] = array(
+// 			'PARENT' => 'VISUAL',
+// 			'NAME' => GetMessage('CP_BCE_TPL_BLOG_USE'),
+// 			'TYPE' => 'CHECKBOX',
+// 			'DEFAULT' => 'N',
+// 			'REFRESH' => 'Y'
+// 		);
 
-		if (isset($arCurrentValues['BLOG_USE']) && $arCurrentValues['BLOG_USE'] === 'Y') {
-			$arTemplateParameters['BLOG_URL'] = array(
-				'PARENT' => 'VISUAL',
-				'NAME' => GetMessage('CP_BCE_TPL_BLOG_URL'),
-				'TYPE' => 'STRING',
-				'DEFAULT' => 'catalog_comments'
-			);
-			$arTemplateParameters['BLOG_EMAIL_NOTIFY'] = array(
-				'PARENT' => 'VISUAL',
-				'NAME' => GetMessage('CP_BCE_TPL_BLOG_EMAIL_NOTIFY'),
-				'TYPE' => 'CHECKBOX',
-				'DEFAULT' => 'N'
-			);
-		}
-	}
+// 		if (isset($arCurrentValues['BLOG_USE']) && $arCurrentValues['BLOG_USE'] === 'Y') {
+// 			$arTemplateParameters['BLOG_URL'] = array(
+// 				'PARENT' => 'VISUAL',
+// 				'NAME' => GetMessage('CP_BCE_TPL_BLOG_URL'),
+// 				'TYPE' => 'STRING',
+// 				'DEFAULT' => 'catalog_comments'
+// 			);
+// 			$arTemplateParameters['BLOG_EMAIL_NOTIFY'] = array(
+// 				'PARENT' => 'VISUAL',
+// 				'NAME' => GetMessage('CP_BCE_TPL_BLOG_EMAIL_NOTIFY'),
+// 				'TYPE' => 'CHECKBOX',
+// 				'DEFAULT' => 'N'
+// 			);
+// 		}
+// 	}
 
-	$boolRus = false;
-	$rsLangs = CLanguage::GetList('id', 'asc', array('ID' => 'ru', 'ACTIVE' => 'Y'));
-	if ($arLang = $rsLangs->Fetch()) {
-		$boolRus = true;
-	}
+// 	$boolRus = false;
+// 	$rsLangs = CLanguage::GetList('id', 'asc', array('ID' => 'ru', 'ACTIVE' => 'Y'));
+// 	if ($arLang = $rsLangs->Fetch()) {
+// 		$boolRus = true;
+// 	}
 
-	if ($boolRus) {
-		$arTemplateParameters['VK_USE'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BCE_TPL_VK_USE'),
-			'TYPE' => 'CHECKBOX',
-			'DEFAULT' => 'N',
-			'REFRESH' => 'Y'
-		);
+// 	if ($boolRus) {
+// 		$arTemplateParameters['VK_USE'] = array(
+// 			'PARENT' => 'VISUAL',
+// 			'NAME' => GetMessage('CP_BCE_TPL_VK_USE'),
+// 			'TYPE' => 'CHECKBOX',
+// 			'DEFAULT' => 'N',
+// 			'REFRESH' => 'Y'
+// 		);
 
-		if (isset($arCurrentValues['VK_USE']) && $arCurrentValues['VK_USE'] === 'Y') {
-			$arTemplateParameters['VK_API_ID'] = array(
-				'PARENT' => 'VISUAL',
-				'NAME' => GetMessage('CP_BCE_TPL_VK_API_ID'),
-				'TYPE' => 'STRING',
-				'DEFAULT' => 'API_ID'
-			);
-		}
-	}
+// 		if (isset($arCurrentValues['VK_USE']) && $arCurrentValues['VK_USE'] === 'Y') {
+// 			$arTemplateParameters['VK_API_ID'] = array(
+// 				'PARENT' => 'VISUAL',
+// 				'NAME' => GetMessage('CP_BCE_TPL_VK_API_ID'),
+// 				'TYPE' => 'STRING',
+// 				'DEFAULT' => 'API_ID'
+// 			);
+// 		}
+// 	}
 
-	$arTemplateParameters['FB_USE'] = array(
-		'PARENT' => 'VISUAL',
-		'NAME' => GetMessage('CP_BCE_TPL_FB_USE'),
-		'TYPE' => 'CHECKBOX',
-		'DEFAULT' => 'N',
-		'REFRESH' => 'Y'
-	);
+// 	$arTemplateParameters['FB_USE'] = array(
+// 		'PARENT' => 'VISUAL',
+// 		'NAME' => GetMessage('CP_BCE_TPL_FB_USE'),
+// 		'TYPE' => 'CHECKBOX',
+// 		'DEFAULT' => 'N',
+// 		'REFRESH' => 'Y'
+// 	);
 
-	if (isset($arCurrentValues['FB_USE']) && $arCurrentValues['FB_USE'] === 'Y') {
-		$arTemplateParameters['FB_APP_ID'] = array(
-			'PARENT' => 'VISUAL',
-			'NAME' => GetMessage('CP_BCE_TPL_FB_APP_ID'),
-			'TYPE' => 'STRING',
-			'DEFAULT' => ''
-		);
-	}
-}
+// 	if (isset($arCurrentValues['FB_USE']) && $arCurrentValues['FB_USE'] === 'Y') {
+// 		$arTemplateParameters['FB_APP_ID'] = array(
+// 			'PARENT' => 'VISUAL',
+// 			'NAME' => GetMessage('CP_BCE_TPL_FB_APP_ID'),
+// 			'TYPE' => 'STRING',
+// 			'DEFAULT' => ''
+// 		);
+// 	}
+// }
 
 $arTemplateParameters['MESS_PRICE_RANGES_TITLE'] = array(
 	'PARENT' => 'VISUAL',

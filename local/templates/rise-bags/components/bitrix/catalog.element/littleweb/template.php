@@ -49,6 +49,8 @@ $itemIds = array(
 	'STICKER_ID' => $mainId . '_sticker',
 	'BIG_SLIDER_ID' => $mainId . '_big_slider',
 	'BIG_IMG_CONT_ID' => $mainId . '_bigimg_cont',
+	'PICT' => $mainId . '_pict',
+	'PICT_SLIDER' => $mainId . '_pict_slider',
 	'SLIDER_CONT_ID' => $mainId . '_slider_cont',
 	'OLD_PRICE_ID' => $mainId . '_old_price',
 	'PRICE_ID' => $mainId . '_price',
@@ -161,84 +163,40 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 
 <div class="bx-catalog-element" id="<?= $itemIds['ID'] ?>" itemscope itemtype="http://schema.org/Product">
 
-
 	<div class="grid">
 		<div class="grid-item">
-			<div class="product-item-detail-slider-container" id="<?= $itemIds['BIG_SLIDER_ID'] ?>">
-				<span class="product-item-detail-slider-close" data-entity="close-popup"></span>
 
-				<div class="product-item-detail-slider-block" data-entity="images-slider-block">
-
-					<span class="product-item-detail-slider-left" data-entity="slider-control-left" style="display: none;"></span>
-					<span class="product-item-detail-slider-right" data-entity="slider-control-right" style="display: none;"></span>
-
-
-
-
-					<? if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y'): ?>
-						<? if ($haveOffers): ?>
-							<div class="product-item-label-ring" id="<?= $itemIds['DISCOUNT_PERCENT_ID'] ?>" style="display: none;"> </div>
-						<? else: ?>
-							<? if ($price['DISCOUNT'] > 0): ?>
-								<div class="product-item-label-ring" id="<?= $itemIds['DISCOUNT_PERCENT_ID'] ?>" title="<?= -$price['PERCENT'] ?>%">
-									<span><?= -$price['PERCENT'] ?>%</span>
-								</div>
-							<? endif; ?>
-						<? endif; ?>
-					<? endif; ?>
-
-					<div class="product-item-detail-slider-images-container" data-entity="images-container">
-
-						<? if (!empty($actualItem['MORE_PHOTO'])): ?>
-							<? foreach ($actualItem['MORE_PHOTO'] as $key => $photo): ?>
-
-								<div class="product-item-detail-slider-image<?= ($key == 0 ? ' active' : '') ?>" data-entity="image" data-id="<?= $photo['ID'] ?>">
-									<img src="<?= $photo['SRC'] ?>" alt="<?= $alt ?>" title="<?= $title ?>" <?= ($key == 0 ? ' itemprop="image"' : '') ?>>
-								</div>
-							<? endforeach; ?>
-						<? endif; ?>
-
-						<? if ($arParams['SLIDER_PROGRESS'] === 'Y'): ?>
-							<div class="product-item-detail-slider-progress-bar" data-entity="slider-progress-bar"></div>
-						<? endif; ?>
-
-					</div>
-				</div>
-
-				<? if ($showSliderControls): ?>
-					<? if ($haveOffers): ?>
-						<? foreach ($arResult['OFFERS'] as $keyOffer => $offer):
-							if (!isset($offer['MORE_PHOTO_COUNT']) || $offer['MORE_PHOTO_COUNT'] <= 0)
-								continue;
-
-							$strVisible = $arResult['OFFERS_SELECTED'] == $keyOffer ? '' : 'none';
-						?>
-							<div class="product-item-detail-slider-controls-block" id="<?= $itemIds['SLIDER_CONT_OF_ID'] . $offer['ID'] ?>" style="display: <?= $strVisible ?>;">
-								<? foreach ($offer['MORE_PHOTO'] as $keyPhoto => $photo) : ?>
-									<div class="product-item-detail-slider-controls-image<?= ($keyPhoto == 0 ? ' active' : '') ?>" data-entity="slider-control" data-value="<?= $offer['ID'] . '_' . $photo['ID'] ?>">
-										<img src="<?= $photo['SRC'] ?>">
-									</div>
-								<? endforeach; ?>
-							</div>
-						<? endforeach ?>
-					<? else: ?>
-						<div class="product-item-detail-slider-controls-block" id="<?= $itemIds['SLIDER_CONT_ID'] ?>">
-							<? if (!empty($actualItem['MORE_PHOTO'])): ?>
-								<? foreach ($actualItem['MORE_PHOTO'] as $key => $photo) : ?>
-									<div class="product-item-detail-slider-controls-image<?= ($key == 0 ? ' active' : '') ?>"
-										data-entity="slider-control" data-value="<?= $photo['ID'] ?>">
-										<img src="<?= $photo['SRC'] ?>">
-									</div>
-								<? endforeach; ?>
-							<? endif; ?>
+			<? if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y'): ?>
+				<? if ($haveOffers): ?>
+					<div class="product-item-label-ring" id="<?= $itemIds['DISCOUNT_PERCENT_ID'] ?>" style="display: none;"> </div>
+				<? else: ?>
+					<? if ($price['DISCOUNT'] > 0): ?>
+						<div class="product-item-label-ring" id="<?= $itemIds['DISCOUNT_PERCENT_ID'] ?>" title="<?= -$price['PERCENT'] ?>%">
+							<span><?= -$price['PERCENT'] ?>%</span>
 						</div>
 					<? endif; ?>
 				<? endif; ?>
+			<? endif; ?>
+
+			<div class="product-item-detail-slider-container" id="<?= $itemIds['BIG_SLIDER_ID'] ?>">
+				<div class="swiper product-item-slider" data-entity="images-slider-block">
+					<div class="swiper-wrapper" id="<?= $itemIds['PICT_SLIDER'] ?>" data-entity="images-container">
+						<? if (!empty($actualItem['MORE_PHOTO'])): ?>
+							<? foreach ($actualItem['MORE_PHOTO'] as $index => $slide): ?>
+								<div class="swiper-slide<?= ($index === 0 ? ' active' : '') ?>" <?= ($index === 0 ? ' id="' . $itemIds['PICT'] . '"' : '') ?> data-entity="image" data-id="<?= $slide['ID'] ?>">
+									<img src="<?= $slide['SRC'] ?>" alt="<?= $alt ?>" title="<?= $title ?>" <?= ($index === 0 ? ' itemprop="image"' : '') ?>>
+								</div>
+							<? endforeach; ?>
+						<? endif; ?>
+					</div>
+					<div class="swiper-pagination" aria-label="Пагинация"></div>
+				</div>
 
 
 
-				<!-- разобраться!!! -->
+				<?/*НАБОРЫ / НЕ ВЕРСТАЛИСЬ*/ ?>
 				<? if ($haveOffers): ?>
+					<? debug($arResult['OFFER_GROUP']) ?>
 					<? if ($arResult['OFFER_GROUP']): ?>
 						<? foreach ($arResult['OFFER_GROUP_VALUES'] as $offerId): ?>
 							<span id="<?= $itemIds['OFFER_GROUP'] . $offerId ?>" style="display: none;">
@@ -290,236 +248,11 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 						);
 					endif; ?>
 				<? endif; ?>
-				<!-- разобраться!!! -->
+				<?/*НАБОРЫ / НЕ ВЕРСТАЛИСЬ*/ ?>
 
-
-
-				<? if ($arResult['CATALOG'] && $actualItem['CAN_BUY'] && \Bitrix\Main\ModuleManager::isModuleInstalled('sale')):
-					$APPLICATION->IncludeComponent(
-						'bitrix:sale.prediction.product.detail',
-						'.default',
-						array(
-							'BUTTON_ID' => $showBuyBtn ? $itemIds['BUY_LINK'] : $itemIds['ADD_BASKET_LINK'],
-							'CUSTOM_SITE_ID' => $arParams['CUSTOM_SITE_ID'] ?? null,
-							'POTENTIAL_PRODUCT_TO_BUY' => array(
-								'ID' => $arResult['ID'] ?? null,
-								'MODULE' => $arResult['MODULE'] ?? 'catalog',
-								'PRODUCT_PROVIDER_CLASS' => $arResult['~PRODUCT_PROVIDER_CLASS'] ?? \Bitrix\Catalog\Product\Basket::getDefaultProviderName(),
-								'QUANTITY' => $arResult['QUANTITY'] ?? null,
-								'IBLOCK_ID' => $arResult['IBLOCK_ID'] ?? null,
-
-								'PRIMARY_OFFER_ID' => $arResult['OFFERS'][0]['ID'] ?? null,
-								'SECTION' => array(
-									'ID' => $arResult['SECTION']['ID'] ?? null,
-									'IBLOCK_ID' => $arResult['SECTION']['IBLOCK_ID'] ?? null,
-									'LEFT_MARGIN' => $arResult['SECTION']['LEFT_MARGIN'] ?? null,
-									'RIGHT_MARGIN' => $arResult['SECTION']['RIGHT_MARGIN'] ?? null,
-								),
-							)
-						),
-						$component,
-						array('HIDE_ICONS' => 'Y')
-					);
-				endif; ?>
-
-				<? if ($arResult['CATALOG'] && $arParams['USE_GIFTS_DETAIL'] == 'Y' && \Bitrix\Main\ModuleManager::isModuleInstalled('sale')): ?>
-					<div data-entity="parent-container">
-						<? if (!isset($arParams['GIFTS_DETAIL_HIDE_BLOCK_TITLE']) || $arParams['GIFTS_DETAIL_HIDE_BLOCK_TITLE'] !== 'Y'): ?>
-							<div class="catalog-block-header" data-entity="header" data-showed="false" style="display: none; opacity: 0;">
-								<?= ($arParams['GIFTS_DETAIL_BLOCK_TITLE'] ?: Loc::getMessage('CT_BCE_CATALOG_GIFT_BLOCK_TITLE_DEFAULT')) ?>
-							</div>
-						<? endif;
-
-						CBitrixComponent::includeComponentClass('bitrix:sale.products.gift');
-						$APPLICATION->IncludeComponent(
-							'bitrix:sale.products.gift',
-							'.default',
-							array(
-								'CUSTOM_SITE_ID' => $arParams['CUSTOM_SITE_ID'] ?? null,
-								'PRODUCT_ID_VARIABLE' => $arParams['PRODUCT_ID_VARIABLE'],
-								'ACTION_VARIABLE' => $arParams['ACTION_VARIABLE'],
-
-								'PRODUCT_ROW_VARIANTS' => "",
-								'PAGE_ELEMENT_COUNT' => 0,
-								'DEFERRED_PRODUCT_ROW_VARIANTS' => \Bitrix\Main\Web\Json::encode(
-									SaleProductsGiftComponent::predictRowVariants(
-										$arParams['GIFTS_DETAIL_PAGE_ELEMENT_COUNT'],
-										$arParams['GIFTS_DETAIL_PAGE_ELEMENT_COUNT']
-									)
-								),
-								'DEFERRED_PAGE_ELEMENT_COUNT' => $arParams['GIFTS_DETAIL_PAGE_ELEMENT_COUNT'],
-
-								'SHOW_DISCOUNT_PERCENT' => $arParams['GIFTS_SHOW_DISCOUNT_PERCENT'],
-								'DISCOUNT_PERCENT_POSITION' => $arParams['DISCOUNT_PERCENT_POSITION'],
-								'SHOW_OLD_PRICE' => $arParams['GIFTS_SHOW_OLD_PRICE'],
-								'PRODUCT_DISPLAY_MODE' => 'Y',
-								'PRODUCT_BLOCKS_ORDER' => $arParams['GIFTS_PRODUCT_BLOCKS_ORDER'],
-								'SHOW_SLIDER' => $arParams['GIFTS_SHOW_SLIDER'],
-								'SLIDER_INTERVAL' => $arParams['GIFTS_SLIDER_INTERVAL'] ?? '',
-								'SLIDER_PROGRESS' => $arParams['GIFTS_SLIDER_PROGRESS'] ?? '',
-
-								'TEXT_LABEL_GIFT' => $arParams['GIFTS_DETAIL_TEXT_LABEL_GIFT'],
-
-								'LABEL_PROP_' . $arParams['IBLOCK_ID'] => array(),
-								'LABEL_PROP_MOBILE_' . $arParams['IBLOCK_ID'] => array(),
-								'LABEL_PROP_POSITION' => $arParams['LABEL_PROP_POSITION'],
-
-								'ADD_TO_BASKET_ACTION' => ($arParams['ADD_TO_BASKET_ACTION'] ?? ''),
-								'MESS_BTN_BUY' => $arParams['~GIFTS_MESS_BTN_BUY'],
-								'MESS_BTN_ADD_TO_BASKET' => $arParams['~GIFTS_MESS_BTN_BUY'],
-								'MESS_BTN_DETAIL' => $arParams['~MESS_BTN_DETAIL'],
-								'MESS_BTN_SUBSCRIBE' => $arParams['~MESS_BTN_SUBSCRIBE'],
-								'MESS_BTN_COMPARE' => $arParams['~MESS_BTN_COMPARE'],
-								'MESS_NOT_AVAILABLE' => $arParams['~MESS_NOT_AVAILABLE'],
-								'MESS_SHOW_MAX_QUANTITY' => $arParams['~MESS_SHOW_MAX_QUANTITY'],
-								'MESS_RELATIVE_QUANTITY_MANY' => $arParams['~MESS_RELATIVE_QUANTITY_MANY'],
-								'MESS_RELATIVE_QUANTITY_FEW' => $arParams['~MESS_RELATIVE_QUANTITY_FEW'],
-
-								'SHOW_PRODUCTS_' . $arParams['IBLOCK_ID'] => 'Y',
-								'PROPERTY_CODE_' . $arParams['IBLOCK_ID'] => [],
-								'PROPERTY_CODE_MOBILE' . $arParams['IBLOCK_ID'] => [],
-								'PROPERTY_CODE_' . $arResult['OFFERS_IBLOCK'] => $arParams['OFFER_TREE_PROPS'],
-								'OFFER_TREE_PROPS_' . $arResult['OFFERS_IBLOCK'] => $arParams['OFFER_TREE_PROPS'],
-								'CART_PROPERTIES_' . $arResult['OFFERS_IBLOCK'] => $arParams['OFFERS_CART_PROPERTIES'],
-								'ADDITIONAL_PICT_PROP_' . $arParams['IBLOCK_ID'] => ($arParams['ADD_PICT_PROP'] ?? ''),
-								'ADDITIONAL_PICT_PROP_' . $arResult['OFFERS_IBLOCK'] => ($arParams['OFFER_ADD_PICT_PROP'] ?? ''),
-
-								'HIDE_NOT_AVAILABLE' => 'Y',
-								'HIDE_NOT_AVAILABLE_OFFERS' => 'Y',
-								'PRODUCT_SUBSCRIPTION' => $arParams['PRODUCT_SUBSCRIPTION'],
-								// 'TEMPLATE_THEME' => $arParams['TEMPLATE_THEME'],
-								'PRICE_CODE' => $arParams['PRICE_CODE'],
-								'SHOW_PRICE_COUNT' => $arParams['SHOW_PRICE_COUNT'],
-								'PRICE_VAT_INCLUDE' => $arParams['PRICE_VAT_INCLUDE'],
-								'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
-								'BASKET_URL' => $arParams['BASKET_URL'],
-								'ADD_PROPERTIES_TO_BASKET' => $arParams['ADD_PROPERTIES_TO_BASKET'],
-								'PRODUCT_PROPS_VARIABLE' => $arParams['PRODUCT_PROPS_VARIABLE'],
-								'PARTIAL_PRODUCT_PROPERTIES' => $arParams['PARTIAL_PRODUCT_PROPERTIES'],
-								'USE_PRODUCT_QUANTITY' => 'N',
-								'PRODUCT_QUANTITY_VARIABLE' => $arParams['PRODUCT_QUANTITY_VARIABLE'],
-								'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
-								'POTENTIAL_PRODUCT_TO_BUY' => array(
-									'ID' => $arResult['ID'] ?? null,
-									'MODULE' => $arResult['MODULE'] ?? 'catalog',
-									'PRODUCT_PROVIDER_CLASS' => $arResult['~PRODUCT_PROVIDER_CLASS'] ?? \Bitrix\Catalog\Product\Basket::getDefaultProviderName(),
-									'QUANTITY' => $arResult['QUANTITY'] ?? null,
-									'IBLOCK_ID' => $arResult['IBLOCK_ID'] ?? null,
-
-									'PRIMARY_OFFER_ID' => $arResult['OFFERS'][$arResult['OFFERS_SELECTED']]['ID'] ?? null,
-									'SECTION' => array(
-										'ID' => $arResult['SECTION']['ID'] ?? null,
-										'IBLOCK_ID' => $arResult['SECTION']['IBLOCK_ID'] ?? null,
-										'LEFT_MARGIN' => $arResult['SECTION']['LEFT_MARGIN'] ?? null,
-										'RIGHT_MARGIN' => $arResult['SECTION']['RIGHT_MARGIN'] ?? null,
-									),
-								),
-
-								'USE_ENHANCED_ECOMMERCE' => $arParams['USE_ENHANCED_ECOMMERCE'],
-								'DATA_LAYER_NAME' => $arParams['DATA_LAYER_NAME'],
-								'BRAND_PROPERTY' => $arParams['BRAND_PROPERTY']
-							),
-							$component,
-							array('HIDE_ICONS' => 'Y')
-						);
-						?>
-					</div>
-				<? endif; ?>
-
-				<? if ($arResult['CATALOG'] && $arParams['USE_GIFTS_MAIN_PR_SECTION_LIST'] == 'Y' && \Bitrix\Main\ModuleManager::isModuleInstalled('sale')): ?>
-					<div data-entity="parent-container">
-						<? if (!isset($arParams['GIFTS_MAIN_PRODUCT_DETAIL_HIDE_BLOCK_TITLE']) || $arParams['GIFTS_MAIN_PRODUCT_DETAIL_HIDE_BLOCK_TITLE'] !== 'Y'): ?>
-							<div class="catalog-block-header" data-entity="header" data-showed="false" style="display: none; opacity: 0;">
-								<?= ($arParams['GIFTS_MAIN_PRODUCT_DETAIL_BLOCK_TITLE'] ?: Loc::getMessage('CT_BCE_CATALOG_GIFTS_MAIN_BLOCK_TITLE_DEFAULT')) ?>
-							</div>
-						<? endif;
-
-						$APPLICATION->IncludeComponent(
-							'bitrix:sale.gift.main.products',
-							'.default',
-							array(
-								'CUSTOM_SITE_ID' => $arParams['CUSTOM_SITE_ID'] ?? null,
-								'PAGE_ELEMENT_COUNT' => $arParams['GIFTS_MAIN_PRODUCT_DETAIL_PAGE_ELEMENT_COUNT'],
-								'LINE_ELEMENT_COUNT' => $arParams['GIFTS_MAIN_PRODUCT_DETAIL_PAGE_ELEMENT_COUNT'],
-								'HIDE_BLOCK_TITLE' => 'Y',
-								'BLOCK_TITLE' => $arParams['GIFTS_MAIN_PRODUCT_DETAIL_BLOCK_TITLE'],
-
-								'OFFERS_FIELD_CODE' => $arParams['OFFERS_FIELD_CODE'],
-								'OFFERS_PROPERTY_CODE' => $arParams['OFFERS_PROPERTY_CODE'],
-
-								'AJAX_MODE' => $arParams['AJAX_MODE'] ?? '',
-								'IBLOCK_TYPE' => $arParams['IBLOCK_TYPE'],
-								'IBLOCK_ID' => $arParams['IBLOCK_ID'],
-
-								'ELEMENT_SORT_FIELD' => 'ID',
-								'ELEMENT_SORT_ORDER' => 'DESC',
-								'FILTER_NAME' => 'searchFilter',
-								'SECTION_URL' => $arParams['SECTION_URL'],
-								'DETAIL_URL' => $arParams['DETAIL_URL'],
-								'BASKET_URL' => $arParams['BASKET_URL'],
-								'ACTION_VARIABLE' => $arParams['ACTION_VARIABLE'],
-								'PRODUCT_ID_VARIABLE' => $arParams['PRODUCT_ID_VARIABLE'],
-								'SECTION_ID_VARIABLE' => $arParams['SECTION_ID_VARIABLE'],
-
-								'CACHE_TYPE' => $arParams['CACHE_TYPE'],
-								'CACHE_TIME' => $arParams['CACHE_TIME'],
-
-								'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
-								'SET_TITLE' => $arParams['SET_TITLE'],
-								'PROPERTY_CODE' => $arParams['PROPERTY_CODE'],
-								'PRICE_CODE' => $arParams['PRICE_CODE'],
-								'USE_PRICE_COUNT' => $arParams['USE_PRICE_COUNT'],
-								'SHOW_PRICE_COUNT' => $arParams['SHOW_PRICE_COUNT'],
-
-								'PRICE_VAT_INCLUDE' => $arParams['PRICE_VAT_INCLUDE'],
-								'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
-								'CURRENCY_ID' => $arParams['CURRENCY_ID'],
-								'HIDE_NOT_AVAILABLE' => 'Y',
-								'HIDE_NOT_AVAILABLE_OFFERS' => 'Y',
-								// 'TEMPLATE_THEME' => ($arParams['TEMPLATE_THEME'] ?? ''),
-								'PRODUCT_BLOCKS_ORDER' => $arParams['GIFTS_PRODUCT_BLOCKS_ORDER'],
-
-								'SHOW_SLIDER' => $arParams['GIFTS_SHOW_SLIDER'],
-								'SLIDER_INTERVAL' => $arParams['GIFTS_SLIDER_INTERVAL'] ?? '',
-								'SLIDER_PROGRESS' => $arParams['GIFTS_SLIDER_PROGRESS'] ?? '',
-
-								'ADD_PICT_PROP' => ($arParams['ADD_PICT_PROP'] ?? ''),
-								'LABEL_PROP' => ($arParams['LABEL_PROP'] ?? ''),
-								'LABEL_PROP_MOBILE' => ($arParams['LABEL_PROP_MOBILE'] ?? ''),
-								'LABEL_PROP_POSITION' => ($arParams['LABEL_PROP_POSITION'] ?? ''),
-								'OFFER_ADD_PICT_PROP' => ($arParams['OFFER_ADD_PICT_PROP'] ?? ''),
-								'OFFER_TREE_PROPS' => ($arParams['OFFER_TREE_PROPS'] ?? ''),
-								'SHOW_DISCOUNT_PERCENT' => ($arParams['SHOW_DISCOUNT_PERCENT'] ?? ''),
-								'DISCOUNT_PERCENT_POSITION' => ($arParams['DISCOUNT_PERCENT_POSITION'] ?? ''),
-								'SHOW_OLD_PRICE' => ($arParams['SHOW_OLD_PRICE'] ?? ''),
-								'MESS_BTN_BUY' => ($arParams['~MESS_BTN_BUY'] ?? ''),
-								'MESS_BTN_ADD_TO_BASKET' => ($arParams['~MESS_BTN_ADD_TO_BASKET'] ?? ''),
-								'MESS_BTN_DETAIL' => ($arParams['~MESS_BTN_DETAIL'] ?? ''),
-								'MESS_NOT_AVAILABLE' => ($arParams['~MESS_NOT_AVAILABLE'] ?? ''),
-								'ADD_TO_BASKET_ACTION' => ($arParams['ADD_TO_BASKET_ACTION'] ?? ''),
-								'SHOW_CLOSE_POPUP' => ($arParams['SHOW_CLOSE_POPUP'] ?? ''),
-								'DISPLAY_COMPARE' => ($arParams['DISPLAY_COMPARE'] ?? ''),
-								'COMPARE_PATH' => ($arParams['COMPARE_PATH'] ?? ''),
-							)
-								+ array(
-									'OFFER_ID' => empty($arResult['OFFERS'][$arResult['OFFERS_SELECTED']]['ID'])
-										? $arResult['ID']
-										: $arResult['OFFERS'][$arResult['OFFERS_SELECTED']]['ID'],
-									'SECTION_ID' => $arResult['SECTION']['ID'],
-									'ELEMENT_ID' => $arResult['ID'],
-
-									'USE_ENHANCED_ECOMMERCE' => $arParams['USE_ENHANCED_ECOMMERCE'],
-									'DATA_LAYER_NAME' => $arParams['DATA_LAYER_NAME'],
-									'BRAND_PROPERTY' => $arParams['BRAND_PROPERTY']
-								),
-							$component,
-							array('HIDE_ICONS' => 'Y')
-						);
-						?>
-					</div>
-				<? endif; ?>
 			</div>
 		</div>
+
 		<div class="grid-item">
 			<? if ($arResult['LABEL'] && !empty($arResult['LABEL_ARRAY_VALUE'])): ?>
 				<div class="product-label-container" id="<?= $itemIds['STICKER_ID'] ?>">
@@ -536,26 +269,6 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 			<!-- PROPS -->
 			<? if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
 				<div class="product-item-props" data-entity="props-block">
-					<small class="product-item-props-title">Характеристики:</small>
-					<? if (!empty($arResult['DISPLAY_PROPERTIES'])): ?>
-						<ul class="prop-list">
-							<? foreach ($arResult['DISPLAY_PROPERTIES'] as $property): ?>
-								<? if (isset($arParams['MAIN_BLOCK_PROPERTY_CODE'][$property['CODE']])): ?>
-									<li class="prop-list-item">
-										<span class="prop-list-item-name"><?= $property['NAME'] ?></span>
-										<span class="prop-list-item-value">
-											<?= (is_array($property['DISPLAY_VALUE'])
-												? implode(' / ', $property['DISPLAY_VALUE'])
-												: $property['DISPLAY_VALUE']) ?>
-										</span>
-									</li>
-								<? endif; ?>
-							<? endforeach;
-							unset($property);
-							?>
-						</ul>
-					<? endif; ?>
-
 					<? if ($arResult['SHOW_OFFERS_PROPS']): ?>
 						<ul class="prop-list" id="<?= $itemIds['DISPLAY_MAIN_PROP_DIV'] ?>"></ul>
 					<? endif; ?>
@@ -577,7 +290,6 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 							'VALUES_COUNT' => $skuProperty['VALUES_COUNT']
 						);
 					?>
-
 
 						<div class="sku-prop-container" data-entity="sku-line-block">
 							<span class="sku-prop-name"><?= $skuProperty['NAME'] ?>:</span>
@@ -864,11 +576,11 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 						</button>
 					<? endif; ?>
 
-					<? if ($arParams['USE_COMMENTS'] === 'Y'): ?>
+					<?/* if ($arParams['USE_COMMENTS'] === 'Y'): ?>
 						<button class="tabs-opener " data-entity="tab" data-value="comments">
 							<span><?= $arParams['MESS_COMMENTS_TAB'] ?></span>
 						</button>
-					<? endif; ?>
+					<? endif; */ ?>
 				</div>
 
 				<div class="tabs-content" id="<?= $itemIds['TAB_CONTAINERS_ID'] ?>">
@@ -917,7 +629,7 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 						</div>
 					<? endif ?>
 
-					<? if ($arParams['USE_COMMENTS'] === 'Y'): ?>
+					<?/* if ($arParams['USE_COMMENTS'] === 'Y'): ?>
 						<div class="tabs-content" data-entity="tab-container" data-value="comments" style="display: none;">
 							<?php
 							$componentCommentsParams = array(
@@ -970,7 +682,7 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 
 							?>
 						</div>
-					<? endif; ?>
+					<? endif; */ ?>
 				</div>
 			</div>
 			<!-- табы заверстать !!! -->

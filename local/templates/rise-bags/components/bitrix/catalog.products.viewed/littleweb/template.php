@@ -126,8 +126,11 @@ $containerName = 'catalog-products-viewed-container';
 		'ADD_PICT_PROP' => $arParams['ADD_PICT_PROP']
 	];
 ?>
-	products-viewed
+
 	<div class="catalog-section">
+		<h2 class="title">
+			<?= GetMessage('CATALOG_VIEWED') ?>
+		</h2>
 		<!-- items-container -->
 		<? if (!empty($arResult['ITEMS'])):
 			$generalParams = [
@@ -214,6 +217,7 @@ $containerName = 'catalog-products-viewed-container';
 		endif; ?>
 		<!-- items-container -->
 	</div>
+
 	<script>
 		BX.message({
 			BTN_MESSAGE_BASKET_REDIRECT: '<?= GetMessageJS('CT_CPV_CATALOG_BTN_MESSAGE_BASKET_REDIRECT') ?>',
