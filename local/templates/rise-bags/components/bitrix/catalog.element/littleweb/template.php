@@ -598,10 +598,10 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 									<? foreach ($arResult['DISPLAY_PROPERTIES'] as $property): ?>
 										<dt><?= $property['NAME'] ?></dt>
 										<dd><?= (
-													is_array($property['DISPLAY_VALUE'])
-													? implode(' / ', $property['DISPLAY_VALUE'])
-													: $property['DISPLAY_VALUE']
-												) ?>
+												is_array($property['DISPLAY_VALUE'])
+												? implode(' / ', $property['DISPLAY_VALUE'])
+												: $property['DISPLAY_VALUE']
+											) ?>
 										</dd>
 									<?
 									endforeach;
