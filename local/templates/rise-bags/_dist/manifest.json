@@ -34,7 +34,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/_src/scss/template.scss": {
-    "file": "template_styles.DH7PVyVC.css",
+    "file": "template_styles.Bc_Y1OYu.css",
     "src": "local/templates/rise-bags/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
@@ -159,6 +159,33 @@
       "bitrix_main_profile_rise_scss.css"
     ]
   },
+  "local/templates/rise-bags/components/bitrix/news.detail/article-card/_src/scss/index.scss": {
+    "file": "components/bitrix/news.detail/article-card/style.BYwjZhqX.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.detail/article-card/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_detail_article-card_scss",
+    "names": [
+      "bitrix_news_detail_article-card_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/news.detail/article-detail/_src/scss/index.scss": {
+    "file": "components/bitrix/news.detail/article-detail/style.DUq6O4Eh.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.detail/article-detail/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_detail_article-detail_scss",
+    "names": [
+      "bitrix_news_detail_article-detail_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/article-list/_src/scss/index.scss": {
+    "file": "components/bitrix/news.list/article-list/style.BT3CtBQH.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/article-list/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_list_article-list_scss",
+    "names": [
+      "bitrix_news_list_article-list_scss.css"
+    ]
+  },
   "local/templates/rise-bags/components/bitrix/news.list/catalog-preview/_src/scss/index.scss": {
     "file": "components/bitrix/news.list/catalog-preview/style.QBdXRqCk.css",
     "src": "local/templates/rise-bags/components/bitrix/news.list/catalog-preview/_src/scss/index.scss",
@@ -168,6 +195,54 @@
       "bitrix_news_list_catalog-preview_scss.css"
     ]
   },
+  "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/js/index.js": {
+    "file": "components/bitrix/news.list/examples-list/script.7H43oxrZ.js",
+    "name": "bitrix_news_list_examples-list_js",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/js/index.js",
+    "isEntry": true
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/scss/index.scss": {
+    "file": "components/bitrix/news.list/examples-list/style.D0hbsKo3.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_list_examples-list_scss",
+    "names": [
+      "bitrix_news_list_examples-list_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/linked-articles/_src/scss/index.scss": {
+    "file": "components/bitrix/news.list/linked-articles/style.CyCD5fd1.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/linked-articles/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_list_linked-articles_scss",
+    "names": [
+      "bitrix_news_list_linked-articles_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/reviews-list/_src/js/index.js": {
+    "file": "components/bitrix/news.list/reviews-list/script.w9NizQ38.js",
+    "name": "bitrix_news_list_reviews-list_js",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/reviews-list/_src/js/index.js",
+    "isEntry": true
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/reviews-list/_src/scss/index.scss": {
+    "file": "components/bitrix/news.list/reviews-list/style.C_M-WHRh.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/reviews-list/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_list_reviews-list_scss",
+    "names": [
+      "bitrix_news_list_reviews-list_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/social-list/_src/scss/index.scss": {
+    "file": "components/bitrix/news.list/social-list/style.CuKlJ9UP.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/social-list/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_list_social-list_scss",
+    "names": [
+      "bitrix_news_list_social-list_scss.css"
+    ]
+  },
   "local/templates/rise-bags/components/bitrix/news.list/tizzers/_src/scss/index.scss": {
     "file": "components/bitrix/news.list/tizzers/style.Bw3iUmcM.css",
     "src": "local/templates/rise-bags/components/bitrix/news.list/tizzers/_src/scss/index.scss",
@@ -175,6 +250,15 @@
     "name": "bitrix_news_list_tizzers_scss",
     "names": [
       "bitrix_news_list_tizzers_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/news/articles/_src/scss/index.scss": {
+    "file": "components/bitrix/news/articles/style.tn0RQdqM.css",
+    "src": "local/templates/rise-bags/components/bitrix/news/articles/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_articles_scss",
+    "names": [
+      "bitrix_news_articles_scss.css"
     ]
   },
   "local/templates/rise-bags/components/bitrix/sale.basket.basket/rise/_src/scss/index.scss": {
@@ -202,6 +286,24 @@
     "name": "bitrix_sale_personal_section_rise_scss",
     "names": [
       "bitrix_sale_personal_section_rise_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/custom/cards/article-card/_src/scss/index.scss": {
+    "file": "components/custom/cards/article-card/style.CmvlEKMa.css",
+    "src": "local/templates/rise-bags/components/custom/cards/article-card/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "custom_cards_article-card_scss",
+    "names": [
+      "custom_cards_article-card_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/custom/cards/review-card/_src/scss/index.scss": {
+    "file": "components/custom/cards/review-card/style.F2xIA1Wp.css",
+    "src": "local/templates/rise-bags/components/custom/cards/review-card/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "custom_cards_review-card_scss",
+    "names": [
+      "custom_cards_review-card_scss.css"
     ]
   }
 }

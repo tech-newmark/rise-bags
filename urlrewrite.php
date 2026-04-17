@@ -56,6 +56,14 @@ $arUrlRewrite=array (
     'PATH' => '/store/index.php',
     'SORT' => 100,
   ),
+  18 => 
+  array (
+    'CONDITION' => '#^/sales/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/sales/index.php',
+    'SORT' => 100,
+  ),
   2 => 
   array (
     'CONDITION' => '#^/rest/#',

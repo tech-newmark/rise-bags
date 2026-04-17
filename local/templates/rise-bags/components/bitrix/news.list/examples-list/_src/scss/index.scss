@@ -1,0 +1,40 @@
+.examples-slider {
+  .swiper {
+    &-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: auto;
+      max-height: 280px;
+      padding: clamp(10px, 2vw, 20px);
+      background-color: var(--gray-800);
+      border-radius: var(--base-br);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    &-button-prev,
+    &-button-next {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--primary);
+      border-radius: 50%;
+
+      svg {
+        width: 16px;
+        height: 16px;
+        fill: var(--primary);
+      }
+    }
+
+    &-button-next {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

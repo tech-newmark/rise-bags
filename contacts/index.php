@@ -1,29 +1,188 @@
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Задайте вопрос");
+<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetTitle("Контакты");
 ?>
 
-	<p>
-		<b>Телефон:</b> 8 (495) 212 85 06<br>
-		<b>Адрес:</b> г. Москва, ул. 2-я Хуторская, д. 38
-	</p>
-	<div class="mb-2 embed-responsive embed-responsive-16by9">
-		<iframe class="embed-responsive-item" width="100%" height="490" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.ru/maps?f=q&amp;source=s_q&amp;hl=ru&amp;geocode=&amp;q=%D0%B3.+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0,+%D1%83%D0%BB.+2-%D1%8F+%D0%A5%D1%83%D1%82%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F,+%D0%B4.+38%D0%90&amp;aq=&amp;sll=55,103&amp;sspn=90.84699,270.527344&amp;t=m&amp;ie=UTF8&amp;hq=&amp;hnear=2-%D1%8F+%D0%A5%D1%83%D1%82%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F+%D1%83%D0%BB.,+38,+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0,+127287&amp;ll=55.805478,37.569551&amp;spn=0.023154,0.054932&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
-	</div>
-	<div class="mb-4">
-		<small><a href="https://maps.google.ru/maps?f=q&amp;source=embed&amp;hl=ru&amp;geocode=&amp;q=%D0%B3.+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0,+%D1%83%D0%BB.+2-%D1%8F+%D0%A5%D1%83%D1%82%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F,+%D0%B4.+38%D0%90&amp;aq=&amp;sll=55,103&amp;sspn=90.84699,270.527344&amp;t=m&amp;ie=UTF8&amp;hq=&amp;hnear=2-%D1%8F+%D0%A5%D1%83%D1%82%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F+%D1%83%D0%BB.,+38,+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0,+127287&amp;ll=55.805478,37.569551&amp;spn=0.023154,0.054932&amp;z=14&amp;iwloc=A" style="text-align:left">Просмотреть увеличенную карту</a></small>
-	</div>
-	<h2>Задать вопрос</h2>
+<section class="section contacts">
+	<div class="container">
+		<h1>Наши контакты</h1>
+		<div class="grid">
+			<div class="grid__item grid__item--info">
+				<? $APPLICATION->IncludeFile(
+					SITE_DIR . "include/contacts/desc.php",
+					array(),
+					array(
+						"MODE" => "php",
+						"NAME" => "описание",
+						"TEMPLATE" => "include_area.php",
+					)
+				); ?>
+				<div class="contacts__list">
+					<div class="contacts__list-item">
+						<div class="contacts__list-item-header">
+							<svg width="32" height="32" viewBox="0 0 32 32" role="img" aria-hidden="true" focusable="false">
+								<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-pin"></use>
+							</svg>
+							<b>Адрес</b>
+						</div>
+						<div class="contacts__list-item-content">
+							<? $APPLICATION->IncludeFile(
+								SITE_DIR . "include/contacts/address.php",
+								array(),
+								array(
+									"MODE" => "php",
+									"NAME" => "адрес",
+									"TEMPLATE" => "include_area.php",
+								)
+							); ?>
+						</div>
+					</div>
+					<div class="contacts__list-item">
+						<div class="contacts__list-item-header">
+							<svg width="32" height="32" viewBox="0 0 32 32" role="img" aria-hidden="true" focusable="false">
+								<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-phone"></use>
+							</svg>
+							<b>Телефон</b>
+						</div>
+						<div class="contacts__list-item-content">
+							<? $APPLICATION->IncludeFile(
+								SITE_DIR . "include/contacts/phones.php",
+								array(),
+								array(
+									"MODE" => "php",
+									"NAME" => "телефон",
+									"TEMPLATE" => "include_area.php",
+								)
+							); ?>
+						</div>
+					</div>
+					<div class="contacts__list-item">
+						<div class="contacts__list-item-header">
+							<svg width="32" height="32" viewBox="0 0 32 32" role="img" aria-hidden="true" focusable="false">
+								<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-date"></use>
+							</svg>
+							<b>Время работы</b>
+						</div>
+						<div class="contacts__list-item-content">
+							<? $APPLICATION->IncludeFile(
+								SITE_DIR . "include/contacts/schedule.php",
+								array(),
+								array(
+									"MODE" => "php",
+									"NAME" => "время работы",
+									"TEMPLATE" => "include_area.php",
+								)
+							); ?>
+						</div>
+					</div>
+					<div class="contacts__list-item">
+						<div class="contacts__list-item-header">
+							<svg width="32" height="32" viewBox="0 0 32 32" role="img" aria-hidden="true" focusable="false">
+								<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-mail"></use>
+							</svg>
+							<b>Email</b>
+						</div>
+						<div class="contacts__list-item-content">
+							<? $APPLICATION->IncludeFile(
+								SITE_DIR . "include/contacts/email.php",
+								array(),
+								array(
+									"MODE" => "php",
+									"NAME" => "email",
+									"TEMPLATE" => "include_area.php",
+								)
+							); ?>
+						</div>
+					</div>
+					<div class="contacts__list-item">
+						<div class="contacts__list-item-header">
+							<b>Мы в соцсетях</b>
+						</div>
 
-	<?$APPLICATION->IncludeComponent(
-		"bitrix:main.feedback",
-		"bootstrap_v4",
-		Array(
-			"EMAIL_TO" => "sale@nyuta.bx",
-			"EVENT_MESSAGE_ID" => array(),
-			"OK_TEXT" => "Спасибо, ваше сообщение принято.",
-			"REQUIRED_FIELDS" => array("NAME","EMAIL"),
-			"USE_CAPTCHA" => "Y"
-		)
-	);?>
+						<? $APPLICATION->IncludeComponent(
+							"bitrix:news.list",
+							"social-list",
+							[
+								"ACTIVE_DATE_FORMAT" => "d.m.Y",
+								"ADD_SECTIONS_CHAIN" => "Y",
+								"AJAX_MODE" => "N",
+								"AJAX_OPTION_ADDITIONAL" => "",
+								"AJAX_OPTION_HISTORY" => "N",
+								"AJAX_OPTION_JUMP" => "N",
+								"AJAX_OPTION_STYLE" => "Y",
+								"CACHE_FILTER" => "N",
+								"CACHE_GROUPS" => "Y",
+								"CACHE_TIME" => "36000000",
+								"CACHE_TYPE" => "A",
+								"CHECK_DATES" => "Y",
+								"DETAIL_URL" => "",
+								"DISPLAY_BOTTOM_PAGER" => "Y",
+								"DISPLAY_DATE" => "Y",
+								"DISPLAY_NAME" => "Y",
+								"DISPLAY_PICTURE" => "Y",
+								"DISPLAY_PREVIEW_TEXT" => "Y",
+								"DISPLAY_TOP_PAGER" => "N",
+								"FIELD_CODE" => [
+									0 => "",
+									1 => "",
+								],
+								"FILTER_NAME" => "",
+								"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+								"IBLOCK_ID" => "8",
+								"IBLOCK_TYPE" => "site_content",
+								"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
+								"INCLUDE_SUBSECTIONS" => "Y",
+								"MESSAGE_404" => "",
+								"NEWS_COUNT" => "20",
+								"PAGER_BASE_LINK_ENABLE" => "N",
+								"PAGER_DESC_NUMBERING" => "N",
+								"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+								"PAGER_SHOW_ALL" => "N",
+								"PAGER_SHOW_ALWAYS" => "N",
+								"PAGER_TEMPLATE" => ".default",
+								"PAGER_TITLE" => "Новости",
+								"PARENT_SECTION" => "",
+								"PARENT_SECTION_CODE" => "",
+								"PREVIEW_TRUNCATE_LEN" => "",
+								"PROPERTY_CODE" => [
+									0 => "",
+									1 => "ICON",
+									2 => "",
+								],
+								"SET_BROWSER_TITLE" => "Y",
+								"SET_LAST_MODIFIED" => "N",
+								"SET_META_DESCRIPTION" => "Y",
+								"SET_META_KEYWORDS" => "Y",
+								"SET_STATUS_404" => "N",
+								"SET_TITLE" => "Y",
+								"SHOW_404" => "N",
+								"SORT_BY1" => "ACTIVE_FROM",
+								"SORT_BY2" => "SORT",
+								"SORT_ORDER1" => "DESC",
+								"SORT_ORDER2" => "ASC",
+								"STRICT_SECTION_CHECK" => "N",
+								"COMPONENT_TEMPLATE" => "social-list",
+								"THEME_SELECT" => "1"
+							],
+							false
+						); ?>
 
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php")?>
+					</div>
+				</div>
+				<div class="contacts__buttons">
+					<button class="main-btn outlined" type="button">
+						<span>Запросить прайс</span>
+					</button>
+					<button class="main-btn" type="button">
+						<span>Заказать звонок</span>
+					</button>
+
+				</div>
+			</div>
+			<div class="grid__item grid__item--map">
+				<iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A8ee7ebca82150d2a24a665ba7846167dae4cc3770c533b389d977e7f7f392690&amp;source=constructor" width="100%" height="400" frameborder="0"></iframe>
+			</div>
+		</div>
+	</div>
+</section>
+
+<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php") ?>
