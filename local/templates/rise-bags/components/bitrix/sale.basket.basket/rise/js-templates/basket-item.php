@@ -165,10 +165,10 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 
 									{{#SKU_BLOCK_LIST}}
 										{{#IS_IMAGE}}
-											<div class="bx-basket__list-item-scu-prop scu-prop-block" data-entity="basket-item-sku-block">
-												<div class="scu-prop-container">
-													<span class="scu-prop-name">{{NAME}}</span>
-													<ul class="scu-prop-list">
+											<div class="bx-basket__list-item-scu-prop sku-prop-block" data-entity="basket-item-sku-block">
+												<div class="sku-prop-container">
+													<span class="sku-prop-name">{{NAME}}</span>
+													<ul class="sku-prop-list">
 														{{#SKU_VALUES_LIST}}
 															<li
 																title="{{NAME}}"
@@ -177,9 +177,9 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 																data-value-id="{{VALUE_ID}}"
 																data-sku-name="{{NAME}}"
 																data-property="{{PROP_CODE}}"
-																class="scu-prop-list-item">
+																class="sku-prop-list-item">
 
-																<button type="button" class="scu-prop-list-item-value {{#SELECTED}}selected{{/SELECTED}} {{#NOT_AVAILABLE_OFFER}}disabled{{/NOT_AVAILABLE_OFFER}}">
+																<button type="button" class="sku-prop-list-item-value {{#SELECTED}}selected{{/SELECTED}} {{#NOT_AVAILABLE_OFFER}}disabled{{/NOT_AVAILABLE_OFFER}}">
 																	<img src="{{PICT}}" alt="{{NAME}}" width="40" height="40">
 																</button>
 															</li>
@@ -190,10 +190,10 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 										{{/IS_IMAGE}}
 
 										{{^IS_IMAGE}}
-											<div class="bx-basket__list-item-scu-prop scu-prop-block" data-entity="basket-item-sku-block">
-												<div class="scu-prop-container">
-													<span class="scu-prop-name">{{NAME}}</span>
-													<ul class="scu-prop-list">
+											<div class="bx-basket__list-item-scu-prop sku-prop-block" data-entity="basket-item-sku-block">
+												<div class="sku-prop-container">
+													<span class="sku-prop-name">{{NAME}}</span>
+													<ul class="sku-prop-list">
 														{{#SKU_VALUES_LIST}}
 															<li
 																title="{{NAME}}"
@@ -202,10 +202,10 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 																data-value-id="{{VALUE_ID}}"
 																data-sku-name="{{NAME}}"
 																data-property="{{PROP_CODE}}"
-																class="scu-prop-list-item">
+																class="sku-prop-list-item">
 
 																<button type="button"
-																	class="scu-prop-list-item-value {{#SELECTED}}selected{{/SELECTED}} {{#NOT_AVAILABLE_OFFER}}disabled{{/NOT_AVAILABLE_OFFER}}">
+																	class="sku-prop-list-item-value {{#SELECTED}}selected{{/SELECTED}} {{#NOT_AVAILABLE_OFFER}}disabled{{/NOT_AVAILABLE_OFFER}}">
 																	<span>{{NAME}}</span>
 																</button>
 															</li>

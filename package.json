@@ -1,7 +1,7 @@
 {
 	"name": "bx-vite",
 	"version": "1.0.0",
-	"description": "Сборка на Vite для шаблона кастомного шаблона на БИТРИКС",
+	"description": "Сборка на Vite для кастомного шаблона БИТРИКС",
 	"keywords": [],
 	"license": "ISC",
 	"author": "",

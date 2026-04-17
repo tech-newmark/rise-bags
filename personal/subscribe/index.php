@@ -3,8 +3,8 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Подписка на рассылку");
 ?>
 <? $APPLICATION->IncludeComponent(
-	"bitrix:subscribe.edit", 
-	".default", 
+	"bitrix:subscribe.edit",
+	"clear",
 	[
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
@@ -17,9 +17,19 @@ $APPLICATION->SetTitle("Подписка на рассылку");
 		"SET_TITLE" => "Y",
 		"SHOW_AUTH_LINKS" => "Y",
 		"SHOW_HIDDEN" => "N",
-		"COMPONENT_TEMPLATE" => ".default"
+		"COMPONENT_TEMPLATE" => "clear"
 	],
 	false
+); ?>
+
+<? $APPLICATION->IncludeComponent(
+	"bitrix:catalog.product.subscribe.list",
+	"",
+	array(
+		"CACHE_TIME" => "3600",
+		"CACHE_TYPE" => "A",
+		"LINE_ELEMENT_COUNT" => "3"
+	)
 ); ?>
   
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

@@ -2457,7 +2457,7 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 				state;
 
 			var orderDataLoaded =
-					!!this.result.IS_AUTHORIZED &&
+					// !!this.result.IS_AUTHORIZED &&
 					this.params.USE_PRELOAD === "Y" &&
 					this.result.LAST_ORDER_DATA.FAIL !== true,
 				skipFlag = true;

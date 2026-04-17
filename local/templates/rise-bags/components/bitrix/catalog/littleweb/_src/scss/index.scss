@@ -1,0 +1,39 @@
+@use "@scss/base/container-queries" as *;
+
+.catalog {
+	&__header {
+		margin-bottom: 32px;
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: 320px auto;
+		gap: var(--base-gap);
+
+		&-item {
+			&--sidebar {
+				position: sticky;
+				top: 40px;
+				height: fit-content;
+			}
+
+			&--main {
+				position: sticky;
+				top: 32px;
+
+				display: flex;
+				flex-direction: column;
+				gap: 24px;
+
+				height: fit-content;
+			}
+		}
+	}
+}
+
+// .catalog-action-row {
+// 	position: relative;
+
+// 	display: flex;
+// 	align-items: center;
+// 	gap: 24px;
+// }
