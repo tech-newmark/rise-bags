@@ -164,18 +164,46 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 <div class="bx-catalog-element" id="<?= $itemIds['ID'] ?>" itemscope itemtype="http://schema.org/Product">
 	<div class="grid">
 		<div class="grid-item">
+
+			<!-- discount -->
 			<? if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y'): ?>
 				<? if ($haveOffers): ?>
-					<div class="product-item-label-ring" id="<?= $itemIds['DISCOUNT_PERCENT_ID'] ?>" style="display: none;"> </div>
+					<span class="product-label product-label--discount" id="<?= $itemIds['DISCOUNT_PERCENT_ID'] ?>" style="display: none;">
+					</span>
 				<? else: ?>
 					<? if ($price['DISCOUNT'] > 0): ?>
-						<div class="product-item-label-ring" id="<?= $itemIds['DISCOUNT_PERCENT_ID'] ?>" title="<?= -$price['PERCENT'] ?>%">
+						<span class="product-item-label-ring" id="<?= $itemIds['DISCOUNT_PERCENT_ID'] ?>" title="<?= -$price['PERCENT'] ?>%">
 							<span><?= -$price['PERCENT'] ?>%</span>
-						</div>
+						</span>
 					<? endif; ?>
 				<? endif; ?>
 			<? endif; ?>
+			<!-- discount -->
 
+			<!-- sidebar -->
+			<div class="bx-catalog-element__sidebar">
+				<? if (!empty($price) && $actualItem['CAN_BUY'] && $arParams['DISPLAY_COMPARE']): ?>
+					<label class="compare" id="<?= $itemIds['COMPARE_LINK'] ?>">
+						<input type="checkbox" data-entity="compare-checkbox">
+						<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
+							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-compare'></use>
+						</svg>
+					</label>
+				<? endif; ?>
+			</div>
+			<!-- sidebar -->
+
+			<!-- labels -->
+			<? if ($arResult['LABEL'] && !empty($arResult['LABEL_ARRAY_VALUE'])): ?>
+				<div class="product-label-container" id="<?= $itemIds['STICKER_ID'] ?>">
+					<? foreach ($arResult['LABEL_ARRAY_VALUE'] as $code => $value): ?>
+						<span class="product-label product-label--<?= strtolower($code) ?>" title="<?= $value ?>"><?= $value ?></span>
+					<? endforeach; ?>
+				</div>
+			<? endif; ?>
+			<!-- labels -->
+
+			<!-- slider -->
 			<div class="bx-catalog-element-slider-container" id="<?= $itemIds['BIG_SLIDER_ID'] ?>">
 				<div class="swiper bx-catalog-element-slider" data-entity="images-slider-block">
 					<div class="swiper-wrapper" id="<?= $itemIds['PICT_SLIDER'] ?>" data-entity="images-container">
@@ -246,75 +274,12 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 				<?/*НАБОРЫ / НЕ ВЕРСТАЛИСЬ*/ ?>
 
 			</div>
+			<!-- slider -->
 		</div>
 
 		<div class="grid-item">
-			<? if ($arResult['LABEL'] && !empty($arResult['LABEL_ARRAY_VALUE'])): ?>
-				<div class="product-label-container" id="<?= $itemIds['STICKER_ID'] ?>">
-					<? foreach ($arResult['LABEL_ARRAY_VALUE'] as $code => $value): ?>
-						<span class="product-label product-label--<?= strtolower($code) ?>" title="<?= $value ?>"><?= $value ?></span>
-					<? endforeach; ?>
-				</div>
-			<? endif; ?>
-
 			<? if ($arParams['DISPLAY_NAME'] === 'Y'): ?>
 				<h1 class="title"><?= $name ?></h1>
-			<? endif; ?>
-
-			<!-- PROPS -->
-			<? if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
-				<div class="product-item-props" data-entity="props-block">
-					<? if ($arResult['SHOW_OFFERS_PROPS']): ?>
-						<ul class="prop-list" id="<?= $itemIds['DISPLAY_MAIN_PROP_DIV'] ?>"></ul>
-					<? endif; ?>
-				</div>
-			<? endif; ?>
-
-			<!-- SKU -->
-			<? if ($haveOffers && !empty($arResult['OFFERS_PROP'])): ?>
-				<div class="sku-prop-block" id="<?= $itemIds['TREE_ID'] ?>">
-					<? foreach ($arResult['SKU_PROPS'] as $skuProperty):
-						if (!isset($arResult['OFFERS_PROP'][$skuProperty['CODE']]))
-							continue;
-
-						$propertyId = $skuProperty['ID'];
-						$skuProps[] = array(
-							'ID' => $propertyId,
-							'SHOW_MODE' => $skuProperty['SHOW_MODE'],
-							'VALUES' => $skuProperty['VALUES'],
-							'VALUES_COUNT' => $skuProperty['VALUES_COUNT']
-						);
-					?>
-
-						<div class="sku-prop-container" data-entity="sku-line-block">
-							<span class="sku-prop-name"><?= $skuProperty['NAME'] ?>:</span>
-							<ul class="sku-prop-list">
-
-								<? foreach ($skuProperty['VALUES'] as &$value):
-
-
-									$value['NAME'] = htmlspecialcharsbx($value['NAME']);
-
-									if ($skuProperty['SHOW_MODE'] === 'PICT'):
-								?>
-										<li class="sku-prop-list-item" title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
-											<button type="button" class="sku-prop-list-item-value">
-												<img src="<?= $value['PICT']['SRC'] ?>" alt="<?= $value['NAME'] ?>" width="40" height="40">
-											</button>
-										</li>
-									<? else: ?>
-										<li class="sku-prop-list-item" title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
-											<button type="button" class="sku-prop-list-item-value">
-												<span><?= $value['NAME'] ?></span>
-											</button>
-										</li>
-									<? endif; ?>
-								<? endforeach; ?>
-							</ul>
-						</div>
-
-					<? endforeach; ?>
-				</div>
 			<? endif; ?>
 
 			<!-- заверстать !!! -->
@@ -350,20 +315,21 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 				<!-- PRICE Заверстать!!!-->
 
 				<div class="bx-catalog-element-price-container">
-					<? if ($arParams['SHOW_OLD_PRICE'] === 'Y' && $showDiscount): ?>
-						<div class="bx-catalog-element-price bx-catalog-element-price--old" id="<?= $itemIds['OLD_PRICE_ID'] ?>">
-							<?= ($showDiscount ? $price['PRINT_RATIO_BASE_PRICE'] : '') ?>
-						</div>
-					<? endif; ?>
+					<p class="bx-catalog-element-price-value">
+						<span class="bx-catalog-element-price bx-catalog-element-price--current" id="<?= $itemIds['PRICE_ID'] ?>">
+							<?= $price['PRINT_RATIO_PRICE'] ?>
+						</span>
 
-					<div class="bx-catalog-element-price bx-catalog-element-price--current" id="<?= $itemIds['PRICE_ID'] ?>">
-						<?= $price['PRINT_RATIO_PRICE'] ?>
-					</div>
-
+						<? if ($arParams['SHOW_OLD_PRICE'] === 'Y' && $showDiscount): ?>
+							<span class="bx-catalog-element-price bx-catalog-element-price--old" id="<?= $itemIds['OLD_PRICE_ID'] ?>">
+								<?= ($showDiscount ? $price['PRINT_RATIO_BASE_PRICE'] : '') ?>
+							</span>
+						<? endif; ?>
+					</p>
 					<? if ($arParams['SHOW_OLD_PRICE'] === 'Y' && $showDiscount): ?>
-						<div class="bx-catalog-element-price-label" id="<?= $itemIds['DISCOUNT_PRICE_ID'] ?>">
+						<p class="bx-catalog-element-price-label" id="<?= $itemIds['DISCOUNT_PRICE_ID'] ?>">
 							<?= Loc::getMessage('CT_BCE_CATALOG_ECONOMY_INFO2', array('#ECONOMY#' => $price['PRINT_RATIO_DISCOUNT'])); ?>
-						</div>
+						</p>
 					<? endif; ?>
 				</div>
 
@@ -465,6 +431,62 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 
 				<!-- quantity -->
 
+				<!-- SKU -->
+				<? if ($haveOffers && !empty($arResult['OFFERS_PROP'])): ?>
+					<div class="sku-prop-block" id="<?= $itemIds['TREE_ID'] ?>">
+						<? foreach ($arResult['SKU_PROPS'] as $skuProperty):
+							if (!isset($arResult['OFFERS_PROP'][$skuProperty['CODE']]))
+								continue;
+
+							$propertyId = $skuProperty['ID'];
+							$skuProps[] = array(
+								'ID' => $propertyId,
+								'SHOW_MODE' => $skuProperty['SHOW_MODE'],
+								'VALUES' => $skuProperty['VALUES'],
+								'VALUES_COUNT' => $skuProperty['VALUES_COUNT']
+							);
+						?>
+
+							<div class="sku-prop-container" data-entity="sku-line-block">
+								<span class="sku-prop-name"><?= $skuProperty['NAME'] ?>:</span>
+								<ul class="sku-prop-list">
+
+									<? foreach ($skuProperty['VALUES'] as &$value):
+
+
+										$value['NAME'] = htmlspecialcharsbx($value['NAME']);
+
+										if ($skuProperty['SHOW_MODE'] === 'PICT'):
+									?>
+											<li class="sku-prop-list-item" title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
+												<button type="button" class="sku-prop-list-item-value">
+													<img src="<?= $value['PICT']['SRC'] ?>" alt="<?= $value['NAME'] ?>" width="40" height="40">
+												</button>
+											</li>
+										<? else: ?>
+											<li class="sku-prop-list-item" title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
+												<button type="button" class="sku-prop-list-item-value">
+													<span><?= $value['NAME'] ?></span>
+												</button>
+											</li>
+										<? endif; ?>
+									<? endforeach; ?>
+								</ul>
+							</div>
+
+						<? endforeach; ?>
+					</div>
+				<? endif; ?>
+
+				<!-- PROPS -->
+				<? /*if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
+					<div class="product-item-props" data-entity="props-block">
+						<? if ($arResult['SHOW_OFFERS_PROPS']): ?>
+							<ul class="prop-list" id="<?= $itemIds['DISPLAY_MAIN_PROP_DIV'] ?>"></ul>
+						<? endif; ?>
+					</div>
+				<? endif; */ ?>
+
 				<!-- Готово -->
 
 				<? if ($arParams['USE_PRODUCT_QUANTITY'] && $actualItem['CAN_BUY']): ?>
@@ -495,22 +517,24 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 				<!-- buttons -->
 
 				<? if ($actualItem['CAN_BUY']): ?>
-					<div id="<?= $itemIds['BASKET_ACTIONS_ID'] ?>" class="bx-catalog-element-button-container">
-						<? if ($showAddBtn): ?>
-							<button class="main-btn outlined" id="<?= $itemIds['ADD_BASKET_LINK'] ?>">
-								<span><?= $arParams['MESS_BTN_ADD_TO_BASKET'] ?></span>
-							</button>
-						<? endif; ?>
+					<div class="bx-catalog-element-buttons-container" id="<?= $itemIds['BASKET_ACTIONS_ID'] ?>">
+						<div class="bx-catalog-element-buttons">
+							<? if ($showAddBtn): ?>
+								<button class="main-btn outlined" id="<?= $itemIds['ADD_BASKET_LINK'] ?>">
+									<span><?= $arParams['MESS_BTN_ADD_TO_BASKET'] ?></span>
+								</button>
+							<? endif; ?>
 
-						<? if ($showBuyBtn): ?>
-							<button class="main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
-								<span><?= $arParams['MESS_BTN_BUY'] ?></span>
+							<? if ($showBuyBtn): ?>
+								<button class="main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
+									<span><?= $arParams['MESS_BTN_BUY'] ?></span>
+								</button>
+							<? endif; ?>
+							<!-- !!! подключить текущее ТП по ID !!! -->
+							<button type="button" class="main-btn" data-1clickbuy-id="317">
+								<span>Купить в 1 клик</span>
 							</button>
-						<? endif; ?>
-						<!-- !!! подключить текущее ТП по ID !!! -->
-						<button type="button" class="oneclickbuy-btn main-btn" data-1clickbuy-id="317">
-							<span>Купить в 1 клик</span>
-						</button>
+						</div>
 					</div>
 				<? else: ?>
 					<div class="product-item-subscribe-block">
@@ -535,31 +559,27 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 					</div>
 				<? endif; ?>
 
-				<? if (!empty($price) && $actualItem['CAN_BUY'] && $arParams['DISPLAY_COMPARE']): ?>
-					<label id="<?= $itemIds['COMPARE_LINK'] ?>" class="compare">
-						<input type="checkbox" data-entity="compare-checkbox">
-						<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-compare'></use>
-						</svg>
-					</label>
-				<? endif; ?>
+
 				<!-- Готово -->
 			</div>
 			<!-- заверстать !!! -->
+
+
+
 		</div>
 
 		<div class="grid-item grid-item--fullwidth">
 			<!-- табы заверстать !!! -->
 			<div class="tabs">
-				<div class="tabs-header" id="<?= $itemIds['TABS_ID'] ?>">
+				<div class="tabs__opener-list" id="<?= $itemIds['TABS_ID'] ?>">
 					<? if ($showDescription): ?>
-						<button class="tabs-opener active" data-entity="tab" data-value="description">
+						<button class="tabs__opener-list-item active" data-entity="tab" data-value="description">
 							<span><?= $arParams['MESS_DESCRIPTION_TAB'] ?></span>
 						</button>
 					<? endif ?>
 
 					<? if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
-						<button class="tabs-opener " data-entity="tab" data-value="properties">
+						<button class="tabs__opener-list-item" data-entity="tab" data-value="properties">
 							<span><?= $arParams['MESS_PROPERTIES_TAB'] ?></span>
 						</button>
 					<? endif; ?>
@@ -571,48 +591,53 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 					<? endif; */ ?>
 				</div>
 
-				<div class="tabs-content" id="<?= $itemIds['TAB_CONTAINERS_ID'] ?>">
+				<div class="tabs__content" id="<?= $itemIds['TAB_CONTAINERS_ID'] ?>">
 					<? if ($showDescription): ?>
-						<div class="tabs-content active" data-entity="tab-container" data-value="description" itemprop="description" id="<?= $itemIds['DESCRIPTION_ID'] ?>">
-							<? if (
-								$arResult['PREVIEW_TEXT'] != ''
-								&& (
-									$arParams['DISPLAY_PREVIEW_TEXT_MODE'] === 'S'
-									|| ($arParams['DISPLAY_PREVIEW_TEXT_MODE'] === 'E' && $arResult['DETAIL_TEXT'] == '')
-								)
-							): ?>
-								<?= $arResult['PREVIEW_TEXT_TYPE'] === 'html' ? $arResult['PREVIEW_TEXT'] : '<p>' . $arResult['PREVIEW_TEXT'] . '</p>'; ?>
-							<? endif; ?>
+						<div class="tabs__content-list-item active" data-entity="tab-container" data-value="description" itemprop="description" id="<?= $itemIds['DESCRIPTION_ID'] ?>">
+							<div class="content">
+								<? if (
+									$arResult['PREVIEW_TEXT'] != ''
+									&& (
+										$arParams['DISPLAY_PREVIEW_TEXT_MODE'] === 'S'
+										|| ($arParams['DISPLAY_PREVIEW_TEXT_MODE'] === 'E' && $arResult['DETAIL_TEXT'] == '')
+									)
+								): ?>
+									<?= $arResult['PREVIEW_TEXT_TYPE'] === 'html' ? $arResult['PREVIEW_TEXT'] : '<p>' . $arResult['PREVIEW_TEXT'] . '</p>'; ?>
+								<? endif; ?>
 
-							<? if ($arResult['DETAIL_TEXT'] != ''): ?>
-								<?= $arResult['DETAIL_TEXT_TYPE'] === 'html' ? $arResult['DETAIL_TEXT'] : '<p>' . $arResult['DETAIL_TEXT'] . '</p>'; ?>
-							<? endif; ?>
+								<? if ($arResult['DETAIL_TEXT'] != ''): ?>
+									<?= $arResult['DETAIL_TEXT_TYPE'] === 'html' ? $arResult['DETAIL_TEXT'] : '<p>' . $arResult['DETAIL_TEXT'] . '</p>'; ?>
+								<? endif; ?>
+							</div>
 						</div>
 					<? endif; ?>
 
 					<? if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
-						<div class="tabs-content" data-entity="tab-container" data-value="properties" style="display: none;">
+						<div class="tabs__content-list-item" data-entity="tab-container" data-value="properties" style="display: none;">
 							<? if (!empty($arResult['DISPLAY_PROPERTIES'])): ?>
 
-								<dl class="product-item-detail-properties">
+								<ul class="prop-list">
 									<? foreach ($arResult['DISPLAY_PROPERTIES'] as $property): ?>
-										<dt><?= $property['NAME'] ?></dt>
-										<dd><?= (
-												is_array($property['DISPLAY_VALUE'])
-												? implode(' / ', $property['DISPLAY_VALUE'])
-												: $property['DISPLAY_VALUE']
-											) ?>
-										</dd>
+										<li class="prop-list-item">
+											<span class="prop-list-item-name"><?= $property['NAME'] ?></span>
+											<span class="prop-list-item-value">
+												<?= (
+													is_array($property['DISPLAY_VALUE'])
+													? implode(' / ', $property['DISPLAY_VALUE'])
+													: $property['DISPLAY_VALUE']
+												) ?>
+											</span>
+										</li>
 									<?
 									endforeach;
 									unset($property);
 									?>
-								</dl>
+								</ul>
 
 							<? endif; ?>
 
 							<? if ($arResult['SHOW_OFFERS_PROPS']): ?>
-								<dl class="product-item-detail-properties" id="<?= $itemIds['DISPLAY_PROP_DIV'] ?>"></dl>
+								<ul class="prop-list" id="<?= $itemIds['DISPLAY_PROP_DIV'] ?>"></ul>
 							<? endif; ?>
 						</div>
 					<? endif ?>
