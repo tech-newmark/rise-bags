@@ -314,8 +314,7 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 			<? endif; ?>
 
 			<div class="bx-basket__list-item-section bx-basket__list-item-section--counter">
-
-				<div class="counter{{#NOT_AVAILABLE}}disabled{{/NOT_AVAILABLE}}" data-entity="basket-item-quantity-block">
+				<div class="counter{{#NOT_AVAILABLE}}disabled{{/NOT_AVAILABLE}} counter--sm" data-entity="basket-item-quantity-block">
 					<button type="button" class="counter-btn counter-btn--dec" data-entity="basket-item-quantity-minus">
 						<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
 							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-minus'></use>
