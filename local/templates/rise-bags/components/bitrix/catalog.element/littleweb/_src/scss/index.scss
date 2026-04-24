@@ -1,17 +1,14 @@
 @use "@scss/base/container-queries" as *;
+@use "@scss/functions/_font-size" as *;
 
 .bx-catalog-element {
   container: bx-catalog-element / inline-size;
-
-  .product-item-detail-slider-container img {
-    width: 100%;
-    height: auto;
-  }
 
   .grid {
     width: 100%;
     display: grid;
     gap: 24px;
+    margin-bottom: 24px;
 
     @include container-up(bx-catalog-element, 850px) {
       grid-template-columns: auto 400px;
@@ -19,22 +16,49 @@
 
     &-item {
       position: relative;
-      outline: 1px solid red;
+    }
+  }
 
-      &--fullwidth {
-        grid-column: -1/1;
+  &-slider {
+    width: 100%;
+    height: 100%;
+
+    &-container {
+      width: 100%;
+      height: 400px;
+      background-color: var(--gray-500);
+      border: 1px solid var(--gray-500);
+      border-radius: var(--base-br);
+    }
+
+    .swiper-slide {
+      display: flex;
+      width: 100% !important;
+      padding: 16px 16px 8px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
+    }
+
+    .swiper-pagination {
+      bottom: 0 !important;
+      margin-bottom: 8px;
     }
   }
 
   &__sidebar {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 12px;
+    right: 12px;
     display: flex;
     flex-direction: column;
     gap: 2px;
     z-index: 2;
+    border-radius: 4px;
+    background-color: var(--gray-500);
   }
 
   &-buy-info {
@@ -43,26 +67,24 @@
     gap: 10px;
   }
 
-  .counter-block {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    min-height: 36px;
-    margin: 4px 0;
-  }
+  .product-label {
+    &-container {
+      position: absolute;
+      bottom: 36px;
+      left: 20px;
+      z-index: 2;
+    }
 
-  .product-label-container {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    z-index: 2;
-  }
+    &--discount {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 2;
+    }
 
-  .product-label--discount {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 2;
+    &--quantity {
+      padding: 0;
+    }
   }
 
   &-price {
@@ -82,13 +104,11 @@
     }
 
     &--current {
-      font-size: clamp(1.75rem, 1.575rem + 0.875vw, 2.625rem);
       font-weight: 600;
       color: var(--primary);
     }
 
     &--old {
-      font-size: clamp(1.25rem, 1.2rem + 0.25vw, 1.5rem);
       text-decoration: line-through;
       color: var(--gray-700);
     }
@@ -112,7 +132,6 @@
       container: bx-catalog-element-buttons/ inline-size;
     }
 
-    outline: 1px solid red;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -138,10 +157,6 @@
     // }
   }
 
-  &-buy-info {
-    outline: 1px solid red;
-  }
-
   .prop-list-item-name {
     font-size: 1em;
     color: var(--gray-700);
@@ -150,48 +165,32 @@
   .prop-list-item-value {
     font-size: 1em;
   }
-}
 
-.bx-catalog-element-slider-container {
-  height: 400px;
-  outline: 1px solid red;
-  //   background-color: var(--light);
-  background-color: var(--gray-800);
-  //   max-width: 900px;
-  width: 100%;
-}
+  .tabs {
+    .swiper-button-disabled {
+      display: none;
+    }
+    .swiper-button-prev,
+    .swiper-button-next {
+      height: 100%;
+      top: 0;
+      margin-top: 0;
+      background-color: var(--white);
+      border-color: transparent;
+      border-radius: 0;
+    }
 
-.bx-catalog-element-slider {
-  width: 100%;
-  height: 400px;
+    .swiper-button-prev {
+      left: 0;
+    }
 
-  z-index: 7;
+    .swiper-button-next {
+      right: 0;
+    }
 
-  .swiper-slide {
-    display: flex;
-    width: 100% !important;
-  }
-
-  .swiper-slide img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-
-  .swiper-pagination {
-    display: flex;
-    justify-content: center;
-    bottom: 0 !important;
-    height: fit-content;
-    padding: 8px 0;
-
-    &-bullet {
-      background-color: #919191;
-      border-radius: 5px;
-
-      &-active {
-        width: 32px;
-      }
+    .swiper-slide {
+      width: 100% !important;
+      max-width: fit-content;
     }
   }
 }

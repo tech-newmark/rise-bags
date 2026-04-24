@@ -182,6 +182,11 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 
 			<!-- sidebar -->
 			<div class="bx-catalog-element__sidebar">
+				<button class="favourite-add-btn" type="button" aria-label="Добавить товар в избранное">
+					<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
+						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-heart'></use>
+					</svg>
+				</button>
 				<? if (!empty($price) && $actualItem['CAN_BUY'] && $arParams['DISPLAY_COMPARE']): ?>
 					<label class="compare" id="<?= $itemIds['COMPARE_LINK'] ?>">
 						<input type="checkbox" data-entity="compare-checkbox">
@@ -190,6 +195,16 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 						</svg>
 					</label>
 				<? endif; ?>
+				<button class="fast-view-btn" type="button" aria-label="Быстрый просмотр">
+					<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
+						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-info'></use>
+					</svg>
+				</button>
+				<button class="oneclickbuy-btn" type="button" aria-label="Информация о доставке">
+					<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
+						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-cube'></use>
+					</svg>
+				</button>
 			</div>
 			<!-- sidebar -->
 
@@ -210,7 +225,7 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 						<? if (!empty($actualItem['MORE_PHOTO'])): ?>
 							<? foreach ($actualItem['MORE_PHOTO'] as $index => $slide): ?>
 								<div class="swiper-slide<?= ($index === 0 ? ' active' : '') ?>" <?= ($index === 0 ? ' id="' . $itemIds['PICT'] . '"' : '') ?> data-entity="image" data-id="<?= $slide['ID'] ?>">
-									<img src="<?= $slide['SRC'] ?>" alt="<?= $alt ?>" title="<?= $title ?>" <?= ($index === 0 ? ' itemprop="image"' : '') ?>>
+									<img data-fancybox="bx-catalog-element-gallery" src="<?= $slide['SRC'] ?>" alt="<?= $alt ?>" title="<?= $title ?>" <?= ($index === 0 ? ' itemprop="image"' : '') ?>>
 								</div>
 							<? endforeach; ?>
 						<? endif; ?>
@@ -316,12 +331,12 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 
 				<div class="bx-catalog-element-price-container">
 					<p class="bx-catalog-element-price-value">
-						<span class="bx-catalog-element-price bx-catalog-element-price--current" id="<?= $itemIds['PRICE_ID'] ?>">
+						<span class="$itemIds['PRICE_ID'] bx-catalog-element-price--current heading--lg" id="<?= $itemIds['PRICE_ID'] ?>">
 							<?= $price['PRINT_RATIO_PRICE'] ?>
 						</span>
 
 						<? if ($arParams['SHOW_OLD_PRICE'] === 'Y' && $showDiscount): ?>
-							<span class="bx-catalog-element-price bx-catalog-element-price--old" id="<?= $itemIds['OLD_PRICE_ID'] ?>">
+							<span class="bx-catalog-element-price bx-catalog-element-price--old heading--sm" id="<?= $itemIds['OLD_PRICE_ID'] ?>">
 								<?= ($showDiscount ? $price['PRINT_RATIO_BASE_PRICE'] : '') ?>
 							</span>
 						<? endif; ?>
@@ -563,86 +578,97 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 				<!-- Готово -->
 			</div>
 			<!-- заверстать !!! -->
-
-
-
 		</div>
+	</div>
 
-		<div class="grid-item grid-item--fullwidth">
-			<!-- табы заверстать !!! -->
-			<div class="tabs">
-				<div class="tabs__opener-list" id="<?= $itemIds['TABS_ID'] ?>">
-					<? if ($showDescription): ?>
-						<button class="tabs__opener-list-item active" data-entity="tab" data-value="description">
+	<!-- табы заверстать !!! -->
+	<div class="tabs">
+		<div class="swiper tabs__buttons">
+			<div class=" swiper-wrapper" id="<?= $itemIds['TABS_ID'] ?>">
+				<? if ($showDescription): ?>
+					<div class="swiper-slide">
+						<button class="tabs__button active" data-entity="tab" data-value="description">
 							<span><?= $arParams['MESS_DESCRIPTION_TAB'] ?></span>
 						</button>
-					<? endif ?>
+					</div>
+				<? endif ?>
 
-					<? if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
-						<button class="tabs__opener-list-item" data-entity="tab" data-value="properties">
+				<? if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
+					<div class="swiper-slide">
+						<button class="tabs__button" data-entity="tab" data-value="properties">
 							<span><?= $arParams['MESS_PROPERTIES_TAB'] ?></span>
 						</button>
-					<? endif; ?>
+					</div>
+				<? endif; ?>
 
-					<?/* if ($arParams['USE_COMMENTS'] === 'Y'): ?>
+				<?/* if ($arParams['USE_COMMENTS'] === 'Y'): ?>
 						<button class="tabs-opener " data-entity="tab" data-value="comments">
 							<span><?= $arParams['MESS_COMMENTS_TAB'] ?></span>
 						</button>
 					<? endif; */ ?>
+			</div>
+			<div class="swiper-button-prev">
+				<svg width="16" height="16" viewBox="0 0 16 16" role="img" aria-hidden="true" focusable="false">
+					<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-arrow"></use>
+				</svg>
+			</div>
+			<div class="swiper-button-next"><svg width="16" height="16" viewBox="0 0 16 16" role="img" aria-hidden="true" focusable="false">
+					<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-arrow"></use>
+				</svg>
+			</div>
+		</div>
+		<div class="tabs__content" id="<?= $itemIds['TAB_CONTAINERS_ID'] ?>">
+			<? if ($showDescription): ?>
+				<div class="tabs__content-list-item active" data-entity="tab-container" data-value="description" itemprop="description" id="<?= $itemIds['DESCRIPTION_ID'] ?>">
+					<div class="content">
+						<? if (
+							$arResult['PREVIEW_TEXT'] != ''
+							&& (
+								$arParams['DISPLAY_PREVIEW_TEXT_MODE'] === 'S'
+								|| ($arParams['DISPLAY_PREVIEW_TEXT_MODE'] === 'E' && $arResult['DETAIL_TEXT'] == '')
+							)
+						): ?>
+							<?= $arResult['PREVIEW_TEXT_TYPE'] === 'html' ? $arResult['PREVIEW_TEXT'] : '<p>' . $arResult['PREVIEW_TEXT'] . '</p>'; ?>
+						<? endif; ?>
+
+						<? if ($arResult['DETAIL_TEXT'] != ''): ?>
+							<?= $arResult['DETAIL_TEXT_TYPE'] === 'html' ? $arResult['DETAIL_TEXT'] : '<p>' . $arResult['DETAIL_TEXT'] . '</p>'; ?>
+						<? endif; ?>
+					</div>
 				</div>
+			<? endif; ?>
 
-				<div class="tabs__content" id="<?= $itemIds['TAB_CONTAINERS_ID'] ?>">
-					<? if ($showDescription): ?>
-						<div class="tabs__content-list-item active" data-entity="tab-container" data-value="description" itemprop="description" id="<?= $itemIds['DESCRIPTION_ID'] ?>">
-							<div class="content">
-								<? if (
-									$arResult['PREVIEW_TEXT'] != ''
-									&& (
-										$arParams['DISPLAY_PREVIEW_TEXT_MODE'] === 'S'
-										|| ($arParams['DISPLAY_PREVIEW_TEXT_MODE'] === 'E' && $arResult['DETAIL_TEXT'] == '')
-									)
-								): ?>
-									<?= $arResult['PREVIEW_TEXT_TYPE'] === 'html' ? $arResult['PREVIEW_TEXT'] : '<p>' . $arResult['PREVIEW_TEXT'] . '</p>'; ?>
-								<? endif; ?>
+			<? if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
+				<div class="tabs__content-list-item" data-entity="tab-container" data-value="properties" style="display: none;">
+					<? if (!empty($arResult['DISPLAY_PROPERTIES'])): ?>
 
-								<? if ($arResult['DETAIL_TEXT'] != ''): ?>
-									<?= $arResult['DETAIL_TEXT_TYPE'] === 'html' ? $arResult['DETAIL_TEXT'] : '<p>' . $arResult['DETAIL_TEXT'] . '</p>'; ?>
-								<? endif; ?>
-							</div>
-						</div>
+						<ul class="prop-list">
+							<? foreach ($arResult['DISPLAY_PROPERTIES'] as $property): ?>
+								<li class="prop-list-item">
+									<span class="prop-list-item-name"><?= $property['NAME'] ?></span>
+									<span class="prop-list-item-value">
+										<?= (
+											is_array($property['DISPLAY_VALUE'])
+											? implode(' / ', $property['DISPLAY_VALUE'])
+											: $property['DISPLAY_VALUE']
+										) ?>
+									</span>
+								</li>
+							<?
+							endforeach;
+							unset($property);
+							?>
+						</ul>
+
 					<? endif; ?>
 
-					<? if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
-						<div class="tabs__content-list-item" data-entity="tab-container" data-value="properties" style="display: none;">
-							<? if (!empty($arResult['DISPLAY_PROPERTIES'])): ?>
+					<? if ($arResult['SHOW_OFFERS_PROPS']): ?>
+						<ul class="prop-list" id="<?= $itemIds['DISPLAY_PROP_DIV'] ?>"></ul>
+					<? endif; ?>
+				</div>
+			<? endif ?>
 
-								<ul class="prop-list">
-									<? foreach ($arResult['DISPLAY_PROPERTIES'] as $property): ?>
-										<li class="prop-list-item">
-											<span class="prop-list-item-name"><?= $property['NAME'] ?></span>
-											<span class="prop-list-item-value">
-												<?= (
-													is_array($property['DISPLAY_VALUE'])
-													? implode(' / ', $property['DISPLAY_VALUE'])
-													: $property['DISPLAY_VALUE']
-												) ?>
-											</span>
-										</li>
-									<?
-									endforeach;
-									unset($property);
-									?>
-								</ul>
-
-							<? endif; ?>
-
-							<? if ($arResult['SHOW_OFFERS_PROPS']): ?>
-								<ul class="prop-list" id="<?= $itemIds['DISPLAY_PROP_DIV'] ?>"></ul>
-							<? endif; ?>
-						</div>
-					<? endif ?>
-
-					<?/* if ($arParams['USE_COMMENTS'] === 'Y'): ?>
+			<?/* if ($arParams['USE_COMMENTS'] === 'Y'): ?>
 						<div class="tabs-content" data-entity="tab-container" data-value="comments" style="display: none;">
 							<?php
 							$componentCommentsParams = array(
@@ -696,14 +722,9 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 							?>
 						</div>
 					<? endif; */ ?>
-				</div>
-			</div>
-			<!-- табы заверстать !!! -->
 		</div>
 	</div>
-
-
-
+	<!-- табы заверстать !!! -->
 
 	<meta itemprop="name" content="<?= $name ?>" />
 	<meta itemprop="category" content="<?= $arResult['CATEGORY_PATH'] ?>" />

@@ -532,7 +532,7 @@
             }
 
             this.checkQuantityControls();
-            this.fixFontCheck();
+            // this.fixFontCheck();
             this.setAnalyticsDataLayer("showDetail");
             break;
           case 3: // sku
@@ -1032,6 +1032,8 @@
         targetTab,
         haveActive = false;
 
+      // console.log(slider);
+
       for (var i = 0; i < tabs.length; i++) {
         if (BX.type.isDomNode(tabs[i])) {
           tabValue = tabs[i].getAttribute("data-value");
@@ -1060,6 +1062,23 @@
           }
         }
       }
+
+      const tabsSlider = new Swiper(".tabs__buttons", {
+        slidesPerView: "auto",
+        spaceBetween: 10,
+
+        navigation: {
+          prevEl: ".tabs .swiper-button-prev",
+          nextEl: ".tabs .swiper-button-next",
+        },
+      });
+
+      tabsSlider.on("click", function (swiper) {
+        const clickedIndex = swiper.clickedIndex;
+        if (clickedIndex !== undefined && clickedIndex !== null) {
+          swiper.slideTo(clickedIndex, 300);
+        }
+      });
     },
 
     scrollToProduct: function () {
@@ -1855,7 +1874,7 @@
         this.setCompared(this.offers[index].COMPARED);
 
         this.offerNum = index;
-        this.fixFontCheck();
+        // this.fixFontCheck();
         this.setAnalyticsDataLayer("showDetail");
         this.incViewedCounter();
 
@@ -2793,21 +2812,21 @@
       }
     },
 
-    fixFontCheck: function () {
-      if (BX.type.isDomNode(this.obPrice.price)) {
-        BX.FixFontSize &&
-          BX.FixFontSize.init({
-            objList: [
-              {
-                node: this.obPrice.price,
-                maxFontSize: 28,
-                smallestValue: false,
-                scaleBy: this.obPrice.price.parentNode,
-              },
-            ],
-            onAdaptiveResize: true,
-          });
-      }
-    },
+    // fixFontCheck: function () {
+    //   if (BX.type.isDomNode(this.obPrice.price)) {
+    //     BX.FixFontSize &&
+    //       BX.FixFontSize.init({
+    //         objList: [
+    //           {
+    //             node: this.obPrice.price,
+    //             maxFontSize: 28,
+    //             smallestValue: false,
+    //             scaleBy: this.obPrice.price.parentNode,
+    //           },
+    //         ],
+    //         onAdaptiveResize: true,
+    //       });
+    //   }
+    // },
   };
 })(window);
