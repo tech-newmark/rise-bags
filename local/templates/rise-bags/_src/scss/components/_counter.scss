@@ -1,86 +1,94 @@
 .counter {
-	display: flex;
-	align-items: center;
-	height: 40px;
-	border: 1px solid var(--primary);
-	border-radius: 30px;
-	overflow: hidden;
-	width: 140px;
-	min-width: 140px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border: 1px solid var(--primary);
+  border-radius: 30px;
+  overflow: hidden;
+  width: 140px;
+  min-width: 140px;
 
-	&-btn {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 40px;
-		height: 40px;
-		aspect-ratio: 1/1;
-		padding: 6px;
-		border: none;
-		background-color: var(--primary);
-		transition: opacity var(--main-transition);
+  &-block {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    margin: 4px 0;
+  }
 
-		svg {
-			fill: var(--white);
-		}
+  &-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    aspect-ratio: 1/1;
+    padding: 6px;
+    border: none;
+    background-color: var(--primary);
+    transition: opacity var(--main-transition);
 
-		&.disabled {
-			pointer-events: none;
-			opacity: 0.6;
-		}
+    svg {
+      fill: var(--white);
+    }
 
-		&--inc {
-			padding-right: 10px;
-		}
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.6;
+    }
 
-		&--dec {
-			padding-left: 10px;
-		}
-	}
+    &--inc {
+      padding-right: 10px;
+    }
 
-	input {
-		width: 60px;
-		border: none;
-		outline: none;
-		text-align: center;
-		font-size: 16px;
+    &--dec {
+      padding-left: 10px;
+    }
+  }
 
-		&.disabled {
-			pointer-events: none;
-			opacity: 0.6;
-		}
-	}
+  input {
+    width: 60px;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-size: 16px;
 
-	&--sm {
-		border: none;
-		border-radius: 0;
-		width: 78px;
-		min-width: 78px;
-		height: fit-content;
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+  }
 
-		.counter-btn {
-			width: 24px;
-			height: 24px;
+  &--sm {
+    border: none;
+    border-radius: 0;
+    width: 78px;
+    min-width: 78px;
+    height: fit-content;
 
-			padding: 2px;
-			border-radius: 50%;
-			background-color: transparent;
-			border: 1px solid var(--primary);
+    .counter-btn {
+      width: 24px;
+      height: 24px;
 
-			svg {
-				width: 16px;
-				height: 16px;
-				fill: var(--primary);
-			}
-		}
+      padding: 2px;
+      border-radius: 50%;
+      background-color: transparent;
+      border: 1px solid var(--primary);
 
-		input {
-			width: 30px;
-			font-size: 14px;
+      svg {
+        width: 16px;
+        height: 16px;
+        fill: var(--primary);
+      }
+    }
 
-			&::placeholder {
-				font-size: 14px;
-			}
-		}
-	}
+    input {
+      width: 30px;
+      font-size: 14px;
+
+      &::placeholder {
+        font-size: 14px;
+      }
+    }
+  }
 }
