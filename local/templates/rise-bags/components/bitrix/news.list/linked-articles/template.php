@@ -13,7 +13,7 @@ $this->setFrameMode(true);
 			<a class="main-btn" href="<?= $arResult['LIST_PAGE_URL'] ?>"><span><?= $arParams["BUTTON_NAME_IN_LINKED_ARTICLES"] ? $arParams["BUTTON_NAME_IN_LINKED_ARTICLES"] : 'Смотреть все' ?></span></a>
 		</div>
 		<div class="linked-articles__list">
-			<? foreach ($arResult["ITEMS"] as $arItem): ?>
+			<? foreach ($arResult["ITEMS"] as $index => $arItemParams): ?>
 				<?
 				$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
 				$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
@@ -22,11 +22,10 @@ $this->setFrameMode(true);
 					<? $APPLICATION->IncludeComponent(
 						"custom:cards",
 						"article-card",
-						array(
-							"TEMPLATE_DATA" => $arItem,
+						$arItemParams + [
 							"SHOW_DATE_ACTIVE_FROM" => $arParams["SHOW_DATE_ACTIVE_FROM"],
 							"SHOW_DATE_ACTIVE_TO" => $arParams["SHOW_DATE_ACTIVE_TO"],
-						),
+						],
 						$component,
 						array("HIDE_ICONS" => $index > 0 ?? "Y")
 					); ?>
