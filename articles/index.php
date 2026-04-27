@@ -10,7 +10,7 @@ $APPLICATION->SetTitle("Новости");
 		"TEMPLATE_THEME" => "site",
 		"NEWS_COUNT" => "",
 		"USE_SEARCH" => "N",
-		"USE_RSS" => "Y",
+		"USE_RSS" => "N",
 		"NUM_NEWS" => "20",
 		"NUM_DAYS" => "180",
 		"YANDEX" => "N",
@@ -89,7 +89,7 @@ $APPLICATION->SetTitle("Новости");
 		"PAGER_TEMPLATE" => "arrows",
 		"PAGER_DESC_NUMBERING" => "N",
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000000",
-		"PAGER_SHOW_ALL" => "N",
+		"PAGER_SHOW_ALL" => "Y",
 		"DISPLAY_DATE" => "Y",
 		"DISPLAY_PICTURE" => "Y",
 		"DISPLAY_PREVIEW_TEXT" => "Y",
@@ -123,8 +123,6 @@ $APPLICATION->SetTitle("Новости");
 			"news" => "",
 			"section" => "",
 			"detail" => "#ELEMENT_CODE#/",
-			"rss" => "rss/",
-			"rss_section" => "#SECTION_ID#/rss/",
 		]
 	],
 	false

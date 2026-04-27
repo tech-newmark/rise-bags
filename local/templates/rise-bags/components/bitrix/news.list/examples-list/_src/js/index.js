@@ -9,8 +9,22 @@ BX.ready(function () {
     const btnPrev = slider.querySelector(".swiper-button-prev");
 
     new window.Swiper(slider, {
-      slidesPerView: "auto",
+      slidesPerView: 1,
       spaceBetween: 20,
+
+      breakpoints: {
+        580: {
+          slidesPerView: 2,
+        },
+
+        800: {
+          slidesPerView: 3,
+        },
+
+        1240: {
+          slidesPerView: 4,
+        },
+      },
 
       navigation: {
         nextEl: btnNext ? btnNext : null,

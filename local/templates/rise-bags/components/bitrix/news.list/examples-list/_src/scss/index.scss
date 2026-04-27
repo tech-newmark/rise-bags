@@ -1,9 +1,6 @@
 .examples-slider {
   .swiper {
     &-slide {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       height: auto;
       max-height: 280px;
       padding: clamp(10px, 2vw, 20px);
