@@ -1,0 +1,2 @@
+BX.ready(function(){const e=document.querySelector(".examples-slider");if(console.log(e),e){e.querySelector(".swiper-pagination");const i=e.querySelector(".swiper-button-next"),n=e.querySelector(".swiper-button-prev");new window.Swiper(e,{slidesPerView:1,spaceBetween:20,breakpoints:{580:{slidesPerView:2},800:{slidesPerView:3},1240:{slidesPerView:4}},navigation:{nextEl:i||null,prevEl:n||null},pagination:{el:".swiper-pagination",clickable:!0}})}});
+//# sourceMappingURL=script.Ox4rlMix.js.map

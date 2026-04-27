@@ -1,5 +1,5 @@
 @use "sass:math";
-@use "../base/vars" as *;
+@use "@scss/base/vars" as *;
 
 $base-font-size-norm: math.div($base-font-size, 1px);
 

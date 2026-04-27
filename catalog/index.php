@@ -132,7 +132,8 @@ $APPLICATION->SetTitle("Каталог");
 		"ADD_PICT_PROP" => "-",
 		"LABEL_PROP" => [
 			0 => "NEW",
-			1 => "POPULAR",
+			1 => "HIT",
+			2 => "POPULAR",
 		],
 		"PRODUCT_DISPLAY_MODE" => "Y",
 		"OFFER_ADD_PICT_PROP" => "MORE_PHOTO",
@@ -291,9 +292,8 @@ $APPLICATION->SetTitle("Каталог");
 			0 => "PROP_3",
 			1 => "PROP_4",
 			2 => "PROP_5",
-			3 => "PROP_2",
-			4 => "PROP_6",
-			5 => "PROP_7",
+			3 => "PROP_6",
+			4 => "PROP_7",
 		],
 		"DETAIL_MAIN_BLOCK_OFFERS_PROPERTY_CODE" => [
 			0 => "ARTNUMBER",
