@@ -35,7 +35,8 @@ $this->setFrameMode(true);
 				</div>
 				<div class="swiper-button-next"><svg width="16" height="16" viewBox="0 0 16 16" role="img" aria-hidden="true" focusable="false">
 						<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-arrow"></use>
-					</svg></div>
+					</svg>
+				</div>
 				<div class="swiper-pagination"></div>
 			</div>
 		<? endif; ?>
