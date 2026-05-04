@@ -92,40 +92,45 @@
             if (\Bitrix\Main\ModuleManager::isModuleInstalled('search')):
           ?>
               <? $APPLICATION->IncludeComponent(
-                "bitrix:search.title",
-                "bootstrap_v4",
-                array(
-                  "NUM_CATEGORIES" => "1",
-                  "TOP_COUNT" => "5",
-                  "CHECK_DATES" => "N",
-                  "SHOW_OTHERS" => "N",
-                  "PAGE" => SITE_DIR . "catalog/",
-                  "CATEGORY_0_TITLE" => GetMessage("SEARCH_GOODS"),
-                  "CATEGORY_0" => array(
-                    0 => "iblock_catalog",
-                  ),
-                  "CATEGORY_0_iblock_catalog" => array(
-                    0 => "all",
-                  ),
-                  "CATEGORY_OTHERS_TITLE" => GetMessage("SEARCH_OTHER"),
-                  "SHOW_INPUT" => "Y",
-                  "INPUT_ID" => "title-search-input",
-                  "CONTAINER_ID" => "search",
-                  "PRICE_CODE" => array(
-                    0 => "BASE",
-                  ),
-                  "SHOW_PREVIEW" => "Y",
-                  "PREVIEW_WIDTH" => "75",
-                  "PREVIEW_HEIGHT" => "75",
-                  "CONVERT_CURRENCY" => "Y"
-                ),
-                false
-              ); ?>
+	"bitrix:search.title", 
+	"search-title", 
+	[
+		"NUM_CATEGORIES" => "1",
+		"TOP_COUNT" => "5",
+		"CHECK_DATES" => "N",
+		"SHOW_OTHERS" => "N",
+		"PAGE" => SITE_DIR."catalog/",
+		"CATEGORY_0_TITLE" => GetMessage("SEARCH_GOODS"),
+		"CATEGORY_0" => [
+			0 => "iblock_catalog",
+		],
+		"CATEGORY_0_iblock_catalog" => [
+			0 => "all",
+		],
+		"CATEGORY_OTHERS_TITLE" => GetMessage("SEARCH_OTHER"),
+		"SHOW_INPUT" => "Y",
+		"INPUT_ID" => "title-search-input",
+		"CONTAINER_ID" => "search",
+		"PRICE_CODE" => [
+			0 => "BASE",
+		],
+		"SHOW_PREVIEW" => "Y",
+		"PREVIEW_WIDTH" => "75",
+		"PREVIEW_HEIGHT" => "75",
+		"CONVERT_CURRENCY" => "Y",
+		"COMPONENT_TEMPLATE" => "search-title",
+		"ORDER" => "date",
+		"USE_LANGUAGE_GUESS" => "Y"
+	],
+	false
+); ?>
           <?php
             endif;
           endif;
           ?>
 
+          <!-- <div class="btn-group">
+          </div> -->
           <? $APPLICATION->IncludeComponent(
 	"bitrix:sale.basket.basket.line", 
 	"header-basket-line", 
@@ -157,7 +162,19 @@
 	],
 	false
 ); ?>
-          <button class="main-btn">Заказать звонок</button>
+
+          <button class="search-title-opener" aria-label="Открыть поиск">
+            <svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+              <use xlink:href="<?= SITE_TEMPLATE_PATH  . '/_dist/sprite.svg#icon-search' ?>"></use>
+            </svg>
+          </button>
+          <button class="main-btn callback-btn">Заказать звонок</button>
+
+          <button class="menu-opener">
+            <svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
+              <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-burger'></use>
+            </svg>
+          </button>
         </div>
       </div>
     </div>

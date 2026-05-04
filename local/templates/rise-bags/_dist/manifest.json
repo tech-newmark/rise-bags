@@ -32,13 +32,13 @@
     "src": "local/templates/rise-bags/_src/images/catalog-section-bg.jpg"
   },
   "local/templates/rise-bags/_src/js/index.js": {
-    "file": "template_scripts.2EbhfgqL.js",
+    "file": "template_scripts.CSRSn4jR.js",
     "name": "script",
     "src": "local/templates/rise-bags/_src/js/index.js",
     "isEntry": true
   },
   "local/templates/rise-bags/_src/scss/template.scss": {
-    "file": "template_styles.ypJ6EoSz.css",
+    "file": "template_styles.DgcGQ5-y.css",
     "src": "local/templates/rise-bags/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
@@ -104,7 +104,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/catalog.section.list/littleweb/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog.section.list/littleweb/style.CDg_KpX9.css",
+    "file": "components/bitrix/catalog.section.list/littleweb/style.BxDz0yqY.css",
     "src": "local/templates/rise-bags/components/bitrix/catalog.section.list/littleweb/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_section_list_littleweb_scss",
@@ -154,6 +154,15 @@
       "bitrix_catalog_littleweb_scss.css"
     ]
   },
+  "local/templates/rise-bags/components/bitrix/form.result.new/callback-form/_src/scss/index.scss": {
+    "file": "components/bitrix/form.result.new/callback-form/style.DbvZV5p0.css",
+    "src": "local/templates/rise-bags/components/bitrix/form.result.new/callback-form/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_form_result_new_callback-form_scss",
+    "names": [
+      "bitrix_form_result_new_callback-form_scss.css"
+    ]
+  },
   "local/templates/rise-bags/components/bitrix/main.profile/rise/_src/scss/index.scss": {
     "file": "components/bitrix/main.profile/rise/style.0TtyZFmw.css",
     "src": "local/templates/rise-bags/components/bitrix/main.profile/rise/_src/scss/index.scss",
@@ -164,7 +173,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/menu/simple-row/_src/scss/index.scss": {
-    "file": "components/bitrix/menu/simple-row/style.B_f5HfEZ.css",
+    "file": "components/bitrix/menu/simple-row/style.Cy3shNhc.css",
     "src": "local/templates/rise-bags/components/bitrix/menu/simple-row/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_menu_simple-row_scss",
@@ -190,6 +199,15 @@
       "bitrix_news_detail_article-detail_scss.css"
     ]
   },
+  "local/templates/rise-bags/components/bitrix/news.list/_catalog-preview/_src/scss/index.scss": {
+    "file": "components/bitrix/news.list/_catalog-preview/style.QBdXRqCk.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/_catalog-preview/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_list__catalog-preview_scss",
+    "names": [
+      "bitrix_news_list__catalog-preview_scss.css"
+    ]
+  },
   "local/templates/rise-bags/components/bitrix/news.list/article-list/_src/scss/index.scss": {
     "file": "components/bitrix/news.list/article-list/style.DBr8Hwc1.css",
     "src": "local/templates/rise-bags/components/bitrix/news.list/article-list/_src/scss/index.scss",
@@ -197,15 +215,6 @@
     "name": "bitrix_news_list_article-list_scss",
     "names": [
       "bitrix_news_list_article-list_scss.css"
-    ]
-  },
-  "local/templates/rise-bags/components/bitrix/news.list/catalog-preview/_src/scss/index.scss": {
-    "file": "components/bitrix/news.list/catalog-preview/style.QBdXRqCk.css",
-    "src": "local/templates/rise-bags/components/bitrix/news.list/catalog-preview/_src/scss/index.scss",
-    "isEntry": true,
-    "name": "bitrix_news_list_catalog-preview_scss",
-    "names": [
-      "bitrix_news_list_catalog-preview_scss.css"
     ]
   },
   "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/js/index.js": {
@@ -221,6 +230,15 @@
     "name": "bitrix_news_list_examples-list_scss",
     "names": [
       "bitrix_news_list_examples-list_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/faq-preview/_src/scss/index.scss": {
+    "file": "components/bitrix/news.list/faq-preview/style.B_NHDSqk.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/faq-preview/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_list_faq-preview_scss",
+    "names": [
+      "bitrix_news_list_faq-preview_scss.css"
     ]
   },
   "local/templates/rise-bags/components/bitrix/news.list/linked-articles/_src/scss/index.scss": {
@@ -275,7 +293,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/sale.basket.basket.line/header-basket-line/_src/scss/index.scss": {
-    "file": "components/bitrix/sale.basket.basket.line/header-basket-line/style.4fziqrNB.css",
+    "file": "components/bitrix/sale.basket.basket.line/header-basket-line/style.KiGt0cmt.css",
     "src": "local/templates/rise-bags/components/bitrix/sale.basket.basket.line/header-basket-line/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_sale_basket_basket_line_header-basket-line_scss",
@@ -308,6 +326,15 @@
     "name": "bitrix_sale_personal_section_rise_scss",
     "names": [
       "bitrix_sale_personal_section_rise_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/search.title/search-title/_src/scss/index.scss": {
+    "file": "components/bitrix/search.title/search-title/style.Dm1B0HBA.css",
+    "src": "local/templates/rise-bags/components/bitrix/search.title/search-title/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_search_title_search-title_scss",
+    "names": [
+      "bitrix_search_title_search-title_scss.css"
     ]
   },
   "local/templates/rise-bags/components/custom/cards/article-card/_src/scss/index.scss": {

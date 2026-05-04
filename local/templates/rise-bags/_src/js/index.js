@@ -4,3 +4,4 @@ import "./modules/imask-instance";
 import "./modules/swiper-instance";
 import "./modules/accordeon";
 import "./modules/bx-popup";
+import "./modules/search-open";

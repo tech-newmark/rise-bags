@@ -16,24 +16,36 @@ $compositeStub = (isset($arResult['COMPOSITE_STUB']) && $arResult['COMPOSITE_STU
 				<a href="?logout=yes&<?= bitrix_sessid_get() ?>">
 					<div class="bx-basket-block-section-icon">
 						<svg width="24" height="20" role="img" aria-hidden="true" focusable="false">
-							<use xlink:href="<?= SITE_TEMPLATE_PATH . '/_dist/sprite.svg#icon-user' ?> "></use>
+							<use xlink:href="<?= SITE_TEMPLATE_PATH . '/_dist/sprite.svg#icon-login' ?> "></use>
 						</svg>
 					</div>
 
-					<?= GetMessage('TSB1_LOGOUT') ?>
+					<span><?= GetMessage('TSB1_LOGOUT') ?></span>
 				</a>
 			</div>
 
 			<? if ($arParams['SHOW_PERSONAL_LINK'] == 'Y'): ?>
 				<div class="bx-basket-block-section">
-					<a href="<?= $arParams['PATH_TO_PERSONAL'] ?>"><?= GetMessage('TSB1_PERSONAL') ?></a>
+					<a href="<?= $arParams['PATH_TO_PERSONAL'] ?>">
+						<div class="bx-basket-block-section-icon">
+							<svg width="24" height="20" role="img" aria-hidden="true" focusable="false">
+								<use xlink:href="<?= SITE_TEMPLATE_PATH . '/_dist/sprite.svg#icon-user' ?> "></use>
+							</svg>
+						</div>
+						<span><?= GetMessage('TSB1_PERSONAL') ?>
+					</a></span>
 				</div>
 			<? endif; ?>
 
 			<? if ($arParams['PATH_TO_PROFILE'] != ''): ?>
 				<div class="bx-basket-block-section">
 					<a href="<?= $arParams['PATH_TO_PROFILE'] ?>">
-						<?= GetMessage('TSB1_PROFILE') ?>
+						<div class="bx-basket-block-section-icon">
+							<svg width="24" height="20" role="img" aria-hidden="true" focusable="false">
+								<use xlink:href="<?= SITE_TEMPLATE_PATH . '/_dist/sprite.svg#icon-profile' ?> "></use>
+							</svg>
+						</div>
+						<span><?= GetMessage('TSB1_PROFILE') ?></span>
 					</a>
 				</div>
 			<? endif; ?>
@@ -73,11 +85,11 @@ $compositeStub = (isset($arResult['COMPOSITE_STUB']) && $arResult['COMPOSITE_STU
 				<a href="<?= $pathToAuthorize ?>">
 					<div class="bx-basket-block-section-icon">
 						<svg width="24" height="20" role="img" aria-hidden="true" focusable="false">
-							<use xlink:href="<?= SITE_TEMPLATE_PATH . '/_dist/sprite.svg#icon-user' ?> "></use>
+							<use xlink:href="<?= SITE_TEMPLATE_PATH . '/_dist/sprite.svg#icon-login' ?> "></use>
 						</svg>
 					</div>
 
-					<?= GetMessage('TSB1_LOGIN') ?>
+					<span><?= GetMessage('TSB1_LOGIN') ?></span>
 				</a>
 
 				<? if ($arParams['SHOW_REGISTRATION'] === 'Y'):
@@ -86,7 +98,12 @@ $compositeStub = (isset($arResult['COMPOSITE_STUB']) && $arResult['COMPOSITE_STU
 					$pathToRegister .= 'register=yes&backurl=' . $currentUrl;
 				?>
 					<a href="<?= $pathToRegister ?>">
-						<?= GetMessage('TSB1_REGISTER') ?>
+						<div class="bx-basket-block-section-icon">
+							<svg width="24" height="20" role="img" aria-hidden="true" focusable="false">
+								<use xlink:href="<?= SITE_TEMPLATE_PATH . '/_dist/sprite.svg#icon-reg' ?> "></use>
+							</svg>
+						</div>
+						<span><?= GetMessage('TSB1_REGISTER') ?></span>
 					</a>
 				<? endif; ?>
 			</div>
@@ -100,7 +117,7 @@ $compositeStub = (isset($arResult['COMPOSITE_STUB']) && $arResult['COMPOSITE_STU
 					<use xlink:href="<?= SITE_TEMPLATE_PATH . '/_dist/sprite.svg#icon-compare' ?> "></use>
 				</svg>
 			</div>
-			Сравнение
+			<span>Сравнение</span>
 		</a>
 	</div>
 
@@ -111,7 +128,7 @@ $compositeStub = (isset($arResult['COMPOSITE_STUB']) && $arResult['COMPOSITE_STU
 					<use xlink:href="<?= SITE_TEMPLATE_PATH . '/_dist/sprite.svg#icon-heart' ?> "></use>
 				</svg>
 			</div>
-			Избранное
+			<span>Избранное</span>
 		</a>
 	</div>
 
@@ -129,7 +146,7 @@ $compositeStub = (isset($arResult['COMPOSITE_STUB']) && $arResult['COMPOSITE_STU
 						<? endif; ?>
 					<? endif; ?>
 				</div>
-				<?= GetMessage('TSB1_CART') ?>
+				<span><?= GetMessage('TSB1_CART') ?></span>
 			</a>
 		<? endif; ?>
 

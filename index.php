@@ -59,7 +59,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Rise-bags\"");
 		"STRICT_SECTION_CHECK" => "N"
 	)
 ); ?>
-<? $APPLICATION->IncludeComponent(
+<?/* $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"catalog-preview",
 	[
@@ -123,7 +123,45 @@ $APPLICATION->SetTitle("Интернет-магазин \"Rise-bags\"");
 		"COMPONENT_TEMPLATE" => "catalog-preview"
 	],
 	false
-); ?>
+); */ ?>
+
+<div class="container">
+	<? $APPLICATION->IncludeComponent(
+		"bitrix:catalog.section.list",
+		"littleweb",
+		[
+			"ADDITIONAL_COUNT_ELEMENTS_FILTER" => "additionalCountFilter",
+			"ADD_SECTIONS_CHAIN" => "Y",
+			"CACHE_FILTER" => "N",
+			"CACHE_GROUPS" => "Y",
+			"CACHE_TIME" => "36000000",
+			"CACHE_TYPE" => "A",
+			"COMPONENT_TEMPLATE" => "littleweb",
+			"COUNT_ELEMENTS" => "Y",
+			"COUNT_ELEMENTS_FILTER" => "CNT_ACTIVE",
+			"FILTER_NAME" => "sectionsFilter",
+			"HIDE_SECTIONS_WITH_ZERO_COUNT_ELEMENTS" => "Y",
+			"IBLOCK_ID" => "2",
+			"IBLOCK_TYPE" => "catalog",
+			"SECTION_CODE" => "",
+			"SECTION_FIELDS" => [
+				0 => "",
+				1 => "",
+			],
+			"SECTION_ID" => $_REQUEST["SECTION_ID"],
+			"SECTION_URL" => "",
+			"SECTION_USER_FIELDS" => [
+				0 => "",
+				1 => "",
+			],
+			"SHOW_PARENT_NAME" => "Y",
+			"TOP_DEPTH" => "2",
+			"VIEW_MODE" => "LINE"
+		],
+		false
+	); ?>
+</div>
+
 
 <?/* if (IsModuleInstalled("advertising")): ?>
 	<div class="mb-5">
@@ -281,5 +319,204 @@ $trendFilter = array('PROPERTY_TREND' => '4');
 	),
 	false
 ); */ ?>
+
+<? $APPLICATION->IncludeComponent(
+	"bitrix:form.result.new",
+	"callback-form",
+	array(
+		"AJAX_MODE" => "Y",
+		"CACHE_TIME" => "3600",
+		"CACHE_TYPE" => "A",
+		"CHAIN_ITEM_LINK" => "",
+		"CHAIN_ITEM_TEXT" => "",
+		"COMPONENT_TEMPLATE" => "callback-form",
+		"EDIT_URL" => "result_edit.php",
+		"IGNORE_CUSTOM_TEMPLATE" => "N",
+		"LIST_URL" => "result_list.php",
+		"NAME_TEMPLATE" => "",
+		"RESULT_ID" => $_REQUEST["RESULT_ID"],
+		"SEF_MODE" => "N",
+		"SHOW_ADDITIONAL" => "N",
+		"SHOW_ANSWER_VALUE" => "N",
+		"SHOW_STATUS" => "Y",
+		"SUCCESS_URL" => "",
+		"USE_EXTENDED_ERRORS" => "Y",
+		"VARIABLE_ALIASES" => ["WEB_FORM_ID" => "WEB_FORM_ID", "RESULT_ID" => "RESULT_ID",],
+		"WEB_FORM_ID" => "1"
+	)
+); ?>
+
+<div class="section">
+	<div class="container">
+		<div class="content">
+			<?
+			$APPLICATION->IncludeFile(
+				SITE_DIR . 'include/seo-block.php',
+				array(),
+				array('MODE' => 'html', 'NAME' => 'SEO-блок', 'SHOW_BORDER' => true)
+			);
+			?>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<? $APPLICATION->IncludeComponent(
+		"bitrix:catalog.top",
+		"littleweb",
+		[
+			"ACTION_VARIABLE" => "action",
+			"ADD_PICT_PROP" => "MORE_PHOTO",
+			"ADD_PROPERTIES_TO_BASKET" => "Y",
+			"ADD_TO_BASKET_ACTION" => "ADD",
+			"BASKET_URL" => "/personal/cart/",
+			"CACHE_FILTER" => "N",
+			"CACHE_GROUPS" => "Y",
+			"CACHE_TIME" => "36000000",
+			"CACHE_TYPE" => "A",
+			"COMPARE_NAME" => "CATALOG_COMPARE_LIST",
+			"COMPATIBLE_MODE" => "N",
+			"COMPONENT_TEMPLATE" => "littleweb",
+			"CONVERT_CURRENCY" => "N",
+			"CUSTOM_FILTER" => "{\"CLASS_ID\":\"CondGroup\",\"DATA\":{\"All\":\"AND\",\"True\":\"True\"},\"CHILDREN\":[]}",
+			"DETAIL_URL" => "/catalog/#SECTION_CODE_PATH#/",
+			"DISPLAY_COMPARE" => "N",
+			"ELEMENT_COUNT" => "9",
+			"ELEMENT_SORT_FIELD" => "sort",
+			"ELEMENT_SORT_FIELD2" => "id",
+			"ELEMENT_SORT_ORDER" => "asc",
+			"ELEMENT_SORT_ORDER2" => "desc",
+			"ENLARGE_PRODUCT" => "STRICT",
+			"FILTER_NAME" => "",
+			"HIDE_NOT_AVAILABLE" => "Y",
+			"HIDE_NOT_AVAILABLE_OFFERS" => "Y",
+			"IBLOCK_ID" => "2",
+			"IBLOCK_TYPE" => "catalog",
+			"LABEL_PROP" => [
+				0 => "NEW",
+				1 => "POPULAR",
+			],
+			"LINE_ELEMENT_COUNT" => "3",
+			"MESS_BTN_ADD_TO_BASKET" => "В корзину",
+			"MESS_BTN_BUY" => "Купить",
+			"MESS_BTN_COMPARE" => "Сравнить",
+			"MESS_BTN_DETAIL" => "Подробнее",
+			"MESS_NOT_AVAILABLE" => "Нет в наличии",
+			"MESS_NOT_AVAILABLE_SERVICE" => "Недоступно",
+			"OFFERS_FIELD_CODE" => [
+				0 => "",
+				1 => "",
+			],
+			"OFFERS_SORT_FIELD" => "sort",
+			"OFFERS_SORT_FIELD2" => "id",
+			"OFFERS_SORT_ORDER" => "asc",
+			"OFFERS_SORT_ORDER2" => "desc",
+			"PARTIAL_PRODUCT_PROPERTIES" => "N",
+			"PRICE_CODE" => [
+				0 => "BASE",
+			],
+			"PRICE_VAT_INCLUDE" => "Y",
+			"PRODUCT_BLOCKS_ORDER" => "price,props,sku,quantityLimit,quantity,buttons",
+			"PRODUCT_DISPLAY_MODE" => "Y",
+			"PRODUCT_ID_VARIABLE" => "id",
+			"PRODUCT_PROPS_VARIABLE" => "prop",
+			"PRODUCT_QUANTITY_VARIABLE" => "quantity",
+			"PRODUCT_ROW_VARIANTS" => "[{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false},{'VARIANT':'2','BIG_DATA':false}]",
+			"PRODUCT_SUBSCRIPTION" => "Y",
+			"PROPERTY_CODE_MOBILE" => [],
+			"ROTATE_TIMER" => "30",
+			"SECTION_URL" => "/catalog/",
+			"SEF_MODE" => "N",
+			"SHOW_CLOSE_POPUP" => "N",
+			"SHOW_DISCOUNT_PERCENT" => "Y",
+			"SHOW_MAX_QUANTITY" => "Y",
+			"SHOW_OLD_PRICE" => "Y",
+			"SHOW_PAGINATION" => "Y",
+			"SHOW_PRICE_COUNT" => "1",
+			"SHOW_SLIDER" => "Y",
+			"SLIDER_INTERVAL" => "3000",
+			"SLIDER_PROGRESS" => "N",
+			"TEMPLATE_THEME" => "blue",
+			"USE_ENHANCED_ECOMMERCE" => "N",
+			"USE_PRICE_COUNT" => "N",
+			"USE_PRODUCT_QUANTITY" => "Y",
+			"VIEW_MODE" => "SECTION",
+			"MESS_SHOW_MAX_QUANTITY" => "Наличие",
+			"DISCOUNT_PERCENT_POSITION" => "bottom-right",
+			"LABEL_PROP_MOBILE" => [],
+			"LABEL_PROP_POSITION" => "top-left",
+			"OFFER_ADD_PICT_PROP" => "MORE_PHOTO"
+		],
+		false
+	); ?>
+</div>
+
+
+<? $APPLICATION->IncludeComponent(
+	"bitrix:news.list",
+	"faq-preview",
+	[
+		"ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"AJAX_MODE" => "N",
+		"AJAX_OPTION_ADDITIONAL" => "",
+		"AJAX_OPTION_HISTORY" => "N",
+		"AJAX_OPTION_JUMP" => "N",
+		"AJAX_OPTION_STYLE" => "Y",
+		"CACHE_FILTER" => "N",
+		"CACHE_GROUPS" => "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "A",
+		"CHECK_DATES" => "Y",
+		"COMPONENT_TEMPLATE" => "faq-preview",
+		"DETAIL_URL" => "",
+		"DISPLAY_BOTTOM_PAGER" => "Y",
+		"DISPLAY_DATE" => "N",
+		"DISPLAY_NAME" => "N",
+		"DISPLAY_PICTURE" => "N",
+		"DISPLAY_PREVIEW_TEXT" => "N",
+		"DISPLAY_TOP_PAGER" => "N",
+		"FIELD_CODE" => [
+			0 => "NAME",
+			1 => "PREVIEW_TEXT",
+			2 => "",
+		],
+		"FILTER_NAME" => "",
+		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+		"IBLOCK_ID" => "6",
+		"IBLOCK_TYPE" => "site_content",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"INCLUDE_SUBSECTIONS" => "N",
+		"MESSAGE_404" => "",
+		"NEWS_COUNT" => "20",
+		"PAGER_BASE_LINK_ENABLE" => "N",
+		"PAGER_DESC_NUMBERING" => "N",
+		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+		"PAGER_SHOW_ALL" => "N",
+		"PAGER_SHOW_ALWAYS" => "N",
+		"PAGER_TEMPLATE" => ".default",
+		"PAGER_TITLE" => "Новости",
+		"PARENT_SECTION" => "",
+		"PARENT_SECTION_CODE" => "",
+		"PREVIEW_TRUNCATE_LEN" => "",
+		"PROPERTY_CODE" => [
+			0 => "SHOW_ON_INDEX_PAGE",
+			1 => "",
+		],
+		"SET_BROWSER_TITLE" => "N",
+		"SET_LAST_MODIFIED" => "N",
+		"SET_META_DESCRIPTION" => "N",
+		"SET_META_KEYWORDS" => "N",
+		"SET_STATUS_404" => "N",
+		"SET_TITLE" => "N",
+		"SHOW_404" => "N",
+		"SORT_BY1" => "ACTIVE_FROM",
+		"SORT_BY2" => "SORT",
+		"SORT_ORDER1" => "DESC",
+		"SORT_ORDER2" => "ASC",
+		"STRICT_SECTION_CHECK" => "N"
+	],
+	false
+); ?>
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
