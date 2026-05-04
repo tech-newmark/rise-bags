@@ -132,8 +132,7 @@ $APPLICATION->SetTitle("Каталог");
 		"ADD_PICT_PROP" => "-",
 		"LABEL_PROP" => [
 			0 => "NEW",
-			1 => "HIT",
-			2 => "POPULAR",
+			1 => "POPULAR",
 		],
 		"PRODUCT_DISPLAY_MODE" => "Y",
 		"OFFER_ADD_PICT_PROP" => "MORE_PHOTO",
@@ -179,7 +178,7 @@ $APPLICATION->SetTitle("Каталог");
 		"SIDEBAR_DETAIL_SHOW" => "N",
 		"SIDEBAR_PATH" => "/catalog/sidebar.php",
 		"COMPONENT_TEMPLATE" => "littleweb",
-		"HIDE_NOT_AVAILABLE_OFFERS" => "N",
+		"HIDE_NOT_AVAILABLE_OFFERS" => "L",
 		"LABEL_PROP_MOBILE" => "",
 		"LABEL_PROP_POSITION" => "top-left",
 		"COMMON_SHOW_CLOSE_POPUP" => "Y",

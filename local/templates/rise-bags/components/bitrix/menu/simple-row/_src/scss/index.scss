@@ -1,0 +1,17 @@
+.simple-row-menu {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+
+	a {
+		display: flex;
+		align-items: center;
+		font-size: 16px;
+		padding: 4px 0;
+
+		&.selected {
+			pointer-events: none;
+			color: var(--primary);
+		}
+	}
+}
