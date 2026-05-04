@@ -127,39 +127,39 @@ $APPLICATION->SetTitle("Интернет-магазин \"Rise-bags\"");
 
 <div class="container">
 	<? $APPLICATION->IncludeComponent(
-		"bitrix:catalog.section.list",
-		"littleweb",
-		[
-			"ADDITIONAL_COUNT_ELEMENTS_FILTER" => "additionalCountFilter",
-			"ADD_SECTIONS_CHAIN" => "Y",
-			"CACHE_FILTER" => "N",
-			"CACHE_GROUPS" => "Y",
-			"CACHE_TIME" => "36000000",
-			"CACHE_TYPE" => "A",
-			"COMPONENT_TEMPLATE" => "littleweb",
-			"COUNT_ELEMENTS" => "Y",
-			"COUNT_ELEMENTS_FILTER" => "CNT_ACTIVE",
-			"FILTER_NAME" => "sectionsFilter",
-			"HIDE_SECTIONS_WITH_ZERO_COUNT_ELEMENTS" => "Y",
-			"IBLOCK_ID" => "2",
-			"IBLOCK_TYPE" => "catalog",
-			"SECTION_CODE" => "",
-			"SECTION_FIELDS" => [
-				0 => "",
-				1 => "",
-			],
-			"SECTION_ID" => $_REQUEST["SECTION_ID"],
-			"SECTION_URL" => "",
-			"SECTION_USER_FIELDS" => [
-				0 => "",
-				1 => "",
-			],
-			"SHOW_PARENT_NAME" => "Y",
-			"TOP_DEPTH" => "2",
-			"VIEW_MODE" => "LINE"
+	"bitrix:catalog.section.list", 
+	"littleweb", 
+	[
+		"ADDITIONAL_COUNT_ELEMENTS_FILTER" => "additionalCountFilter",
+		"ADD_SECTIONS_CHAIN" => "Y",
+		"CACHE_FILTER" => "N",
+		"CACHE_GROUPS" => "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "A",
+		"COMPONENT_TEMPLATE" => "littleweb",
+		"COUNT_ELEMENTS" => "Y",
+		"COUNT_ELEMENTS_FILTER" => "CNT_ACTIVE",
+		"FILTER_NAME" => "sectionsFilter",
+		"HIDE_SECTIONS_WITH_ZERO_COUNT_ELEMENTS" => "Y",
+		"IBLOCK_ID" => "2",
+		"IBLOCK_TYPE" => "catalog",
+		"SECTION_CODE" => "",
+		"SECTION_FIELDS" => [
+			0 => "",
+			1 => "",
 		],
-		false
-	); ?>
+		"SECTION_ID" => $_REQUEST["SECTION_ID"],
+		"SECTION_URL" => "/catalog/#SECTION_CODE_PATH#/",
+		"SECTION_USER_FIELDS" => [
+			0 => "",
+			1 => "",
+		],
+		"SHOW_PARENT_NAME" => "Y",
+		"TOP_DEPTH" => "2",
+		"VIEW_MODE" => "LINE"
+	],
+	false
+); ?>
 </div>
 
 

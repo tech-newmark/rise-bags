@@ -92,38 +92,38 @@
             if (\Bitrix\Main\ModuleManager::isModuleInstalled('search')):
           ?>
               <? $APPLICATION->IncludeComponent(
-	"bitrix:search.title", 
-	"search-title", 
-	[
-		"NUM_CATEGORIES" => "1",
-		"TOP_COUNT" => "5",
-		"CHECK_DATES" => "N",
-		"SHOW_OTHERS" => "N",
-		"PAGE" => SITE_DIR."catalog/",
-		"CATEGORY_0_TITLE" => GetMessage("SEARCH_GOODS"),
-		"CATEGORY_0" => [
-			0 => "iblock_catalog",
-		],
-		"CATEGORY_0_iblock_catalog" => [
-			0 => "all",
-		],
-		"CATEGORY_OTHERS_TITLE" => GetMessage("SEARCH_OTHER"),
-		"SHOW_INPUT" => "Y",
-		"INPUT_ID" => "title-search-input",
-		"CONTAINER_ID" => "search",
-		"PRICE_CODE" => [
-			0 => "BASE",
-		],
-		"SHOW_PREVIEW" => "Y",
-		"PREVIEW_WIDTH" => "75",
-		"PREVIEW_HEIGHT" => "75",
-		"CONVERT_CURRENCY" => "Y",
-		"COMPONENT_TEMPLATE" => "search-title",
-		"ORDER" => "date",
-		"USE_LANGUAGE_GUESS" => "Y"
-	],
-	false
-); ?>
+                "bitrix:search.title",
+                "search-title",
+                [
+                  "NUM_CATEGORIES" => "1",
+                  "TOP_COUNT" => "5",
+                  "CHECK_DATES" => "N",
+                  "SHOW_OTHERS" => "N",
+                  "PAGE" => SITE_DIR . "catalog/",
+                  "CATEGORY_0_TITLE" => GetMessage("SEARCH_GOODS"),
+                  "CATEGORY_0" => [
+                    0 => "iblock_catalog",
+                  ],
+                  "CATEGORY_0_iblock_catalog" => [
+                    0 => "all",
+                  ],
+                  "CATEGORY_OTHERS_TITLE" => GetMessage("SEARCH_OTHER"),
+                  "SHOW_INPUT" => "Y",
+                  "INPUT_ID" => "title-search-input",
+                  "CONTAINER_ID" => "search",
+                  "PRICE_CODE" => [
+                    0 => "BASE",
+                  ],
+                  "SHOW_PREVIEW" => "Y",
+                  "PREVIEW_WIDTH" => "75",
+                  "PREVIEW_HEIGHT" => "75",
+                  "CONVERT_CURRENCY" => "Y",
+                  "COMPONENT_TEMPLATE" => "search-title",
+                  "ORDER" => "date",
+                  "USE_LANGUAGE_GUESS" => "Y"
+                ],
+                false
+              ); ?>
           <?php
             endif;
           endif;
@@ -132,36 +132,36 @@
           <!-- <div class="btn-group">
           </div> -->
           <? $APPLICATION->IncludeComponent(
-	"bitrix:sale.basket.basket.line", 
-	"header-basket-line", 
-	[
-		"PATH_TO_BASKET" => SITE_DIR."personal/cart/",
-		"PATH_TO_PERSONAL" => SITE_DIR."personal/",
-		"SHOW_PERSONAL_LINK" => "N",
-		"SHOW_NUM_PRODUCTS" => "Y",
-		"SHOW_TOTAL_PRICE" => "N",
-		"SHOW_PRODUCTS" => "N",
-		"POSITION_FIXED" => "N",
-		"SHOW_AUTHOR" => "Y",
-		"PATH_TO_REGISTER" => SITE_DIR."login/",
-		"PATH_TO_PROFILE" => SITE_DIR."personal/private/",
-		"COMPONENT_TEMPLATE" => "header-basket-line",
-		"PATH_TO_ORDER" => SITE_DIR."personal/order/make/",
-		"SHOW_EMPTY_VALUES" => "N",
-		"PATH_TO_AUTHORIZE" => SITE_DIR."auth/",
-		"SHOW_REGISTRATION" => "N",
-		"SHOW_DELAY" => "Y",
-		"SHOW_NOTAVAIL" => "Y",
-		"SHOW_IMAGE" => "Y",
-		"SHOW_PRICE" => "Y",
-		"SHOW_SUMMARY" => "Y",
-		"POSITION_HORIZONTAL" => "right",
-		"POSITION_VERTICAL" => "vcenter",
-		"HIDE_ON_BASKET_PAGES" => "Y",
-		"MAX_IMAGE_SIZE" => "80"
-	],
-	false
-); ?>
+            "bitrix:sale.basket.basket.line",
+            "header-basket-line",
+            [
+              "PATH_TO_BASKET" => SITE_DIR . "personal/cart/",
+              "PATH_TO_PERSONAL" => SITE_DIR . "personal/",
+              "SHOW_PERSONAL_LINK" => "N",
+              "SHOW_NUM_PRODUCTS" => "Y",
+              "SHOW_TOTAL_PRICE" => "N",
+              "SHOW_PRODUCTS" => "N",
+              "POSITION_FIXED" => "N",
+              "SHOW_AUTHOR" => "Y",
+              "PATH_TO_REGISTER" => SITE_DIR . "login/",
+              "PATH_TO_PROFILE" => SITE_DIR . "personal/private/",
+              "COMPONENT_TEMPLATE" => "header-basket-line",
+              "PATH_TO_ORDER" => SITE_DIR . "personal/order/make/",
+              "SHOW_EMPTY_VALUES" => "N",
+              "PATH_TO_AUTHORIZE" => SITE_DIR . "auth/",
+              "SHOW_REGISTRATION" => "N",
+              "SHOW_DELAY" => "Y",
+              "SHOW_NOTAVAIL" => "Y",
+              "SHOW_IMAGE" => "Y",
+              "SHOW_PRICE" => "Y",
+              "SHOW_SUMMARY" => "Y",
+              "POSITION_HORIZONTAL" => "right",
+              "POSITION_VERTICAL" => "vcenter",
+              "HIDE_ON_BASKET_PAGES" => "Y",
+              "MAX_IMAGE_SIZE" => "80"
+            ],
+            false
+          ); ?>
 
           <button class="search-title-opener" aria-label="Открыть поиск">
             <svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
@@ -207,16 +207,17 @@
 
   <main id="workarea" class="workarea">
     <?
+
     if ($curPage != '/' && !defined("ERROR_404")) {
       $APPLICATION->IncludeComponent(
         "bitrix:breadcrumb",
-        "",
-        array(
+        "lw-breadcrumb",
+        [
           "PATH" => "",
           "SITE_ID" => "s1",
           "START_FROM" => "0",
           "COMPONENT_TEMPLATE" => "lw-breadcrumb"
-        ),
+        ],
         false
       );
     }
