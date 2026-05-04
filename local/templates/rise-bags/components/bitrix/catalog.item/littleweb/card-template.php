@@ -420,12 +420,14 @@ use Bitrix\Main\Localization\Loc;
 					</svg>
 				</button>
 			</div>
+
 			<span class="product-item-amount-description-container">
 				<small id="<?= $itemIds['QUANTITY_MEASURE'] ?>">
 					<?= $actualItem['ITEM_MEASURE']['TITLE'] ?>
 				</small>
 				<small id="<?= $itemIds['PRICE_TOTAL'] ?>"></small>
 			</span>
+
 		</div>
 	<? endif; ?>
 

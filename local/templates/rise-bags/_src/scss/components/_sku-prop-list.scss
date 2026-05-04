@@ -20,14 +20,20 @@
 		flex-wrap: wrap;
 		gap: 4px;
 
-		&-item.selected {
-			button {
-				border-color: var(--primary);
+		&-item {
+			&.notallowed {
+				opacity: 0.3;
+			}
 
-				&:has(span) {
-					background-color: var(--primary);
-					span {
-						color: var(--white);
+			&.selected {
+				button {
+					border-color: var(--primary);
+
+					&:has(span) {
+						background-color: var(--primary);
+						span {
+							color: var(--white);
+						}
 					}
 				}
 			}
@@ -50,24 +56,24 @@
 			&:has(img) {
 				border-radius: 50%;
 				img {
-					width: 12px;
-					height: 12px;
+					width: 24px;
+					height: 24px;
 					object-fit: cover;
 					border-radius: 50%;
 					aspect-ratio: 1/1;
 				}
 			}
 
-			// &.selected {
-			// 	border-color: var(--primary);
+			&.selected {
+				border-color: var(--primary);
 
-			// 	&:has(span) {
-			// 		background-color: var(--primary);
-			// 		span {
-			// 			color: var(--white);
-			// 		}
-			// 	}
-			// }
+				&:has(span) {
+					background-color: var(--primary);
+					span {
+						color: var(--white);
+					}
+				}
+			}
 
 			&.disabled {
 				pointer-events: none;

@@ -1,34 +1,23 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 
-<? if ($arParams["IS_MODAL"] != "Y"): ?>
-	<section class="base-section callback">
-		<div class="container">
-		<? endif; ?>
+<section class="section callback">
+	<div class="container">
 
-		<div class="callback-form ">
+		<div class="callback-form">
 			<?= $arResult["FORM_HEADER"] ?>
 
 			<? if ($arResult["FORM_NOTE"]): ?>
 				<div class="callback-form__header">
-					<span class="callback-form__title">Заявка отправлена успешно!</span>
+					<h2>Заявка отправлена успешно!</h2>
 					<p>Спасибо, мы скоро свяжемся с Вами!</p>
 				</div>
 
-				<? if ($arParams["IS_MODAL"] == "Y"): ?>
-					<script>
-						yaCounter102970436.reachGoal('form_popup');
-					</script>
-				<? else: ?>
-					<script>
-						yaCounter102970436.reachGoal('form_bottom');
-					</script>
-				<? endif; ?>
-
 			<? else: ?>
 				<div class="callback-form__header">
-					<span class="callback-form__headline"><?= $arResult["FORM_TITLE"] ?></span>
-					<span class="callback-form__title"><?= $arResult["FORM_DESCRIPTION"] ?></span>
+					<h2><?= $arResult["FORM_TITLE"] ?></h2>
+					<p><?= $arResult["FORM_DESCRIPTION"] ?></p>
 				</div>
+
 				<? foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion): ?>
 					<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "text"): ?>
 						<div class="main-input-wrapper <?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? 'invalid-fld' : '') ?>">
@@ -62,35 +51,27 @@
 					</div>
 				<? endif; ?>
 
-				<?/* $APPLICATION->IncludeComponent(
-					"bitrix:main.userconsent.request",
-					"user-consent",
-					array(
-						"AUTO_SAVE" => "N",
-						"COMPOSITE_FRAME_MODE" => "A",
-						"COMPOSITE_FRAME_TYPE" => "AUTO",
-						"ID" => "1",
-						"IS_CHECKED" => "N",
-						"IS_LOADED" => "Y",
-						"COMPONENT_TEMPLATE" => "user-consent"
-					),
-					$component
-				); */ ?>
 
-				<div class="main-input-wrapper">
-					<input
-						<?= (intval($arResult["F_RIGHT"]) < 10 ? "disabled=\"disabled\"" : ""); ?>
-						type="submit" name="web_form_submit"
-						value="<?= htmlspecialcharsbx(trim($arResult["arForm"]["BUTTON"]) == '' ? 'Отправить' : $arResult["arForm"]["BUTTON"]); ?>" />
-				</div>
+				<input class="main-btn"
+					<?= (intval($arResult["F_RIGHT"]) < 10 ? "disabled=\"disabled\"" : ""); ?>
+					type="submit" name="web_form_submit"
+					value="<?= htmlspecialcharsbx(trim($arResult["arForm"]["BUTTON"]) == '' ? 'Отправить' : $arResult["arForm"]["BUTTON"]); ?>" />
+
 			<? endif; ?>
 			<?= $arResult["FORM_FOOTER"] ?>
 		</div>
 
-		<? if ($arParams["IS_MODAL"] != "Y"): ?>
-		</div>
-	</section>
-<? endif; ?>
+		<?
+		$APPLICATION->IncludeFile(
+			SITE_DIR . 'include/callback-form-img.php',
+			array(),
+			array('MODE' => 'html', 'NAME' => 'Изображение в форме', 'SHOW_BORDER' => true)
+		);
+		?>
+
+	</div>
+</section>
+
 
 <? if ($_REQUEST['AJAX_CALL'] == 'Y'): ?>
 	<script src="https://unpkg.com/imask"></script>

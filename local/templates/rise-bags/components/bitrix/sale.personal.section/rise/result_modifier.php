@@ -24,7 +24,7 @@ if ($arParams['SHOW_PRIVATE_PAGE'] === 'Y') {
   $availablePages[] = array(
     "path" => $arResult['PATH_TO_PRIVATE'],
     "name" => Loc::getMessage("SPS_PERSONAL_PAGE_NAME"),
-    "icon" => 'personal-section-user-icon'
+    "icon" => 'icon-user'
   );
 }
 
@@ -50,7 +50,7 @@ if ($arParams['SHOW_BASKET_PAGE'] === 'Y') {
   $availablePages[] = array(
     "path" => $arParams['PATH_TO_BASKET'],
     "name" => Loc::getMessage("SPS_BASKET_PAGE_NAME"),
-    "icon" => 'personal-section-basket-icon'
+    "icon" => 'icon-cart'
   );
 }
 
@@ -78,7 +78,7 @@ if (!empty($arParams['~CUSTOM_PAGES'])) {
       $availablePages[] = [
         'path' => $page[0],
         'name' => $page[1],
-        'icon' => $icon !== '' ? 'personal-section-user-icon' : ''
+        'icon' => $icon !== '' ? 'icon-user' : ''
       ];
       unset($icon);
     }

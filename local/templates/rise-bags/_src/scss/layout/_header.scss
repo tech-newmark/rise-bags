@@ -1,0 +1,178 @@
+@use "@scss/base/container-queries" as *;
+
+.header {
+	container: header / inline-size;
+
+	&__top {
+		position: relative;
+
+		display: flex;
+		flex-direction: column;
+		padding-left: 180px;
+
+		&-row {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 24px;
+			padding: 8px 0;
+
+			&:not(:last-child) {
+				border-bottom: 1px solid var(--light);
+			}
+		}
+	}
+
+	&__bottom {
+		background-color: var(--light);
+	}
+
+	&__logo {
+		position: absolute;
+		bottom: 8px;
+		left: 0;
+		width: 100%;
+		max-width: 160px;
+		height: auto;
+
+		img {
+			display: flex;
+			width: 100%;
+			height: auto;
+			object-fit: contain;
+		}
+	}
+
+	.simple-row-menu {
+		display: none;
+		margin-right: auto;
+
+		@include container-up("header", 1280px) {
+			display: flex;
+		}
+	}
+
+	.catalog-opener {
+		line-height: 1;
+		margin-right: auto;
+		@include container-up("header", 1280px) {
+			margin-right: revert;
+		}
+	}
+
+	.contact-block {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		margin-right: auto;
+
+		@include container-up("header", 1280px) {
+			margin-right: revert;
+		}
+
+		&__section {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 4px;
+			padding-left: 32px;
+
+			a {
+				font-size: 14px;
+				font-weight: 500;
+				color: var(--primary);
+			}
+
+			svg {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				left: 0;
+				width: 24px;
+				height: auto;
+
+				fill: var(--primary);
+			}
+		}
+	}
+
+	.btn-group {
+		@include container-down("header", 1280px) {
+			display: flex;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			width: 100vw;
+			padding: 24px;
+			background-color: var(--white);
+			z-index: 101;
+			box-shadow:
+				rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+				rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+			.bx-basket {
+				margin-left: auto;
+			}
+		}
+	}
+
+	@include container-down("header", 960px) {
+		.catalog-opener {
+			display: none;
+		}
+		.header__top {
+			flex-direction: row;
+			align-items: center;
+			padding-left: 0;
+			gap: 24px;
+			padding: 12px 0;
+
+			&-row:first-of-type {
+				display: none;
+			}
+
+			&-row {
+				padding: 0;
+				gap: 16px;
+			}
+		}
+
+		.header__logo {
+			max-width: 84px;
+			position: static;
+			margin-right: auto;
+		}
+	}
+
+	@include container-down("header", 768px) {
+		.bx-basket-block {
+			display: none;
+		}
+	}
+
+	@include container-down("header", 440px) {
+		.callback-btn {
+			display: none;
+		}
+	}
+
+	.menu-opener {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: transparent;
+		padding: 6px;
+		border: none;
+
+		@include container-up("header", 960px) {
+			display: none;
+		}
+
+		svg {
+			width: 30px;
+			height: auto;
+			fill: var(--primary);
+		}
+	}
+}

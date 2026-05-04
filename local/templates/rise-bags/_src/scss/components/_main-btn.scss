@@ -3,10 +3,12 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	gap: 6px;
+	min-height: 44px;
 	text-align: center;
 	font-size: 16px;
 	font-weight: 600;
-	padding: 8px 18px;
+	padding: 4px 18px;
 	border: 1px solid transparent;
 	border-radius: var(--base-br);
 	background-color: var(--primary);
@@ -15,10 +17,20 @@
 
 	@extend %hover-opacity;
 
+	svg {
+		width: 24px;
+		height: auto;
+		fill: var(--white);
+	}
+
 	&.outlined {
 		border-color: var(--primary);
 		background-color: transparent;
 		color: var(--primary);
+
+		svg {
+			fill: var(--primary);
+		}
 	}
 
 	&.disabled {
