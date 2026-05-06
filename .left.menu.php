@@ -1,39 +1,10 @@
 <?
-$aMenuLinks = Array(
-	Array(
-		"Доставка", 
-		"/company/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Гарантия", 
-		"/company/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Доставка", 
-		"/company/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Отзывы", 
-		"/company/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Оплата", 
-		"/company/", 
-		Array(), 
-		Array(), 
-		"" 
+$aMenuLinks = array(
+	array(
+		"Каталог",
+		"/catalog/",
+		array(),
+		array("TOP_MULTILEVEL" => "true"),
+		""
 	)
 );
-?>

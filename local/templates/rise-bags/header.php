@@ -42,7 +42,7 @@
             "bitrix:menu",
             "simple-row",
             [
-              "ROOT_MENU_TYPE" => "left",
+              "ROOT_MENU_TYPE" => "top.simple",
               "MENU_CACHE_TYPE" => "A",
               "MENU_CACHE_TIME" => "36000000",
               "MENU_CACHE_USE_GROUPS" => "Y",
@@ -81,12 +81,50 @@
         </div>
 
         <div class="header__top-row">
-          <button class="main-btn catalog-opener">
-            <svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-              <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#catalog-icon'></use>
-            </svg>
-            <span>Каталог</span>
-          </button>
+
+          <?
+          $APPLICATION->IncludeComponent(
+	"bitrix:menu", 
+	"catalog-menu", 
+	[
+		"ROOT_MENU_TYPE" => "left",
+		"MENU_CACHE_TYPE" => "N",
+		"MENU_CACHE_TIME" => "36000000",
+		"MENU_CACHE_USE_GROUPS" => "Y",
+		"MENU_CACHE_GET_VARS" => [
+		],
+		"MAX_LEVEL" => "2",
+		"CHILD_MENU_TYPE" => "left",
+		"USE_EXT" => "Y",
+		"ALLOW_MULTI_SELECT" => "N",
+		"COMPONENT_TEMPLATE" => "catalog-menu",
+		"DELAY" => "N"
+	],
+	false
+);
+          ?>
+
+          <?/* $APPLICATION->IncludeComponent(
+            "bitrix:menu",
+            "catalog-menu",
+            [
+              "ROOT_MENU_TYPE" => "left",
+              "MENU_CACHE_TYPE" => "A",
+              "MENU_CACHE_TIME" => "36000000",
+              "MENU_CACHE_USE_GROUPS" => "Y",
+              "MENU_THEME" => "site",
+              "CACHE_SELECTED_ITEMS" => "N",
+              "MENU_CACHE_GET_VARS" => [],
+              "MAX_LEVEL" => "2",
+              "CHILD_MENU_TYPE" => "top",
+              "USE_EXT" => "Y",
+              "DELAY" => "N",
+              "ALLOW_MULTI_SELECT" => "N",
+              "COMPONENT_TEMPLATE" => "horizontal_multilevel"
+            ],
+            false
+          ); */ ?>
+
           <?php
           if ($curPage != SITE_DIR . "index.php"):
             if (\Bitrix\Main\ModuleManager::isModuleInstalled('search')):
@@ -182,22 +220,22 @@
       <div class="container">
         <? $APPLICATION->IncludeComponent(
           "bitrix:menu",
-          "bootstrap_v4",
-          array(
-            "ROOT_MENU_TYPE" => "left",
+          "horizontal_multilevel",
+          [
+            "ROOT_MENU_TYPE" => "top",
             "MENU_CACHE_TYPE" => "A",
             "MENU_CACHE_TIME" => "36000000",
             "MENU_CACHE_USE_GROUPS" => "Y",
             "MENU_THEME" => "site",
             "CACHE_SELECTED_ITEMS" => "N",
-            "MENU_CACHE_GET_VARS" => array(),
-            "MAX_LEVEL" => "3",
-            "CHILD_MENU_TYPE" => "left",
+            "MENU_CACHE_GET_VARS" => [],
+            "MAX_LEVEL" => "2",
+            "CHILD_MENU_TYPE" => "top",
             "USE_EXT" => "Y",
             "DELAY" => "N",
             "ALLOW_MULTI_SELECT" => "N",
-            "COMPONENT_TEMPLATE" => "bootstrap_v4"
-          ),
+            "COMPONENT_TEMPLATE" => "horizontal_multilevel"
+          ],
           false
         ); ?>
       </div>
