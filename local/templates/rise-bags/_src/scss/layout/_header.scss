@@ -52,7 +52,7 @@
 		}
 	}
 
-	.catalog-opener {
+	.catalog-menu {
 		line-height: 1;
 		margin-right: auto;
 		@include container-up("header", 1280px) {
@@ -118,7 +118,7 @@
 	}
 
 	@include container-down("header", 960px) {
-		.catalog-opener {
+		.catalog-menu {
 			display: none;
 		}
 		.header__top {

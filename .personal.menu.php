@@ -1,71 +1,68 @@
 <?
-$aMenuLinks = Array(
-	Array(
+$aMenuLinks = array(
+	array(
 		"Мой кабинет",
 		"personal/",
-		Array(),
-		Array(),
+		array(),
+		array(),
 		""
 	),
-
-
-	Array(
+	array(
 		"Текущие заказы",
 		"personal/orders/",
-		Array(),
-		Array(),
+		array(),
+		array(),
 		""
 	),
 
-	Array(
+	array(
 		"Личный счет",
 		"personal/account/",
-		Array(), 
-		Array(),
+		array(),
+		array(),
 		"CBXFeatures::IsFeatureEnabled('SaleAccounts')"
 	),
 
-	Array(
+	array(
 		"Личные данные",
 		"personal/private/",
-		Array(), 
-		Array(), 
-		"" 
+		array(),
+		array(),
+		""
 	),
-	Array(
+	array(
 		"История заказов",
 		"personal/orders/?filter_history=Y",
-		Array(),
-		Array(),
+		array(),
+		array(),
 		""
 	),
-	Array(
+	array(
 		"Профили заказов",
 		"personal/profiles/",
-		Array(),
-		Array(),
+		array(),
+		array(),
 		""
 	),
-	Array(
+	array(
 		"Корзина",
 		"personal/cart/",
-		Array(),
-		Array(),
+		array(),
+		array(),
 		""
 	),
-	Array(
+	array(
 		"Подписки",
 		"personal/subscribe/",
-		Array(),
-		Array(),
+		array(),
+		array(),
 		""
 	),
-	Array(
+	array(
 		"Контакты",
 		"about/contacts/",
-		Array(),
-		Array(),
+		array(),
+		array(),
 		""
 	),
 );
-?>
