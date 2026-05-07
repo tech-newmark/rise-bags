@@ -12,7 +12,7 @@ if (!$formId) {
 
 $APPLICATION->IncludeComponent(
   "bitrix:form.result.new",
-  "popup",
+  "ajax-popup",
   array(
     "AJAX_MODE" => "Y", // включаем AJAX-режим
     "AJAX_OPTION_JUMP" => "N",

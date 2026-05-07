@@ -21,10 +21,11 @@
 
 // forms controls, partials, templates
 
-@use "./forms/templates/_bx-popup";
-@use "./forms/templates/_popup-form";
-@use "./forms/templates/_oneclickbuy";
-@use "./forms/templates/_bx-authform";
+@use "./forms/templates/bx-popup";
+@use "./forms/templates/popup-form";
+@use "./forms/templates/oneclickbuy";
+@use "./forms/templates/bx-authform";
+@use "./forms/templates/ajax-popup";
 
 @use "./forms/partials/_captcha-block";
 

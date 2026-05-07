@@ -58,10 +58,6 @@
 			& > li {
 				break-inside: avoid;
 			}
-
-			// @include container-up("multilevel-menu", 320px) {
-			// 	columns: 2;
-			// }
 		}
 	}
 }

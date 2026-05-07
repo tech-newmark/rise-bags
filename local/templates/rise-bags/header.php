@@ -77,53 +77,31 @@
             </div>
           </div>
 
-          <button class="main-btn outlined">Стать партнером</button>
+          <button class="main-btn outlined" data-form-id="1">Стать партнером</button>
         </div>
 
         <div class="header__top-row">
 
           <?
           $APPLICATION->IncludeComponent(
-	"bitrix:menu", 
-	"catalog-menu", 
-	[
-		"ROOT_MENU_TYPE" => "left",
-		"MENU_CACHE_TYPE" => "N",
-		"MENU_CACHE_TIME" => "36000000",
-		"MENU_CACHE_USE_GROUPS" => "Y",
-		"MENU_CACHE_GET_VARS" => [
-		],
-		"MAX_LEVEL" => "2",
-		"CHILD_MENU_TYPE" => "left",
-		"USE_EXT" => "Y",
-		"ALLOW_MULTI_SELECT" => "N",
-		"COMPONENT_TEMPLATE" => "catalog-menu",
-		"DELAY" => "N"
-	],
-	false
-);
-          ?>
-
-          <?/* $APPLICATION->IncludeComponent(
             "bitrix:menu",
             "catalog-menu",
             [
               "ROOT_MENU_TYPE" => "left",
-              "MENU_CACHE_TYPE" => "A",
+              "MENU_CACHE_TYPE" => "N",
               "MENU_CACHE_TIME" => "36000000",
               "MENU_CACHE_USE_GROUPS" => "Y",
-              "MENU_THEME" => "site",
-              "CACHE_SELECTED_ITEMS" => "N",
               "MENU_CACHE_GET_VARS" => [],
-              "MAX_LEVEL" => "2",
-              "CHILD_MENU_TYPE" => "top",
+              "MAX_LEVEL" => "3",
+              "CHILD_MENU_TYPE" => "left",
               "USE_EXT" => "Y",
-              "DELAY" => "N",
               "ALLOW_MULTI_SELECT" => "N",
-              "COMPONENT_TEMPLATE" => "horizontal_multilevel"
+              "COMPONENT_TEMPLATE" => "catalog-menu",
+              "DELAY" => "N"
             ],
             false
-          ); */ ?>
+          );
+          ?>
 
           <?php
           if ($curPage != SITE_DIR . "index.php"):
@@ -206,7 +184,7 @@
               <use xlink:href="<?= SITE_TEMPLATE_PATH  . '/_dist/sprite.svg#icon-search' ?>"></use>
             </svg>
           </button>
-          <button class="main-btn callback-btn">Заказать звонок</button>
+          <button class="main-btn callback-btn" data-form-id="1">Заказать звонок</button>
 
           <button class="menu-opener">
             <svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
