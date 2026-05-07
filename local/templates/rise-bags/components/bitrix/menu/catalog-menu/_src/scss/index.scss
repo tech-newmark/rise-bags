@@ -10,14 +10,15 @@
 	&-wrapper {
 		display: none;
 		position: absolute;
-		width: 640px;
-		height: 40vh;
+		width: 70vw;
+		max-width: 840px;
+		height: 50vh;
 		max-height: fit-content;
 		background-color: #fff;
 		border-radius: 4px;
 		box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 		overflow: hidden;
-		padding: 8px;
+		padding: 24px;
 	}
 
 	&:hover .catalog-menu-wrapper,
@@ -34,11 +35,10 @@
 	.catalog-menu-sidelist {
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
+		gap: 16px;
 
 		width: 240px;
-		padding: 0 8px;
-		padding-right: 0;
+		padding: 0;
 		border-right: 1px solid var(--light);
 
 		a {
@@ -69,17 +69,17 @@
 
 	.catalog-menu-main {
 		position: absolute;
-		left: 240px;
-		top: 8px;
+		left: 264px;
+		top: 24px;
 
 		display: flex;
 		flex-direction: column;
 		gap: 2px;
 
-		width: 400px;
-		padding: 0 8px;
+		width: calc(100% - 288px);
+		padding: 0 24px;
 		padding-left: 24px;
-		height: calc(100% - 16px);
+		height: calc(100% - 48px);
 		overflow: hidden;
 		overflow-y: auto;
 
@@ -88,18 +88,18 @@
 
 		a {
 			display: flex;
-			align-items: center;
+			// align-items: center;
 			width: 100%;
 			font-style: 16px;
 			font-weight: 500;
-			padding: 4px 0;
+			padding: 8px 0;
 			outline: none;
 		}
 
 		ul {
 			display: none;
-			gap: 4px 16px;
-			grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+			gap: 12px 16px;
+			grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 
 			&.active {
 				display: grid;
@@ -107,7 +107,7 @@
 
 			li {
 				display: flex;
-				align-items: center;
+				// align-items: center;
 				gap: 8px;
 			}
 		}
