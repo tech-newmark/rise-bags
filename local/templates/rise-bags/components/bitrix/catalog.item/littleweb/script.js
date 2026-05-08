@@ -5,8 +5,11 @@
 
 	var BasketButton = function (params) {
 		BasketButton.superclass.constructor.apply(this, arguments);
-		this.buttonNode = BX.create("span", {
-			props: { className: "btn btn-default btn-buy btn-sm", id: this.id },
+		this.buttonNode = BX.create("button", {
+			props: {
+				className: "main-btn",
+				id: this.id,
+			},
 			style: typeof params.style === "object" ? params.style : {},
 			text: params.text,
 			events: this.contextEvents,
@@ -1952,12 +1955,7 @@
 							break;
 					}
 
-					strContent =
-						'<div style="width: 100%; margin: 0; text-align: center;"><img src="' +
-						strPict +
-						'" height="130" style="max-height:130px"><p>' +
-						this.product.name +
-						"</p></div>";
+					strContent = "<p>" + this.product.name + "</p>";
 
 					if (this.showClosePopup) {
 						buttons = [
@@ -1987,11 +1985,11 @@
 					}
 				} else {
 					strContent =
-						'<div style="width: 100%; margin: 0; text-align: center;"><p>' +
+						"<p>" +
 						(arResult.MESSAGE
 							? arResult.MESSAGE
 							: BX.message("BASKET_UNKNOWN_ERROR")) +
-						"</p></div>";
+						"</p>";
 					buttons = [
 						new BasketButton({
 							text: BX.message("BTN_MESSAGE_CLOSE"),

@@ -148,36 +148,36 @@
           <!-- <div class="btn-group">
           </div> -->
           <? $APPLICATION->IncludeComponent(
-            "bitrix:sale.basket.basket.line",
-            "header-basket-line",
-            [
-              "PATH_TO_BASKET" => SITE_DIR . "personal/cart/",
-              "PATH_TO_PERSONAL" => SITE_DIR . "personal/",
-              "SHOW_PERSONAL_LINK" => "N",
-              "SHOW_NUM_PRODUCTS" => "Y",
-              "SHOW_TOTAL_PRICE" => "N",
-              "SHOW_PRODUCTS" => "N",
-              "POSITION_FIXED" => "N",
-              "SHOW_AUTHOR" => "Y",
-              "PATH_TO_REGISTER" => SITE_DIR . "login/",
-              "PATH_TO_PROFILE" => SITE_DIR . "personal/private/",
-              "COMPONENT_TEMPLATE" => "header-basket-line",
-              "PATH_TO_ORDER" => SITE_DIR . "personal/order/make/",
-              "SHOW_EMPTY_VALUES" => "N",
-              "PATH_TO_AUTHORIZE" => SITE_DIR . "auth/",
-              "SHOW_REGISTRATION" => "N",
-              "SHOW_DELAY" => "Y",
-              "SHOW_NOTAVAIL" => "Y",
-              "SHOW_IMAGE" => "Y",
-              "SHOW_PRICE" => "Y",
-              "SHOW_SUMMARY" => "Y",
-              "POSITION_HORIZONTAL" => "right",
-              "POSITION_VERTICAL" => "vcenter",
-              "HIDE_ON_BASKET_PAGES" => "Y",
-              "MAX_IMAGE_SIZE" => "80"
-            ],
-            false
-          ); ?>
+	"bitrix:sale.basket.basket.line", 
+	"header-basket-line", 
+	[
+		"PATH_TO_BASKET" => SITE_DIR."personal/cart/",
+		"PATH_TO_PERSONAL" => SITE_DIR."personal/",
+		"SHOW_PERSONAL_LINK" => "N",
+		"SHOW_NUM_PRODUCTS" => "Y",
+		"SHOW_TOTAL_PRICE" => "N",
+		"SHOW_PRODUCTS" => "N",
+		"POSITION_FIXED" => "N",
+		"SHOW_AUTHOR" => "Y",
+		"PATH_TO_REGISTER" => SITE_DIR."login/",
+		"PATH_TO_PROFILE" => SITE_DIR."personal/private/",
+		"COMPONENT_TEMPLATE" => "header-basket-line",
+		"PATH_TO_ORDER" => SITE_DIR."personal/order/make/",
+		"SHOW_EMPTY_VALUES" => "N",
+		"PATH_TO_AUTHORIZE" => SITE_DIR."auth/",
+		"SHOW_REGISTRATION" => "N",
+		"SHOW_DELAY" => "Y",
+		"SHOW_NOTAVAIL" => "Y",
+		"SHOW_IMAGE" => "Y",
+		"SHOW_PRICE" => "Y",
+		"SHOW_SUMMARY" => "Y",
+		"POSITION_HORIZONTAL" => "right",
+		"POSITION_VERTICAL" => "vcenter",
+		"HIDE_ON_BASKET_PAGES" => "N",
+		"MAX_IMAGE_SIZE" => "80"
+	],
+	false
+); ?>
 
           <button class="search-title-opener" aria-label="Открыть поиск">
             <svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">

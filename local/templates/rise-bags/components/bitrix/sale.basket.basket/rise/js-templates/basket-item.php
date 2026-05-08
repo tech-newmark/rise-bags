@@ -278,8 +278,9 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 
 			</div>
 
-			<? if ($usePriceInAdditionalColumn): ?>
-				<div class="bx-basket__list-item-section bx-basket__list-item-section--price">
+
+			<div class="bx-basket__list-item-section bx-basket__list-item-section--info">
+				<div class="bx-basket__list-item-price-wrapper">
 					{{#SHOW_DISCOUNT_PRICE}}
 						<span class="bx-basket__list-item-price bx-basket__list-item-price--old">
 							{{{FULL_PRICE_FORMATED}}}
@@ -291,87 +292,44 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 					</span>
 
 					<small class="bx-basket__list-item-price-note">
-						<?= Loc::getMessage(
-							'SBB_BASKET_ITEM_PRICE_FOR_MSGVER_1',
-							[
-								'#MEASURE_RATIO#' => '{{MEASURE_RATIO}}',
-								'#MEASURE_TEXT#' => '{{MEASURE_TEXT}}',
-							],
-						); ?>
-					</small>
-
-					{{#SHOW_DISCOUNT_PRICE}}
-						<div class="bx-basket__list-item-price-label">
-							<?= Loc::getMessage(
-								'SBB_BASKET_ITEM_ECONOMY_MSGVER_2',
+						*<?= Loc::getMessage(
+								'SBB_BASKET_ITEM_PRICE_FOR_MSGVER_1',
 								[
-									'#DISCOUNT_PRICE_FORMATED#' => '<span id="basket-item-sum-price-difference-{{ID}}" >{{{SUM_DISCOUNT_PRICE_FORMATED}}}</span>',
+									'#MEASURE_RATIO#' => '{{MEASURE_RATIO}}',
+									'#MEASURE_TEXT#' => '{{MEASURE_TEXT}}',
 								],
-							) ?>
-						</div>
-					{{/SHOW_DISCOUNT_PRICE}}
+							); ?>
+					</small>
 				</div>
-			<? endif; ?>
 
-			<div class="bx-basket__list-item-section bx-basket__list-item-section--counter">
-				<div class="counter{{#NOT_AVAILABLE}}disabled{{/NOT_AVAILABLE}} counter--sm" data-entity="basket-item-quantity-block">
-					<button type="button" class="counter-btn counter-btn--dec" data-entity="basket-item-quantity-minus">
-						<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-minus'></use>
-						</svg>
-					</button>
-					<input type="number" value="{{QUANTITY}}"
-						{{#NOT_AVAILABLE}} disabled="disabled" {{/NOT_AVAILABLE}}
-						data-value="{{QUANTITY}}" data-entity="basket-item-quantity-field"
-						id="basket-item-quantity-{{ID}}">
-					<button type="button" class="counter-btn counter-btn--inc" data-entity="basket-item-quantity-plus">
-						<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-plus'></use>
-						</svg>
-					</button>
+				<div class="bx-basket__list-item-section bx-basket__list-item-section--counter">
+					<small class="bx-basket__list-item-price-note bx-basket__list-item-price-note--counter">
+						Выбор количества:
+					</small>
+					<div class="counter{{#NOT_AVAILABLE}}disabled{{/NOT_AVAILABLE}} counter--sm" data-entity="basket-item-quantity-block">
+						<button type="button" class="counter-btn counter-btn--dec" data-entity="basket-item-quantity-minus">
+							<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
+								<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-minus'></use>
+							</svg>
+						</button>
+						<input type="number" value="{{QUANTITY}}"
+							{{#NOT_AVAILABLE}} disabled="disabled" {{/NOT_AVAILABLE}}
+							data-value="{{QUANTITY}}" data-entity="basket-item-quantity-field"
+							id="basket-item-quantity-{{ID}}">
+						<button type="button" class="counter-btn counter-btn--inc" data-entity="basket-item-quantity-plus">
+							<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
+								<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-plus'></use>
+							</svg>
+						</button>
+					</div>
 				</div>
 			</div>
 
-			<? if ($useSumColumn): ?>
-				<div class="bx-basket__list-item-section">
-					<div class="basket-item-block-price">
-						{{#SHOW_DISCOUNT_PRICE}}
-							<div class="basket-item-price-old">
-								<span class="basket-item-price-old-text" id="basket-item-sum-price-old-{{ID}}">
-									{{{SUM_FULL_PRICE_FORMATED}}}
-								</span>
-							</div>
-						{{/SHOW_DISCOUNT_PRICE}}
-
-						<div class="basket-item-price-current">
-							<span class="basket-item-price-current-text" id="basket-item-sum-price-{{ID}}">
-								{{{SUM_PRICE_FORMATED}}}
-							</span>
-						</div>
-
-						{{#SHOW_DISCOUNT_PRICE}}
-							<div class="basket-item-price-difference">
-								<?= Loc::getMessage(
-									'SBB_BASKET_ITEM_ECONOMY_MSGVER_1',
-									[
-										'#DISCOUNT_PRICE_FORMATED#' => '<span id="basket-item-sum-price-difference-{{ID}}" style="white-space: nowrap;">{{{SUM_DISCOUNT_PRICE_FORMATED}}}</span>',
-									],
-								) ?>
-							</div>
-						{{/SHOW_DISCOUNT_PRICE}}
-					</div>
-				</div>
-			<? endif; ?>
-
-			<? if ($useActionColumn): ?>
-				<div class="bx-basket__list-item-section">
-					<button class="bx-basket__list-item-delete" data-entity="basket-item-delete">
-						<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#cross-icon'></use>
-						</svg>
-					</button>
-				</div>
-			<? endif; ?>
+			<button class="bx-basket__list-item-delete" data-entity="basket-item-delete">
+				<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
+					<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#cross-icon'></use>
+				</svg>
+			</button>
 		</div>
 
 	</li>

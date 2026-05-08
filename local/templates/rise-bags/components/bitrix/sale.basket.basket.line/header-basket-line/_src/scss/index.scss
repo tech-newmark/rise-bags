@@ -1,6 +1,6 @@
 @use "@scss/base/container-queries" as *;
 
-.bx-basket {
+.bx-basket-line {
 	position: relative;
 
 	&-tooltip {
@@ -96,11 +96,11 @@
 				font-size: 14px;
 			}
 
-			&:has(.bx-basket-tooltip) {
+			&:has(.bx-basket-line-tooltip) {
 				position: relative;
 			}
 
-			&:has(.bx-basket-tooltip) .bx-basket-tooltip {
+			&:has(.bx-basket-line-tooltip) .bx-basket-line-tooltip {
 				display: none;
 				position: absolute;
 				top: 100%;
@@ -111,8 +111,8 @@
 			}
 
 			@media (hover: hover) {
-				&:has(.bx-basket-tooltip):focus .bx-basket-tooltip,
-				&:has(.bx-basket-tooltip):hover .bx-basket-tooltip {
+				&:has(.bx-basket-line-tooltip):focus .bx-basket-line-tooltip,
+				&:has(.bx-basket-line-tooltip):hover .bx-basket-line-tooltip {
 					display: flex;
 				}
 			}
