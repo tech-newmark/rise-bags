@@ -99,12 +99,12 @@ $arTemplateParameters['EMPTY_BASKET_HINT_PATH'] = [
 // 	),
 // 	'DEFAULT' => 'extended'
 // );
-$arTemplateParameters['PRICE_DISPLAY_MODE'] = array(
-	'PARENT' => 'VISUAL',
-	'NAME' => GetMessage('CP_SBB_TPL_PRICE_DISPLAY_MODE'),
-	'TYPE' => 'CHECKBOX',
-	'DEFAULT' => 'Y'
-);
+// $arTemplateParameters['PRICE_DISPLAY_MODE'] = array(
+// 	'PARENT' => 'VISUAL',
+// 	'NAME' => GetMessage('CP_SBB_TPL_PRICE_DISPLAY_MODE'),
+// 	'TYPE' => 'CHECKBOX',
+// 	'DEFAULT' => 'Y'
+// );
 // $arTemplateParameters['SHOW_DISCOUNT_PERCENT'] = array(
 // 	'PARENT' => 'VISUAL',
 // 	'NAME' => GetMessage('CP_SBB_TPL_SHOW_DISCOUNT_PERCENT'),
@@ -112,6 +112,19 @@ $arTemplateParameters['PRICE_DISPLAY_MODE'] = array(
 // 	'REFRESH' => 'Y',
 // 	'DEFAULT' => 'Y'
 // );
+
+$arTemplateParameters['COLUMNS_LIST_EXT'] = array(
+	'HIDDEN' => 'Y'
+);
+
+$arTemplateParameters['USE_GIFTS'] = array(
+	'HIDDEN' => 'Y'
+);
+
+$arTemplateParameters['BASKET_IMAGES_SCALING'] = array(
+	'HIDDEN' => 'Y'
+);
+
 
 // if (!isset($arCurrentValues['SHOW_DISCOUNT_PERCENT']) || $arCurrentValues['SHOW_DISCOUNT_PERCENT'] === 'Y')
 // {
@@ -165,18 +178,18 @@ $arTemplateParameters['LABEL_PROP'] = array(
 	'REFRESH' => 'Y'
 );
 
-if (!empty($arCurrentValues['LABEL_PROP'])) {
-	$arTemplateParameters['LABEL_PROP_MOBILE'] = array(
-		'PARENT' => 'VISUAL',
-		'NAME' => GetMessage('CP_SBB_TPL_LABEL_PROP_MOBILE'),
-		'TYPE' => 'LIST',
-		'MULTIPLE' => 'Y',
-		'ADDITIONAL_VALUES' => 'N',
-		'COLS' => 25,
-		'SIZE' => 7,
-		'REFRESH' => 'N',
-	);
-}
+// if (!empty($arCurrentValues['LABEL_PROP'])) {
+// 	$arTemplateParameters['LABEL_PROP_MOBILE'] = array(
+// 		'PARENT' => 'VISUAL',
+// 		'NAME' => GetMessage('CP_SBB_TPL_LABEL_PROP_MOBILE'),
+// 		'TYPE' => 'LIST',
+// 		'MULTIPLE' => 'Y',
+// 		'ADDITIONAL_VALUES' => 'N',
+// 		'COLS' => 25,
+// 		'SIZE' => 7,
+// 		'REFRESH' => 'N',
+// 	);
+// }
 
 // 	$arTemplateParameters['LABEL_PROP_POSITION'] = array(
 // 		'PARENT' => 'VISUAL',
