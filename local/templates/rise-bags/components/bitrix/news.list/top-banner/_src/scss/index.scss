@@ -33,6 +33,7 @@
 	background-size: cover;
 	background-color: var(--primary);
 	border-radius: var(--base-br);
+	overflow: hidden;
 
 	@include container-up(banner, 420px) {
 		height: 450px;
@@ -60,6 +61,7 @@
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 4;
 		overflow: hidden;
+		text-transform: none;
 	}
 
 	.content {
