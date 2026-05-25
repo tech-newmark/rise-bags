@@ -3,14 +3,14 @@ $aMenuLinks = array(
 
 	array(
 		"Производство",
-		"/company/about/",
+		"/company/production/",
 		array(),
 		array(),
 		""
 	),
 	array(
 		"Условия сотрудничества",
-		"/company/team/",
+		"/company/terms/",
 		array(),
 		array(),
 		""
