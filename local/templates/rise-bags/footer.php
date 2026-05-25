@@ -61,7 +61,65 @@
         </a>
 
         <div class="social">
-          social-icons-row
+          <? $APPLICATION->IncludeComponent(
+            "bitrix:news.list",
+            "social-list",
+            array(
+              "ACTIVE_DATE_FORMAT" => "d.m.Y",
+              "ADD_SECTIONS_CHAIN" => "N",
+              "AJAX_MODE" => "N",
+              "AJAX_OPTION_ADDITIONAL" => "",
+              "AJAX_OPTION_HISTORY" => "N",
+              "AJAX_OPTION_JUMP" => "N",
+              "AJAX_OPTION_STYLE" => "Y",
+              "CACHE_FILTER" => "N",
+              "CACHE_GROUPS" => "Y",
+              "CACHE_TIME" => "36000000",
+              "CACHE_TYPE" => "A",
+              "CHECK_DATES" => "Y",
+              "COMPONENT_TEMPLATE" => "social-list",
+              "DETAIL_URL" => "",
+              "DISPLAY_BOTTOM_PAGER" => "Y",
+              "DISPLAY_DATE" => "Y",
+              "DISPLAY_NAME" => "Y",
+              "DISPLAY_PICTURE" => "Y",
+              "DISPLAY_PREVIEW_TEXT" => "Y",
+              "DISPLAY_TOP_PAGER" => "N",
+              "FIELD_CODE" => [0 => "", 1 => "",],
+              "FILTER_NAME" => "",
+              "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+              "IBLOCK_ID" => "8",
+              "IBLOCK_TYPE" => "site_content",
+              "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+              "INCLUDE_SUBSECTIONS" => "N",
+              "MESSAGE_404" => "",
+              "NEWS_COUNT" => "20",
+              "PAGER_BASE_LINK_ENABLE" => "N",
+              "PAGER_DESC_NUMBERING" => "N",
+              "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+              "PAGER_SHOW_ALL" => "N",
+              "PAGER_SHOW_ALWAYS" => "N",
+              "PAGER_TEMPLATE" => ".default",
+              "PAGER_TITLE" => "Новости",
+              "PARENT_SECTION" => "",
+              "PARENT_SECTION_CODE" => "",
+              "PREVIEW_TRUNCATE_LEN" => "",
+              "PROPERTY_CODE" => [0 => "", 1 => "ICON_DARK", 2 => "ICON_LIGHT", 3 => "",],
+              "SET_BROWSER_TITLE" => "N",
+              "SET_LAST_MODIFIED" => "N",
+              "SET_META_DESCRIPTION" => "N",
+              "SET_META_KEYWORDS" => "N",
+              "SET_STATUS_404" => "N",
+              "SET_TITLE" => "N",
+              "SHOW_404" => "N",
+              "SORT_BY1" => "ACTIVE_FROM",
+              "SORT_BY2" => "SORT",
+              "SORT_ORDER1" => "DESC",
+              "SORT_ORDER2" => "ASC",
+              "STRICT_SECTION_CHECK" => "N",
+              "THEME_SELECT" => "2"
+            )
+          ); ?>
         </div>
 
         <button class="main-btn">Запросить прайс</button>
@@ -70,52 +128,50 @@
 
       <div class="grid__item grid__item--menu grid__item--menu-wide">
         <? $APPLICATION->IncludeComponent(
-	"bitrix:menu", 
-	"bottom-menu", 
-	[
-		"TITLE" => "Каталог",
-		"COLUMN_VIEW" => "Y",
-		"ALLOW_MULTI_SELECT" => "N",
-		"CHILD_MENU_TYPE" => "bottom.left",
-		"DELAY" => "N",
-		"MAX_LEVEL" => "3",
-		"MENU_CACHE_GET_VARS" => [
-		],
-		"MENU_CACHE_TIME" => "3600",
-		"MENU_CACHE_TYPE" => "N",
-		"MENU_CACHE_USE_GROUPS" => "Y",
-		"MENU_THEME" => "site",
-		"ROOT_MENU_TYPE" => "bottom.left",
-		"USE_EXT" => "Y",
-		"COMPONENT_TEMPLATE" => "bottom-menu"
-	],
-	false
-); ?>
+          "bitrix:menu",
+          "bottom-menu",
+          [
+            "TITLE" => "Каталог",
+            "COLUMN_VIEW" => "Y",
+            "ALLOW_MULTI_SELECT" => "N",
+            "CHILD_MENU_TYPE" => "bottom.left",
+            "DELAY" => "N",
+            "MAX_LEVEL" => "3",
+            "MENU_CACHE_GET_VARS" => [],
+            "MENU_CACHE_TIME" => "3600",
+            "MENU_CACHE_TYPE" => "N",
+            "MENU_CACHE_USE_GROUPS" => "Y",
+            "MENU_THEME" => "site",
+            "ROOT_MENU_TYPE" => "bottom.left",
+            "USE_EXT" => "Y",
+            "COMPONENT_TEMPLATE" => "bottom-menu"
+          ],
+          false
+        ); ?>
       </div>
 
       <div class="grid__item grid__item--menu">
         <? $APPLICATION->IncludeComponent(
-	"bitrix:menu", 
-	"bottom-menu", 
-	[
-		"TITLE" => "Информация",
-		"COLUMN_VIEW" => "N",
-		"ALLOW_MULTI_SELECT" => "N",
-		"CHILD_MENU_TYPE" => "left",
-		"DELAY" => "N",
-		"MAX_LEVEL" => "4",
-		"MENU_CACHE_GET_VARS" => [
-		],
-		"MENU_CACHE_TIME" => "3600",
-		"MENU_CACHE_TYPE" => "N",
-		"MENU_CACHE_USE_GROUPS" => "Y",
-		"MENU_THEME" => "site",
-		"ROOT_MENU_TYPE" => "bottom",
-		"USE_EXT" => "Y",
-		"COMPONENT_TEMPLATE" => "bottom-menu"
-	],
-	false
-); ?>
+          "bitrix:menu",
+          "bottom-menu",
+          [
+            "TITLE" => "Информация",
+            "COLUMN_VIEW" => "N",
+            "ALLOW_MULTI_SELECT" => "N",
+            "CHILD_MENU_TYPE" => "left",
+            "DELAY" => "N",
+            "MAX_LEVEL" => "4",
+            "MENU_CACHE_GET_VARS" => [],
+            "MENU_CACHE_TIME" => "3600",
+            "MENU_CACHE_TYPE" => "N",
+            "MENU_CACHE_USE_GROUPS" => "Y",
+            "MENU_THEME" => "site",
+            "ROOT_MENU_TYPE" => "bottom",
+            "USE_EXT" => "Y",
+            "COMPONENT_TEMPLATE" => "bottom-menu"
+          ],
+          false
+        ); ?>
       </div>
 
       <div class="grid__item grid__item--contacts">
@@ -130,8 +186,15 @@
               </span>
             </div>
             <div class="contact-block__section-content">
-              <a href="tel:+78125429154">+7 (812) 542-91-54</a>
-              <a href="tel:+79633227552">+7 (963) 322-75-52</a>
+              <? $APPLICATION->IncludeFile(
+                SITE_DIR . "include/phone.php",
+                array(),
+                array(
+                  "MODE" => "php",
+                  "NAME" => "Телефон",
+                  "TEMPLATE" => "include_area.php",
+                )
+              ); ?>
             </div>
           </div>
           <div class="contact-block__section">
@@ -144,7 +207,15 @@
               </span>
             </div>
             <div class="contact-block__section-content">
-              <a href="ailto:support@rise-bags.ru">support@rise-bags.ru</a>
+              <? $APPLICATION->IncludeFile(
+                SITE_DIR . "include/email.php",
+                array(),
+                array(
+                  "MODE" => "php",
+                  "NAME" => "E-mail",
+                  "TEMPLATE" => "include_area.php",
+                )
+              ); ?>
             </div>
           </div>
           <div class="contact-block__section">
@@ -157,9 +228,15 @@
               </span>
             </div>
             <div class="contact-block__section-content">
-              <address>
-                194044, Россия, г. Санкт-Петербург, ул. наб. Обводного канала, 223–225, литер Л, пом. 9
-              </address>
+              <? $APPLICATION->IncludeFile(
+                SITE_DIR . "include/address.php",
+                array(),
+                array(
+                  "MODE" => "php",
+                  "NAME" => "Адрес",
+                  "TEMPLATE" => "include_area.php",
+                )
+              ); ?>
             </div>
           </div>
           <div class="contact-block__section">
@@ -172,9 +249,15 @@
               </span>
             </div>
             <div class="contact-block__section-content">
-              <span>
-                пн. - пт. с 10-00 до 18-00
-              </span>
+              <? $APPLICATION->IncludeFile(
+                SITE_DIR . "include/schedule.php",
+                array(),
+                array(
+                  "MODE" => "php",
+                  "NAME" => "Время работы",
+                  "TEMPLATE" => "include_area.php",
+                )
+              ); ?>
             </div>
           </div>
           <div class="contact-block__section">
@@ -190,7 +273,15 @@
 </footer>
 <div class="underfooter-line">
   <div class="container">
-    underfooter-line
+    <? $APPLICATION->IncludeFile(
+      SITE_DIR . "include/policy-footer.php",
+      array(),
+      array(
+        "MODE" => "php",
+        "NAME" => "Текст",
+        "TEMPLATE" => "include_area.php",
+      )
+    ); ?>
   </div>
 </div>
 </body>

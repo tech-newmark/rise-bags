@@ -1,12 +1,11 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("О компании");
-?>
-<section class="section company">
-	<div class="container">
-		<div class="grid">
-			<div class="content">
-				<? $APPLICATION->IncludeFile(
+?><section class="section company">
+<div class="container">
+	<div class="grid">
+		<div class="content">
+			 <? $APPLICATION->IncludeFile(
 					SITE_DIR . "include/company/desc.php",
 					array(),
 					array(
@@ -15,10 +14,10 @@ $APPLICATION->SetTitle("О компании");
 						"TEMPLATE" => "include_area.php",
 					)
 				); ?>
-			</div>
-			<div class="content">
-				<div class="company__img-wrapper">
-					<? $APPLICATION->IncludeFile(
+		</div>
+		<div class="content">
+			<div class="company__img-wrapper">
+				 <? $APPLICATION->IncludeFile(
 						SITE_DIR . "include/company/image.php",
 						array(),
 						array(
@@ -27,9 +26,8 @@ $APPLICATION->SetTitle("О компании");
 							"TEMPLATE" => "include_area.php",
 						)
 					); ?>
-				</div>
 			</div>
 		</div>
 	</div>
-</section>
-<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
+</div>
+ </section> <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

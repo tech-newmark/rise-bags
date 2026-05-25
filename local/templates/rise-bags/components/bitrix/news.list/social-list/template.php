@@ -14,7 +14,7 @@ $this->setFrameMode(true);
 ?>
 
 <? if ($arResult["ITEMS"]): ?>
-	<ul class="social-list test">
+	<ul class="social-list">
 		<? foreach ($arResult["ITEMS"] as $arItem): ?>
 			<?
 			$lightThemeIcon = CFile::GetPath($arItem["PROPERTIES"]["ICON_DARK"]["VALUE"]);
@@ -23,7 +23,6 @@ $this->setFrameMode(true);
 			$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
 			$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
 			?>
-
 			<li class="social-list__item" id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
 
 				<a href="<?= $arItem['CODE'] ?>" target="_blank">
