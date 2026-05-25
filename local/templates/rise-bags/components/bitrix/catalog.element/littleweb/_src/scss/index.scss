@@ -30,7 +30,7 @@
 			&--gallery {
 				max-width: 640px;
 				height: fit-content;
-				
+
 				@include container-up(bx-catalog-element, 850px) {
 					&--gallery {
 						position: sticky;
@@ -202,6 +202,7 @@
 		.swiper-button-disabled {
 			display: none;
 		}
+
 		.swiper-button-prev,
 		.swiper-button-next {
 			height: 100%;

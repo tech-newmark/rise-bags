@@ -38,7 +38,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/_src/scss/template.scss": {
-    "file": "template_styles.CkmYO5xM.css",
+    "file": "template_styles.DtOIB3KJ.css",
     "src": "local/templates/rise-bags/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
@@ -281,7 +281,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/js/index.js": {
-    "file": "components/bitrix/news.list/examples-list/script.Ox4rlMix.js",
+    "file": "components/bitrix/news.list/examples-list/script.RJayASz8.js",
     "name": "bitrix_news_list_examples-list_js",
     "src": "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/js/index.js",
     "isEntry": true
@@ -344,6 +344,25 @@
     "name": "bitrix_news_list_tizzers_scss",
     "names": [
       "bitrix_news_list_tizzers_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/top-banner/_src/images/banner-bg.jpg": {
+    "file": "components/bitrix/news.list/top-banner/_src/images/banner-bg.jpg",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/top-banner/_src/images/banner-bg.jpg"
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/top-banner/_src/js/index.js": {
+    "file": "components/bitrix/news.list/top-banner/script.DiDnqqqQ.js",
+    "name": "bitrix_news_list_top-banner_js",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/top-banner/_src/js/index.js",
+    "isEntry": true
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/top-banner/_src/scss/index.scss": {
+    "file": "components/bitrix/news.list/top-banner/style.CTKFTujC.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/top-banner/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_list_top-banner_scss",
+    "names": [
+      "bitrix_news_list_top-banner_scss.css"
     ]
   },
   "local/templates/rise-bags/components/bitrix/news/articles/_src/scss/index.scss": {

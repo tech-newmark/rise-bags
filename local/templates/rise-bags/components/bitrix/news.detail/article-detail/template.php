@@ -58,7 +58,7 @@ $this->setFrameMode(true);
 					"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 					"IBLOCK_ID" => $arResult['IBLOCK_ID'],
 					"IBLOCK_TYPE" => "site_content",
-					"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
+					"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 					"INCLUDE_SUBSECTIONS" => "Y",
 					"MESSAGE_404" => "",
 					"NEWS_COUNT" => "20",

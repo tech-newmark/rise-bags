@@ -615,13 +615,6 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 			<div class="tabs">
 				<div class="swiper tabs__buttons">
 					<div class=" swiper-wrapper" id="<?= $itemIds['TABS_ID'] ?>">
-						<? if ($showDescription): ?>
-							<div class="swiper-slide">
-								<button class="tabs__button active" data-entity="tab" data-value="description">
-									<span><?= $arParams['MESS_DESCRIPTION_TAB'] ?></span>
-								</button>
-							</div>
-						<? endif ?>
 
 						<? if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
 							<div class="swiper-slide">
@@ -630,6 +623,14 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 								</button>
 							</div>
 						<? endif; ?>
+
+						<? if ($showDescription): ?>
+							<div class="swiper-slide">
+								<button class="tabs__button active" data-entity="tab" data-value="description">
+									<span><?= $arParams['MESS_DESCRIPTION_TAB'] ?></span>
+								</button>
+							</div>
+						<? endif ?>
 
 						<?/* if ($arParams['USE_COMMENTS'] === 'Y'): ?>
 						<button class="tabs-opener " data-entity="tab" data-value="comments">

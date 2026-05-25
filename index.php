@@ -4,6 +4,66 @@ $APPLICATION->SetTitle("Интернет-магазин \"Rise-bags\"");
 ?>
 <? $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
+	"top-banner",
+	array(
+		"ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"AJAX_MODE" => "N",
+		"AJAX_OPTION_ADDITIONAL" => "",
+		"AJAX_OPTION_HISTORY" => "N",
+		"AJAX_OPTION_JUMP" => "N",
+		"AJAX_OPTION_STYLE" => "Y",
+		"CACHE_FILTER" => "N",
+		"CACHE_GROUPS" => "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "A",
+		"CHECK_DATES" => "Y",
+		"COMPONENT_TEMPLATE" => "top-banner",
+		"DETAIL_URL" => "",
+		"DISPLAY_BOTTOM_PAGER" => "Y",
+		"DISPLAY_DATE" => "Y",
+		"DISPLAY_NAME" => "Y",
+		"DISPLAY_PICTURE" => "Y",
+		"DISPLAY_PREVIEW_TEXT" => "Y",
+		"DISPLAY_TOP_PAGER" => "N",
+		"FIELD_CODE" => [0 => "", 1 => "",],
+		"FILTER_NAME" => "",
+		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+		"IBLOCK_ID" => "7",
+		"IBLOCK_TYPE" => "site_content",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"INCLUDE_SUBSECTIONS" => "Y",
+		"MESSAGE_404" => "",
+		"NEWS_COUNT" => "20",
+		"PAGER_BASE_LINK_ENABLE" => "N",
+		"PAGER_DESC_NUMBERING" => "N",
+		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+		"PAGER_SHOW_ALL" => "N",
+		"PAGER_SHOW_ALWAYS" => "N",
+		"PAGER_TEMPLATE" => ".default",
+		"PAGER_TITLE" => "Новости",
+		"PARENT_SECTION" => "",
+		"PARENT_SECTION_CODE" => "",
+		"PREVIEW_TRUNCATE_LEN" => "",
+		"PROPERTY_CODE" => [0 => "LINK_URL", 1 => "H1_TITLE", 2 => "BUTTON", 3 => "",],
+		"SET_BROWSER_TITLE" => "N",
+		"SET_LAST_MODIFIED" => "N",
+		"SET_META_DESCRIPTION" => "N",
+		"SET_META_KEYWORDS" => "N",
+		"SET_STATUS_404" => "N",
+		"SET_TITLE" => "N",
+		"SHOW_404" => "N",
+		"SORT_BY1" => "ACTIVE_FROM",
+		"SORT_BY2" => "SORT",
+		"SORT_ORDER1" => "DESC",
+		"SORT_ORDER2" => "ASC",
+		"STRICT_SECTION_CHECK" => "N"
+	),
+	$component
+); ?>
+
+<? $APPLICATION->IncludeComponent(
+	"bitrix:news.list",
 	"tizzers",
 	array(
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
@@ -127,39 +187,39 @@ $APPLICATION->SetTitle("Интернет-магазин \"Rise-bags\"");
 
 <div class="container">
 	<? $APPLICATION->IncludeComponent(
-	"bitrix:catalog.section.list", 
-	"littleweb", 
-	[
-		"ADDITIONAL_COUNT_ELEMENTS_FILTER" => "additionalCountFilter",
-		"ADD_SECTIONS_CHAIN" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"COMPONENT_TEMPLATE" => "littleweb",
-		"COUNT_ELEMENTS" => "Y",
-		"COUNT_ELEMENTS_FILTER" => "CNT_ACTIVE",
-		"FILTER_NAME" => "sectionsFilter",
-		"HIDE_SECTIONS_WITH_ZERO_COUNT_ELEMENTS" => "Y",
-		"IBLOCK_ID" => "2",
-		"IBLOCK_TYPE" => "catalog",
-		"SECTION_CODE" => "",
-		"SECTION_FIELDS" => [
-			0 => "",
-			1 => "",
+		"bitrix:catalog.section.list",
+		"littleweb",
+		[
+			"ADDITIONAL_COUNT_ELEMENTS_FILTER" => "additionalCountFilter",
+			"ADD_SECTIONS_CHAIN" => "Y",
+			"CACHE_FILTER" => "N",
+			"CACHE_GROUPS" => "Y",
+			"CACHE_TIME" => "36000000",
+			"CACHE_TYPE" => "A",
+			"COMPONENT_TEMPLATE" => "littleweb",
+			"COUNT_ELEMENTS" => "Y",
+			"COUNT_ELEMENTS_FILTER" => "CNT_ACTIVE",
+			"FILTER_NAME" => "sectionsFilter",
+			"HIDE_SECTIONS_WITH_ZERO_COUNT_ELEMENTS" => "Y",
+			"IBLOCK_ID" => "2",
+			"IBLOCK_TYPE" => "catalog",
+			"SECTION_CODE" => "",
+			"SECTION_FIELDS" => [
+				0 => "",
+				1 => "",
+			],
+			"SECTION_ID" => $_REQUEST["SECTION_ID"],
+			"SECTION_URL" => "/catalog/#SECTION_CODE_PATH#/",
+			"SECTION_USER_FIELDS" => [
+				0 => "",
+				1 => "",
+			],
+			"SHOW_PARENT_NAME" => "Y",
+			"TOP_DEPTH" => "2",
+			"VIEW_MODE" => "LINE"
 		],
-		"SECTION_ID" => $_REQUEST["SECTION_ID"],
-		"SECTION_URL" => "/catalog/#SECTION_CODE_PATH#/",
-		"SECTION_USER_FIELDS" => [
-			0 => "",
-			1 => "",
-		],
-		"SHOW_PARENT_NAME" => "Y",
-		"TOP_DEPTH" => "2",
-		"VIEW_MODE" => "LINE"
-	],
-	false
-); ?>
+		false
+	); ?>
 </div>
 
 

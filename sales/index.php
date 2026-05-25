@@ -1,35 +1,38 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Новости");
-?><?$APPLICATION->IncludeComponent(
-	"bitrix:news", 
-	"articles", 
+?>
+
+<?
+$APPLICATION->IncludeComponent(
+	"bitrix:news",
+	"articles",
 	[
-		"ADD_ELEMENT_CHAIN" => "N",
-		"ADD_SECTIONS_CHAIN" => "Y",
+		"ADD_ELEMENT_CHAIN" => "Y",
+		"ADD_SECTIONS_CHAIN" => "N",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
 		"AJAX_OPTION_HISTORY" => "N",
 		"AJAX_OPTION_JUMP" => "N",
 		"AJAX_OPTION_STYLE" => "Y",
 		"BROWSER_TITLE" => "-",
+		"BUTTON_NAME_IN_LINKED_ARTICLES" => "Смотреть все",
 		"CACHE_FILTER" => "N",
 		"CACHE_GROUPS" => "Y",
 		"CACHE_TIME" => "36000000",
 		"CACHE_TYPE" => "A",
 		"CHECK_DATES" => "Y",
+		"DESC_IN_LINKED_ARTICLES" => "Возможно вам так же будет интересно",
 		"DETAIL_ACTIVE_DATE_FORMAT" => "j F Y",
 		"DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",
 		"DETAIL_DISPLAY_TOP_PAGER" => "N",
 		"DETAIL_FIELD_CODE" => [
 			0 => "NAME",
-			1 => "PREVIEW_TEXT",
-			2 => "PREVIEW_PICTURE",
-			3 => "DETAIL_TEXT",
-			4 => "DETAIL_PICTURE",
-			5 => "DATE_ACTIVE_FROM",
-			6 => "DATE_ACTIVE_TO",
-			7 => "",
+			1 => "PREVIEW_PICTURE",
+			2 => "DETAIL_TEXT",
+			3 => "DETAIL_PICTURE",
+			4 => "DATE_ACTIVE_TO",
+			5 => "",
 		],
 		"DETAIL_PAGER_SHOW_ALL" => "Y",
 		"DETAIL_PAGER_TEMPLATE" => "",
@@ -40,25 +43,21 @@ $APPLICATION->SetTitle("Новости");
 		],
 		"DETAIL_SET_CANONICAL_URL" => "N",
 		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "Y",
+		"DISPLAY_DATE" => "N",
 		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
+		"DISPLAY_PICTURE" => "N",
+		"DISPLAY_PREVIEW_TEXT" => "N",
 		"DISPLAY_TOP_PAGER" => "N",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "11",
 		"IBLOCK_TYPE" => "site_content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
-		"LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"LIST_ACTIVE_DATE_FORMAT" => "j F Y",
 		"LIST_FIELD_CODE" => [
 			0 => "NAME",
-			1 => "PREVIEW_TEXT",
-			2 => "PREVIEW_PICTURE",
-			3 => "DETAIL_TEXT",
-			4 => "DETAIL_PICTURE",
-			5 => "DATE_ACTIVE_FROM",
-			6 => "DATE_ACTIVE_TO",
-			7 => "",
+			1 => "PREVIEW_PICTURE",
+			2 => "DATE_ACTIVE_TO",
+			3 => "",
 		],
 		"LIST_PROPERTY_CODE" => [
 			0 => "",
@@ -88,7 +87,9 @@ $APPLICATION->SetTitle("Новости");
 		"SORT_ORDER1" => "DESC",
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N",
+		"TITLE_IN_LINKED_ARTICLES" => "Рекомендуем",
 		"USE_CATEGORIES" => "N",
+		"USE_DATE_FILTER" => "Y",
 		"USE_FILTER" => "N",
 		"USE_PERMISSIONS" => "N",
 		"USE_RATING" => "N",
@@ -98,9 +99,6 @@ $APPLICATION->SetTitle("Новости");
 		"USE_SHARE" => "N",
 		"COMPONENT_TEMPLATE" => "articles",
 		"SEF_FOLDER" => "/sales/",
-		"TITLE_IN_LINKED_ARTICLES" => "Рекомендации",
-		"DESC_IN_LINKED_ARTICLES" => "",
-		"BUTTON_NAME_IN_LINKED_ARTICLES" => "",
 		"SEF_URL_TEMPLATES" => [
 			"news" => "",
 			"section" => "",
@@ -108,4 +106,4 @@ $APPLICATION->SetTitle("Новости");
 		]
 	],
 	false
-);?><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
+); ?><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
