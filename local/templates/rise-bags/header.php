@@ -65,15 +65,30 @@
                 <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-phone'></use>
               </svg>
 
-              <a href="tel:+78125429154">+7 (812) 542-91-54</a>
-              <a href="tel:+79633227552">+7 (963) 322-75-52</a>
+              <? $APPLICATION->IncludeFile(
+                SITE_DIR . "include/contacts/phones.php",
+                array(),
+                array(
+                  "MODE" => "php",
+                  "NAME" => "Телефон",
+                  "TEMPLATE" => "include_area.php",
+                )
+              ); ?>
             </div>
 
             <div class="contact-block__section">
               <svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
                 <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-mail'></use>
               </svg>
-              <a href="mailto:support@rise-bags.ru">support@rise-bags.ru</a>
+              <? $APPLICATION->IncludeFile(
+                SITE_DIR . "include/contacts/email.php",
+                array(),
+                array(
+                  "MODE" => "php",
+                  "NAME" => "E-mail",
+                  "TEMPLATE" => "include_area.php",
+                )
+              ); ?>
             </div>
           </div>
 
@@ -148,36 +163,36 @@
           <!-- <div class="btn-group">
           </div> -->
           <? $APPLICATION->IncludeComponent(
-	"bitrix:sale.basket.basket.line", 
-	"header-basket-line", 
-	[
-		"PATH_TO_BASKET" => SITE_DIR."personal/cart/",
-		"PATH_TO_PERSONAL" => SITE_DIR."personal/",
-		"SHOW_PERSONAL_LINK" => "N",
-		"SHOW_NUM_PRODUCTS" => "Y",
-		"SHOW_TOTAL_PRICE" => "N",
-		"SHOW_PRODUCTS" => "N",
-		"POSITION_FIXED" => "N",
-		"SHOW_AUTHOR" => "Y",
-		"PATH_TO_REGISTER" => SITE_DIR."login/",
-		"PATH_TO_PROFILE" => SITE_DIR."personal/private/",
-		"COMPONENT_TEMPLATE" => "header-basket-line",
-		"PATH_TO_ORDER" => SITE_DIR."personal/order/make/",
-		"SHOW_EMPTY_VALUES" => "N",
-		"PATH_TO_AUTHORIZE" => SITE_DIR."auth/",
-		"SHOW_REGISTRATION" => "N",
-		"SHOW_DELAY" => "Y",
-		"SHOW_NOTAVAIL" => "Y",
-		"SHOW_IMAGE" => "Y",
-		"SHOW_PRICE" => "Y",
-		"SHOW_SUMMARY" => "Y",
-		"POSITION_HORIZONTAL" => "right",
-		"POSITION_VERTICAL" => "vcenter",
-		"HIDE_ON_BASKET_PAGES" => "N",
-		"MAX_IMAGE_SIZE" => "80"
-	],
-	false
-); ?>
+            "bitrix:sale.basket.basket.line",
+            "header-basket-line",
+            [
+              "PATH_TO_BASKET" => SITE_DIR . "personal/cart/",
+              "PATH_TO_PERSONAL" => SITE_DIR . "personal/",
+              "SHOW_PERSONAL_LINK" => "N",
+              "SHOW_NUM_PRODUCTS" => "Y",
+              "SHOW_TOTAL_PRICE" => "N",
+              "SHOW_PRODUCTS" => "N",
+              "POSITION_FIXED" => "N",
+              "SHOW_AUTHOR" => "Y",
+              "PATH_TO_REGISTER" => SITE_DIR . "login/",
+              "PATH_TO_PROFILE" => SITE_DIR . "personal/private/",
+              "COMPONENT_TEMPLATE" => "header-basket-line",
+              "PATH_TO_ORDER" => SITE_DIR . "personal/order/make/",
+              "SHOW_EMPTY_VALUES" => "N",
+              "PATH_TO_AUTHORIZE" => SITE_DIR . "auth/",
+              "SHOW_REGISTRATION" => "N",
+              "SHOW_DELAY" => "Y",
+              "SHOW_NOTAVAIL" => "Y",
+              "SHOW_IMAGE" => "Y",
+              "SHOW_PRICE" => "Y",
+              "SHOW_SUMMARY" => "Y",
+              "POSITION_HORIZONTAL" => "right",
+              "POSITION_VERTICAL" => "vcenter",
+              "HIDE_ON_BASKET_PAGES" => "N",
+              "MAX_IMAGE_SIZE" => "80"
+            ],
+            false
+          ); ?>
 
           <button class="search-title-opener" aria-label="Открыть поиск">
             <svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
@@ -208,7 +223,7 @@
             "CACHE_SELECTED_ITEMS" => "N",
             "MENU_CACHE_GET_VARS" => [],
             "MAX_LEVEL" => "2",
-            "CHILD_MENU_TYPE" => "top",
+            "CHILD_MENU_TYPE" => "left",
             "USE_EXT" => "Y",
             "DELAY" => "N",
             "ALLOW_MULTI_SELECT" => "N",

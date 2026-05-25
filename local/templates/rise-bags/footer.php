@@ -187,7 +187,7 @@
             </div>
             <div class="contact-block__section-content">
               <? $APPLICATION->IncludeFile(
-                SITE_DIR . "include/phone.php",
+                SITE_DIR . "include/contacts/phones.php",
                 array(),
                 array(
                   "MODE" => "php",
@@ -208,7 +208,7 @@
             </div>
             <div class="contact-block__section-content">
               <? $APPLICATION->IncludeFile(
-                SITE_DIR . "include/email.php",
+                SITE_DIR . "include/contacts/email.php",
                 array(),
                 array(
                   "MODE" => "php",
@@ -229,7 +229,7 @@
             </div>
             <div class="contact-block__section-content">
               <? $APPLICATION->IncludeFile(
-                SITE_DIR . "include/address.php",
+                SITE_DIR . "include/contacts/address.php",
                 array(),
                 array(
                   "MODE" => "php",
@@ -250,7 +250,7 @@
             </div>
             <div class="contact-block__section-content">
               <? $APPLICATION->IncludeFile(
-                SITE_DIR . "include/schedule.php",
+                SITE_DIR . "include/contacts/schedule.php",
                 array(),
                 array(
                   "MODE" => "php",
