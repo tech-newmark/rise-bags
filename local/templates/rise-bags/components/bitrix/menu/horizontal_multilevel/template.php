@@ -1,7 +1,7 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 
 <? if (!empty($arResult)): ?>
-	<ul id="horizontal-multilevel-menu">
+	<ul class="horizontal-multilevel-menu" id="horizontal-multilevel-menu">
 
 		<?
 		$previousLevel = 0;
@@ -14,7 +14,12 @@
 			<? if ($arItem["IS_PARENT"]): ?>
 
 				<? if ($arItem["DEPTH_LEVEL"] == 1): ?>
-					<li><a href="<?= $arItem["LINK"] ?>" class="<? if ($arItem["SELECTED"]): ?>root-item-selected<? else: ?>root-item<? endif ?>"><?= $arItem["TEXT"] ?></a>
+					<li class="dropdown-menu">
+						<a href="<?= $arItem["LINK"] ?>" class="<? if ($arItem["SELECTED"]): ?>root-item-selected<? else: ?>root-item<? endif ?>"><?= $arItem["TEXT"] ?>
+							<svg width="18" height="18" viewBox="0 0 18 18" role="img" aria-hidden="true" focusable="false">
+								<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#arrow-sm"></use>
+							</svg>
+						</a>
 						<ul>
 						<? else: ?>
 							<li<? if ($arItem["SELECTED"]): ?> class="item-selected" <? endif ?>><a href="<?= $arItem["LINK"] ?>" class="parent"><?= $arItem["TEXT"] ?></a>
