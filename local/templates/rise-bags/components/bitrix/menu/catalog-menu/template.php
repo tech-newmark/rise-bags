@@ -3,7 +3,7 @@
 <? if (!empty($arResult)): ?>
 	<div class="catalog-menu">
 
-		<a href="#" class="main-btn catalog-menu-opener">
+		<a href="/catalog/" class="main-btn catalog-menu-opener">
 			<svg width="24" height="24" role="img" aria-hidden="true" focusable="false">
 				<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#catalog-icon"></use>
 			</svg>
