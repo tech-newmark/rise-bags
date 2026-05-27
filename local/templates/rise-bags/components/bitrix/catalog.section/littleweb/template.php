@@ -10,15 +10,12 @@ $this->SetViewTarget("SECTION_HEADER");
 ?>
 <h1 class="title"><?= $arResult["NAME"] ?></h1>
 
-<? if (!isset($arParams['HIDE_SECTION_DESCRIPTION']) || $arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y'): ?>
-	<? if (!empty(trim($arResult['DESCRIPTION']))): ?>
-		<? if ($arResult["DESCRIPTION_TYPE"] === 'html') : ?>
-			<?= $arResult['~DESCRIPTION'] ?>
-		<? else: ?>
-			<p class="text"><?= $arResult['~DESCRIPTION'] ?></p>
-		<? endif; ?>
-	<? endif; ?>
+<? if ($arResult["UF_PREVIEW_DESCR"] && $arResult["UF_PREVIEW_DESCR"] !== ""): ?>
+	<div class="content">
+		<?= $arResult['~UF_PREVIEW_DESCR'] ?>
+	</div>
 <? endif; ?>
+
 
 <? $this->EndViewTarget();
 
@@ -185,6 +182,18 @@ $containerName = 'container-' . $navParams['NavNum'];
 		<?= $arResult['NAV_STRING'] ?>
 		<!-- pagination-container -->
 	</div>
+<? endif; ?>
+
+<? if (!isset($arParams['HIDE_SECTION_DESCRIPTION']) || $arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y'): ?>
+	<? if (!empty(trim($arResult['DESCRIPTION']))): ?>
+		<div class="content">
+			<? if ($arResult["DESCRIPTION_TYPE"] === 'html') : ?>
+				<?= $arResult['~DESCRIPTION'] ?>
+			<? else: ?>
+				<p class="text"><?= $arResult['~DESCRIPTION'] ?></p>
+			<? endif; ?>
+		</div>
+	<? endif; ?>
 <? endif; ?>
 
 <?

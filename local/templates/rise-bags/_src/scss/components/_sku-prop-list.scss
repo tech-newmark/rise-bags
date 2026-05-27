@@ -1,9 +1,10 @@
 .sku-prop {
 	&-container {
 		display: flex;
-		flex-wrap: wrap;
+		// flex-wrap: wrap;
+		flex-direction: column;
 		gap: 6px 12px;
-		align-items: center;
+		// align-items: center;
 		padding: 4px 0;
 	}
 
@@ -56,8 +57,8 @@
 			&:has(img) {
 				border-radius: 50%;
 				img {
-					width: 24px;
-					height: 24px;
+					width: 16px;
+					height: 16px;
 					object-fit: cover;
 					border-radius: 50%;
 					aspect-ratio: 1/1;
