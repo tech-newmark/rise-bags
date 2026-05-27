@@ -40,8 +40,8 @@
 
 			&-label {
 				position: absolute;
-				top: -5px;
-				left: 100%;
+				top: -8px;
+				left: calc(100% - 10px);
 
 				display: flex;
 				align-items: center;
@@ -78,13 +78,13 @@
 				font-weight: 400;
 				color: var(--dark);
 
-				span {
-					display: none;
+				// span:not(.bx-basket-line-block-section-label) {
+				// 	display: none;
 
-					@include container-up("header", 1400px) {
-						display: flex;
-					}
-				}
+				// 	@include container-up("header", 1400px) {
+				// 		display: flex;
+				// 	}
+				// }
 			}
 
 			small {

@@ -1,20 +1,34 @@
 @use "@scss/base/container-queries" as *;
 
 .catalog {
+
+	container: catalog / inline-size;
+
+
 	margin-bottom: 40px;
+
 	&__header {
 		margin-bottom: 32px;
 	}
 	.grid {
 		display: grid;
-		grid-template-columns: 320px auto;
+		grid-template-columns: 1fr;
 		gap: var(--base-gap);
+
+		@include container-up("catalog", 768px) {
+			grid-template-columns: 320px auto;
+		}
 
 		&-item {
 			&--sidebar {
+				display: none;
 				position: sticky;
 				top: 40px;
 				height: fit-content;
+
+				@include container-up("catalog", 768px) {
+					display: block;
+				}
 			}
 
 			&--main {
