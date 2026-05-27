@@ -48,6 +48,7 @@
 	}
 
 	&-slider {
+		position: relative;
 		width: 100%;
 		height: 100%;
 
@@ -77,6 +78,21 @@
 		.swiper-pagination {
 			bottom: 0 !important;
 			margin-bottom: 8px;
+		}
+	}
+
+	&-slider-hover {
+		position: absolute;
+		inset: 0;
+		z-index: 8;
+		display: grid;
+		grid-template-columns: repeat(var(--catalog-element-slider-hover-count), 1fr);
+		pointer-events: none;
+
+		&__area {
+			display: block;
+			min-width: 0;
+			pointer-events: auto;
 		}
 	}
 

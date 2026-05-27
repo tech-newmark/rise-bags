@@ -1053,6 +1053,14 @@
 		},
 
 		initializeSlider: function () {
+			var swiperContainer = this.obPictSlider
+				? this.obPictSlider.closest(".swiper")
+				: null;
+
+			if (swiperContainer) {
+				this.clearSliderHoverAreas(swiperContainer);
+			}
+
 			// Если Swiper уже инициализирован, уничтожаем его
 			if (this.swiperInstance) {
 				this.swiperInstance.destroy(true, true);
@@ -1061,8 +1069,6 @@
 
 			// Инициализируем новый Swiper
 			if (typeof Swiper !== "undefined" && this.obPictSlider) {
-				// Находим родительский контейнер swiper для текущего слайдера
-				var swiperContainer = this.obPictSlider.closest(".swiper");
 				var slideCount =
 					this.obPictSlider.querySelectorAll(".swiper-slide").length;
 
@@ -1087,10 +1093,71 @@
 						// 	prevEl: swiperContainer.querySelector('.swiper-button-prev'),
 						// },
 					});
+
+					if (slideCount > 1 && this.canUseSliderHover()) {
+						this.initSliderHoverAreas(swiperContainer, slideCount);
+					}
 				} else if (!swiperContainer) {
 					console.error("Swiper container not found");
 				}
 			}
+		},
+
+		canUseSliderHover: function () {
+			return (
+				!this.isTouchDevice &&
+				window.matchMedia &&
+				window.matchMedia("(hover: hover) and (pointer: fine)").matches
+			);
+		},
+
+		clearSliderHoverAreas: function (swiperContainer) {
+			var hoverAreas = swiperContainer.querySelector(
+				".product-item-slider-hover",
+			);
+
+			if (hoverAreas) {
+				hoverAreas.parentNode.removeChild(hoverAreas);
+			}
+		},
+
+		initSliderHoverAreas: function (swiperContainer, slideCount) {
+			var hoverAreas = BX.create("div", {
+				props: {
+					className: "product-item-slider-hover",
+				},
+				attrs: {
+					"aria-hidden": "true",
+				},
+			});
+
+			hoverAreas.style.setProperty("--product-slider-hover-count", slideCount);
+
+			for (var i = 0; i < slideCount; i++) {
+				(function (slideIndex, catalogItem) {
+					hoverAreas.appendChild(
+						BX.create("span", {
+							props: {
+								className: "product-item-slider-hover__area",
+							},
+							attrs: {
+								"data-slide-index": slideIndex,
+							},
+							events: {
+								mouseenter: function () {
+									if (!catalogItem.swiperInstance) {
+										return;
+									}
+
+									catalogItem.swiperInstance.slideToLoop(slideIndex, 0);
+								},
+							},
+						}),
+					);
+				})(i, this);
+			}
+
+			swiperContainer.appendChild(hoverAreas);
 		},
 
 		selectOfferProp: function () {
