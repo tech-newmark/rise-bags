@@ -32,13 +32,17 @@
     "src": "local/templates/rise-bags/_src/images/catalog-section-bg.jpg"
   },
   "local/templates/rise-bags/_src/js/index.js": {
-    "file": "template_scripts.DAli53m_.js",
+
+    "file": "template_scripts.BH7fnBs3.js",
+
     "name": "script",
     "src": "local/templates/rise-bags/_src/js/index.js",
     "isEntry": true
   },
   "local/templates/rise-bags/_src/scss/template.scss": {
-    "file": "template_styles.JrWp5CRv.css",
+
+    "file": "template_styles.BwnXMSfo.css",
+
     "src": "local/templates/rise-bags/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
@@ -65,7 +69,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/catalog.element/littleweb/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog.element/littleweb/style.BHy-Fkyg.css",
+    "file": "components/bitrix/catalog.element/littleweb/style.CHYjxMIY.css",
     "src": "local/templates/rise-bags/components/bitrix/catalog.element/littleweb/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_element_littleweb_scss",
@@ -89,7 +93,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/components/bitrix/catalog.item/littleweb/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog.item/littleweb/style.W5d6nKVi.css",
+    "file": "components/bitrix/catalog.item/littleweb/style.DLh9CKda.css",
     "src": "local/templates/rise-bags/components/bitrix/catalog.item/littleweb/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_item_littleweb_scss",
@@ -167,7 +171,9 @@
     "isEntry": true
   },
   "local/templates/rise-bags/components/bitrix/catalog/littleweb/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog/littleweb/style.Cnnkk-Au.css",
+
+    "file": "components/bitrix/catalog/littleweb/style.BG-UDfxG.css",
+
     "src": "local/templates/rise-bags/components/bitrix/catalog/littleweb/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_littleweb_scss",
@@ -320,7 +326,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/news.list/faq-preview/_src/scss/index.scss": {
-    "file": "components/bitrix/news.list/faq-preview/style.B_NHDSqk.css",
+    "file": "components/bitrix/news.list/faq-preview/style.QrayX7hE.css",
     "src": "local/templates/rise-bags/components/bitrix/news.list/faq-preview/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_news_list_faq-preview_scss",

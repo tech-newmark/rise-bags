@@ -5,11 +5,15 @@
 	.container {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: clamp(24px, 4vw, 80px);
+		gap: 16px clamp(24px, 4vw, 80px);
 
-		@include container-up("faq-preview", 768px) {
-			grid-template-columns: 640px auto;
+		@include container-up("faq-preview", 960px) {
+			grid-template-columns: 440px auto;
 		}
+	}
+
+	.section-header {
+		margin-bottom: 0;
 	}
 
 	.accordeon-item {
