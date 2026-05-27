@@ -1,6 +1,6 @@
 
 		<? 
 			if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
-			// includeComponentAssets('catalog/rise-catalog');
+			// includeComponentAssets('menu/horizontal_multilevel copy');
 		?>
 	

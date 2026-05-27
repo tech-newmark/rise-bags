@@ -974,13 +974,13 @@ $arTemplateParameters['DETAIL_SHOW_VIEWED'] = array(
 $arTemplateParameters['HIDE_USE_ALSO_BUY'] = array();
 
 $arTemplateParameters['USE_GIFTS_DETAIL'] = array(
-	'HIDDEN' => 'N'
+	'HIDDEN' => 'Y'
 );
 
 $arTemplateParameters['USE_GIFTS_SECTION'] = array(
-	'HIDDEN' => 'N'
+	'HIDDEN' => 'Y'
 );
 
 $arTemplateParameters['USE_GIFTS_MAIN_PR_SECTION_LIST'] = array(
-	'HIDDEN' => 'N'
+	'HIDDEN' => 'Y'
 );

@@ -32,7 +32,7 @@
     "src": "local/templates/rise-bags/_src/images/catalog-section-bg.jpg"
   },
   "local/templates/rise-bags/_src/js/index.js": {
-    "file": "template_scripts.CSRSn4jR.js",
+    "file": "template_scripts.BH7fnBs3.js",
     "name": "script",
     "src": "local/templates/rise-bags/_src/js/index.js",
     "isEntry": true
@@ -65,7 +65,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/catalog.element/littleweb/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog.element/littleweb/style.BHy-Fkyg.css",
+    "file": "components/bitrix/catalog.element/littleweb/style.CHYjxMIY.css",
     "src": "local/templates/rise-bags/components/bitrix/catalog.element/littleweb/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_element_littleweb_scss",
@@ -89,7 +89,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/components/bitrix/catalog.item/littleweb/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog.item/littleweb/style.W5d6nKVi.css",
+    "file": "components/bitrix/catalog.item/littleweb/style.DLh9CKda.css",
     "src": "local/templates/rise-bags/components/bitrix/catalog.item/littleweb/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_item_littleweb_scss",
@@ -195,10 +195,9 @@
     "file": "components/bitrix/menu/_catalog-sections-menu/style.DXWnnJRr.css",
     "src": "local/templates/rise-bags/components/bitrix/menu/_catalog-sections-menu/_src/scss/index.scss",
     "isEntry": true,
-    "name": "bitrix_menu_horizontal_multilevel copy_scss",
+    "name": "bitrix_menu__catalog-sections-menu_scss",
     "names": [
-      "bitrix_menu__catalog-sections-menu_scss.css",
-      "bitrix_menu_horizontal_multilevel copy_scss.css"
+      "bitrix_menu__catalog-sections-menu_scss.css"
     ]
   },
   "local/templates/rise-bags/components/bitrix/menu/bottom-menu/_src/scss/index.scss": {
@@ -223,16 +222,6 @@
     "name": "bitrix_menu_catalog-menu_scss",
     "names": [
       "bitrix_menu_catalog-menu_scss.css"
-    ]
-  },
-  "local/templates/rise-bags/components/bitrix/menu/horizontal_multilevel copy/_src/scss/index.scss": {
-    "file": "components/bitrix/menu/_catalog-sections-menu/style.DXWnnJRr.css",
-    "src": "local/templates/rise-bags/components/bitrix/menu/_catalog-sections-menu/_src/scss/index.scss",
-    "isEntry": true,
-    "name": "bitrix_menu_horizontal_multilevel copy_scss",
-    "names": [
-      "bitrix_menu__catalog-sections-menu_scss.css",
-      "bitrix_menu_horizontal_multilevel copy_scss.css"
     ]
   },
   "local/templates/rise-bags/components/bitrix/menu/horizontal_multilevel/_src/scss/index.scss": {

@@ -873,16 +873,21 @@
 		},
 
 		initSlider: function () {
+			var swiperContainer = this.node.imageSliderBlock;
+
+			if (swiperContainer) {
+				this.clearSliderHoverAreas(swiperContainer);
+			}
+
 			if (this.swiperInstance) {
 				this.swiperInstance.destroy(true, true);
 				this.swiperInstance = null;
 			}
 
-			if (typeof Swiper === "undefined" || !this.node.imageSliderBlock) {
+			if (typeof Swiper === "undefined" || !swiperContainer) {
 				return;
 			}
 
-			var swiperContainer = this.node.imageSliderBlock;
 			var slideCount = swiperContainer.querySelectorAll(".swiper-slide").length;
 			if (slideCount < 1) {
 				return;
@@ -899,6 +904,70 @@
 					clickable: true,
 				},
 			});
+
+			if (slideCount > 1 && this.canUseSliderHover()) {
+				this.initSliderHoverAreas(swiperContainer, slideCount);
+			}
+		},
+
+		canUseSliderHover: function () {
+			return (
+				!this.isTouchDevice &&
+				window.matchMedia &&
+				window.matchMedia("(hover: hover) and (pointer: fine)").matches
+			);
+		},
+
+		clearSliderHoverAreas: function (swiperContainer) {
+			var hoverAreas = swiperContainer.querySelector(
+				".bx-catalog-element-slider-hover",
+			);
+
+			if (hoverAreas) {
+				hoverAreas.parentNode.removeChild(hoverAreas);
+			}
+		},
+
+		initSliderHoverAreas: function (swiperContainer, slideCount) {
+			var hoverAreas = BX.create("div", {
+				props: {
+					className: "bx-catalog-element-slider-hover",
+				},
+				attrs: {
+					"aria-hidden": "true",
+				},
+			});
+
+			hoverAreas.style.setProperty(
+				"--catalog-element-slider-hover-count",
+				slideCount,
+			);
+
+			for (var i = 0; i < slideCount; i++) {
+				(function (slideIndex, catalogElement) {
+					hoverAreas.appendChild(
+						BX.create("span", {
+							props: {
+								className: "bx-catalog-element-slider-hover__area",
+							},
+							attrs: {
+								"data-slide-index": slideIndex,
+							},
+							events: {
+								mouseenter: function () {
+									if (!catalogElement.swiperInstance) {
+										return;
+									}
+
+									catalogElement.swiperInstance.slideToLoop(slideIndex, 0);
+								},
+							},
+						}),
+					);
+				})(i, this);
+			}
+
+			swiperContainer.appendChild(hoverAreas);
 		},
 
 		setAnalyticsDataLayer: function (action) {
