@@ -71,6 +71,10 @@ if (isset($arResult['ITEM'])) {
 		$actualItem = $item;
 	}
 
+	$displayTitle = $haveOffers && !empty($actualItem['NAME'])
+		? $actualItem['NAME']
+		: $productTitle;
+
 	// ⚡ ИСПОЛЬЗУЕМ ГОТОВЫЕ ДАННЫЕ ИЗ result_modifier.php ⚡
 	$morePhoto = $item['MORE_PHOTO'] ?? [];
 
@@ -87,6 +91,14 @@ if (isset($arResult['ITEM'])) {
 	$showSlider = $arParams["SHOW_SLIDER"] === "Y" && is_array($morePhoto) && count($morePhoto) > 1;
 	$showSubscribe = $arParams['PRODUCT_SUBSCRIPTION'] === 'Y' && ($item['CATALOG_SUBSCRIBE'] === 'Y' || $haveOffers);
 	$itemHasDetailUrl = isset($item['DETAIL_PAGE_URL']) && $item['DETAIL_PAGE_URL'] != '';
+	$detailPageUrl = $item['DETAIL_PAGE_URL'];
+	if ($itemHasDetailUrl && $haveOffers && !empty($actualItem['ID'])) {
+		$detailPageUrl = CHTTP::urlAddParams(
+			$item['DETAIL_PAGE_URL'],
+			array('offer' => (int)$actualItem['ID']),
+			array('encode' => true)
+		);
+	}
 ?>
 	<div class="product-item-container<?= (isset($arResult['SCALABLE']) && $arResult['SCALABLE'] === 'Y' ? ' product-item-scalable-card' : '') ?>"
 		id="<?= $areaId ?>" data-entity="item">
@@ -276,5 +288,5 @@ if (isset($arResult['ITEM'])) {
 		</script>
 	</div>
 <?php
-	unset($item, $actualItem, $minOffer, $itemIds, $jsParams);
+	unset($item, $actualItem, $minOffer, $itemIds, $jsParams, $displayTitle, $detailPageUrl);
 }

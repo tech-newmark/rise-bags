@@ -383,6 +383,13 @@
 				console.log("КОД ОШИБКИ:", this.errorCode);
 			}
 
+			this.blockNodes.name = this.obProduct.querySelector('[data-entity="name"]');
+			this.blockNodes.nameLink = this.obProduct.querySelector(
+				'[data-entity="name-link"]',
+			);
+			this.blockNodes.detailLinks =
+				this.obProduct.querySelectorAll('[data-detail-link="Y"]');
+
 			if (!this.obPictSlider) {
 				this.errorCode = -4;
 				console.log("КОД ОШИБКИ:", this.errorCode);
@@ -709,6 +716,45 @@
 			);
 
 			return matches ? decodeURIComponent(matches[1]) : null;
+		},
+
+		getOfferDetailUrl: function (offerId) {
+			var urlParts = this.product.DETAIL_PAGE_URL.split("#"),
+				hash = urlParts.length > 1 ? "#" + urlParts.slice(1).join("#") : "",
+				url = urlParts[0],
+				queryIndex = url.indexOf("?"),
+				path = queryIndex === -1 ? url : url.substring(0, queryIndex),
+				query = queryIndex === -1 ? "" : url.substring(queryIndex + 1),
+				params = query ? query.split("&") : [],
+				filteredParams = [],
+				i,
+				paramName;
+
+			for (i = 0; i < params.length; i++) {
+				paramName = params[i].split("=")[0];
+				if (decodeURIComponent(paramName) !== "offer") {
+					filteredParams.push(params[i]);
+				}
+			}
+
+			filteredParams.push("offer=" + encodeURIComponent(offerId));
+
+			return path + "?" + filteredParams.join("&") + hash;
+		},
+
+		updateDetailLinks: function (offerId) {
+			var i,
+				detailUrl;
+
+			if (!this.blockNodes.detailLinks || !this.blockNodes.detailLinks.length) {
+				return;
+			}
+
+			detailUrl = this.getOfferDetailUrl(offerId);
+
+			for (i = 0; i < this.blockNodes.detailLinks.length; i++) {
+				this.blockNodes.detailLinks[i].setAttribute("href", detailUrl);
+			}
 		},
 
 		rememberProductRecommendation: function () {
@@ -1432,6 +1478,8 @@
 				btns.forEach((btn) => {
 					btn.setAttribute("data-1clickbuy-id", this.offers[index].ID);
 				});
+				this.updateDetailLinks(this.offers[index].ID);
+
 				if (this.obPictSlider) {
 					var offer = this.offers[index];
 					var slides = [];
@@ -1493,6 +1541,23 @@
 							html: "",
 						});
 					}
+				}
+
+				if (this.blockNodes.name && this.offers[index].NAME) {
+					BX.adjust(this.blockNodes.name, {
+						text: this.offers[index].NAME,
+						attrs: {
+							title: this.offers[index].NAME,
+						},
+					});
+				}
+
+				if (this.blockNodes.nameLink && this.offers[index].NAME) {
+					BX.adjust(this.blockNodes.nameLink, {
+						attrs: {
+							title: this.offers[index].NAME,
+						},
+					});
 				}
 
 				this.quantitySet(index);

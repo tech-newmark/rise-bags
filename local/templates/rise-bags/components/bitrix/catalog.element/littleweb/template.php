@@ -105,6 +105,10 @@ if ($haveOffers) {
 	$showSliderControls = $arResult['MORE_PHOTO_COUNT'] > 1;
 }
 
+$displayName = $haveOffers && !empty($actualItem['NAME'])
+	? $actualItem['NAME']
+	: $name;
+
 $skuProps = array();
 $price = $actualItem['ITEM_PRICES'][$actualItem['ITEM_PRICE_SELECTED']];
 $measureRatio = $actualItem['ITEM_MEASURE_RATIOS'][$actualItem['ITEM_MEASURE_RATIO_SELECTED']]['RATIO'];
@@ -294,10 +298,11 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 
 		<div class="grid-item grid-item--main">
 			<? if ($arParams['DISPLAY_NAME'] === 'Y'): ?>
-				<h1 class="title"><?= $name ?></h1>
+
+				<h1 class="title" data-entity="name"><?= $displayName ?></h1>
 			<? endif; ?>
 
-			<div class="bx-catalog-element-buy-info">
+			<div class=" bx-catalog-element-buy-info">
 
 				<!-- RATING -->
 				<? if ($arParams['USE_VOTE_RATING'] === 'Y'): ?>
@@ -612,146 +617,57 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 				*/ ?>
 			</div>
 
-			<div class="tabs">
-				<div class="swiper tabs__buttons">
-					<div class=" swiper-wrapper" id="<?= $itemIds['TABS_ID'] ?>">
+			<div class="bx-catalog-element-description">
+				<? if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
+					<div class="bx-catalog-element-description-section ">
+						<span class="bx-catalog-element-description-section-title"><?= $arParams['MESS_PROPERTIES_TAB'] ?></span>
 
-						<? if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
-							<div class="swiper-slide">
-								<button class="tabs__button" data-entity="tab" data-value="properties">
-									<span><?= $arParams['MESS_PROPERTIES_TAB'] ?></span>
-								</button>
-							</div>
+						<? if (!empty($arResult['DISPLAY_PROPERTIES'])): ?>
+							<ul class="prop-list">
+								<? foreach ($arResult['DISPLAY_PROPERTIES'] as $property): ?>
+									<li class="prop-list-item">
+										<span class="prop-list-item-name"><?= $property['NAME'] ?></span>
+										<span class="prop-list-item-value">
+											<?= (
+												is_array($property['DISPLAY_VALUE'])
+												? implode(' / ', $property['DISPLAY_VALUE'])
+												: $property['DISPLAY_VALUE']
+											) ?>
+										</span>
+									</li>
+								<?
+								endforeach;
+								unset($property);
+								?>
+							</ul>
 						<? endif; ?>
 
-						<? if ($showDescription): ?>
-							<div class="swiper-slide">
-								<button class="tabs__button active" data-entity="tab" data-value="description">
-									<span><?= $arParams['MESS_DESCRIPTION_TAB'] ?></span>
-								</button>
-							</div>
-						<? endif ?>
-
-						<?/* if ($arParams['USE_COMMENTS'] === 'Y'): ?>
-						<button class="tabs-opener " data-entity="tab" data-value="comments">
-							<span><?= $arParams['MESS_COMMENTS_TAB'] ?></span>
-						</button>
-					<? endif; */ ?>
+						<? if ($arResult['SHOW_OFFERS_PROPS']): ?>
+							<ul class="prop-list" id="<?= $itemIds['DISPLAY_PROP_DIV'] ?>"></ul>
+						<? endif; ?>
 					</div>
-					<div class="swiper-button-prev">
-						<svg width="16" height="16" viewBox="0 0 16 16" role="img" aria-hidden="true" focusable="false">
-							<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-arrow"></use>
-						</svg>
-					</div>
-					<div class="swiper-button-next"><svg width="16" height="16" viewBox="0 0 16 16" role="img" aria-hidden="true" focusable="false">
-							<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-arrow"></use>
-						</svg>
-					</div>
-				</div>
-				<div class="tabs__content" id="<?= $itemIds['TAB_CONTAINERS_ID'] ?>">
-					<? if ($showDescription): ?>
-						<div class="tabs__content-list-item active" data-entity="tab-container" data-value="description" itemprop="description" id="<?= $itemIds['DESCRIPTION_ID'] ?>">
-							<div class="content">
-								<? if (
-									$arResult['PREVIEW_TEXT'] != ''
-									&& (
-										$arParams['DISPLAY_PREVIEW_TEXT_MODE'] === 'S'
-										|| ($arParams['DISPLAY_PREVIEW_TEXT_MODE'] === 'E' && $arResult['DETAIL_TEXT'] == '')
-									)
-								): ?>
-									<?= $arResult['PREVIEW_TEXT_TYPE'] === 'html' ? $arResult['PREVIEW_TEXT'] : '<p>' . $arResult['PREVIEW_TEXT'] . '</p>'; ?>
-								<? endif; ?>
+				<? endif ?>
 
-								<? if ($arResult['DETAIL_TEXT'] != ''): ?>
-									<?= $arResult['DETAIL_TEXT_TYPE'] === 'html' ? $arResult['DETAIL_TEXT'] : '<p>' . $arResult['DETAIL_TEXT'] . '</p>'; ?>
-								<? endif; ?>
-							</div>
-						</div>
-					<? endif; ?>
-
-					<? if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
-						<div class="tabs__content-list-item" data-entity="tab-container" data-value="properties" style="display: none;">
-							<? if (!empty($arResult['DISPLAY_PROPERTIES'])): ?>
-
-								<ul class="prop-list">
-									<? foreach ($arResult['DISPLAY_PROPERTIES'] as $property): ?>
-										<li class="prop-list-item">
-											<span class="prop-list-item-name"><?= $property['NAME'] ?></span>
-											<span class="prop-list-item-value">
-												<?= (
-													is_array($property['DISPLAY_VALUE'])
-													? implode(' / ', $property['DISPLAY_VALUE'])
-													: $property['DISPLAY_VALUE']
-												) ?>
-											</span>
-										</li>
-									<?
-									endforeach;
-									unset($property);
-									?>
-								</ul>
+				<? if ($showDescription): ?>
+					<div class="bx-catalog-element-description-section">
+						<span class="bx-catalog-element-description-section-title"><?= $arParams['MESS_DESCRIPTION_TAB'] ?></span>
+						<div class="content" itemprop="description" id="<?= $itemIds['DESCRIPTION_ID'] ?>">
+							<? if (
+								$arResult['PREVIEW_TEXT'] != ''
+								&& (
+									$arParams['DISPLAY_PREVIEW_TEXT_MODE'] === 'S'
+									|| ($arParams['DISPLAY_PREVIEW_TEXT_MODE'] === 'E' && $arResult['DETAIL_TEXT'] == '')
+								)
+							): ?>
+								<?= $arResult['PREVIEW_TEXT_TYPE'] === 'html' ? $arResult['PREVIEW_TEXT'] : '<p>' . $arResult['PREVIEW_TEXT'] . '</p>'; ?>
 							<? endif; ?>
-							<? if ($arResult['SHOW_OFFERS_PROPS']): ?>
-								<ul class="prop-list" id="<?= $itemIds['DISPLAY_PROP_DIV'] ?>"></ul>
+
+							<? if ($arResult['DETAIL_TEXT'] != ''): ?>
+								<?= $arResult['DETAIL_TEXT_TYPE'] === 'html' ? $arResult['DETAIL_TEXT'] : '<p>' . $arResult['DETAIL_TEXT'] . '</p>'; ?>
 							<? endif; ?>
 						</div>
-					<? endif ?>
-
-					<?/* if ($arParams['USE_COMMENTS'] === 'Y'): ?>
-						<div class="tabs-content" data-entity="tab-container" data-value="comments" style="display: none;">
-							<?php
-							$componentCommentsParams = array(
-								'ELEMENT_ID' => $arResult['ID'],
-								'ELEMENT_CODE' => '',
-								'IBLOCK_ID' => $arParams['IBLOCK_ID'],
-								'SHOW_DEACTIVATED' => $arParams['SHOW_DEACTIVATED'],
-								'URL_TO_COMMENT' => '',
-								'WIDTH' => '',
-								'COMMENTS_COUNT' => '5',
-								'BLOG_USE' => $arParams['BLOG_USE'],
-								'FB_USE' => $arParams['FB_USE'],
-								'FB_APP_ID' => $arParams['FB_APP_ID'],
-								'VK_USE' => $arParams['VK_USE'],
-								'VK_API_ID' => $arParams['VK_API_ID'],
-								'CACHE_TYPE' => $arParams['CACHE_TYPE'],
-								'CACHE_TIME' => $arParams['CACHE_TIME'],
-								'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
-								'BLOG_TITLE' => '',
-								'BLOG_URL' => $arParams['BLOG_URL'],
-								'PATH_TO_SMILE' => '',
-								'EMAIL_NOTIFY' => $arParams['BLOG_EMAIL_NOTIFY'],
-								'AJAX_POST' => 'Y',
-								'SHOW_SPAM' => 'Y',
-								'SHOW_RATING' => 'N',
-								'FB_TITLE' => '',
-								'FB_USER_ADMIN_ID' => '',
-								'FB_COLORSCHEME' => 'light',
-								'FB_ORDER_BY' => 'reverse_time',
-								'VK_TITLE' => '',
-								// 'TEMPLATE_THEME' => $arParams['~TEMPLATE_THEME']
-							);
-
-							if (isset($arParams["USER_CONSENT"]))
-								$componentCommentsParams["USER_CONSENT"] = $arParams["USER_CONSENT"];
-							if (isset($arParams["USER_CONSENT_ID"]))
-								$componentCommentsParams["USER_CONSENT_ID"] = $arParams["USER_CONSENT_ID"];
-							if (isset($arParams["USER_CONSENT_IS_CHECKED"]))
-								$componentCommentsParams["USER_CONSENT_IS_CHECKED"] = $arParams["USER_CONSENT_IS_CHECKED"];
-							if (isset($arParams["USER_CONSENT_IS_LOADED"]))
-								$componentCommentsParams["USER_CONSENT_IS_LOADED"] = $arParams["USER_CONSENT_IS_LOADED"];
-
-							$APPLICATION->IncludeComponent(
-								'bitrix:catalog.comments',
-								'',
-								$componentCommentsParams,
-								$component,
-								array('HIDE_ICONS' => 'Y')
-							);
-
-							?>
-						</div>
-					<? endif; */ ?>
-				</div>
+					</div>
+				<? endif; ?>
 			</div>
 		</div>
 	</div>
