@@ -22,6 +22,8 @@ use Bitrix\Main\Localization\Loc;
  * @var bool $itemHasDetailUrl
  * @var string $imgTitle
  * @var string $productTitle
+ * @var string $displayTitle
+ * @var string $detailPageUrl
  * @var string $buttonSizeClass
  * @var string $discountPositionClass
  * @var string $labelPositionClass
@@ -32,7 +34,7 @@ use Bitrix\Main\Localization\Loc;
 <div class="product-item">
 	<?/* product-item-header  */ ?>
 	<? if ($itemHasDetailUrl): ?>
-		<a class="product-item-header" href="<?= $item['DETAIL_PAGE_URL'] ?>" title="<?= $imgTitle ?>" data-entity="image-wrapper">
+		<a class="product-item-header" href="<?= $detailPageUrl ?>" title="<?= $imgTitle ?>" data-entity="image-wrapper" data-detail-link="Y">
 		<? else: ?>
 			<div class="product-item-header" data-entity="image-wrapper">
 			<? endif; ?>
@@ -113,9 +115,9 @@ use Bitrix\Main\Localization\Loc;
 
 <div class="product-item-body">
 	<? if ($itemHasDetailUrl): ?>
-		<a class="product-item-title" href="<?= $item['DETAIL_PAGE_URL'] ?>" title="<?= $productTitle ?>">
+		<a class="product-item-title" href="<?= $detailPageUrl ?>" title="<?= $displayTitle ?>" data-entity="name-link" data-detail-link="Y">
 		<? endif; ?>
-		<span class="product-item-title" title="<?= $productTitle ?>"><?= $productTitle ?></span>
+		<span class="product-item-title" title="<?= $displayTitle ?>" data-entity="name"><?= $displayTitle ?></span>
 		<? if ($itemHasDetailUrl): ?>
 		</a>
 	<? endif; ?>
@@ -447,7 +449,7 @@ use Bitrix\Main\Localization\Loc;
 				</div>
 			<? else: ?>
 				<div class="product-item-button-container">
-					<a class="main-btn outlined" href="<?= $item['DETAIL_PAGE_URL'] ?>">
+					<a class="main-btn outlined" href="<?= $detailPageUrl ?>" data-detail-link="Y">
 						<?= $arParams['MESS_BTN_DETAIL'] ?>
 					</a>
 					<button type="button" class="main-btn" data-1clickbuy-id="<?= $item["ID"] ?>">
@@ -474,7 +476,7 @@ use Bitrix\Main\Localization\Loc;
 			</div>
 		<? else: ?>
 			<div class="product-item-button-container">
-				<a class="main-btn outlined" href="<?= $item['DETAIL_PAGE_URL'] ?>">
+				<a class="main-btn outlined" href="<?= $detailPageUrl ?>" data-detail-link="Y">
 					<?= $arParams['MESS_BTN_DETAIL'] ?>
 				</a>
 				<button type="button" class="main-btn" data-1clickbuy-id="<?= $item["ID"] ?>">

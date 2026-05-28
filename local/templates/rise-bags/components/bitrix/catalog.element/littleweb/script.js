@@ -260,6 +260,48 @@
 			);
 		},
 
+		updateOfferUrl: function (offerId) {
+			var urlParts,
+				hash,
+				url,
+				queryIndex,
+				path,
+				query,
+				params,
+				filteredParams = [],
+				i,
+				paramName,
+				newUrl;
+
+			if (!offerId || !window.history || !window.history.replaceState) {
+				return;
+			}
+
+			urlParts = window.location.href.split("#");
+			hash = urlParts.length > 1 ? "#" + urlParts.slice(1).join("#") : "";
+			url = urlParts[0];
+			queryIndex = url.indexOf("?");
+			path = queryIndex === -1 ? url : url.substring(0, queryIndex);
+			query = queryIndex === -1 ? "" : url.substring(queryIndex + 1);
+			params = query ? query.split("&") : [];
+
+			for (i = 0; i < params.length; i++) {
+				paramName = params[i].split("=")[0];
+
+				if (
+					decodeURIComponent(paramName) !== "offer" &&
+					decodeURIComponent(paramName) !== "offer_id"
+				) {
+					filteredParams.push(params[i]);
+				}
+			}
+
+			filteredParams.push("offer=" + encodeURIComponent(offerId));
+			newUrl = path + "?" + filteredParams.join("&") + hash;
+
+			window.history.replaceState(window.history.state, document.title, newUrl);
+		},
+
 		onSaleProductIsGift: function (productId, offerId) {
 			if (offerId && this.offers && this.offers[this.offerNum].ID == offerId) {
 				this.setGift();
@@ -327,6 +369,7 @@
 				this.obProduct,
 				"images-slider-block",
 			);
+			this.node.name = this.getEntity(this.obProduct, "name");
 			// this.node.sliderProgressBar = this.getEntity(
 			// 	this.obProduct,
 			// 	"slider-progress-bar",
@@ -1096,10 +1139,18 @@
 		},
 
 		initTabs: function () {
+			if (!this.obTabs || !this.obTabContainers) {
+				return;
+			}
+
 			var tabs = this.getEntities(this.obTabs, "tab");
 			var tabValue,
 				targetTab,
 				haveActive = false;
+
+			if (!tabs.length) {
+				return;
+			}
 
 			// console.log(slider);
 
@@ -1855,6 +1906,7 @@
 			var index = -1,
 				j = 0,
 				boolOneSearch = true,
+				offerChanged = false,
 				eventData = {
 					currentId: this.offerNum > -1 ? this.offers[this.offerNum].ID : 0,
 					newId: 0,
@@ -1879,6 +1931,8 @@
 			}
 
 			if (index > -1) {
+				offerChanged = index != this.offerNum;
+
 				if (index != this.offerNum) {
 					this.isGift = false;
 				}
@@ -1905,6 +1959,12 @@
 
 				if (this.obDescription && this.config.showSkuDescription === "Y") {
 					this.changeSkuDescription(index);
+				}
+
+				if (this.node.name && this.offers[index].NAME) {
+					BX.adjust(this.node.name, {
+						text: this.offers[index].NAME,
+					});
 				}
 
 				if (this.config.showSkuProps) {
@@ -1943,6 +2003,9 @@
 				this.setCompared(this.offers[index].COMPARED);
 
 				this.offerNum = index;
+				if (offerChanged) {
+					this.updateOfferUrl(this.offers[this.offerNum].ID);
+				}
 				// this.fixFontCheck();
 				this.setAnalyticsDataLayer("showDetail");
 				this.incViewedCounter();
