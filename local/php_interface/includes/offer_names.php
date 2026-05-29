@@ -119,6 +119,43 @@ if (!function_exists('rbGetOfferPropertyDirectoryName')) {
   }
 }
 
+if (!function_exists('rbGetOfferParentProductId')) {
+  /**
+   * Возвращает ID родительского товара для торгового предложения.
+   */
+  function rbGetOfferParentProductId(int $offerId, int $offerIblockId): int
+  {
+    $productInfo = CCatalogSKU::GetProductInfo($offerId);
+    if (!empty($productInfo['ID'])) {
+      return (int)$productInfo['ID'];
+    }
+
+    $skuInfo = CCatalogSKU::GetInfoByOfferIBlock($offerIblockId);
+    $linkPropertyId = (int)($skuInfo['SKU_PROPERTY_ID'] ?? 0);
+    if ($linkPropertyId > 0) {
+      $linkProperty = CIBlockElement::GetProperty(
+        $offerIblockId,
+        $offerId,
+        ['sort' => 'asc'],
+        ['ID' => $linkPropertyId]
+      )->Fetch();
+
+      if (!empty($linkProperty['VALUE'])) {
+        return (int)$linkProperty['VALUE'];
+      }
+    }
+
+    $linkProperty = CIBlockElement::GetProperty(
+      $offerIblockId,
+      $offerId,
+      ['sort' => 'asc'],
+      ['CODE' => 'CML2_LINK']
+    )->Fetch();
+
+    return (int)($linkProperty['VALUE'] ?? 0);
+  }
+}
+
 if (!function_exists('rbBuildTradeOfferName')) {
   /**
    * Формирует название ТП: "Название товара цвет основной/дополнительный".
@@ -130,15 +167,15 @@ if (!function_exists('rbBuildTradeOfferName')) {
       return '';
     }
 
-    $productInfo = CCatalogSKU::GetProductInfo($offerId);
-    if (empty($productInfo['ID'])) {
+    $offerIblockId = (int)CIBlockElement::GetIBlockByID($offerId);
+    $productId = rbGetOfferParentProductId($offerId, $offerIblockId);
+    if ($productId <= 0) {
       return '';
     }
 
-    $offerIblockId = (int)CIBlockElement::GetIBlockByID($offerId);
     $product = CIBlockElement::GetList(
       [],
-      ['ID' => (int)$productInfo['ID']],
+      ['ID' => $productId],
       false,
       false,
       ['ID', 'NAME']
@@ -163,6 +200,50 @@ if (!function_exists('rbBuildTradeOfferName')) {
     }
 
     return $productName . ' цвет ' . implode('/', $colors);
+  }
+}
+
+if (!function_exists('rbGetTradeOfferNameBuildError')) {
+  /**
+   * Возвращает причину, почему название ТП не удалось собрать.
+   */
+  function rbGetTradeOfferNameBuildError(int $offerId): string
+  {
+    if ($offerId <= 0) {
+      return 'Invalid offer ID';
+    }
+
+    if (!Loader::includeModule('iblock') || !Loader::includeModule('catalog')) {
+      return 'Required modules iblock/catalog are not available';
+    }
+
+    $offerIblockId = (int)CIBlockElement::GetIBlockByID($offerId);
+    if ($offerIblockId <= 0) {
+      return 'Offer iblock is not found';
+    }
+
+    $productId = rbGetOfferParentProductId($offerId, $offerIblockId);
+    if ($productId <= 0) {
+      return 'Parent product is not found';
+    }
+
+    $product = CIBlockElement::GetList(
+      [],
+      ['ID' => $productId],
+      false,
+      false,
+      ['ID', 'NAME']
+    )->Fetch();
+
+    if (!$product) {
+      return 'Parent product element is not found';
+    }
+
+    if (trim((string)($product['NAME'] ?? '')) === '') {
+      return 'Parent product name is empty';
+    }
+
+    return 'Can not build offer name';
   }
 }
 
@@ -199,7 +280,7 @@ if (!function_exists('rbRewriteTradeOfferName')) {
 
     if ($result['NEW_NAME'] === '') {
       $result['SKIPPED'] = true;
-      $result['ERROR'] = 'Can not build offer name';
+      $result['ERROR'] = rbGetTradeOfferNameBuildError($offerId);
       return $result;
     }
 
