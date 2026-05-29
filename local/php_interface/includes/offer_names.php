@@ -31,6 +31,31 @@ if (!function_exists('rbLowercaseColorName')) {
   }
 }
 
+if (!function_exists('rbIsLocalhostServer')) {
+  /**
+   * Проверяет, что скрипт запущен на локальном сервере.
+   */
+  function rbIsLocalhostServer(): bool
+  {
+    $host = strtolower((string)($_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? ''));
+    $host = preg_replace('/:\d+$/', '', $host);
+    $serverAddress = (string)($_SERVER['SERVER_ADDR'] ?? '');
+
+    return in_array($host, ['localhost', '127.0.0.1', '::1'], true)
+      || in_array($serverAddress, ['127.0.0.1', '::1'], true);
+  }
+}
+
+if (!function_exists('rbGetAdditionalColorPropertyId')) {
+  /**
+   * Возвращает ID свойства дополнительного цвета для текущего окружения.
+   */
+  function rbGetAdditionalColorPropertyId(): int
+  {
+    return rbIsLocalhostServer() ? 57 : 71;
+  }
+}
+
 if (!function_exists('rbGetDirectoryValueName')) {
   /**
    * Возвращает человекочитаемое имя значения свойства типа "Справочник".
@@ -97,6 +122,7 @@ if (!function_exists('rbGetOfferPropertyDirectoryName')) {
 if (!function_exists('rbBuildTradeOfferName')) {
   /**
    * Формирует название ТП: "Название товара цвет основной/дополнительный".
+   * Если цвета не заполнены, возвращает только название товара.
    */
   function rbBuildTradeOfferName(int $offerId): string
   {
@@ -120,15 +146,23 @@ if (!function_exists('rbBuildTradeOfferName')) {
 
     $productName = trim((string)($product['NAME'] ?? ''));
     $color = rbLowercaseColorName(rbGetOfferPropertyDirectoryName($offerId, $offerIblockId, 21));
-    $additionalColor = rbLowercaseColorName(rbGetOfferPropertyDirectoryName($offerId, $offerIblockId, 57));
+    $additionalColor = rbLowercaseColorName(
+      rbGetOfferPropertyDirectoryName($offerId, $offerIblockId, rbGetAdditionalColorPropertyId())
+    );
 
-    if ($productName === '' || $color === '') {
+    if ($productName === '') {
       return '';
     }
 
-    $colorName = $color . ($additionalColor !== '' ? '/' . $additionalColor : '');
+    $colors = array_filter([$color, $additionalColor], static function (string $colorName): bool {
+      return $colorName !== '';
+    });
 
-    return $productName . ' цвет ' . $colorName;
+    if (empty($colors)) {
+      return $productName;
+    }
+
+    return $productName . ' цвет ' . implode('/', $colors);
   }
 }
 
