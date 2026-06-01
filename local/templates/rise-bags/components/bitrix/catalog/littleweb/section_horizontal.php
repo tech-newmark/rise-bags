@@ -42,7 +42,7 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 }
 ?>
 
-<div class="catalog">
+<section class="catalog">
 	<div class="container">
 		<div class="catalog__header">
 			<?
@@ -255,7 +255,7 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 			</div>
 		</div>
 	</div>
-</div>
+</section>
 
 <div class="catalog__footer">
 	<?
@@ -397,7 +397,7 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 		if (!empty($arRecomData)):
 			if (!isset($arParams['USE_BIG_DATA']) || $arParams['USE_BIG_DATA'] != 'N'):
 	?>
-				<h1>Рекомендуемые товары ??</h1>
+				<h2>Рекомендуемые товары</h2>
 				<div class="catalog-block-header" data-entity="parent-container">
 					<div data-entity="header" data-showed="false" style="display: none; opacity: 0;">
 						<?= GetMessage('CATALOG_PERSONAL_RECOM') ?>
