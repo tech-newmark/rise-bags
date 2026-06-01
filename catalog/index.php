@@ -4,8 +4,8 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Каталог");
 ?>
 <? $APPLICATION->IncludeComponent(
-	"bitrix:catalog",
-	"littleweb",
+	"bitrix:catalog", 
+	"littleweb", 
 	[
 		"IBLOCK_TYPE" => "catalog",
 		"IBLOCK_ID" => "2",
@@ -346,7 +346,7 @@ $APPLICATION->SetTitle("Каталог");
 			"section" => "#SECTION_CODE_PATH#/",
 			"element" => "#SECTION_CODE_PATH#/#ELEMENT_CODE#/",
 			"compare" => "compare/",
-			"smart_filter" => "#SECTION_CODE_PATH#/filter/#SMART_FILTER_PATH#/apply/",
+			"smart_filter" => "#SITE_DIR#/catalog/#SECTION_CODE_PATH#/filter/#SMART_FILTER_PATH#/apply/",
 		]
 	],
 	false
