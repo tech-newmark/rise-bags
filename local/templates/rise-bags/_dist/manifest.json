@@ -38,7 +38,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/_src/scss/template.scss": {
-    "file": "template_styles.L7dqIrUx.css",
+    "file": "template_styles.BJOuDCST.css",
     "src": "local/templates/rise-bags/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
@@ -95,6 +95,15 @@
     "name": "bitrix_catalog_item_littleweb_scss",
     "names": [
       "bitrix_catalog_item_littleweb_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/catalog.search/rise/_src/scss/index.scss": {
+    "file": "components/bitrix/catalog.search/rise/style.BvRom7ag.css",
+    "src": "local/templates/rise-bags/components/bitrix/catalog.search/rise/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_catalog_search_rise_scss",
+    "names": [
+      "bitrix_catalog_search_rise_scss.css"
     ]
   },
   "local/templates/rise-bags/components/bitrix/catalog.section.list/accordeon/_src/js/index.js": {
@@ -437,8 +446,17 @@
       "bitrix_sale_personal_section_rise_scss.css"
     ]
   },
+  "local/templates/rise-bags/components/bitrix/search.page/rise-catalog/_src/scss/index.scss": {
+    "file": "components/bitrix/search.page/rise-catalog/style.BXZ0QyQZ.css",
+    "src": "local/templates/rise-bags/components/bitrix/search.page/rise-catalog/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_search_page_rise-catalog_scss",
+    "names": [
+      "bitrix_search_page_rise-catalog_scss.css"
+    ]
+  },
   "local/templates/rise-bags/components/bitrix/search.title/search-title/_src/scss/index.scss": {
-    "file": "components/bitrix/search.title/search-title/style.Dm1B0HBA.css",
+    "file": "components/bitrix/search.title/search-title/style.gZ8rGnft.css",
     "src": "local/templates/rise-bags/components/bitrix/search.title/search-title/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_search_title_search-title_scss",
