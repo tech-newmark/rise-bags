@@ -91,6 +91,8 @@ if (isset($arResult['ITEM'])) {
 	$showSlider = $arParams["SHOW_SLIDER"] === "Y" && is_array($morePhoto) && count($morePhoto) > 1;
 	$showSubscribe = $arParams['PRODUCT_SUBSCRIPTION'] === 'Y' && ($item['CATALOG_SUBSCRIBE'] === 'Y' || $haveOffers);
 	$itemHasDetailUrl = isset($item['DETAIL_PAGE_URL']) && $item['DETAIL_PAGE_URL'] != '';
+	$favoriteProductId = (int)$actualItem['ID'];
+	$isFavorite = function_exists('riseBagsIsFavoriteProduct') && riseBagsIsFavoriteProduct($favoriteProductId);
 	$detailPageUrl = $item['DETAIL_PAGE_URL'];
 	if ($itemHasDetailUrl && $haveOffers && !empty($actualItem['ID'])) {
 		$detailPageUrl = CHTTP::urlAddParams(

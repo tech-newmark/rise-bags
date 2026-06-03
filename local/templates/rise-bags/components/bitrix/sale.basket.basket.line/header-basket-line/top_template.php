@@ -6,6 +6,15 @@
  * @global string $cartId
  */
 $compositeStub = (isset($arResult['COMPOSITE_STUB']) && $arResult['COMPOSITE_STUB'] == 'Y');
+$favoriteCount = 0;
+
+if (!$compositeStub) {
+	if (function_exists('riseBagsGetFavoriteProductIds')) {
+		$favoriteCount = count(riseBagsGetFavoriteProductIds());
+	} elseif (!empty($arResult['CATEGORIES']['DELAY'])) {
+		$favoriteCount = count($arResult['CATEGORIES']['DELAY']);
+	}
+}
 ?>
 
 <div class="bx-basket-line-block">
@@ -122,11 +131,16 @@ $compositeStub = (isset($arResult['COMPOSITE_STUB']) && $arResult['COMPOSITE_STU
 	</div>
 
 	<div class="bx-basket-line-block-section">
-		<a href="/">
+		<a href="/personal/favourite/">
 			<div class="bx-basket-line-block-section-icon">
 				<svg width="24" height="20" role="img" aria-hidden="true" focusable="false">
 					<use xlink:href="<?= SITE_TEMPLATE_PATH . '/_dist/sprite.svg#icon-heart' ?> "></use>
 				</svg>
+				<span
+					class="bx-basket-line-block-section-label"
+					data-favorite-counter
+					<?= $favoriteCount <= 0 ? 'style="display: none;"' : '' ?>
+				><?= $favoriteCount ?></span>
 			</div>
 			<span>Избранное</span>
 		</a>

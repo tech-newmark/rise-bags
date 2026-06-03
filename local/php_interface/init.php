@@ -16,5 +16,6 @@ require_once $includesPath . 'assets_init.php';
 require_once $includesPath . 'core_init.php';
 require_once $includesPath . 'debug.php';
 require_once $includesPath . 'offer_names.php';
+require_once $includesPath . 'favorites.php';
 
 

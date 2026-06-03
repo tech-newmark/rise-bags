@@ -16,7 +16,11 @@
   initBitrixCore('popup');
 
   $curPage = $APPLICATION->GetCurPage();
+  $favoriteProductIds = function_exists('riseBagsGetFavoriteProductIds') ? riseBagsGetFavoriteProductIds() : [];
   ?>
+  <script>
+    window.RiseBagsFavoriteIds = <?= CUtil::PhpToJSObject($favoriteProductIds) ?>;
+  </script>
 
 </head>
 
