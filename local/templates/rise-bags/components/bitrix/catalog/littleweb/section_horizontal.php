@@ -98,10 +98,6 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 					?>
 				<? endif ?>
 
-
-
-
-
 				<? if ($isSidebar): ?>
 					<?
 					$APPLICATION->IncludeComponent(
@@ -275,7 +271,6 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 
 		if (!empty($arRecomData) && $arParams['USE_GIFTS_SECTION'] === 'Y'):
 	?>
-			<span>GIFTS??</span>
 			<div data-entity="parent-container">
 				<? if (!isset($arParams['GIFTS_SECTION_LIST_HIDE_BLOCK_TITLE']) || $arParams['GIFTS_SECTION_LIST_HIDE_BLOCK_TITLE'] !== 'Y'): ?>
 					<div class="catalog-block-header" data-entity="header" data-showed="false" style="display: none; opacity: 0;">

@@ -1,7 +1,24 @@
 @use "@scss/base/container-queries" as *;
 
 .bx-basket-line {
-	position: relative;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100svw;
+	height: fit-content;
+	padding: 20px;
+	background-color: rgba(0, 0, 0, 0.25);
+	z-index: 3;
+
+	@include container-up("header", 1068px) {
+		position: relative;
+		bottom: revert;
+		left: revert;
+		width: revert;
+		height: revert;
+		padding: revert;
+		background-color: revert;
+	}
 
 	&-tooltip {
 		flex-direction: column;

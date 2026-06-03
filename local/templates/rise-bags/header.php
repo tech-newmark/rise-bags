@@ -487,6 +487,10 @@
     </div>
   </header>
 
+  <div class="sticky-action-block">
+    sticky
+  </div>
+
   <main id="workarea" class="workarea">
     <?
 
