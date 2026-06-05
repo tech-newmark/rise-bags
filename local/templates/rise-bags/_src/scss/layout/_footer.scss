@@ -1,7 +1,7 @@
 @use "@scss/base/container-queries" as *;
 
 .footer {
-	padding: clamp(60px, 8vw, 100px) 0;
+	padding: clamp(20px, 2.4vw, 30px) 0;
 	border-radius: 30px 30px 0 0;
 	background-color: var(--primary);
 	color: var(--white);
@@ -11,68 +11,48 @@
 	.grid {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: clamp(40px, 4vw, 100px);
+		gap: 20px;
 
 		@include container-up(footer, 768px) {
-			grid-template-columns: 240px auto 240px;
-		}
-
-		@include container-up(footer, 1240px) {
-			grid-template-columns: 240px auto auto minmax(280px, 360px);
-		}
-
-		@include container-up(footer, 1440px) {
+			grid-template-columns: 240px repeat(2, auto);
 			justify-content: space-between;
-			grid-template-columns: 240px 440px 220px minmax(280px, 360px);
+		}
+
+		@include container-up(footer, 880px) {
+			grid-template-columns: 240px repeat(2, 150px) auto;
+		}
+
+		@include container-up(footer, 1080px) {
+			grid-template-columns: repeat(3, 240px) minmax(260px, 460px);
 		}
 
 		&__item {
 			display: flex;
 			flex-direction: column;
-			gap: 20px;
+			gap: 14px;
 			height: fit-content;
-			order: 1;
 
 			&--company {
 				align-items: center;
 			}
 
 			&--contacts {
-				order: 1;
 				@include container-up(footer, 768px) {
-					grid-column: 2/4;
+					grid-column: 1/-1;
 				}
 
-				@include container-up(footer, 1240px) {
-					grid-column: revert;
-				}
-			}
-
-			&--menu {
-				order: 2;
-				@include container-up(footer, 768px) {
-					&-wide {
-						grid-column: 1/3;
-					}
-				}
-
-				@include container-up(footer, 1240px) {
-					order: 1;
-
-					&-wide {
-						grid-column: revert;
-					}
+				@include container-up(footer, 880px) {
+					grid-column: auto;
 				}
 			}
 		}
 	}
 
 	&__logo {
-		margin-bottom: 20px;
 		img {
 			display: flex;
 			width: 100%;
-			max-width: 240px;
+			max-width: 150px;
 			height: auto;
 			object-fit: contain;
 		}
@@ -96,60 +76,46 @@
 	}
 
 	.contact-block {
+		&__section-content * {
+			@include container-up(footer, 768px) {
+				color: var(--primary);
+			}
+		}
+
+		@include container-up(footer, 768px) {
+			align-items: flex-start;
+			text-align: left;
+			max-width: 680px;
+			margin: 0;
+			padding: 20px;
+			background-color: var(--white);
+			border-radius: var(--base-br);
+		}
+	}
+
+	.multilevel-menu {
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
-		padding: 20px;
-		background-color: var(--white);
-		border-radius: var(--base-br);
+		align-items: center;
 
-		&__section {
+		ul {
 			display: flex;
 			flex-direction: column;
-			gap: 12px;
-			&-header {
-				display: flex;
-				align-items: center;
-				gap: 6px;
+			align-items: center;
+		}
 
-				svg {
-					fill: var(--gray-900);
-				}
-				&-title {
-					font-weight: 600;
-					color: var(--dark);
-				}
-			}
+		@include container-up(footer, 768px) {
+			align-items: flex-start;
 
-			&-content {
-				display: flex;
-				flex-direction: column;
-				gap: 6px;
-
-				* {
-					color: var(--primary);
-				}
-
-				// a {
-				// 	display: flex;
-				// 	color: var(--primary);
-				// }
-
-				img {
-					width: 100%;
-					max-width: 212px;
-					height: auto;
-					object-fit: contain;
-				}
+			ul {
+				align-items: flex-start;
 			}
 		}
 	}
 }
 
-//
 .underfooter-line {
 	background-color: var(--dark);
-	padding: 20px 0;
+	padding: 14px 0;
 	color: var(--white);
 }
-//
