@@ -139,13 +139,11 @@ if (!$compositeStub) {
 				<span
 					class="bx-basket-line-block-section-label"
 					data-favorite-counter
-					<?= $favoriteCount <= 0 ? 'style="display: none;"' : '' ?>
-				><?= $favoriteCount ?></span>
+					<?= $favoriteCount <= 0 ? 'style="display: none;"' : '' ?>><?= $favoriteCount ?></span>
 			</div>
 			<span>Избранное</span>
 		</a>
 	</div>
-
 
 	<div class="bx-basket-line-block-section">
 		<? if (!$arResult["DISABLE_USE_BASKET"]): ?>
@@ -177,4 +175,55 @@ if (!$compositeStub) {
 			<? endif; ?>
 		<? endif; ?>
 	</div>
+
+	<div class="bx-basket-line-block-section">
+		<button class="search-title-opener" aria-label="Открыть поиск">
+			<div class="bx-basket-line-block-section-icon">
+				<svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+					<use xlink:href="<?= SITE_TEMPLATE_PATH  . '/_dist/sprite.svg#icon-search' ?>"></use>
+				</svg>
+			</div>
+			<span>Поиск</span>
+		</button>
+	</div>
+
+	<?
+	$curDir = $APPLICATION->GetCurDir();
+	$isCatalogSection = preg_match('#^/catalog/(?:[^/]+/)+$#', $curDir) === 1;
+
+	if ($isCatalogSection):
+	?>
+		<div class="bx-basket-line-block-section">
+			<button id="smartfilter_sticky_filter_opener" type="button" class="filter-opener" aria-label="Открыть фильтр">
+				<div class="bx-basket-line-block-section-icon">
+					<svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+						<use xlink:href="<?= SITE_TEMPLATE_PATH  . '/_dist/sprite.svg#icon-filter' ?>"></use>
+					</svg>
+				</div>
+				<span>Фильтр</span>
+			</button>
+		</div>
+	<? endif; ?>
 </div>
+
+<!-- <script>
+	(function() {
+		var filterSelector = '#smartfilter_form, .bx-filter';
+		var filterButtonSectionSelector = '.bx-basket-line-block-section--filter';
+
+		function toggleFilterButtons() {
+			var hasFilter = Boolean(document.querySelector(filterSelector));
+			var sections = document.querySelectorAll(filterButtonSectionSelector);
+
+			for (var i = 0; i < sections.length; i++) {
+				sections[i].hidden = !hasFilter;
+			}
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', toggleFilterButtons);
+		} else {
+			toggleFilterButtons();
+		}
+	})();
+</script> -->

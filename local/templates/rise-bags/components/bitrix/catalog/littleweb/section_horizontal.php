@@ -62,7 +62,28 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 				);
 				unset($sectionListParams);
 				?>
+
+
+				<? if ($isSidebar): ?>
+					<?
+					$APPLICATION->IncludeComponent(
+						"bitrix:main.include",
+						"",
+						array(
+							"AREA_FILE_SHOW" => "file",
+							"PATH" => $arParams["SIDEBAR_PATH"],
+							"AREA_FILE_RECURSIVE" => "N",
+							"EDIT_MODE" => "html",
+						),
+						false,
+						array('HIDE_ICONS' => 'Y')
+					);
+					?>
+				<? endif; ?>
+			</div>
+			<div class="grid-item grid-item--main">
 				<? if ($isFilter): ?>
+
 					<?
 					$APPLICATION->IncludeComponent(
 						"bitrix:catalog.smart.filter",
@@ -97,25 +118,6 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 					);
 					?>
 				<? endif ?>
-
-				<? if ($isSidebar): ?>
-					<?
-					$APPLICATION->IncludeComponent(
-						"bitrix:main.include",
-						"",
-						array(
-							"AREA_FILE_SHOW" => "file",
-							"PATH" => $arParams["SIDEBAR_PATH"],
-							"AREA_FILE_RECURSIVE" => "N",
-							"EDIT_MODE" => "html",
-						),
-						false,
-						array('HIDE_ICONS' => 'Y')
-					);
-					?>
-				<? endif; ?>
-			</div>
-			<div class="grid-item grid-item--main">
 				<?
 				$intSectionID = $APPLICATION->IncludeComponent(
 					"bitrix:catalog.section",

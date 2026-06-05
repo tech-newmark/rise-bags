@@ -6,11 +6,18 @@
 	left: 0;
 	width: 100svw;
 	height: fit-content;
-	padding: 20px;
-	background-color: rgba(0, 0, 0, 0.25);
+	padding: 12px var(--container-offset);
+	background-color: var(--white);
 	z-index: 3;
+	border-top: 1px solid var(--dark);
+	z-index: 11;
 
-	@include container-up("header", 1068px) {
+	min-height: 60px;
+	display: flex;
+	width: 100%;
+	align-items: center;
+
+	@include container-up("header", 1091px) {
 		position: relative;
 		bottom: revert;
 		left: revert;
@@ -18,6 +25,7 @@
 		height: revert;
 		padding: revert;
 		background-color: revert;
+		border-top: revert;
 	}
 
 	&-tooltip {
@@ -34,10 +42,8 @@
 		display: flex;
 		align-items: center;
 		gap: 12px;
-
-		@include container-up("header", 1400px) {
-			padding: 0 24px;
-		}
+		justify-content: space-around;
+		width: 100%;
 
 		&-section {
 			display: flex;
@@ -87,7 +93,8 @@
 				}
 			}
 
-			a {
+			a,
+			button {
 				display: flex;
 				flex-direction: column;
 				gap: 2px;
@@ -95,13 +102,40 @@
 				font-weight: 400;
 				color: var(--dark);
 
-				// span:not(.bx-basket-line-block-section-label) {
-				// 	display: none;
+				@include container-up("header", 620px) {
+					height: 40px;
+				}
 
-				// 	@include container-up("header", 1400px) {
-				// 		display: flex;
-				// 	}
-				// }
+				@include container-up("header", 1091px) {
+					height: revert;
+				}
+
+				span:not(.bx-basket-line-block-section-label) {
+					display: none;
+					@include container-up("header", 620px) {
+						display: flex;
+					}
+
+					@include container-up("header", 1091px) {
+						display: none;
+					}
+
+					@include container-up("header", 1450px) {
+						display: flex;
+					}
+				}
+			}
+
+			@include container-up("header", 768px) {
+				&:has(.search-title-opener) {
+					display: none;
+				}
+			}
+
+			@include container-up("header", 960px) {
+				&:has(.filter-opener) {
+					display: none !important;
+				}
 			}
 
 			small {
@@ -137,8 +171,6 @@
 	}
 
 	&-list {
-		// display: none;
-
 		&-header {
 			background-color: var(--light);
 			padding: 8px 12px;
@@ -193,6 +225,21 @@
 			box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
 			border-radius: 0px 0px 30px 30px;
 			z-index: 99;
+		}
+	}
+
+	.filter-opener,
+	.search-title-opener {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: transparent;
+		border: none;
+		padding: 0;
+
+		svg {
+			width: 24px;
+			fill: var(--dark);
 		}
 	}
 }
