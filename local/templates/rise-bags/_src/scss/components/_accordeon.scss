@@ -1,14 +1,11 @@
 .accordeon {
 	display: flex;
 	flex-direction: column;
+	gap: 12px;
 
 	&-item {
 		display: flex;
 		flex-direction: column;
-
-		&:not(:last-child) {
-			border-bottom: 1px solid var(--gray-500);
-		}
 
 		svg {
 			fill: #000000;
