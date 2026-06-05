@@ -78,7 +78,14 @@ use Bitrix\Main\Localization\Loc;
 			<? endif; ?>
 
 			<div class="product-item-sidebar">
-				<button class="favourite-add-btn" type="button" aria-label="Добавить товар в избранное">
+				<button
+					class="favourite-add-btn<?= $isFavorite ? ' active' : '' ?>"
+					type="button"
+					aria-label="<?= $isFavorite ? 'Удалить товар из избранного' : 'Добавить товар в избранное' ?>"
+					aria-pressed="<?= $isFavorite ? 'true' : 'false' ?>"
+					data-favorite-toggle
+					data-product-id="<?= $favoriteProductId ?>"
+				>
 					<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
 						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-heart'></use>
 					</svg>

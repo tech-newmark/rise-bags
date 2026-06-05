@@ -6,7 +6,7 @@ function JCSmartFilter(ajaxURL, params) {
 	this.cacheKey = "";
 	this.cache = [];
 	this.popups = [];
-	this.formOpenedID = params.FILTER_OPENER_ID;
+	this.filterOpenerIds = params.FILTER_OPENER_IDS || [params.FILTER_OPENER_ID];
 
 	if (params && params.SEF_SET_FILTER_URL) {
 		this.bindUrlToButton("set_filter", params.SEF_SET_FILTER_URL);
@@ -22,43 +22,123 @@ function JCSmartFilter(ajaxURL, params) {
 // !!
 // Метод для привязки кнопки открытия фильтра
 JCSmartFilter.prototype.bindFilterOpener = function () {
-	var openerBtn = BX(this.formOpenedID);
 	var filterForm = BX("smartfilter_form");
 
-	console.log(openerBtn);
-	if (!openerBtn || !filterForm) return;
+	if (!filterForm) return;
 
-	// Удаляем старые обработчики
-	var newBtn = openerBtn.cloneNode(true);
-	openerBtn.parentNode.replaceChild(newBtn, openerBtn);
-	openerBtn = newBtn;
+	for (var i = 0; i < this.filterOpenerIds.length; i++) {
+		var openerBtn = BX(this.filterOpenerIds[i]);
 
-	// Добавляем новый обработчик
-	BX.bind(openerBtn, "click", function (e) {
-		e.preventDefault();
-		if (filterForm.style.display === "none") {
-			filterForm.style.display = "block";
-		} else {
-			filterForm.style.display = "none";
+		if (!openerBtn) {
+			continue;
+		}
+
+		// Удаляем старые обработчики
+		var newBtn = openerBtn.cloneNode(true);
+		openerBtn.parentNode.replaceChild(newBtn, openerBtn);
+		openerBtn = newBtn;
+
+		// Добавляем новый обработчик
+		var self = this;
+		BX.bind(openerBtn, "click", function (e) {
+			e.preventDefault();
+			self.toggleFilterForm(filterForm);
+		});
+
+		// Сохраняем ссылку
+		this.filterOpenerBtn = openerBtn;
+	}
+};
+
+JCSmartFilter.prototype.isFilterFormOpened = function (filterForm) {
+	if (!filterForm) return false;
+
+	return filterForm.style.display !== "none" && getComputedStyle(filterForm).display !== "none";
+};
+
+JCSmartFilter.prototype.openFilterForm = function (filterForm) {
+	if (!filterForm) return;
+
+	filterForm.style.display = "block";
+	filterForm.classList.add("active");
+};
+
+JCSmartFilter.prototype.closeFilterForm = function (filterForm) {
+	if (!filterForm) return;
+
+	filterForm.style.display = "none";
+	filterForm.classList.remove("active");
+};
+
+JCSmartFilter.prototype.toggleFilterForm = function (filterForm) {
+	if (this.isFilterFormOpened(filterForm)) {
+		this.closeFilterForm(filterForm);
+	} else {
+		this.openFilterForm(filterForm);
+	}
+};
+
+JCSmartFilter.prototype.isFilterOpener = function (target) {
+	for (var i = 0; i < this.filterOpenerIds.length; i++) {
+		var openerBtn = BX(this.filterOpenerIds[i]);
+
+		if (openerBtn && openerBtn.contains(target)) {
+			return true;
+		}
+	}
+
+	return false;
+};
+
+JCSmartFilter.prototype.bindOutsideClick = function () {
+	var filterForm = BX("smartfilter_form");
+
+	if (!filterForm) return;
+
+	var self = this;
+
+	BX.bind(document, "click", function (e) {
+		var target = e.target;
+
+		if (
+			self.isFilterFormOpened(filterForm)
+			&& !filterForm.contains(target)
+			&& !self.isFilterOpener(target)
+		) {
+			self.closeFilterForm(filterForm);
 		}
 	});
+};
 
-	// Сохраняем ссылку
-	this.filterOpenerBtn = openerBtn;
+JCSmartFilter.prototype.bindFilterCloser = function () {
+	var filterForm = BX("smartfilter_form");
+	var closerBtns = document.querySelectorAll(".bx-filter-closer");
+
+	if (!filterForm || !closerBtns.length) return;
+
+	var self = this;
+
+	for (var i = 0; i < closerBtns.length; i++) {
+		BX.bind(closerBtns[i], "click", function (e) {
+			e.preventDefault();
+			self.closeFilterForm(filterForm);
+		});
+	}
 };
 
 // Метод для инициализации кнопки при создании фильтра
 JCSmartFilter.prototype.initFilterOpener = function () {
 	var filterForm = BX("smartfilter_form");
-	var openerBtn = BX(this.formOpenedID);
 
-	if (!openerBtn || !filterForm) return;
+	if (!filterForm || !this.filterOpenerIds.length) return;
 
 	// По умолчанию фильтр скрыт
 	// filterForm.style.display = "none";
 
 	// Привязываем обработчик
 	this.bindFilterOpener();
+	this.bindFilterCloser();
+	this.bindOutsideClick();
 };
 // !!
 

@@ -1,3 +1,7 @@
+.container:has(.mobile-menu) {
+	margin-bottom: 40px;
+}
+
 .mobile-menu {
 	width: 100%;
 
@@ -15,13 +19,15 @@
 			display: none;
 		}
 
-		&:not(:last-child) > .mobile-menu__link {
+		& > .mobile-menu__link {
 			border-bottom: 1px solid var(--gray-600);
 		}
 	}
 
-	&__list > li:only-child > .mobile-menu__link {
-		border-bottom: 1px solid var(--gray-600);
+	&__list {
+		& > li:only-child > .mobile-menu__link {
+			border-bottom: 1px solid var(--gray-600);
+		}
 	}
 
 	&__link {

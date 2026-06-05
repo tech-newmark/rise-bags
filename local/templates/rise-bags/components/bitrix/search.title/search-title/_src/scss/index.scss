@@ -1,9 +1,5 @@
 @use "@scss/base/container-queries" as *;
 
-// div:has(.search-title) {
-// 	flex-grow: 1;
-// }
-
 .search-title {
 	position: relative;
 	outline: none;
@@ -11,7 +7,6 @@
 
 	// overflow: hidden;
 
-	&-opener,
 	&-closer {
 		display: flex;
 		align-items: center;
@@ -25,21 +20,6 @@
 
 		svg {
 			fill: var(--gray-700);
-		}
-	}
-
-	&-opener {
-		border-radius: 50%;
-		border: 1px solid var(--primary);
-		svg {
-			fill: var(--dark);
-		}
-	}
-
-	&-opener,
-	&-closer {
-		@include container-up("header", 1068px) {
-			display: none;
 		}
 	}
 
@@ -88,8 +68,8 @@
 			background-color: transparent;
 
 			svg {
-				width: 24px;
-				height: 24px;
+				width: 16px;
+				height: 16px;
 				fill: var(--dark);
 			}
 		}
@@ -132,8 +112,6 @@
 			b {
 				color: var(--primary);
 			}
-
-			// @extend %hover-opacity;
 		}
 		padding: 12px 12px;
 		border-bottom: 1px solid var(--white);
@@ -157,14 +135,8 @@
 }
 
 .search-title {
-	display: none;
-
-	&__btn {
-		// @extend %hover-opacity;
-	}
-
-	@include container-up("header", 1068px) {
-		display: block;
+	form {
+		width: 100%;
 	}
 
 	&.mobile-expanded {
@@ -183,7 +155,6 @@
 		border-radius: 0;
 
 		form {
-			width: 100%;
 			display: flex;
 			align-items: center;
 			gap: 12px;

@@ -1,9 +1,7 @@
 @use "@scss/base/container-queries" as *;
 
 .catalog {
-
 	container: catalog / inline-size;
-
 
 	margin-bottom: 40px;
 
@@ -15,7 +13,7 @@
 		grid-template-columns: 1fr;
 		gap: var(--base-gap);
 
-		@include container-up("catalog", 768px) {
+		@include container-up("catalog", 960px) {
 			grid-template-columns: 320px auto;
 		}
 
@@ -26,7 +24,7 @@
 				top: 40px;
 				height: fit-content;
 
-				@include container-up("catalog", 768px) {
+				@include container-up("catalog", 960px) {
 					display: block;
 				}
 			}

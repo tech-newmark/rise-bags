@@ -2003,6 +2003,7 @@
 				this.setCompared(this.offers[index].COMPARED);
 
 				this.offerNum = index;
+				this.updateFavoriteButton(this.offers[this.offerNum].ID);
 				if (offerChanged) {
 					this.updateOfferUrl(this.offers[this.offerNum].ID);
 				}
@@ -2018,6 +2019,19 @@
 				// new event
 				BX.onCustomEvent("onCatalogElementChangeOffer", [eventData]);
 				eventData = null;
+			}
+		},
+		updateFavoriteButton: function (productId) {
+			var buttons = this.obProduct
+				? this.obProduct.querySelectorAll("[data-favorite-toggle]")
+				: [];
+
+			for (var i = 0; i < buttons.length; i++) {
+				buttons[i].setAttribute("data-product-id", productId);
+
+				if (window.RiseBagsUpdateFavoriteButtonState) {
+					window.RiseBagsUpdateFavoriteButtonState(buttons[i], productId);
+				}
 			}
 		},
 		changeSkuDescription: function (index) {

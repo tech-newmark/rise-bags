@@ -16,7 +16,11 @@
   initBitrixCore('popup');
 
   $curPage = $APPLICATION->GetCurPage();
+  $favoriteProductIds = function_exists('riseBagsGetFavoriteProductIds') ? riseBagsGetFavoriteProductIds() : [];
   ?>
+  <script>
+    window.RiseBagsFavoriteIds = <?= CUtil::PhpToJSObject($favoriteProductIds) ?>;
+  </script>
 
 </head>
 
@@ -34,7 +38,7 @@
     <div class="container">
       <div class="header__top">
         <a href="/" class="header__logo" aria-label="На главную страницу">
-          <img src="<?= SITE_TEMPLATE_PATH ?>/_dist/images/logo-colored.svg" alt="" width="167" height="100">
+          <img src="<?= SITE_TEMPLATE_PATH ?>/_dist/images/logo-colored.svg" alt="" width="204" height="106">
         </a>
 
         <div class="header__top-row">
@@ -193,14 +197,7 @@
             ],
             false
           ); ?>
-
-          <button class="search-title-opener" aria-label="Открыть поиск">
-            <svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
-              <use xlink:href="<?= SITE_TEMPLATE_PATH  . '/_dist/sprite.svg#icon-search' ?>"></use>
-            </svg>
-          </button>
           <button class="main-btn callback-btn" data-form-id="1">Заказать звонок</button>
-
           <button class="menu-opener">
             <svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
               <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-burger'></use>
@@ -291,53 +288,14 @@
           false
         ); ?>
       </div>
-      <div class="header__mobile-section-wrapper">
-        <div class="container">
-          <? $APPLICATION->IncludeComponent(
-            "bitrix:sale.basket.basket.line",
-            "header-basket-line",
-            [
-              "PATH_TO_BASKET" => SITE_DIR . "personal/cart/",
-              "PATH_TO_PERSONAL" => SITE_DIR . "personal/",
-              "SHOW_PERSONAL_LINK" => "N",
-              "SHOW_NUM_PRODUCTS" => "Y",
-              "SHOW_TOTAL_PRICE" => "N",
-              "SHOW_PRODUCTS" => "N",
-              "POSITION_FIXED" => "N",
-              "SHOW_AUTHOR" => "Y",
-              "PATH_TO_REGISTER" => SITE_DIR . "login/",
-              "PATH_TO_PROFILE" => SITE_DIR . "personal/private/",
-              "COMPONENT_TEMPLATE" => "header-basket-line",
-              "PATH_TO_ORDER" => SITE_DIR . "personal/order/make/",
-              "SHOW_EMPTY_VALUES" => "N",
-              "PATH_TO_AUTHORIZE" => SITE_DIR . "auth/",
-              "SHOW_REGISTRATION" => "N",
-              "SHOW_DELAY" => "Y",
-              "SHOW_NOTAVAIL" => "Y",
-              "SHOW_IMAGE" => "Y",
-              "SHOW_PRICE" => "Y",
-              "SHOW_SUMMARY" => "Y",
-              "POSITION_HORIZONTAL" => "right",
-              "POSITION_VERTICAL" => "vcenter",
-              "HIDE_ON_BASKET_PAGES" => "N",
-              "MAX_IMAGE_SIZE" => "80"
-            ],
-            false
-          ); ?>
-        </div>
-      </div>
       <div class="container">
+        <!-- <div class="header__mobile-buttons">
+          <button class="main-btn callback-btn" data-form-id="1">Заказать звонок</button>
+          <button class="main-btn outlined" data-form-id="1">Стать партнером</button>
+          <button class="main-btn callback-btn" data-form-id="1">Запросить прайс</button>
+        </div> -->
         <div class="contact-block">
-          <span> Связаться с нами:</span>
           <div class="contact-block__section">
-            <div class="contact-block__section-header">
-              <svg width='32' height='32' role='img' aria-hidden='true' focusable='false'>
-                <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-phone-clear'></use>
-              </svg>
-              <span class="contact-block__section-header-title">
-                Телефон
-              </span>
-            </div>
             <div class="contact-block__section-content">
               <? $APPLICATION->IncludeFile(
                 SITE_DIR . "include/contacts/phones.php",
@@ -351,14 +309,7 @@
             </div>
           </div>
           <div class="contact-block__section">
-            <div class="contact-block__section-header">
-              <svg width='32' height='32' role='img' aria-hidden='true' focusable='false'>
-                <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-mail-clear'></use>
-              </svg>
-              <span class="contact-block__section-header-title">
-                E-mail
-              </span>
-            </div>
+
             <div class="contact-block__section-content">
               <? $APPLICATION->IncludeFile(
                 SITE_DIR . "include/contacts/email.php",
@@ -372,14 +323,7 @@
             </div>
           </div>
           <div class="contact-block__section">
-            <div class="contact-block__section-header">
-              <svg width='32' height='32' role='img' aria-hidden='true' focusable='false'>
-                <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-pin-clear'></use>
-              </svg>
-              <span class="contact-block__section-header-title">
-                Адрес
-              </span>
-            </div>
+
             <div class="contact-block__section-content">
               <? $APPLICATION->IncludeFile(
                 SITE_DIR . "include/contacts/address.php",
@@ -393,14 +337,7 @@
             </div>
           </div>
           <div class="contact-block__section">
-            <div class="contact-block__section-header">
-              <svg width='32' height='32' role='img' aria-hidden='true' focusable='false'>
-                <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-date-clear'></use>
-              </svg>
-              <span class="contact-block__section-header-title">
-                Время работы
-              </span>
-            </div>
+
             <div class="contact-block__section-content">
               <? $APPLICATION->IncludeFile(
                 SITE_DIR . "include/contacts/schedule.php",
@@ -478,11 +415,7 @@
           ); ?>
         </div>
 
-        <div class="header__mobile-buttons">
-          <button class="main-btn" data-form-id="1">Заказать звонок</button>
-          <button class="main-btn outlined" data-form-id="2">Стать партнером</button>
-          <button class="main-btn" data-form-id="3">Запросить прайс</button>
-        </div>
+
       </div>
     </div>
   </header>
