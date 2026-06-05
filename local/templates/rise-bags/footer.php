@@ -122,8 +122,8 @@
           ); ?>
         </div>
 
-        <button class="main-btn">Запросить прайс</button>
-        <button class="main-btn outlined">Заказать звонок</button>
+        <button class="main-btn" data-form-id="3">Запросить прайс</button>
+        <button class="main-btn outlined" data-form-id="1">Заказать звонок</button>
       </div>
 
       <div class="grid__item grid__item--menu grid__item--menu-wide">
