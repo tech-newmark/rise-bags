@@ -17,10 +17,16 @@
 					<h2><?= $arResult["FORM_TITLE"] ?></h2>
 					<p><?= $arResult["FORM_DESCRIPTION"] ?></p>
 				</div>
-
 				<? foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion): ?>
 					<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "text"): ?>
 						<div class="main-input-wrapper <?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? 'invalid-fld' : '') ?>">
+							<label>
+								<?= $arQuestion["HTML_CODE"] ?>
+							</label>
+						</div>
+					<? endif; ?>
+					<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "textarea"): ?>
+						<div class="main-textarea-wrapper  <?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? 'invalid-fld' : '') ?>">
 							<label>
 								<?= $arQuestion["HTML_CODE"] ?>
 							</label>
