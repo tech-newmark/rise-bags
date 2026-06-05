@@ -54,6 +54,12 @@ if ($arParams['SHOW_BASKET_PAGE'] === 'Y') {
   );
 }
 
+$availablePages[] = array(
+  "path" => "/personal/favourite/",
+  "name" => "Избранные товары",
+  "icon" => 'icon-heart'
+);
+
 if ($arParams['SHOW_SUBSCRIBE_PAGE'] === 'Y') {
   $availablePages[] = array(
     "path" => $arResult['PATH_TO_SUBSCRIBE'],

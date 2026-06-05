@@ -113,6 +113,14 @@ $arTemplateParameters['EMPTY_BASKET_HINT_PATH'] = [
 // 	'DEFAULT' => 'Y'
 // );
 
+$arTemplateParameters['USE_PREPAYMENT'] = array(
+	'HIDDEN' => 'Y'
+);
+
+$arTemplateParameters['LABEL_PROP_MOBILE'] = array(
+	'HIDDEN' => 'Y'
+);
+
 $arTemplateParameters['COLUMNS_LIST_EXT'] = array(
 	'HIDDEN' => 'Y'
 );

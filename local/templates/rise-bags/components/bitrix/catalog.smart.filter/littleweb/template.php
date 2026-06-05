@@ -32,6 +32,15 @@ $this->setFrameMode(true);
 			<input type="hidden" name="<?= $arItem["CONTROL_NAME"] ?>" id="<?= $arItem["CONTROL_ID"] ?>" value="<?= $arItem["HTML_VALUE"] ?>" />
 		<? endforeach; ?>
 
+		<div class="bx-filter-header">
+			<span>Фильтр</span>
+			<button type="button" class="bx-filter-closer" aria-label="Закрыть фильтр">
+				<svg width='16' height='16' role='img' aria-hidden='true' focusable='false'>
+					<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#cross-icon'></use>
+				</svg>
+			</button>
+		</div>
+
 		<div class="bx-filter-content">
 			<? foreach ($arResult["ITEMS"] as $key => $arItem) //prices
 			{
@@ -568,8 +577,11 @@ $this->setFrameMode(true);
 </div>
 
 <?
-// Добавил кнопку открытия фильтра в передаваемые скрипту параметры
-$arResult["JS_FILTER_PARAMS"]["FILTER_OPENER_ID"] =  'smartfilter_form_opener' ?>
+// Добавил кнопки открытия фильтра в передаваемые скрипту параметры
+$arResult["JS_FILTER_PARAMS"]["FILTER_OPENER_IDS"] = [
+	'smartfilter_form_opener',
+	'smartfilter_sticky_filter_opener',
+] ?>
 <script>
 	var smartFilter = new JCSmartFilter('<?= CUtil::JSEscape($arResult["FORM_ACTION"]) ?>', <?= CUtil::PhpToJSObject($arResult["JS_FILTER_PARAMS"]) ?>);
 </script>

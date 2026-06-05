@@ -19,7 +19,7 @@ $arSectionDeleteParams = array("CONFIRM" => GetMessage('CT_BCSL_ELEMENT_DELETE_C
 
 <? if ($arResult["SECTIONS_COUNT"] > 0): ?>
   <div class="catalog-section-list catalog-section-list--accordeon-view">
-    <span class="catalog-section-list__title">Каталог</span>
+    <!-- <span class="catalog-section-list__title">Каталог</span> -->
     <nav class="accordeon">
       <?
       $intCurrentDepth = 1;
