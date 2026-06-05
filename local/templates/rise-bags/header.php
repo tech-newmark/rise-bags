@@ -96,7 +96,7 @@
             </div>
           </div>
 
-          <button class="main-btn outlined" data-form-id="1">Стать партнером</button>
+          <button class="main-btn outlined" data-form-id="2">Стать партнером</button>
         </div>
 
         <div class="header__top-row">
@@ -132,20 +132,20 @@
                 [
                   "NUM_CATEGORIES" => "1",
                   "TOP_COUNT" => "5",
-                  "CHECK_DATES" => "N",
+                  "CHECK_DATES" => "Y",
                   "SHOW_OTHERS" => "N",
                   "PAGE" => SITE_DIR . "catalog/",
-                  "CATEGORY_0_TITLE" => GetMessage("SEARCH_GOODS"),
+                  "CATEGORY_0_TITLE" => "",
                   "CATEGORY_0" => [
                     0 => "iblock_catalog",
                   ],
                   "CATEGORY_0_iblock_catalog" => [
-                    0 => "all",
+                    0 => "2",
                   ],
                   "CATEGORY_OTHERS_TITLE" => GetMessage("SEARCH_OTHER"),
                   "SHOW_INPUT" => "Y",
                   "INPUT_ID" => "title-search-input",
-                  "CONTAINER_ID" => "search",
+                  "CONTAINER_ID" => "title-search",
                   "PRICE_CODE" => [
                     0 => "BASE",
                   ],

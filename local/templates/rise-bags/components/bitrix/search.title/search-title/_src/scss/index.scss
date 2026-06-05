@@ -4,9 +4,8 @@
 	position: relative;
 	outline: none;
 	flex-grow: 1;
-	border: 1px solid var(--primary);
-	border-radius: 30px;
-	overflow: hidden;
+
+	// overflow: hidden;
 
 	&-closer {
 		display: flex;
@@ -44,6 +43,8 @@
 			padding-right: 52px;
 			outline: none;
 			background-color: var(--white);
+			border: 1px solid var(--primary);
+			border-radius: 30px;
 
 			&::placeholder {
 				color: var(--gray-900);
@@ -98,6 +99,7 @@
 		max-height: clamp(140px, 60vh, 440px);
 		overflow: hidden;
 		overflow-y: auto;
+		box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
 	}
 
 	&-item {

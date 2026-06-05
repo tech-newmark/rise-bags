@@ -1,0 +1,46 @@
+.contact-block {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	text-align: center;
+	max-width: 500px;
+	margin: 0 auto;
+
+	&__section {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+
+		&-header {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+
+			svg {
+				fill: var(--gray-800);
+			}
+			&-title {
+				font-weight: 600;
+				color: var(--dark);
+			}
+		}
+
+		&-content {
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+
+			* {
+				color: var(--white);
+			}
+
+			img {
+				width: 100%;
+				max-width: 212px;
+				height: auto;
+				object-fit: contain;
+			}
+		}
+	}
+}

@@ -122,33 +122,32 @@
           ); ?>
         </div>
 
-        <button class="main-btn">Запросить прайс</button>
-        <button class="main-btn outlined">Заказать звонок</button>
+        <button class="main-btn" data-form-id="3">Запросить прайс</button>
+        <button class="main-btn outlined" data-form-id="1">Заказать звонок</button>
       </div>
 
       <div class="grid__item grid__item--menu grid__item--menu-wide">
         <? $APPLICATION->IncludeComponent(
-	"bitrix:menu", 
-	"bottom-menu", 
-	[
-		"TITLE" => "Каталог",
-		"COLUMN_VIEW" => "Y",
-		"ALLOW_MULTI_SELECT" => "N",
-		"CHILD_MENU_TYPE" => "bottom.left",
-		"DELAY" => "N",
-		"MAX_LEVEL" => "1",
-		"MENU_CACHE_GET_VARS" => [
-		],
-		"MENU_CACHE_TIME" => "3600",
-		"MENU_CACHE_TYPE" => "N",
-		"MENU_CACHE_USE_GROUPS" => "Y",
-		"MENU_THEME" => "site",
-		"ROOT_MENU_TYPE" => "bottom.left",
-		"USE_EXT" => "Y",
-		"COMPONENT_TEMPLATE" => "bottom-menu"
-	],
-	false
-); ?>
+          "bitrix:menu",
+          "bottom-menu",
+          [
+            "TITLE" => "Каталог",
+            "COLUMN_VIEW" => "Y",
+            "ALLOW_MULTI_SELECT" => "N",
+            "CHILD_MENU_TYPE" => "bottom.left",
+            "DELAY" => "N",
+            "MAX_LEVEL" => "1",
+            "MENU_CACHE_GET_VARS" => [],
+            "MENU_CACHE_TIME" => "3600",
+            "MENU_CACHE_TYPE" => "N",
+            "MENU_CACHE_USE_GROUPS" => "Y",
+            "MENU_THEME" => "site",
+            "ROOT_MENU_TYPE" => "bottom.left",
+            "USE_EXT" => "Y",
+            "COMPONENT_TEMPLATE" => "bottom-menu"
+          ],
+          false
+        ); ?>
       </div>
 
       <div class="grid__item grid__item--menu">
@@ -178,56 +177,6 @@
       <div class="grid__item grid__item--contacts">
         <div class="contact-block">
           <div class="contact-block__section">
-            <div class="contact-block__section-header">
-              <svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-                <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-phone'></use>
-              </svg>
-              <span class="contact-block__section-header-title">
-                Телефон
-              </span>
-            </div>
-            <div class="contact-block__section-content">
-              <? $APPLICATION->IncludeFile(
-                SITE_DIR . "include/contacts/phones.php",
-                array(),
-                array(
-                  "MODE" => "php",
-                  "NAME" => "Телефон",
-                  "TEMPLATE" => "include_area.php",
-                )
-              ); ?>
-            </div>
-          </div>
-          <div class="contact-block__section">
-            <div class="contact-block__section-header">
-              <svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-                <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-mail'></use>
-              </svg>
-              <span class="contact-block__section-header-title">
-                E-mail
-              </span>
-            </div>
-            <div class="contact-block__section-content">
-              <? $APPLICATION->IncludeFile(
-                SITE_DIR . "include/contacts/email.php",
-                array(),
-                array(
-                  "MODE" => "php",
-                  "NAME" => "E-mail",
-                  "TEMPLATE" => "include_area.php",
-                )
-              ); ?>
-            </div>
-          </div>
-          <div class="contact-block__section">
-            <div class="contact-block__section-header">
-              <svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-                <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-pin'></use>
-              </svg>
-              <span class="contact-block__section-header-title">
-                Адрес
-              </span>
-            </div>
             <div class="contact-block__section-content">
               <? $APPLICATION->IncludeFile(
                 SITE_DIR . "include/contacts/address.php",
@@ -241,14 +190,32 @@
             </div>
           </div>
           <div class="contact-block__section">
-            <div class="contact-block__section-header">
-              <svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-                <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-date'></use>
-              </svg>
-              <span class="contact-block__section-header-title">
-                Время работы
-              </span>
+            <div class="contact-block__section-content">
+              <? $APPLICATION->IncludeFile(
+                SITE_DIR . "include/contacts/phones.php",
+                array(),
+                array(
+                  "MODE" => "php",
+                  "NAME" => "Телефон",
+                  "TEMPLATE" => "include_area.php",
+                )
+              ); ?>
             </div>
+          </div>
+          <div class="contact-block__section">
+            <div class="contact-block__section-content">
+              <? $APPLICATION->IncludeFile(
+                SITE_DIR . "include/contacts/email.php",
+                array(),
+                array(
+                  "MODE" => "php",
+                  "NAME" => "E-mail",
+                  "TEMPLATE" => "include_area.php",
+                )
+              ); ?>
+            </div>
+          </div>
+          <div class="contact-block__section">
             <div class="contact-block__section-content">
               <? $APPLICATION->IncludeFile(
                 SITE_DIR . "include/contacts/schedule.php",
@@ -261,11 +228,11 @@
               ); ?>
             </div>
           </div>
-          <div class="contact-block__section">
+          <!-- <div class="contact-block__section">
             <div class="contact-block__section-content">
               <img src="<?= SITE_TEMPLATE_PATH ?>/_dist/yandex-rate.png" alt="Рейтинг организации в Яндекс" width="210" height="70">
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
