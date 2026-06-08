@@ -5,6 +5,9 @@
  * @global CMain $APPLICATION
  * @global string $cartId
  */
+$curDir = !empty($arParams['CURRENT_PAGE_DIR']) ? $arParams['CURRENT_PAGE_DIR'] : $APPLICATION->GetCurDir();
+$isCatalogSection = preg_match('#^/catalog/(?:[^/]+/)+$#', $curDir) === 1;
+
 $compositeStub = (isset($arResult['COMPOSITE_STUB']) && $arResult['COMPOSITE_STUB'] == 'Y');
 $favoriteCount = 0;
 
@@ -187,12 +190,7 @@ if (!$compositeStub) {
 		</button>
 	</div>
 
-	<?
-	$curDir = $APPLICATION->GetCurDir();
-	$isCatalogSection = preg_match('#^/catalog/(?:[^/]+/)+$#', $curDir) === 1;
-
-	if ($isCatalogSection):
-	?>
+	<? if ($isCatalogSection): ?>
 		<div class="bx-basket-line-block-section">
 			<button id="smartfilter_sticky_filter_opener" type="button" class="filter-opener" aria-label="Открыть фильтр">
 				<div class="bx-basket-line-block-section-icon">
