@@ -46,7 +46,7 @@
             "bitrix:menu",
             "simple-row",
             [
-              "ROOT_MENU_TYPE" => "top.simple",
+              "ROOT_MENU_TYPE" => "top_simple",
               "MENU_CACHE_TYPE" => "A",
               "MENU_CACHE_TIME" => "36000000",
               "MENU_CACHE_USE_GROUPS" => "Y",
