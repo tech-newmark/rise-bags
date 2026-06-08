@@ -38,7 +38,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/_src/scss/template.scss": {
-    "file": "template_styles.BQoWzOVV.css",
+    "file": "template_styles.B4a40jFT.css",
     "src": "local/templates/rise-bags/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
@@ -224,7 +224,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/menu/bottom-menu/_src/scss/index.scss": {
-    "file": "components/bitrix/menu/bottom-menu/style.Nj7DYYM0.css",
+    "file": "components/bitrix/menu/bottom-menu/style.BhivnYyE.css",
     "src": "local/templates/rise-bags/components/bitrix/menu/bottom-menu/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_menu_bottom-menu_scss",

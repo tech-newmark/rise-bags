@@ -1,6 +1,7 @@
 @use "@scss/base/container-queries" as *;
 
 .multilevel-menu {
+	width: 100%;
 	container: multilevel-menu / inline-size;
 
 	&__title {
