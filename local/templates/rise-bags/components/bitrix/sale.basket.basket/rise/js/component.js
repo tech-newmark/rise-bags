@@ -78,7 +78,7 @@
 			this.ajaxUrl = this.params.AJAX_PATH || "";
 			this.templateFolder = parameters.templateFolder || "";
 
-			this.useDynamicScroll = this.params.USE_DYNAMIC_SCROLL === "Y";
+			this.useDynamicScroll = this.params.USE_DYNAMIC_SCROLL === "N";
 			this.useItemsFilter = this.params.SHOW_FILTER === "Y" && !this.isMobile;
 
 			this.initializeFilter();
@@ -1689,7 +1689,27 @@
 		// 	}
 		// },
 
-		startQuantityInterval: function () {
+		isPrimaryQuantityPointer: function (event) {
+			if (!event || this.isTouch) {
+				return true;
+			}
+
+			if (typeof event.button !== "undefined") {
+				return event.button === 0;
+			}
+
+			if (typeof event.which !== "undefined") {
+				return event.which === 1;
+			}
+
+			return true;
+		},
+
+		startQuantityInterval: function (event) {
+			if (!this.isPrimaryQuantityPointer(event)) {
+				return;
+			}
+
 			var target = BX.proxy_context;
 			var func =
 				target.getAttribute("data-entity") === "basket-item-quantity-minus"
