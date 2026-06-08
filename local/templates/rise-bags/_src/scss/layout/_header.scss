@@ -58,6 +58,10 @@
 			&:not(:last-child) {
 				border-bottom: 1px solid var(--light);
 			}
+
+			.contact-block {
+				flex-direction: row;
+			}
 		}
 	}
 
