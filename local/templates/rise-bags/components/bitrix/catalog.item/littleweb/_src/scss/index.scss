@@ -309,12 +309,11 @@
 		height: auto;
 		object-fit: contain;
 		fill: var(--gray-700);
-		transition: fill var(--main-transition);
 	}
 
 	&.active {
 		svg {
-			fill: var(--primary);
+			fill: var(--danger);
 		}
 	}
 }

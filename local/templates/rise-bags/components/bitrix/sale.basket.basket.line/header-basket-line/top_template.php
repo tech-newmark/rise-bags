@@ -10,12 +10,17 @@ $isCatalogSection = preg_match('#^/catalog/(?:[^/]+/)+$#', $curDir) === 1;
 
 $compositeStub = (isset($arResult['COMPOSITE_STUB']) && $arResult['COMPOSITE_STUB'] == 'Y');
 $favoriteCount = 0;
+$compareCount = 0;
 
 if (!$compositeStub) {
 	if (function_exists('riseBagsGetFavoriteProductIds')) {
 		$favoriteCount = count(riseBagsGetFavoriteProductIds());
 	} elseif (!empty($arResult['CATEGORIES']['DELAY'])) {
 		$favoriteCount = count($arResult['CATEGORIES']['DELAY']);
+	}
+
+	if (function_exists('riseBagsGetCompareCount')) {
+		$compareCount = riseBagsGetCompareCount();
 	}
 }
 ?>
@@ -123,14 +128,18 @@ if (!$compositeStub) {
 	<? endif ?>
 
 	<div class="bx-basket-line-block-section">
-		<a href="/">
-			<div class="bx-basket-line-block-section-icon">
-				<svg width="24" height="20" role="img" aria-hidden="true" focusable="false">
-					<use xlink:href="<?= SITE_TEMPLATE_PATH . '/_dist/sprite.svg#icon-compare' ?> "></use>
-				</svg>
-			</div>
-			<span>Сравнение</span>
-		</a>
+		<a href="/catalog/compare/">
+				<div class="bx-basket-line-block-section-icon">
+					<svg width="24" height="20" role="img" aria-hidden="true" focusable="false">
+						<use xlink:href="<?= SITE_TEMPLATE_PATH . '/_dist/sprite.svg#icon-compare' ?> "></use>
+					</svg>
+					<span
+						class="bx-basket-line-block-section-label"
+						data-compare-counter
+						<?= $compareCount <= 0 ? 'style="display: none;"' : '' ?>><?= $compareCount ?></span>
+				</div>
+				<span>Сравнение</span>
+			</a>
 	</div>
 
 	<div class="bx-basket-line-block-section">

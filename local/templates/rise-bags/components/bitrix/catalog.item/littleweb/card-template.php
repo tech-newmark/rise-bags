@@ -90,15 +90,23 @@ use Bitrix\Main\Localization\Loc;
 						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-heart'></use>
 					</svg>
 				</button>
-				<? if (!empty($price) && $actualItem['CAN_BUY']): ?>
-					<? if ($arParams['DISPLAY_COMPARE'] && (!$haveOffers || $arParams['PRODUCT_DISPLAY_MODE'] === 'Y')): ?>
-						<label id="<?= $itemIds['COMPARE_LINK'] ?>" class="compare">
-							<input type="checkbox" data-entity="compare-checkbox">
-							<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-								<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-compare'></use>
-							</svg>
-						</label>
-					<? endif; ?>
+				<? if ($displayCompare && (!$haveOffers || $arParams['PRODUCT_DISPLAY_MODE'] === 'Y')): ?>
+					<label
+						id="<?= $itemIds['COMPARE_LINK'] ?>"
+						class="compare"
+						aria-label="<?= $isCompared ? 'Удалить товар из сравнения' : 'Добавить товар в сравнение' ?>"
+						data-compare-toggle
+						data-product-id="<?= $compareProductId ?>"
+						data-compare-iblock-id="<?= (int)$item['IBLOCK_ID'] ?>"
+						data-compare-name="<?= htmlspecialcharsbx($arParams['COMPARE_NAME'] ?: 'CATALOG_COMPARE_LIST') ?>"
+						data-compare-add-url="<?= htmlspecialcharsbx($compareAddUrl) ?>"
+						data-compare-delete-url="<?= htmlspecialcharsbx($compareDeleteUrl) ?>"
+					>
+						<input type="checkbox" data-entity="compare-checkbox" <?= $isCompared ? 'checked' : '' ?>>
+						<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
+							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-compare'></use>
+						</svg>
+					</label>
 				<? endif; ?>
 				<button class="fast-view-btn" type="button" aria-label="Быстрый просмотр">
 					<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>

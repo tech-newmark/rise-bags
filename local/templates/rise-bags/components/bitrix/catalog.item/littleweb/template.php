@@ -93,6 +93,47 @@ if (isset($arResult['ITEM'])) {
 	$itemHasDetailUrl = isset($item['DETAIL_PAGE_URL']) && $item['DETAIL_PAGE_URL'] != '';
 	$favoriteProductId = (int)$actualItem['ID'];
 	$isFavorite = function_exists('riseBagsIsFavoriteProduct') && riseBagsIsFavoriteProduct($favoriteProductId);
+	$displayCompare = in_array($arParams['DISPLAY_COMPARE'], ['Y', true, 1, '1'], true);
+	$compareProductId = (int)($haveOffers && $arParams['PRODUCT_DISPLAY_MODE'] === 'Y' ? $actualItem['ID'] : $item['ID']);
+	$compareProductIds = function_exists('riseBagsGetCompareItems') ? riseBagsGetCompareItems($arParams['COMPARE_NAME'] ?: 'CATALOG_COMPARE_LIST') : [];
+	$isCompared = in_array($compareProductId, $compareProductIds, true);
+	$compareAddUrl = !empty($arParams['~COMPARE_URL_TEMPLATE'])
+		? str_replace('#ID#', $compareProductId, $arParams['~COMPARE_URL_TEMPLATE'])
+		: '';
+	$compareDeleteUrl = !empty($arParams['~COMPARE_DELETE_URL_TEMPLATE'])
+		? str_replace('#ID#', $compareProductId, $arParams['~COMPARE_DELETE_URL_TEMPLATE'])
+		: '';
+	if ($displayCompare && $compareProductId > 0 && ($compareAddUrl === '' || $compareDeleteUrl === '')) {
+		$compareActionVariable = $arParams['ACTION_VARIABLE'] ?: 'action';
+		$compareProductIdVariable = $arParams['PRODUCT_ID_VARIABLE'] ?: 'id';
+		$compareBaseUrl = $APPLICATION->GetCurPageParam(
+			'',
+			[$compareActionVariable, $compareProductIdVariable, 'ajax_action'],
+			false
+		);
+
+		if ($compareAddUrl === '') {
+			$compareAddUrl = CHTTP::urlAddParams(
+				$compareBaseUrl,
+				[
+					$compareActionVariable => 'ADD_TO_COMPARE_LIST',
+					$compareProductIdVariable => $compareProductId,
+				],
+				['encode' => true]
+			);
+		}
+
+		if ($compareDeleteUrl === '') {
+			$compareDeleteUrl = CHTTP::urlAddParams(
+				$compareBaseUrl,
+				[
+					$compareActionVariable => 'DELETE_FROM_COMPARE_LIST',
+					$compareProductIdVariable => $compareProductId,
+				],
+				['encode' => true]
+			);
+		}
+	}
 	$detailPageUrl = $item['DETAIL_PAGE_URL'];
 	if ($itemHasDetailUrl && $haveOffers && !empty($actualItem['ID'])) {
 		$detailPageUrl = CHTTP::urlAddParams(
@@ -122,7 +163,7 @@ if (isset($arResult['ITEM'])) {
 				'ADD_TO_BASKET_ACTION' => $arParams['ADD_TO_BASKET_ACTION'],
 				'SHOW_CLOSE_POPUP' => $arParams['SHOW_CLOSE_POPUP'] === 'Y',
 				'SHOW_DISCOUNT_PERCENT' => $arParams['SHOW_DISCOUNT_PERCENT'] === 'Y',
-				'DISPLAY_COMPARE' => $arParams['DISPLAY_COMPARE'],
+				'DISPLAY_COMPARE' => $displayCompare,
 				'BIG_DATA' => $item['BIG_DATA'],
 				'TEMPLATE_THEME' => $arParams['TEMPLATE_THEME'],
 				'VIEW_MODE' => $arResult['TYPE'],
@@ -191,7 +232,7 @@ if (isset($arResult['ITEM'])) {
 				'SHOW_DISCOUNT_PERCENT' => $arParams['SHOW_DISCOUNT_PERCENT'] === 'Y',
 				'ADD_TO_BASKET_ACTION' => $arParams['ADD_TO_BASKET_ACTION'],
 				'SHOW_CLOSE_POPUP' => $arParams['SHOW_CLOSE_POPUP'] === 'Y',
-				'DISPLAY_COMPARE' => $arParams['DISPLAY_COMPARE'],
+				'DISPLAY_COMPARE' => $displayCompare,
 				'BIG_DATA' => $item['BIG_DATA'],
 				'TEMPLATE_THEME' => $arParams['TEMPLATE_THEME'],
 				'VIEW_MODE' => $arResult['TYPE'],
@@ -243,23 +284,23 @@ if (isset($arResult['ITEM'])) {
 				'TREE_PROPS' => array()
 			);
 
-			// debug($item['JS_OFFERS']);
-			if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y' && !empty($item['OFFERS_PROP'])) {
-				$jsParams['SHOW_QUANTITY'] = $arParams['USE_PRODUCT_QUANTITY'];
-				$jsParams['SHOW_SKU_PROPS'] = $item['OFFERS_PROPS_DISPLAY'];
-				$jsParams['OFFERS'] = $item['JS_OFFERS']; // тут передаю данные ТП в скрипт !!
-				$jsParams['OFFER_SELECTED'] = $item['OFFERS_SELECTED'];
-				$jsParams['TREE_PROPS'] = $skuProps;
+				// debug($item['JS_OFFERS']);
+				if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y' && !empty($item['OFFERS_PROP'])) {
+					$jsParams['SHOW_QUANTITY'] = $arParams['USE_PRODUCT_QUANTITY'];
+					$jsParams['SHOW_SKU_PROPS'] = $item['OFFERS_PROPS_DISPLAY'];
+					$jsParams['OFFERS'] = $item['JS_OFFERS']; // тут передаю данные ТП в скрипт !!
+					$jsParams['OFFER_SELECTED'] = $item['OFFERS_SELECTED'];
+					$jsParams['TREE_PROPS'] = $skuProps;
+				}
 			}
-		}
 
-		if ($arParams['DISPLAY_COMPARE']) {
-			$jsParams['COMPARE'] = array(
-				'COMPARE_URL_TEMPLATE' => $arParams['~COMPARE_URL_TEMPLATE'],
-				'COMPARE_DELETE_URL_TEMPLATE' => $arParams['~COMPARE_DELETE_URL_TEMPLATE'],
-				'COMPARE_PATH' => $arParams['COMPARE_PATH']
-			);
-		}
+			if ($displayCompare) {
+				$jsParams['COMPARE'] = array(
+					'COMPARE_URL_TEMPLATE' => $compareAddUrl,
+					'COMPARE_DELETE_URL_TEMPLATE' => $compareDeleteUrl,
+					'COMPARE_PATH' => $arParams['COMPARE_PATH']
+				);
+			}
 
 		if ($item['BIG_DATA']) {
 			$jsParams['PRODUCT']['RCM_ID'] = $item['RCM_ID'];
