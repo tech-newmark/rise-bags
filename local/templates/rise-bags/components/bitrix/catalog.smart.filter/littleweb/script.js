@@ -19,6 +19,27 @@ function JCSmartFilter(ajaxURL, params) {
 	this.initFilterOpener();
 }
 
+JCSmartFilter.prototype.lockBodyScroll = function () {
+	var body = document.body;
+
+	if (!body) return;
+
+	if (!body.hasAttribute("data-smart-filter-overflow")) {
+		body.dataset.smartFilterOverflow = body.style.overflow || "";
+	}
+
+	body.style.overflow = "hidden";
+};
+
+JCSmartFilter.prototype.unlockBodyScroll = function () {
+	var body = document.body;
+
+	if (!body) return;
+
+	body.style.overflow = body.dataset.smartFilterOverflow || "";
+	delete body.dataset.smartFilterOverflow;
+};
+
 // !!
 // Метод для привязки кнопки открытия фильтра
 JCSmartFilter.prototype.bindFilterOpener = function () {
@@ -61,6 +82,7 @@ JCSmartFilter.prototype.openFilterForm = function (filterForm) {
 
 	filterForm.style.display = "block";
 	filterForm.classList.add("active");
+	this.lockBodyScroll();
 };
 
 JCSmartFilter.prototype.closeFilterForm = function (filterForm) {
@@ -68,6 +90,7 @@ JCSmartFilter.prototype.closeFilterForm = function (filterForm) {
 
 	filterForm.style.display = "none";
 	filterForm.classList.remove("active");
+	this.unlockBodyScroll();
 };
 
 JCSmartFilter.prototype.toggleFilterForm = function (filterForm) {
