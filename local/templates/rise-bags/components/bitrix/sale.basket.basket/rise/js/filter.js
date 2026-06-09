@@ -12,7 +12,6 @@
 
 		this.realShownItems = [];
 		this.realSortedItems = [];
-		this.realScrollTop = 0;
 
 		this.lastShownItemsHash = "";
 		this.currentFilter = {
@@ -243,10 +242,7 @@
 			this.activeFilterMode = true;
 			this.realShownItems = BX.util.array_values(this.component.shownItems);
 			this.realSortedItems = BX.util.array_values(this.component.sortedItems);
-			this.realScrollTop = this.component.getDocumentScrollTop();
 		}
-
-		this.component.scrollToFirstItem();
 
 		this.component.sortedItems = this.searchItems();
 
@@ -292,7 +288,6 @@
 			this.hideEmptyFilterResult();
 
 			this.component.editBasketItems(BX.util.array_values(this.realShownItems));
-			window.scrollTo(0, this.realScrollTop);
 		}
 
 		this.component.hideItemsOverlay();
