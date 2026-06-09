@@ -27,9 +27,11 @@ $config = \Bitrix\Main\Web\Json::encode($arResult['CONFIG']);
 		gap: 24px;
 		width: 90%;
 		max-width: 980px;
-		padding: 24px 18px;
+		padding: 18px;
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 		box-sizing: border-box;
+
+
 
 		background-color: var(--secondary);
 		border: 1px solid var(--primary);
@@ -43,7 +45,7 @@ $config = \Bitrix\Main\Web\Json::encode($arResult['CONFIG']);
 
 	.main-user-consent-cookie-text {
 		color: var(--dark);
-		font-size: 16px;
+		font-size: 14px;
 		line-height: 1.45;
 	}
 
