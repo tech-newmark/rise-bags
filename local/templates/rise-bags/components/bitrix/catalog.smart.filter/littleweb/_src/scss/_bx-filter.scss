@@ -148,10 +148,17 @@
 	--bx-filter-image-checkbox-span-color: var(--dark-color);
 }
 
-.catalog:has(.bx-filter form.active) {
-	position: relative;
-	z-index: 99;
+body:has(.bx-filter form.active) {
+	.catalog {
+		position: relative;
+		z-index: 99;
+	}
+
+	.bx-basket-line {
+		display: none;
+	}
 }
+
 .bx-filter {
 	display: flex;
 	flex-direction: column;

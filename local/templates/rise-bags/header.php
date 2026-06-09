@@ -17,9 +17,11 @@
 
   $curPage = $APPLICATION->GetCurPage();
   $favoriteProductIds = function_exists('riseBagsGetFavoriteProductIds') ? riseBagsGetFavoriteProductIds() : [];
+  $compareProductIds = function_exists('riseBagsGetCompareItems') ? riseBagsGetCompareItems() : [];
   ?>
   <script>
     window.RiseBagsFavoriteIds = <?= CUtil::PhpToJSObject($favoriteProductIds) ?>;
+    window.RiseBagsCompareIds = <?= CUtil::PhpToJSObject($compareProductIds) ?>;
   </script>
 
 </head>

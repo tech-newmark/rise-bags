@@ -1566,6 +1566,7 @@
 
 				this.offerNum = index;
 				this.updateFavoriteButton(this.offers[index].ID);
+				this.updateCompareButton(this.offers[index].ID, this.offers[index].COMPARED);
 			}
 		},
 
@@ -1579,6 +1580,81 @@
 
 				if (window.RiseBagsUpdateFavoriteButtonState) {
 					window.RiseBagsUpdateFavoriteButtonState(buttons[i], productId);
+				}
+			}
+		},
+
+		updateCompareButton: function (productId, isCompared) {
+			var buttons = this.obProduct
+				? this.obProduct.querySelectorAll("[data-compare-toggle]")
+				: [];
+
+			for (var i = 0; i < buttons.length; i++) {
+				var oldProductId = buttons[i].getAttribute("data-product-id");
+				var oldProductIdRegexp = oldProductId
+					? new RegExp("([?&]id=)" + oldProductId + "($|&)")
+					: null;
+
+				buttons[i].setAttribute("data-product-id", productId);
+
+				if (this.compareData.compareUrl) {
+					var compareAddUrl =
+						this.compareData.compareUrl.indexOf("#ID#") !== -1
+							? this.compareData.compareUrl.replace("#ID#", productId)
+							: this.compareData.compareUrl;
+
+					if (oldProductIdRegexp) {
+						compareAddUrl = compareAddUrl.replace(
+							oldProductIdRegexp,
+							"$1" + productId + "$2",
+						);
+					}
+
+					buttons[i].setAttribute("data-compare-add-url", compareAddUrl);
+				} else if (oldProductIdRegexp && buttons[i].dataset.compareAddUrl) {
+					buttons[i].setAttribute(
+						"data-compare-add-url",
+						buttons[i].dataset.compareAddUrl.replace(
+							oldProductIdRegexp,
+							"$1" + productId + "$2",
+						),
+					);
+				}
+
+				if (this.compareData.compareDeleteUrl) {
+					var compareDeleteUrl =
+						this.compareData.compareDeleteUrl.indexOf("#ID#") !== -1
+							? this.compareData.compareDeleteUrl.replace("#ID#", productId)
+							: this.compareData.compareDeleteUrl;
+
+					if (oldProductIdRegexp) {
+						compareDeleteUrl = compareDeleteUrl.replace(
+							oldProductIdRegexp,
+							"$1" + productId + "$2",
+						);
+					}
+
+					buttons[i].setAttribute("data-compare-delete-url", compareDeleteUrl);
+				} else if (oldProductIdRegexp && buttons[i].dataset.compareDeleteUrl) {
+					buttons[i].setAttribute(
+						"data-compare-delete-url",
+						buttons[i].dataset.compareDeleteUrl.replace(
+							oldProductIdRegexp,
+							"$1" + productId + "$2",
+						),
+					);
+				}
+
+				if (window.RiseBagsUpdateCompareButtonState) {
+					window.RiseBagsUpdateCompareButtonState(buttons[i], productId);
+				} else {
+					var checkbox = buttons[i].querySelector(
+						'[data-entity="compare-checkbox"]',
+					);
+
+					if (checkbox) {
+						checkbox.checked = !!isCompared;
+					}
 				}
 			}
 		},
@@ -1822,12 +1898,18 @@
 
 			if (result.STATUS === "OK") {
 				BX.onCustomEvent("OnCompareChange");
+				if (window.RiseBagsRefreshCompareState) {
+					window.RiseBagsRefreshCompareState();
+				}
 				// Если нужно показать какое то окно или уведомление, то пишем тут
 			}
 		},
 
 		compareDeleteResult: function () {
 			BX.onCustomEvent("OnCompareChange");
+			if (window.RiseBagsRefreshCompareState) {
+				window.RiseBagsRefreshCompareState();
+			}
 
 			if (this.offers && this.offers.length) {
 				this.offers[this.offerNum].COMPARED = false;
@@ -1994,6 +2076,24 @@
 			this.basket();
 		},
 
+		getBasketProductId: function () {
+			if (this.productType === 3 && this.offers[this.offerNum]) {
+				return this.offers[this.offerNum].ID;
+			}
+
+			return this.product.id;
+		},
+
+		removeFavoriteAfterBasketAdd: function () {
+			if (window.RiseBagsRemoveFavoriteProduct) {
+				window.RiseBagsRemoveFavoriteProduct(this.getBasketProductId()).catch(
+					function (error) {
+						console.error(error);
+					},
+				);
+			}
+		},
+
 		buyBasket: function () {
 			this.basketMode = "BUY";
 			this.basket();
@@ -2078,6 +2178,7 @@
 
 				if (successful) {
 					BX.onCustomEvent("OnBasketChange");
+					this.removeFavoriteAfterBasketAdd();
 
 					if (
 						BX.findParent(

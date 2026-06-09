@@ -6,6 +6,7 @@ import "./modules/accordeon";
 import "./modules/bx-popup";
 import "./modules/search-open";
 import "./modules/favorites";
+import "./modules/compare";
 
 import "./modules/mobile-menu";
 import "./modules/multilevel-menu";

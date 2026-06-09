@@ -113,6 +113,9 @@
 				if (counterElement) {
 					counterElement.innerHTML = newCount;
 				}
+				if (window.RiseBagsUpdateCompareCounter) {
+					window.RiseBagsUpdateCompareCounter(newCount);
+				}
 
 				BX[newCount > 0 ? "addClass" : "removeClass"](this.obCompare, "active");
 			}

@@ -253,6 +253,19 @@
   </div>
 </footer>
 
+<? $APPLICATION->IncludeComponent(
+  'bitrix:main.userconsent.request',
+  'cookie',
+  array(
+    'ID' => 1,
+    'IS_CHECKED' => 'N',
+    'IS_LOADED' => 'Y',
+    'AUTO_SAVE' => 'Y',
+    'INPUT_NAME' => 'COOKIE_CONSENT',
+    'REPLACE' => array()
+  )
+); ?>
+
 </body>
 
 </html>

@@ -59,6 +59,7 @@
 	&__list {
 		display: flex;
 		flex-direction: column;
+		gap: 12px;
 		list-style: none;
 		margin: 0;
 		padding: 0;
@@ -80,9 +81,9 @@
 				}
 			}
 
-			&:not(:last-child) {
-				border-bottom: 1px solid var(--primary);
-			}
+			// &:not(:last-child) {
+			// 	border-bottom: 1px solid var(--primary);
+			// }
 
 			&-removed {
 				position: absolute;

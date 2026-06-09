@@ -57,7 +57,6 @@ if ($arParams["SHOW_PRODUCTS"] == "Y" && ($arResult['NUM_PRODUCTS'] > 0 || !empt
 										<strong><?= $item["QUANTITY"] ?></strong> <?= $item["MEASURE_NAME"] ?> <?= GetMessage("TSB1_SUM") ?> <strong><?= $item["SUM"] ?></strong>
 									</div>
 								<? endif ?>
-
 							</div>
 						<? endif ?>
 

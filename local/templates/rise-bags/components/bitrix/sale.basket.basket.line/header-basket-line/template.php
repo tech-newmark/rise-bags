@@ -7,6 +7,7 @@
 $cartStyle = 'bx-basket-line';
 $cartId = "bx_basket" . $this->randString();
 $arParams['cartId'] = $cartId;
+$arParams['CURRENT_PAGE_DIR'] = $APPLICATION->GetCurDir();
 
 if ($arParams['POSITION_FIXED'] == 'Y') {
 	$cartStyle .= "-fixed {$arParams['POSITION_HORIZONTAL']} {$arParams['POSITION_VERTICAL']}";
