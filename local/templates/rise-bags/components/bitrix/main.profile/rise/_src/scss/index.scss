@@ -69,25 +69,27 @@
 
 	form {
 		max-width: 840px;
-
-		.alert {
-			margin: 0;
-			padding: 0;
-			padding-bottom: clamp(10px, 2vw, 20px);
-		}
 	}
 
 	.alert {
+		margin: 0;
+		padding: 0;
 		background-color: transparent;
 		max-width: 100%;
 		border: none;
+		padding-bottom: 10px;
+
+		&-warning {
+			padding-bottom: clamp(10px, 2vw, 20px);
+		}
 
 		&-success {
 			width: 100%;
+			color: var(--success);
 		}
 
 		&-danger {
-			grid-column: 1/-1;
+			color: var(--danger);
 		}
 	}
 }

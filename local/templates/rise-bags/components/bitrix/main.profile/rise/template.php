@@ -78,10 +78,6 @@ includeComponentAssets('main.profile/rise');
 							<p class="heading heading--md">Безопасность</p>
 
 							<div class="grid">
-								<? if ($arResult["strProfileError"]): ?>
-									<div class="alert alert-danger"><small><?= $arResult["strProfileError"] ?></small></div>
-								<? endif; ?>
-
 								<div class="main-input-wrapper">
 									<label for="main-profile-password"><?= Loc::getMessage('NEW_PASSWORD_REQ') ?></label>
 									<input class="main-input" type="password" name="NEW_PASSWORD" maxlength="50" id="main-profile-password" value="" autocomplete="off" />
@@ -93,6 +89,12 @@ includeComponentAssets('main.profile/rise');
 								</div>
 							</div>
 							<small>*<?= $arResult["GROUP_POLICY"]["PASSWORD_REQUIREMENTS"]; ?></small>
+
+							<? if ($arResult["strProfileError"]): ?>
+								<div class="alert alert-danger">
+									<small><?= $arResult["strProfileError"] ?></small>
+								</div>
+							<? endif; ?>
 						</div>
 					<? endif; ?>
 				</div>
