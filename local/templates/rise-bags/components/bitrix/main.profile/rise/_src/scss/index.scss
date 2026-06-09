@@ -6,95 +6,90 @@
 	.container {
 		display: flex;
 		flex-direction: column;
-		max-width: 840px;
 	}
 
-	&__info {
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
-		padding-bottom: 16px;
+	.title {
+		margin-bottom: clamp(30px, 3.8vw, 50px);
+	}
 
-		small {
-			font-style: 14px;
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 10px 30px;
+
+		span {
 			font-weight: 600;
 		}
 	}
 
-	&__main {
+	&__body {
 		display: flex;
 		flex-direction: column;
-		gap: 16px;
-	}
-
-	&__pswd-block {
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
-
-		small {
-			padding: 8px 0;
-			font-size: 12px;
-			color: var(--dark);
-		}
+		gap: clamp(20px, 3vw, 30px);
+		padding-bottom: clamp(20px, 4vw, 30px);
 	}
 
 	&__footer {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
+		display: grid;
 		gap: 12px;
-		padding-top: 24px;
 
-		input {
-			flex-grow: 1;
+		@include container-up(profile, 460px) {
+			grid-template-columns: repeat(2, 1fr);
+			max-width: 520px;
 		}
 	}
 
-	form {
-		.alert {
-			margin: 0;
+	&__section {
+		padding: 24px;
+		border: 1px solid var(--light);
+		border-radius: var(--base-br);
+
+		&--safety {
+			.grid {
+				margin-bottom: 8px;
+			}
 		}
 	}
 
 	.grid {
 		display: grid;
-		grid-template-columns: 1fr;
-		gap: var(--base-gap);
+		gap: 20px clamp(10px, 2vw, 20px);
 
 		@include container-up(profile, 620px) {
-			grid-template-columns: 220px auto;
+			grid-template-columns: repeat(2, 1fr);
 		}
 
-		&__item {
-			height: fit-content;
-
-			@include container-up(profile, 620px) {
-				position: sticky;
-				top: 32px;
-			}
+		.main-input-wrapper {
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
 		}
+	}
+
+	form {
+		max-width: 840px;
 	}
 
 	.alert {
-		font-weight: 600;
-		padding: 12px 20px;
-	}
-}
+		margin: 0;
+		padding: 0;
+		background-color: transparent;
+		max-width: 100%;
+		border: none;
+		padding-bottom: 10px;
 
-.personal-sidebar {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	gap: clamp(6px, 2.4vw, 12px);
+		&-warning {
+			padding-bottom: clamp(10px, 2vw, 20px);
+		}
 
-	a {
-		padding: 4px 12px;
-		font-size: 12px;
-		width: fit-content;
-
-		@include container-up(profile, 620px) {
+		&-success {
 			width: 100%;
+			color: var(--success);
+		}
+
+		&-danger {
+			color: var(--danger);
 		}
 	}
 }

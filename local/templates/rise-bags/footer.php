@@ -126,7 +126,7 @@
         <button class="main-btn outlined" data-form-id="1">Заказать звонок</button>
       </div>
 
-      <div class="grid__item grid__item--menu grid__item--menu-wide">
+      <div class="grid__item grid__item--menu">
         <? $APPLICATION->IncludeComponent(
           "bitrix:menu",
           "bottom-menu",
@@ -238,20 +238,21 @@
 
     </div>
   </div>
-</footer>
-<div class="underfooter-line">
-  <div class="container">
-    <? $APPLICATION->IncludeFile(
-      SITE_DIR . "include/policy-footer.php",
-      array(),
-      array(
-        "MODE" => "php",
-        "NAME" => "Текст",
-        "TEMPLATE" => "include_area.php",
-      )
-    ); ?>
+  <div class="footer__bottom-line">
+    <div class="container">
+      <? $APPLICATION->IncludeFile(
+        SITE_DIR . "include/policy-footer.php",
+        array(),
+        array(
+          "MODE" => "php",
+          "NAME" => "Текст",
+          "TEMPLATE" => "include_area.php",
+        )
+      ); ?>
+    </div>
   </div>
-</div>
+</footer>
+
 <? $APPLICATION->IncludeComponent(
   'bitrix:main.userconsent.request',
   'cookie',
@@ -264,6 +265,7 @@
     'REPLACE' => array()
   )
 ); ?>
+
 </body>
 
 </html>
