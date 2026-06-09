@@ -2076,6 +2076,24 @@
 			this.basket();
 		},
 
+		getBasketProductId: function () {
+			if (this.productType === 3 && this.offers[this.offerNum]) {
+				return this.offers[this.offerNum].ID;
+			}
+
+			return this.product.id;
+		},
+
+		removeFavoriteAfterBasketAdd: function () {
+			if (window.RiseBagsRemoveFavoriteProduct) {
+				window.RiseBagsRemoveFavoriteProduct(this.getBasketProductId()).catch(
+					function (error) {
+						console.error(error);
+					},
+				);
+			}
+		},
+
 		buyBasket: function () {
 			this.basketMode = "BUY";
 			this.basket();
@@ -2160,6 +2178,7 @@
 
 				if (successful) {
 					BX.onCustomEvent("OnBasketChange");
+					this.removeFavoriteAfterBasketAdd();
 
 					if (
 						BX.findParent(

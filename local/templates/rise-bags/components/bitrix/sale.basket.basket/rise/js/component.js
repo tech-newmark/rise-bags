@@ -54,6 +54,8 @@
 			/** Array of basket items with warnings */
 			this.warningItems = [];
 
+			this.deleteWithoutRestoreItems = {};
+
 			this.isMobile = BX.browser.IsMobile();
 			this.isTouch = BX.hasClass(document.documentElement, "bx-touch");
 
@@ -199,23 +201,23 @@
 			this.filter.showFilterByName(entityName);
 		},
 
-		scrollToFirstItem: function () {
-			var headerNode = this.getEntity(
-				this.getCacheNode(this.ids.itemListWrapper),
-				"basket-items-list-header",
-			);
+		// scrollToFirstItem: function () {
+		// 	var headerNode = this.getEntity(
+		// 		this.getCacheNode(this.ids.itemListWrapper),
+		// 		"basket-items-list-header",
+		// 	);
 
-			if (BX.type.isDomNode(headerNode)) {
-				var itemListTopPosition = BX.pos(
-					this.getCacheNode(this.ids.itemListContainer),
-				).top;
-				var headerBottomPosition = BX.pos(headerNode).bottom;
+		// 	if (BX.type.isDomNode(headerNode)) {
+		// 		var itemListTopPosition = BX.pos(
+		// 			this.getCacheNode(this.ids.itemListContainer),
+		// 		).top;
+		// 		var headerBottomPosition = BX.pos(headerNode).bottom;
 
-				if (itemListTopPosition < headerBottomPosition) {
-					window.scrollTo(0, itemListTopPosition - this.stickyHeaderOffset);
-				}
-			}
-		},
+		// 		if (itemListTopPosition < headerBottomPosition) {
+		// 			window.scrollTo(0, itemListTopPosition - this.stickyHeaderOffset);
+		// 		}
+		// 	}
+		// },
 
 		showItemsOverlay: function () {
 			var overlay = this.getCacheNode(this.ids.itemListOverlay);
@@ -411,7 +413,7 @@
 				}
 			}
 
-			this.checkStickyHeaders();
+			// this.checkStickyHeaders();
 		},
 
 		showItemsCount: function () {
@@ -827,16 +829,73 @@
 			return changedSimilarOffers;
 		},
 
+		getComparableBasketProps: function (itemData) {
+			var props = itemData ? itemData.PROPS_ALL || itemData.PROPS || [] : [];
+			var comparableProps = [];
+
+			for (var i in props) {
+				if (!props.hasOwnProperty(i) || props[i].CODE === "FAVORITE") {
+					continue;
+				}
+
+				comparableProps.push({
+					CODE: props[i].CODE || "",
+					VALUE: props[i].VALUE || props[i]["~VALUE"] || "",
+				});
+			}
+
+			comparableProps.sort(function (a, b) {
+				var first = a.CODE + ":" + a.VALUE;
+				var second = b.CODE + ":" + b.VALUE;
+
+				return first > second ? 1 : first < second ? -1 : 0;
+			});
+
+			return comparableProps;
+		},
+
+		getBasketItemComparableKey: function (itemData) {
+			var productId = parseInt(itemData.PRODUCT_ID, 10);
+
+			if (productId > 0) {
+				return "product:" + productId;
+			}
+
+			return [
+				"props",
+				JSON.stringify(this.getComparableBasketProps(itemData)),
+			].join("|");
+		},
+
+		isSameBasketProduct: function (firstItemData, secondItemData) {
+			if (!firstItemData || !secondItemData) {
+				return false;
+			}
+
+			return (
+				this.getBasketItemComparableKey(firstItemData) ===
+				this.getBasketItemComparableKey(secondItemData)
+			);
+		},
+
 		getHashMap: function () {
 			var hashMap = {};
+			var comparableKey;
 
 			for (var id in this.items) {
-				if (this.items.hasOwnProperty(id) && this.isItemAvailable(id)) {
-					if (!hashMap.hasOwnProperty(this.items[id].HASH)) {
-						hashMap[this.items[id].HASH] = [];
+				if (
+					this.items.hasOwnProperty(id) &&
+					this.isItemAvailable(id) &&
+					!this.items[id].DELAYED
+				) {
+					comparableKey = this.getBasketItemComparableKey(this.items[id]);
+					this.items[id].HASH = comparableKey;
+
+					if (!hashMap.hasOwnProperty(comparableKey)) {
+						hashMap[comparableKey] = [];
 					}
 
-					hashMap[this.items[id].HASH].push(id);
+					hashMap[comparableKey].push(id);
 				}
 			}
 
@@ -1449,6 +1508,14 @@
 		},
 
 		deleteBasketItem: function (itemId, restore, final) {
+			var deleteWithoutRestore = this.deleteWithoutRestoreItems[String(itemId)];
+
+			if (deleteWithoutRestore) {
+				restore = false;
+				final = true;
+				delete this.deleteWithoutRestoreItems[String(itemId)];
+			}
+
 			// delete not available item with no chance to restore
 			if (this.items[itemId].NOT_AVAILABLE && restore) {
 				restore = false;
@@ -2214,9 +2281,63 @@
 			}
 		},
 
+		getActiveDuplicateItem: function (itemData) {
+			for (var itemId in this.items) {
+				if (
+					this.items.hasOwnProperty(itemId) &&
+					String(this.items[itemId].ID) !== String(itemData.ID) &&
+					this.isSameBasketProduct(this.items[itemId], itemData) &&
+					!this.items[itemId].DELAYED &&
+					!this.items[itemId].SHOW_RESTORE &&
+					!this.items[itemId].NOT_AVAILABLE
+				) {
+					return this.items[itemId];
+				}
+			}
+
+			return null;
+		},
+
+		mergeDelayedWithActiveDuplicate: function (
+			delayedItemData,
+			activeItemData,
+		) {
+			var oldQuantity = parseFloat(activeItemData.QUANTITY);
+			var delayedQuantity = parseFloat(delayedItemData.QUANTITY);
+			var quantity = this.getCorrectQuantity(
+				activeItemData,
+				oldQuantity + delayedQuantity,
+			);
+			var quantityField = BX(this.ids.quantity + activeItemData.ID);
+
+			this.items[activeItemData.ID].QUANTITY = quantity;
+
+			if (quantityField) {
+				quantityField.value = quantity;
+			}
+
+			this.actionPool.changeQuantity(activeItemData.ID, quantity, oldQuantity);
+			this.deleteWithoutRestoreItems[String(delayedItemData.ID)] = true;
+			this.actionPool.deleteItem(delayedItemData.ID);
+
+			if (this.isItemShown(activeItemData.ID)) {
+				this.redrawBasketItemNode(activeItemData.ID);
+			}
+
+			this.items[delayedItemData.ID].SHOW_LOADING = true;
+			this.redrawBasketItemNode(delayedItemData.ID);
+		},
+
 		removeDelayedAction: function () {
 			var itemData = this.getItemDataByTarget(BX.proxy_context);
 			if (itemData) {
+				var activeDuplicate = this.getActiveDuplicateItem(itemData);
+
+				if (activeDuplicate) {
+					this.mergeDelayedWithActiveDuplicate(itemData, activeDuplicate);
+					return;
+				}
+
 				this.actionPool.removeDelayed(itemData.ID);
 
 				this.items[itemData.ID].SHOW_LOADING = true;

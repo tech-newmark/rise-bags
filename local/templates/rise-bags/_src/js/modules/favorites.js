@@ -101,6 +101,23 @@ window.RiseBagsUpdateFavoriteButtonState = (button, productId) => {
 	syncButtonState(button, normalizedProductId);
 };
 
+const requestFavoriteToggle = (productId) => {
+	const formData = new FormData();
+	formData.append("product_id", productId);
+
+	if (window.BX && BX.bitrix_sessid) {
+		formData.append("sessid", BX.bitrix_sessid());
+	}
+
+	return fetch("/local/ajax/favorite.php", {
+		method: "POST",
+		headers: {
+			"X-Requested-With": "XMLHttpRequest",
+		},
+		body: formData,
+	}).then((response) => response.json());
+};
+
 const replaceFavoriteIds = (ids) => {
 	favoriteIds.clear();
 
@@ -111,6 +128,31 @@ const replaceFavoriteIds = (ids) => {
 	});
 
 	window.RiseBagsFavoriteIds = Array.from(favoriteIds);
+};
+
+window.RiseBagsRemoveFavoriteProduct = (productId) => {
+	const normalizedProductId = getProductId(productId);
+
+	if (!normalizedProductId || !favoriteIds.has(normalizedProductId)) {
+		return Promise.resolve(null);
+	}
+
+	return requestFavoriteToggle(normalizedProductId).then((data) => {
+		if (!data || !data.success) {
+			throw new Error(data && data.message ? data.message : "Favorite error");
+		}
+
+		replaceFavoriteIds(data.ids);
+		syncButtonsByProductId(normalizedProductId);
+		updateFavoriteCounter(data.count);
+		updateFavoritePageEmptyState(data.count);
+
+		if (window.BX && BX.onCustomEvent) {
+			BX.onCustomEvent(window, "OnBasketChange", [{}]);
+		}
+
+		return data;
+	});
 };
 
 const loadFavoriteStatus = () => {
@@ -161,23 +203,9 @@ document.addEventListener("click", (event) => {
 		return;
 	}
 
-	const formData = new FormData();
-	formData.append("product_id", productId);
-
-	if (window.BX && BX.bitrix_sessid) {
-		formData.append("sessid", BX.bitrix_sessid());
-	}
-
 	button.disabled = true;
 
-	fetch("/local/ajax/favorite.php", {
-		method: "POST",
-		headers: {
-			"X-Requested-With": "XMLHttpRequest",
-		},
-		body: formData,
-	})
-		.then((response) => response.json())
+	requestFavoriteToggle(productId)
 		.then((data) => {
 			if (!data || !data.success) {
 				throw new Error(data && data.message ? data.message : "Favorite error");

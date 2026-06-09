@@ -32,7 +32,7 @@
     "src": "local/templates/rise-bags/_src/images/catalog-section-bg.jpg"
   },
   "local/templates/rise-bags/_src/js/index.js": {
-    "file": "template_scripts.DZyWKBg4.js",
+    "file": "template_scripts.BgxU8DU5.js",
     "name": "script",
     "src": "local/templates/rise-bags/_src/js/index.js",
     "isEntry": true
@@ -420,7 +420,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/sale.basket.basket/rise/_src/scss/index.scss": {
-    "file": "components/bitrix/sale.basket.basket/rise/style.z7XBYi0o.css",
+    "file": "components/bitrix/sale.basket.basket/rise/style.CMtV1xEQ.css",
     "src": "local/templates/rise-bags/components/bitrix/sale.basket.basket/rise/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_sale_basket_basket_rise_scss",

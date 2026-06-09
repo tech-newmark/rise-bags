@@ -1,6 +1,7 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\Loader;
 use Bitrix\Sale\PriceMaths;
 
 /**
@@ -16,6 +17,84 @@ $this->arParams['BRAND_PROPERTY'] ??= '';
 $mobileColumns = $this->arParams['COLUMNS_LIST_MOBILE'] ?? $this->arParams['COLUMNS_LIST'];
 $mobileColumns = array_fill_keys($mobileColumns, true);
 
+if (!function_exists('riseBagsGetBasketItemComparableHash')) {
+	function riseBagsGetBasketItemComparableHash(array $row): string
+	{
+		$props = [];
+
+		foreach (($row['PROPS_ALL'] ?? $row['PROPS'] ?? []) as $prop) {
+			$code = (string)($prop['CODE'] ?? '');
+
+			if ($code === 'FAVORITE') {
+				continue;
+			}
+
+			$props[] = [
+				'CODE' => $code,
+				'VALUE' => (string)($prop['VALUE'] ?? $prop['~VALUE'] ?? ''),
+			];
+		}
+
+		usort($props, static function (array $a, array $b): int {
+			return strcmp($a['CODE'] . ':' . $a['VALUE'], $b['CODE'] . ':' . $b['VALUE']);
+		});
+
+		return md5((int)$row['PRODUCT_ID'] . '|' . serialize($props));
+	}
+}
+
+if (!function_exists('riseBagsApplyDelayedItemDiscount')) {
+	function riseBagsApplyDelayedItemDiscount(array $rowData): array
+	{
+		if (
+			(!$rowData['DELAYED'] && !$rowData['IS_FAVORITE'])
+			|| (float)$rowData['DISCOUNT_PRICE'] > 0
+		) {
+			return $rowData;
+		}
+
+		if (!Loader::includeModule('catalog') || !Loader::includeModule('currency')) {
+			return $rowData;
+		}
+
+		global $USER;
+
+		$userGroups = is_object($USER) && method_exists($USER, 'GetUserGroupArray')
+			? $USER->GetUserGroupArray()
+			: [2];
+		$quantity = max((float)$rowData['QUANTITY'], 1);
+		$optimalPrice = CCatalogProduct::GetOptimalPrice((int)$rowData['PRODUCT_ID'], $quantity, $userGroups, 'N');
+
+		if (empty($optimalPrice['PRICE']['PRICE']) || !isset($optimalPrice['DISCOUNT_PRICE'])) {
+			return $rowData;
+		}
+
+		$fullPrice = PriceMaths::roundPrecision((float)$optimalPrice['PRICE']['PRICE']);
+		$price = PriceMaths::roundPrecision((float)$optimalPrice['DISCOUNT_PRICE']);
+
+		if ($fullPrice <= 0 || $price <= 0 || $fullPrice <= $price) {
+			return $rowData;
+		}
+
+		$currency = $optimalPrice['PRICE']['CURRENCY'] ?: $rowData['CURRENCY'];
+		$discountPrice = PriceMaths::roundPrecision($fullPrice - $price);
+		$discountPercent = (int)round($discountPrice / $fullPrice * 100);
+
+		$rowData['CURRENCY'] = $currency;
+		$rowData['PRICE'] = $price;
+		$rowData['PRICE_FORMATED'] = CCurrencyLang::CurrencyFormat($price, $currency, true);
+		$rowData['FULL_PRICE'] = $fullPrice;
+		$rowData['FULL_PRICE_FORMATED'] = CCurrencyLang::CurrencyFormat($fullPrice, $currency, true);
+		$rowData['DISCOUNT_PRICE'] = $discountPrice;
+		$rowData['DISCOUNT_PRICE_FORMATED'] = CCurrencyLang::CurrencyFormat($discountPrice, $currency, true);
+		$rowData['DISCOUNT_PRICE_PERCENT'] = $discountPercent;
+		$rowData['DISCOUNT_PRICE_PERCENT_FORMATED'] = $discountPercent . '%';
+		$rowData['SHOW_DISCOUNT_PRICE'] = true;
+
+		return $rowData;
+	}
+}
+
 $result['BASKET_ITEM_RENDER_DATA'] = array();
 
 foreach ($this->basketItems as $row) {
@@ -26,7 +105,7 @@ foreach ($this->basketItems as $row) {
 		'QUANTITY' => $row['QUANTITY'],
 		'PROPS' => $row['PROPS'],
 		'PROPS_ALL' => $row['PROPS_ALL'],
-		'HASH' => $row['HASH'],
+		'HASH' => riseBagsGetBasketItemComparableHash($row),
 		'SORT' => $row['SORT'],
 		'DETAIL_PAGE_URL' => $row['DETAIL_PAGE_URL'],
 		'CURRENCY' => $row['CURRENCY'],
@@ -53,12 +132,15 @@ foreach ($this->basketItems as $row) {
 		'PRODUCT_PROVIDER_CLASS' => $row['PRODUCT_PROVIDER_CLASS'],
 		'NOT_AVAILABLE' => isset($row['NOT_AVAILABLE']) && $row['NOT_AVAILABLE'] === true,
 		'DELAYED' => $row['DELAY'] === 'Y',
+		'IS_FAVORITE' => function_exists('riseBagsIsFavoriteProduct') && riseBagsIsFavoriteProduct((int)$row['PRODUCT_ID']),
 		'SKU_BLOCK_LIST' => array(),
 		'COLUMN_LIST' => array(),
 		'SHOW_LABEL' => false,
 		'LABEL_VALUES' => array(),
 		'BRAND' => $row[$this->arParams['BRAND_PROPERTY'] . '_VALUE'] ?? '',
 	);
+
+	$rowData = riseBagsApplyDelayedItemDiscount($rowData);
 
 	// show price including ratio
 	if ($rowData['MEASURE_RATIO'] != 1) {
