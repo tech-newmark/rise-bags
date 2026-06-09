@@ -25,13 +25,14 @@ $config = \Bitrix\Main\Web\Json::encode($arResult['CONFIG']);
 		flex-direction: column;
 
 		gap: 24px;
-		max-width: 1080px;
+		width: 90%;
+		max-width: 980px;
 		padding: 24px 18px;
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 		box-sizing: border-box;
 
-		background-color: var(--primary);
-		border: 2px solid var(--secondary);
+		background-color: var(--secondary);
+		border: 1px solid var(--primary);
 		backdrop-filter: blur(15px);
 		border-radius: 20px;
 	}
@@ -41,13 +42,13 @@ $config = \Bitrix\Main\Web\Json::encode($arResult['CONFIG']);
 	}
 
 	.main-user-consent-cookie-text {
-		color: var(--white);
+		color: var(--dark);
 		font-size: 16px;
 		line-height: 1.45;
 	}
 
 	.main-user-consent-cookie-text a {
-		color: var(--white);
+		color: var(--primary);
 		text-decoration: underline;
 	}
 
@@ -55,12 +56,12 @@ $config = \Bitrix\Main\Web\Json::encode($arResult['CONFIG']);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-
 		padding: 12px 24px;
 		border: 1px solid var(--white);
 		background-color: var(--primary);
 		color: var(--white);
 		border-radius: 12px;
+		max-width: 300px;
 
 		span {
 			font-size: 16px;
