@@ -17,6 +17,16 @@ if (isset($arParams['USE_COMMON_SETTINGS_BASKET_POPUP']) && $arParams['USE_COMMO
 	$basketAction = $arParams['SECTION_ADD_TO_BASKET_ACTION'] ?? '';
 }
 
+$makeCatalogSefRule = static function (string $folder, string $template): string {
+	$template = str_replace('#SITE_DIR#', SITE_DIR, $template);
+
+	if ($template !== '' && $template[0] === '/') {
+		return preg_replace('#/+#', '/', $template);
+	}
+
+	return preg_replace('#/+#', '/', rtrim($folder, '/') . '/' . ltrim($template, '/'));
+};
+
 
 $sectionListParams = array(
 	"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
@@ -107,7 +117,7 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 							'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
 							'CURRENCY_ID' => $arParams['CURRENCY_ID'],
 							"SEF_MODE" => $arParams["SEF_MODE"],
-							"SEF_RULE" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["smart_filter"],
+							"SEF_RULE" => $makeCatalogSefRule($arResult["FOLDER"], $arResult["URL_TEMPLATES"]["smart_filter"]),
 							"SMART_FILTER_PATH" => $arResult["VARIABLES"]["SMART_FILTER_PATH"],
 							"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
 							"INSTANT_RELOAD" => $arParams["INSTANT_RELOAD"],

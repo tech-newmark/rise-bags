@@ -581,7 +581,9 @@ $this->setFrameMode(true);
 $arResult["JS_FILTER_PARAMS"]["FILTER_OPENER_IDS"] = [
 	'smartfilter_form_opener',
 	'smartfilter_sticky_filter_opener',
-] ?>
+];
+$filterAjaxAction = preg_replace('#^(.*)/filter/.*/apply/?$#', '$1/', $arResult["FORM_ACTION"]);
+?>
 <script>
-	var smartFilter = new JCSmartFilter('<?= CUtil::JSEscape($arResult["FORM_ACTION"]) ?>', <?= CUtil::PhpToJSObject($arResult["JS_FILTER_PARAMS"]) ?>);
+	var smartFilter = new JCSmartFilter('<?= CUtil::JSEscape($filterAjaxAction) ?>', <?= CUtil::PhpToJSObject($arResult["JS_FILTER_PARAMS"]) ?>);
 </script>
