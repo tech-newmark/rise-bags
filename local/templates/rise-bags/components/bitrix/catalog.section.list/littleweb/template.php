@@ -27,14 +27,21 @@ if ($arResult["SECTIONS"]): ?>
 					echo str_repeat("\t", $intCurrentDepth - 1), '</li>';
 				}
 				echo (!$boolFirst ? "\n" : ''), str_repeat("\t", $arSection['RELATIVE_DEPTH_LEVEL']);
+
+				$sectionBackground = $arSection["DETAIL_PICTURE"]
+					? CFile::GetPath($arSection["DETAIL_PICTURE"])
+					: SITE_TEMPLATE_PATH . '/_dist/images/card-bg.png';
 			?>
 
 				<li id="<?= $this->GetEditAreaId($arSection['ID']); ?>"
 					<? if ($arSection["DEPTH_LEVEL"] === '1'): ?>
-					style="<?= 'background-image: url(' .  $arSection["PICTURE"]["SRC"]  . ');' ?>"
+					style="background-image: url('<?= htmlspecialcharsbx($sectionBackground) ?>');"
 					<? endif; ?>>
 
 
+					<? if ($arSection["DEPTH_LEVEL"] === '1'): ?>
+						<img src="<?= $arSection["PICTURE"]["SRC"] ?>" alt="" width="<?= $arSection["PICTURE"]["WIDTH"] ?>" height="<?= $arSection["PICTURE"]["HEIGHT"] ?>">
+					<? endif; ?>
 
 					<a href="<?= $arSection["SECTION_PAGE_URL"]; ?>">
 						<?= $arSection["NAME"]; ?>
