@@ -5,7 +5,15 @@ $APPLICATION->SetTitle("Доставка по России");
 <section class="section production">
 	<div class="container">
 		<div class="content">
-			Доставка по Санкт-Петербургу
+			<? $APPLICATION->IncludeFile(
+				SITE_DIR . "include/delivery/delivery-russia.php",
+				array(),
+				array(
+					"MODE" => "php",
+					"NAME" => "текст",
+					"TEMPLATE" => "include_area.php",
+				)
+			); ?>
 		</div>
 	</div>
 </section>
