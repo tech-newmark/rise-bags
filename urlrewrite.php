@@ -42,10 +42,10 @@ $arUrlRewrite=array (
   ),
   22 => 
   array (
-    'CONDITION' => '#^/articles/#',
+    'CONDITION' => '#^/company/articles/#',
     'RULE' => '',
     'ID' => 'bitrix:news',
-    'PATH' => '/articles/index.php',
+    'PATH' => '/company/articles/index.php',
     'SORT' => 100,
   ),
   25 => 
