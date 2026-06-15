@@ -4,7 +4,7 @@ $this->setFrameMode(true);
 
 // includeComponentAssets('news.list/examples-list');
 ?>
-<!-- <? debug($arResult) ?> -->
+
 
 <section class="section examples-list">
 	<div class="container">
