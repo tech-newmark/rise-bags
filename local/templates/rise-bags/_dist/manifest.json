@@ -34,7 +34,9 @@
     "isEntry": true
   },
   "local/templates/rise-bags/_src/scss/template.scss": {
-    "file": "template_styles.BqGThxzv.css",
+
+    "file": "template_styles.Dvf8eZQp.css",
+
     "src": "local/templates/rise-bags/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
@@ -425,7 +427,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/sale.order.ajax/rise/_src/scss/index.scss": {
-    "file": "components/bitrix/sale.order.ajax/rise/style.BDjb4v6e.css",
+    "file": "components/bitrix/sale.order.ajax/rise/style.DPYz4G8Y.css",
     "src": "local/templates/rise-bags/components/bitrix/sale.order.ajax/rise/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_sale_order_ajax_rise_scss",
@@ -433,8 +435,17 @@
       "bitrix_sale_order_ajax_rise_scss.css"
     ]
   },
+  "local/templates/rise-bags/components/bitrix/sale.personal.order.cancel/rise/_src/scss/index.scss": {
+    "file": "components/bitrix/sale.personal.order.cancel/rise/style.FBeoxyjD.css",
+    "src": "local/templates/rise-bags/components/bitrix/sale.personal.order.cancel/rise/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_sale_personal_order_cancel_rise_scss",
+    "names": [
+      "bitrix_sale_personal_order_cancel_rise_scss.css"
+    ]
+  },
   "local/templates/rise-bags/components/bitrix/sale.personal.order.list/rise/_src/scss/index.scss": {
-    "file": "components/bitrix/sale.personal.order.list/rise/style.Cdt_CZFS.css",
+    "file": "components/bitrix/sale.personal.order.list/rise/style.0wdzVtJz.css",
     "src": "local/templates/rise-bags/components/bitrix/sale.personal.order.list/rise/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_sale_personal_order_list_rise_scss",
@@ -467,6 +478,35 @@
     "name": "bitrix_search_title_search-title_scss",
     "names": [
       "bitrix_search_title_search-title_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/system.auth.authorize/flat/_src/scss/index.scss": {
+    "file": "components/bitrix/system.auth.authorize/flat/style.CvXWkZWD.css",
+    "src": "local/templates/rise-bags/components/bitrix/system.auth.authorize/flat/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_system_auth_forgotpasswd_flat_scss",
+    "names": [
+      "bitrix_system_auth_authorize_flat_scss.css",
+      "bitrix_system_auth_forgotpasswd_flat_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/system.auth.forgotpasswd/flat/_src/scss/index.scss": {
+    "file": "components/bitrix/system.auth.authorize/flat/style.CvXWkZWD.css",
+    "src": "local/templates/rise-bags/components/bitrix/system.auth.authorize/flat/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_system_auth_forgotpasswd_flat_scss",
+    "names": [
+      "bitrix_system_auth_authorize_flat_scss.css",
+      "bitrix_system_auth_forgotpasswd_flat_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/system.auth.registration/flat/_src/scss/index.scss": {
+    "file": "components/bitrix/system.auth.registration/flat/style.IfFMp2s8.css",
+    "src": "local/templates/rise-bags/components/bitrix/system.auth.registration/flat/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_system_auth_registration_flat_scss",
+    "names": [
+      "bitrix_system_auth_registration_flat_scss.css"
     ]
   },
   "local/templates/rise-bags/components/bitrix/system.pagenavigation/lw-page-navigation/_src/scss/index.scss": {
