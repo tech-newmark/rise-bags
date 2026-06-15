@@ -3,6 +3,11 @@
 .bx-basket {
 	container: bx-basket / inline-size;
 
+	&,
+	* {
+		overflow-anchor: none;
+	}
+
 	.grid {
 		display: grid;
 		grid-template-columns: 1fr;
@@ -14,8 +19,6 @@
 
 		&__item {
 			&--side {
-				position: sticky;
-				top: 30px;
 				height: fit-content;
 				padding: var(--base-gap);
 				border: 1px solid var(--primary);

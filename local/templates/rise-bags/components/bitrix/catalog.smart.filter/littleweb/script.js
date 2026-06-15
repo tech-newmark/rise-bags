@@ -1,5 +1,4 @@
 function JCSmartFilter(ajaxURL, params) {
-	console.log("PARAMS:", params);
 	this.ajaxURL = ajaxURL;
 	this.form = null;
 	this.timer = null;
@@ -355,22 +354,22 @@ JCSmartFilter.prototype.postHandler = function (result, fromCache) {
 JCSmartFilter.prototype.bindUrlToButton = function (buttonId, url) {
 	var button = BX(buttonId);
 	if (button) {
-		var proxy = function (j, func) {
-			return function () {
-				return func(j);
-			};
-		};
+		button.setAttribute("data-filter-url", url);
 
 		if (button.type == "submit") button.type = "button";
 
-		BX.bind(
-			button,
-			"click",
-			proxy(url, function (url) {
-				window.location.href = url;
+		if (!button.getAttribute("data-filter-bound")) {
+			button.setAttribute("data-filter-bound", "true");
+			BX.bind(button, "click", function () {
+				var currentUrl = button.getAttribute("data-filter-url");
+
+				if (currentUrl) {
+					window.location.href = currentUrl;
+				}
+
 				return false;
-			}),
-		);
+			});
+		}
 	}
 };
 

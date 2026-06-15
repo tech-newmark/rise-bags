@@ -1445,33 +1445,42 @@
 
 			var basketItemTemplate = this.getTemplate("basket-item-template");
 			if (basketItemTemplate) {
-				// var nodeAligner = BX(this.ids.itemHeightAligner + itemId),
-				// 	oldHeight;
+				var oldHeight = basketItemNode.offsetHeight;
+				var activeElement = document.activeElement;
 
-				// if (BX.type.isDomNode(nodeAligner)) {
-				// 	oldHeight = nodeAligner.clientHeight;
-				// }
+				if (
+					BX.type.isDomNode(activeElement) &&
+					basketItemNode.contains(activeElement) &&
+					BX.type.isFunction(activeElement.blur)
+				) {
+					activeElement.blur();
+				}
 
 				var basketItemHtml = this.renderBasketItem(
 					basketItemTemplate,
 					this.items[itemId],
 				);
 				basketItemNode.insertAdjacentHTML("beforebegin", basketItemHtml);
+				var newBasketItemNode = basketItemNode.previousElementSibling;
+
+				if (
+					BX.type.isDomNode(newBasketItemNode) &&
+					oldHeight &&
+					newBasketItemNode.offsetHeight < oldHeight
+				) {
+					newBasketItemNode.style.minHeight = oldHeight + "px";
+				}
+
 				BX.remove(basketItemNode);
 
-				// if (oldHeight) {
-				// 	nodeAligner = BX(this.ids.itemHeightAligner + itemId);
-
-				// 	if (
-				// 		BX.type.isDomNode(nodeAligner) &&
-				// 		nodeAligner.clientHeight < oldHeight
-				// 	) {
-				// 		nodeAligner.style.minHeight = oldHeight + "px";
-				// 		setTimeout(function () {
-				// 			nodeAligner.style.minHeight = "0px";
-				// 		}, 1);
-				// 	}
-				// }
+				if (
+					BX.type.isDomNode(newBasketItemNode) &&
+					newBasketItemNode.style.minHeight
+				) {
+					setTimeout(function () {
+						newBasketItemNode.style.minHeight = "";
+					}, 300);
+				}
 
 				this.bindBasketItemEvents(this.items[itemId]);
 
@@ -2135,34 +2144,38 @@
 			return null;
 		},
 
-		mergeDelayedWithActiveDuplicate: function (
-			delayedItemData,
-			activeItemData,
-		) {
-			var oldQuantity = parseFloat(activeItemData.QUANTITY);
-			var delayedQuantity = parseFloat(delayedItemData.QUANTITY);
+		mergeBasketItems: function (sourceItemData, targetItemData) {
+			var oldQuantity = parseFloat(targetItemData.QUANTITY);
+			var sourceQuantity = parseFloat(sourceItemData.QUANTITY);
 			var quantity = this.getCorrectQuantity(
-				activeItemData,
-				oldQuantity + delayedQuantity,
+				targetItemData,
+				oldQuantity + sourceQuantity,
 			);
-			var quantityField = BX(this.ids.quantity + activeItemData.ID);
+			var quantityField = BX(this.ids.quantity + targetItemData.ID);
 
-			this.items[activeItemData.ID].QUANTITY = quantity;
+			this.items[targetItemData.ID].QUANTITY = quantity;
 
 			if (quantityField) {
 				quantityField.value = quantity;
 			}
 
-			this.actionPool.changeQuantity(activeItemData.ID, quantity, oldQuantity);
-			this.deleteWithoutRestoreItems[String(delayedItemData.ID)] = true;
-			this.actionPool.deleteItem(delayedItemData.ID);
+			this.actionPool.changeQuantity(targetItemData.ID, quantity, oldQuantity);
+			this.deleteWithoutRestoreItems[String(sourceItemData.ID)] = true;
+			this.actionPool.deleteItem(sourceItemData.ID);
 
-			if (this.isItemShown(activeItemData.ID)) {
-				this.redrawBasketItemNode(activeItemData.ID);
+			if (this.isItemShown(targetItemData.ID)) {
+				this.redrawBasketItemNode(targetItemData.ID);
 			}
 
-			this.items[delayedItemData.ID].SHOW_LOADING = true;
-			this.redrawBasketItemNode(delayedItemData.ID);
+			this.items[sourceItemData.ID].SHOW_LOADING = true;
+			this.redrawBasketItemNode(sourceItemData.ID);
+		},
+
+		mergeDelayedWithActiveDuplicate: function (
+			delayedItemData,
+			activeItemData,
+		) {
+			this.mergeBasketItems(delayedItemData, activeItemData);
 		},
 
 		removeDelayedAction: function () {
@@ -2182,9 +2195,20 @@
 			}
 		},
 
-		mergeAction: function () {
+		mergeAction: function (event) {
+			if (event) {
+				event.preventDefault();
+			}
+
 			var itemData = this.getItemDataByTarget(BX.proxy_context);
 			if (itemData) {
+				var activeDuplicate = this.getActiveDuplicateItem(itemData);
+
+				if (activeDuplicate) {
+					this.mergeBasketItems(itemData, activeDuplicate);
+					return;
+				}
+
 				this.actionPool.mergeSku(itemData.ID);
 			}
 		},

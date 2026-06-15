@@ -296,7 +296,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 		refreshOrder: function (result) {
 			if (result.error) {
 				this.showError(this.mainErrorsNode, result.error);
-				this.animateScrollTo(this.mainErrorsNode, 800, 20);
 			} else if (result.order.SHOW_AUTH) {
 				var animation;
 
@@ -314,7 +313,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 				this.editAuthBlock();
 				this.showAuthBlock();
 				this.showErrors(result.order.ERROR, false);
-				this.animateScrollTo(this.authBlockNode);
 			} else {
 				this.isPriceChanged(result);
 
@@ -365,7 +363,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 
 					this.editAuthBlock();
 					this.showAuthBlock();
-					this.animateScrollTo(this.authBlockNode);
 				} else {
 					this.showErrors(result.ERROR, true, true);
 				}
@@ -454,32 +451,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 					}
 				}
 			}
-		},
-
-		/**
-		 * Animating scroll to certain node
-		 */
-		animateScrollTo: function (node, duration, shiftToTop) {
-			if (!node) return;
-
-			var scrollTop = BX.GetWindowScrollPos().scrollTop,
-				orderBlockPos = BX.pos(this.orderBlockNode),
-				ghostTop = BX.pos(node).top - (this.isMobile ? 50 : 0);
-
-			if (shiftToTop) ghostTop -= parseInt(shiftToTop);
-
-			if (ghostTop + window.innerHeight > orderBlockPos.bottom)
-				ghostTop = orderBlockPos.bottom - window.innerHeight + 17;
-
-			new BX.easing({
-				duration: duration || 800,
-				start: { scroll: scrollTop },
-				finish: { scroll: ghostTop },
-				transition: BX.easing.makeEaseOut(BX.easing.transitions.quad),
-				step: BX.delegate(function (state) {
-					window.scrollTo(0, state.scroll);
-				}, this),
-			}).animate();
 		},
 
 		checkKeyPress: function (event) {
@@ -665,13 +636,11 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 				switch (k.toUpperCase()) {
 					case "MAIN":
 						this.showError(this.mainErrorsNode, blockErrors);
-						this.animateScrollTo(this.mainErrorsNode, 800, 20);
 						scroll = false;
 						break;
 					case "AUTH":
 						if (this.authBlockNode.style.display == "none") {
 							this.showError(this.mainErrorsNode, blockErrors, true);
-							this.animateScrollTo(this.mainErrorsNode, 800, 20);
 							scroll = false;
 						} else this.showError(this.authBlockNode, blockErrors, true);
 						break;
@@ -713,8 +682,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 						break;
 				}
 			}
-
-			!!scroll && this.scrollToError();
 		},
 
 		showBlockErrors: function (node) {
@@ -760,9 +727,7 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 				success,
 				sections,
 				className,
-				text,
-				scrollTop,
-				informerPos;
+				text;
 
 			if (informer) {
 				if (
@@ -806,9 +771,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 					BX.addClass(informer, "alert alert-" + className);
 					informer.style.display = "";
 				} else if (BX.hasClass(informer, "alert")) {
-					scrollTop = BX.GetWindowScrollPos().scrollTop;
-					informerPos = BX.pos(informer);
-
 					new BX.easing({
 						duration: 300,
 						start: { opacity: 100 },
@@ -818,9 +780,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 							informer.style.opacity = state.opacity / 100;
 						},
 						complete: function () {
-							if (scrollTop > informerPos.top)
-								window.scrollBy(0, -(informerPos.height + 20));
-
 							informer.style.display = "none";
 							BX.cleanNode(informer);
 							informer.removeAttribute("class");
@@ -889,24 +848,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 			else BX.removeClass(node, "bx-step-error bx-step-warning");
 
 			return !showError;
-		},
-
-		scrollToError: function () {
-			var sections = this.orderBlockNode.querySelectorAll(
-					"div.bx-soa-section.bx-active",
-				),
-				i,
-				errorNode;
-
-			for (i in sections) {
-				if (sections.hasOwnProperty(i)) {
-					errorNode = sections[i].querySelector(".alert.alert-danger");
-					if (errorNode && errorNode.style.display != "none") {
-						this.animateScrollTo(sections[i]);
-						break;
-					}
-				}
-			}
 		},
 
 		showWarnings: function () {
@@ -1367,7 +1308,7 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 		},
 
 		/**
-		 * Binds main events for scrolling/resizing
+		 * Binds main events
 		 */
 		bindEvents: function () {
 			BX.bind(
@@ -1375,7 +1316,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 				"click",
 				BX.proxy(this.clickOrderSaveAction, this),
 			);
-			BX.bind(window, "scroll", BX.proxy(this.totalBlockScrollCheck, this));
 			BX.bind(
 				window,
 				"resize",
@@ -1915,7 +1855,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 
 			this.fade(actionSection);
 			this.show(section.next);
-			this.animateScrollTo(section.next, 800);
 			return BX.PreventDefault(event);
 		},
 
@@ -2136,54 +2075,13 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 			objHeight = node.offsetHeight;
 			node.style.height = objHeightOrig + "px";
 
-			// calculations of scrolling animation
-			if (nextSection) {
-				var windowScrollTop = BX.GetWindowScrollPos().scrollTop,
-					orderPos = BX.pos(this.orderBlockNode),
-					nodePos = BX.pos(node),
-					diff,
-					scrollTo,
-					nextSectionHeightBefore,
-					nextSectionHeightAfter,
-					nextSectionHidden,
-					offset;
-
-				nextSectionHidden = BX(nextSection.id + "-hidden");
-				nextSectionHidden.style.left = "-10000";
-				nextSectionHidden.style.position = "absolute";
-				this.orderBlockNode.appendChild(nextSectionHidden);
-				nextSectionHeightBefore = nextSection.offsetHeight;
-				nextSectionHeightAfter = nextSectionHidden.offsetHeight + 57;
-				BX(node.id + "-hidden").parentNode.appendChild(nextSectionHidden);
-				nextSectionHidden.removeAttribute("style");
-
-				diff =
-					objHeight +
-					nextSectionHeightAfter -
-					objHeightOrig -
-					nextSectionHeightBefore;
-
-				offset = window.innerHeight - orderPos.height - diff;
-				if (offset > 0) scrollTo = orderPos.top - offset / 2;
-				else {
-					if (nodePos.top > windowScrollTop) scrollTo = nodePos.top;
-					else scrollTo = nodePos.bottom + 6 - objHeightOrig + objHeight;
-
-					if (scrollTo + window.innerHeight > orderPos.bottom + 25 + diff)
-						scrollTo = orderPos.bottom + 25 + diff - window.innerHeight;
-				}
-
-				scrollTo -= this.isMobile ? 50 : 0;
-			}
-
 			new BX.easing({
 				duration: nextSection ? 800 : 600,
-				start: { height: objHeightOrig, scrollTop: windowScrollTop },
-				finish: { height: objHeight, scrollTop: scrollTo },
+				start: { height: objHeightOrig },
+				finish: { height: objHeight },
 				transition: BX.easing.makeEaseOut(BX.easing.transitions.quad),
 				step: function (state) {
 					node.style.height = state.height + "px";
-					if (nextSection) window.scrollTo(0, state.scrollTop);
 				},
 				complete: function () {
 					node.style.height = "";
@@ -2241,8 +2139,7 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 		showByClick: function (event) {
 			var target = event.target || event.srcElement,
 				showNode = BX.findParent(target, { className: "bx-active" }),
-				fadeNode = BX(this.activeSectionId),
-				scrollTop = BX.GetWindowScrollPos().scrollTop;
+				fadeNode = BX(this.activeSectionId);
 
 			if (!showNode || BX.hasClass(showNode, "bx-selected"))
 				return BX.PreventDefault(event);
@@ -2251,14 +2148,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 
 			fadeNode && this.fade(fadeNode);
 			this.show(showNode);
-
-			setTimeout(
-				BX.delegate(function () {
-					if (BX.pos(showNode).top < scrollTop)
-						this.animateScrollTo(showNode, 300);
-				}, this),
-				320,
-			);
 
 			return BX.PreventDefault(event);
 		},
@@ -2595,8 +2484,7 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 			// 		titleNode,
 			// 		"click",
 			// 		BX.delegate(function () {
-			// 			this.animateScrollTo(this.authBlockNode);
-			// 			this.addAnimationEffect(this.authBlockNode, "bx-step-good");
+				// 			this.addAnimationEffect(this.authBlockNode, "bx-step-good");
 			// 		}, this),
 			// 	);
 			// } else {
@@ -3353,8 +3241,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 					},
 				}).animate();
 			}, 110);
-
-			this.animateScrollTo(section);
 		},
 
 		// alignBasketColumns: function () {
@@ -8052,33 +7938,7 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 			if (!this.options.propertyValidation) return true;
 
 			var regionErrors = this.isValidRegionBlock(),
-				propsErrors = this.isValidPropertiesBlock(),
-				navigated = false,
-				tooltips,
-				i;
-
-			if (regionErrors.length) {
-				navigated = true;
-				this.animateScrollTo(this.regionBlockNode, 800, 50);
-			}
-
-			if (propsErrors.length && !navigated) {
-				if (this.activeSectionId == this.propsBlockNode.id) {
-					tooltips = this.propsBlockNode.querySelectorAll("div.tooltip");
-					for (i = 0; i < tooltips.length; i++) {
-						if (tooltips[i].getAttribute("data-state") == "opened") {
-							this.animateScrollTo(
-								BX.findParent(tooltips[i], {
-									className: "form-group bx-soa-customer-field",
-								}),
-								800,
-								50,
-							);
-							break;
-						}
-					}
-				} else this.animateScrollTo(this.propsBlockNode, 800, 50);
-			}
+				propsErrors = this.isValidPropertiesBlock();
 
 			if (regionErrors.length) {
 				this.showError(this.regionBlockNode, regionErrors);
@@ -8992,7 +8852,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 		// 		this.mobileTotalBlockNode.querySelector("a.bx-soa-price-not-calc"),
 		// 		"click",
 		// 		BX.delegate(function () {
-		// 			this.animateScrollTo(this.deliveryBlockNode);
 		// 		}, this),
 		// 	);
 		// 	BX.bind(
@@ -9015,11 +8874,6 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 					BX.create("A", {
 						props: { className: "bx-soa-price-not-calc" },
 						html: value,
-						events: {
-							click: BX.delegate(function () {
-								this.animateScrollTo(this.deliveryBlockNode);
-							}, this),
-						},
 					}),
 				];
 			} else if (params.free) {
@@ -9121,34 +8975,7 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 		// },
 
 		totalBlockScrollCheck: function () {
-			if (!this.totalInfoBlockNode || !this.totalGhostBlockNode) return;
-
-			var scrollTop = BX.GetWindowScrollPos().scrollTop,
-				ghostTop = BX.pos(this.totalGhostBlockNode).top,
-				ghostBottom = BX.pos(this.orderBlockNode).bottom,
-				width;
-
-			if (ghostBottom - this.totalBlockNode.offsetHeight < scrollTop + 20)
-				BX.addClass(this.totalInfoBlockNode, "bx-soa-cart-total-bottom");
-			else BX.removeClass(this.totalInfoBlockNode, "bx-soa-cart-total-bottom");
-
-			if (
-				scrollTop > ghostTop &&
-				!BX.hasClass(this.totalInfoBlockNode, "bx-soa-cart-total-fixed")
-			) {
-				width = this.totalInfoBlockNode.offsetWidth;
-				BX.addClass(this.totalInfoBlockNode, "bx-soa-cart-total-fixed");
-				this.totalGhostBlockNode.style.paddingTop =
-					this.totalInfoBlockNode.offsetHeight + "px";
-				this.totalInfoBlockNode.style.width = width + "px";
-			} else if (
-				scrollTop < ghostTop &&
-				BX.hasClass(this.totalInfoBlockNode, "bx-soa-cart-total-fixed")
-			) {
-				BX.removeClass(this.totalInfoBlockNode, "bx-soa-cart-total-fixed");
-				this.totalGhostBlockNode.style.paddingTop = 0;
-				this.totalInfoBlockNode.style.width = "";
-			}
+			return;
 		},
 
 		totalBlockResizeCheck: function () {
