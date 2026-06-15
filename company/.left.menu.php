@@ -21,5 +21,12 @@ $aMenuLinks = array(
 		array(),
 		array(),
 		""
+	),
+	array(
+		"Информация потребителю",
+		"/company/customers-info/",
+		array(),
+		array(),
+		""
 	)
 );
