@@ -28,15 +28,15 @@ if ($arParams['SHOW_PRIVATE_PAGE'] === 'Y') {
   );
 }
 
-if ($arParams['SHOW_ORDER_PAGE'] === 'Y') {
+// if ($arParams['SHOW_ORDER_PAGE'] === 'Y') {
 
-  $delimeter = ($arParams['SEF_MODE'] === 'Y') ? "?" : "&";
-  $availablePages[] = array(
-    "path" => $arResult['PATH_TO_ORDERS'] . $delimeter . "filter_history=Y",
-    "name" => Loc::getMessage("SPS_ORDER_PAGE_HISTORY"),
-    "icon" => 'personal-section-history-icon'
-  );
-}
+//   $delimeter = ($arParams['SEF_MODE'] === 'Y') ? "?" : "&";
+//   $availablePages[] = array(
+//     "path" => $arResult['PATH_TO_ORDERS'] . $delimeter . "filter_history=Y",
+//     "name" => Loc::getMessage("SPS_ORDER_PAGE_HISTORY"),
+//     "icon" => 'personal-section-history-icon'
+//   );
+// }
 
 if ($arParams['SHOW_PROFILE_PAGE'] === 'Y') {
   $availablePages[] = array(

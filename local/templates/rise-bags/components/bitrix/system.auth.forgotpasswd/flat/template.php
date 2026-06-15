@@ -19,7 +19,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 		<h2 class="title"><?= GetMessage("AUTH_FORGOT_TITLE") ?></h2>
 
 		<? if (!empty($arParams["~AUTH_RESULT"]["MESSAGE"]) && $arParams["~AUTH_RESULT"]["TYPE"] != "OK"): ?>
-			<div class="alert alert-danger">
+			<div class="alert alert-line alert-danger">
 				<?= $arParams["~AUTH_RESULT"]["MESSAGE"] ?>
 			</div>
 		<? endif ?>

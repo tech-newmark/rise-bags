@@ -2714,10 +2714,12 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 				}),
 			);
 			remember = BX.create("DIV", {
-				props: { className: "bx-authform-formgroup-container" },
+				props: {
+					className: "bx-authform-formgroup-container",
+				},
 				children: [
 					BX.create("DIV", {
-						props: { className: "checkbox" },
+						props: { className: "main-checkbox checkbox" },
 						children: [
 							BX.create("LABEL", {
 								props: { className: "bx-filter-param-label" },
@@ -2740,7 +2742,9 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 				],
 			});
 			button = BX.create("DIV", {
-				props: { className: "bx-authform-formgroup-container" },
+				props: {
+					className: "bx-authform-formgroup-container",
+				},
 				children: [
 					BX.create("INPUT", {
 						props: {
@@ -2806,7 +2810,9 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 			labelHtml += labelText;
 
 			return BX.create("DIV", {
-				props: { className: "bx-authform-formgroup-container" },
+				props: {
+					className: "main-input-wrapper bx-authform-formgroup-container",
+				},
 				children: [
 					BX.create("DIV", {
 						props: { className: "bx-authform-label-container" },
@@ -3847,9 +3853,7 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 			if (!data) return;
 
 			var itemName = data.NAME || "",
-				detailPageUrl = this.normalizeBasketItemDetailUrl(
-					data.DETAIL_PAGE_URL
-				),
+				detailPageUrl = this.normalizeBasketItemDetailUrl(data.DETAIL_PAGE_URL),
 				titleHtml,
 				props = data.PROPS || [],
 				propsNodes = "",

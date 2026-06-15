@@ -34,7 +34,6 @@ if (empty($availablePages)): {
 else:
 	// debug($arResult);
 ?>
-
 	<section class="personal">
 		<div class="container">
 			<h2 class="title"><?= $APPLICATION->ShowTitle() ?></h2>

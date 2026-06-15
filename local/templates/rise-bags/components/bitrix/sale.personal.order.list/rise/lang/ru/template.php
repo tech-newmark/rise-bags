@@ -32,7 +32,7 @@ $MESS["SPOL_TPL_CANCEL_ORDER"] = "Отменить заказ";
 $MESS["SPOL_TPL_POSTID"] = "Идентификатор отправления";
 $MESS["SPOL_TPL_DELIVERY"] = "Доставка";
 $MESS["SPOL_TPL_PAY"] = "Оплатить";
-$MESS["SPOL_TPL_CHANGE_PAY_TYPE"] = "сменить способ оплаты";
+$MESS["SPOL_TPL_CHANGE_PAY_TYPE"] = "Изменить способ оплаты";
 $MESS["SPOL_TPL_LOAD"] = "Отгрузка";
 $MESS["SPOL_TPL_DELIVERY_COST"] = "стоимость доставки";
 $MESS["SPOL_TPL_DELIVERY_SERVICE"] = "Служба доставки";
@@ -44,4 +44,3 @@ $MESS["SPOL_CANCEL_PAYMENT"] = "назад";
 $MESS["SPOL_ORDER_SHIPMENT_STATUS"] = "Статус отгрузки";
 $MESS["SPOL_CHECK_TITLE"] = "Список чеков";
 $MESS["SPOL_CHECK_NUM"] = "Чек №#CHECK_NUMBER#";
-?>

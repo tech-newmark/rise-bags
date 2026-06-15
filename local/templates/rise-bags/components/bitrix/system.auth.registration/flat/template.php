@@ -96,14 +96,14 @@ if ($arResult["SHOW_SMS_FIELD"] == true) {
 				</div>
 
 				<div class="main-input-wrapper">
-					<label for="bx-register-user-login"><span class="bx-authform-starrequired">*</span><?= GetMessage("AUTH_LOGIN_MIN") ?></label>
+					<label for="bx-register-user-login"><?= GetMessage("AUTH_LOGIN_MIN") ?><span class="bx-authform-starrequired">*</span></label>
 					<input class="main-input" type="text" id="bx-register-user-login" name="USER_LOGIN" maxlength="255" value="<?= $arResult["USER_LOGIN"] ?>" />
 				</div>
 
 				<div class="main-input-wrapper">
-					<label for="bx-register-user-password"><span class="bx-authform-starrequired">*</span><?= GetMessage("AUTH_PASSWORD_REQ") ?></label>
+					<label for="bx-register-user-password"><?= GetMessage("AUTH_PASSWORD_REQ") ?><span class="bx-authform-starrequired">*</span></label>
 					<? if ($arResult["SECURE_AUTH"]): ?>
-						<div class="alert alert-warning">
+						<div class="alert alert-warning alert-line">
 							<?= GetMessage("AUTH_SECURE_NOTE") ?>
 						</div>
 					<? endif ?>
@@ -111,7 +111,7 @@ if ($arResult["SHOW_SMS_FIELD"] == true) {
 				</div>
 
 				<div class="main-input-wrapper">
-					<label for="bx-register-user-confirm-password"><span class="bx-authform-starrequired">*</span><?= GetMessage("AUTH_CONFIRM") ?></label>
+					<label for="bx-register-user-confirm-password"><?= GetMessage("AUTH_CONFIRM") ?><span class="bx-authform-starrequired">*</span></label>
 					<? if ($arResult["SECURE_AUTH"]): ?>
 						<div class="alert alert-warning alert-line">
 							<?= GetMessage("AUTH_SECURE_NOTE") ?>
@@ -129,8 +129,8 @@ if ($arResult["SHOW_SMS_FIELD"] == true) {
 				<? if ($arResult["EMAIL_REGISTRATION"]): ?>
 					<div class="main-input-wrapper">
 						<label for="bx-register-user-email">
-							<? if ($arResult["EMAIL_REQUIRED"]): ?><span class="bx-authform-starrequired">*</span><? endif ?>
-							<?= GetMessage("AUTH_EMAIL") ?>
+							<? if ($arResult["EMAIL_REQUIRED"]): ?><? endif ?>
+							<?= GetMessage("AUTH_EMAIL") ?><span class="bx-authform-starrequired">*</span>
 						</label>
 						<input class="main-input" type="text" id="bx-register-user-email" name="USER_EMAIL" maxlength="255" value="<?= $arResult["USER_EMAIL"] ?>" />
 					</div>
