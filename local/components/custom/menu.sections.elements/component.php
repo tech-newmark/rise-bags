@@ -23,6 +23,34 @@ if (!function_exists('createMenuArray')){
     }
 }
 
+if (!function_exists('makeMenuItemUrl')){
+    function makeMenuItemUrl($template, $baseUrl, array $fields, $fallbackUrl){
+        $template = trim((string)$template);
+        if ($template === '') {
+            return $fallbackUrl;
+        }
+
+        $url = CComponentEngine::MakePathFromTemplate($template, array(
+            'ID' => $fields['ID'],
+            'CODE' => $fields['CODE'],
+            'ELEMENT_ID' => $fields['ID'],
+            'ELEMENT_CODE' => $fields['CODE'],
+            'SECTION_ID' => $fields['ID'],
+            'SECTION_CODE' => $fields['CODE'],
+        ));
+
+        if ($url === '') {
+            return $fallbackUrl;
+        }
+
+        if (preg_match('#^(?:[a-z]+:)?//#i', $url) || $url[0] === '/') {
+            return $url;
+        }
+
+        return rtrim((string)$baseUrl, '/') . '/' . ltrim($url, '/');
+    }
+}
+
 if(!isset($arParams['CACHE_TIME']))
 	$arParams['CACHE_TIME'] = 36000000;
 
@@ -48,13 +76,19 @@ if($this->StartResultCache()) {
             'ID',
             'DEPTH_LEVEL',
             'NAME',
+            'CODE',
             'SECTION_PAGE_URL',
             'IBLOCK_SECTION_ID',
     ));
     $menuItems = array();
     while($arSection = $rsSections->GetNext()){
         $arSection['IS_SECTION'] = 1;
-        $arSection['LINK'] = $arSection['SECTION_PAGE_URL'];
+        $arSection['LINK'] = makeMenuItemUrl(
+            $arParams['SECTION_PAGE_URL'],
+            $arParams['SEF_BASE_URL'],
+            $arSection,
+            $arSection['SECTION_PAGE_URL']
+        );
         if ($arSection['IBLOCK_SECTION_ID']){
             $menuItems[$arSection['IBLOCK_SECTION_ID']][] = $arSection;
         } else {
@@ -63,7 +97,7 @@ if($this->StartResultCache()) {
         $arSectionId[] = $arSection['ID'];
     }
     //Получим элементы
-    $arSelect = Array('ID', 'NAME','DETAIL_PAGE_URL', 'IBLOCK_SECTION_ID');
+    $arSelect = Array('ID', 'NAME', 'CODE', 'DETAIL_PAGE_URL', 'IBLOCK_SECTION_ID');
     $arFilter = Array(
         'IBLOCK_ID' => $arParams['IBLOCK_ID'],
         'ACTIVE' => 'Y',
@@ -78,7 +112,12 @@ if($this->StartResultCache()) {
     while ($ob = $res->GetNextElement()){
         $arFields = $ob->GetFields();
         $arFields['IS_SECTION'] = 0;
-        $arFields['LINK'] = $arFields['DETAIL_PAGE_URL'];
+        $arFields['LINK'] = makeMenuItemUrl(
+            $arParams['DETAIL_PAGE_URL'],
+            $arParams['SEF_BASE_URL'],
+            $arFields,
+            $arFields['DETAIL_PAGE_URL']
+        );
         if ($arFields['IBLOCK_SECTION_ID']){
             $menuItems[$arFields['IBLOCK_SECTION_ID']][] = $arFields;
         } else {

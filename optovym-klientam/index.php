@@ -82,7 +82,7 @@ $APPLICATION->SetTitle("Оптовым клиентам");
 		"USE_SEARCH" => "N",
 		"USE_SHARE" => "N",
 		"COMPONENT_TEMPLATE" => ".default",
-		"SEF_FOLDER" => "/customization/",
+		"SEF_FOLDER" => "/optovym-klientam/",
 		"SEF_URL_TEMPLATES" => [
 			"news" => "",
 			"section" => "",
