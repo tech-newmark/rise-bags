@@ -5,7 +5,15 @@ $APPLICATION->SetTitle("Реквизиты");
 <section class="section production">
 	<div class="container">
 		<div class="content">
-			Реквизиты
+			<? $APPLICATION->IncludeFile(
+				SITE_DIR . "include/company/details.php.php",
+				array(),
+				array(
+					"MODE" => "php",
+					"NAME" => "текст о компании",
+					"TEMPLATE" => "include_area.php",
+				)
+			); ?>
 		</div>
 	</div>
 </section>

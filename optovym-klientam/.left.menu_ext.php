@@ -7,15 +7,16 @@ $aMenuLinksExt = $APPLICATION->IncludeComponent(
   "custom:menu.sections.elements",
   "",
   array(
-    "CACHE_TIME" => "36000000",
-    "CACHE_TYPE" => "A",
-    "DEPTH_LEVEL" => "3",
-    "IBLOCK_ID" => "13",
-    "IBLOCK_TYPE" => "site_content",
     "IS_SEF" => "Y",
     "SEF_BASE_URL" => "/optovym-klientam/",
+    "SECTION_PAGE_URL" => "",
+    "DETAIL_PAGE_URL" => "#ELEMENT_CODE#/",
+    "IBLOCK_TYPE" => "site_content",
+    "IBLOCK_ID" => "16",
+    "DEPTH_LEVEL" => "2",
+    "CACHE_TYPE" => "A",
+    "CACHE_TIME" => "36000000",
   ),
   false
 );
-
 $aMenuLinks = array_merge($aMenuLinks, $aMenuLinksExt);

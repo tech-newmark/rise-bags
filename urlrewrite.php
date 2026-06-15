@@ -24,6 +24,22 @@ $arUrlRewrite=array (
     'PATH' => '/bitrix/services/stssync/calendar/index.php',
     'SORT' => 100,
   ),
+  22 => 
+  array (
+    'CONDITION' => '#^/company/articles/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/company/articles/index.php',
+    'SORT' => 100,
+  ),
+  27 => 
+  array (
+    'CONDITION' => '#^/optovym-klientam/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/optovym-klientam/index.php',
+    'SORT' => 100,
+  ),
   6 => 
   array (
     'CONDITION' => '#^/personal/order/#',
@@ -38,14 +54,6 @@ $arUrlRewrite=array (
     'RULE' => '',
     'ID' => 'bitrix:news',
     'PATH' => '/customization/index.php',
-    'SORT' => 100,
-  ),
-  22 => 
-  array (
-    'CONDITION' => '#^/company/articles/#',
-    'RULE' => '',
-    'ID' => 'bitrix:news',
-    'PATH' => '/company/articles/index.php',
     'SORT' => 100,
   ),
   25 => 
