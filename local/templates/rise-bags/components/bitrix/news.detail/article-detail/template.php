@@ -7,7 +7,7 @@ $this->setFrameMode(true);
 		<div class="article-detail-container">
 			<article class="article-detail">
 				<? if ($arResult['DETAIL_PICTURE']['SRC'] || $arResult['PREVIEW_PICTURE']['SRC']): ?>
-					<img src="<?= ($arResult['DETAIL_PICTURE']['SRC']) ? $arResult['DETAIL_PICTURE']['SRC'] : $arResult['PREVIEW_PICTURE']['SRC'] ?>" alt="<?= $arResult['NAME'] ?>" width="560" height="280">
+					<img class="article-detail__img" src="<?= ($arResult['DETAIL_PICTURE']['SRC']) ? $arResult['DETAIL_PICTURE']['SRC'] : $arResult['PREVIEW_PICTURE']['SRC'] ?>" alt="<?= $arResult['NAME'] ?>" width="840" height="280">
 				<? endif; ?>
 				<div class="article-detail__header">
 					<h1><?= $arResult['NAME'] ?></h1>
