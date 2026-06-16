@@ -6,11 +6,11 @@ $APPLICATION->SetTitle("Информация потребителю");
 	<div class="container">
 		<div class="content">
 			<? $APPLICATION->IncludeFile(
-				SITE_DIR . "include/company/customers-info.php.php",
+				SITE_DIR . "include/company/customers-info.php",
 				array(),
 				array(
 					"MODE" => "php",
-					"NAME" => "текст о компании",
+					"NAME" => "текст",
 					"TEMPLATE" => "include_area.php",
 				)
 			); ?>

@@ -6,7 +6,9 @@ $arResult = $arParams;
 <? if ($arResult): ?>
     <div class="article-card-container">
         <article class="article-card">
-            <img src="<?= ($arResult['PREVIEW_PICTURE']['SRC']) ? $arResult['PREVIEW_PICTURE']['SRC'] : $arResult['DETAIL_PICTURE']['SRC'] ?>" alt="<?= $arResult['NAME'] ?>" width="480" height="240">
+            <a class="clear-btn" href="<?= $arResult['DETAIL_PAGE_URL'] ?>">
+                <img src="<?= ($arResult['PREVIEW_PICTURE']['SRC']) ? $arResult['PREVIEW_PICTURE']['SRC'] : $arResult['DETAIL_PICTURE']['SRC'] ?>" alt="<?= $arResult['NAME'] ?>" width="480" height="240">
+            </a>
             <div class="article-card__body">
                 <? if ($arParams['SHOW_DATE_ACTIVE_FROM'] == "Y" && $arResult['DISPLAY_ACTIVE_FROM']): ?>
                     <time><?= $arResult['DISPLAY_ACTIVE_FROM'] ?></time>
@@ -14,7 +16,9 @@ $arResult = $arParams;
                 <? if ($arParams['SHOW_DATE_ACTIVE_TO'] == "Y" && $arResult['DATE_ACTIVE_TO']): ?>
                     <time>Действует до <?= FormatDate("j F Y", MakeTimeStamp($arResult['DATE_ACTIVE_TO'], "DD.MM.YYYY")) ?></time>
                 <? endif; ?>
-                <h2><?= $arResult['NAME'] ?></h2>
+                <a class="clear-btn" href="<?= $arResult['DETAIL_PAGE_URL'] ?>">
+                    <h2><?= $arResult['NAME'] ?></h2>
+                </a>
                 <? if ($arResult['~PREVIEW_TEXT'] || $arResult['~DETAIL_TEXT']): ?>
                     <div><?= ($arResult['~PREVIEW_TEXT']) ?  $arResult['~PREVIEW_TEXT'] : $arResult['~DETAIL_TEXT'] ?></div>
                 <? endif; ?>
