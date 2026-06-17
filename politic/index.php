@@ -9,7 +9,7 @@ $APPLICATION->SetTitle("Политика конфиденциальности");
 				SITE_DIR . "include/policy.php",
 				array(),
 				array(
-					"MODE" => "php",
+					"MODE" => "html",
 					"NAME" => "Текст",
 					"TEMPLATE" => "include_area.php",
 				)

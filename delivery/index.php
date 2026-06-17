@@ -8,7 +8,7 @@ $APPLICATION->SetTitle("Доставка и оплата");
 			SITE_DIR . "include/delivery.php",
 			array(),
 			array(
-				"MODE" => "php",
+				"MODE" => "html",
 				"NAME" => "текст",
 				"TEMPLATE" => "include_area.php",
 			)

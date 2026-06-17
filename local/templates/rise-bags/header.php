@@ -75,7 +75,7 @@
                 SITE_DIR . "include/contacts/phones.php",
                 array(),
                 array(
-                  "MODE" => "php",
+                  "MODE" => "html",
                   "NAME" => "Телефон",
                   "TEMPLATE" => "include_area.php",
                 )
@@ -90,7 +90,7 @@
                 SITE_DIR . "include/contacts/email.php",
                 array(),
                 array(
-                  "MODE" => "php",
+                  "MODE" => "html",
                   "NAME" => "E-mail",
                   "TEMPLATE" => "include_area.php",
                 )
@@ -303,7 +303,7 @@
                 SITE_DIR . "include/contacts/phones.php",
                 array(),
                 array(
-                  "MODE" => "php",
+                  "MODE" => "html",
                   "NAME" => "Телефон",
                   "TEMPLATE" => "include_area.php",
                 )
@@ -317,7 +317,7 @@
                 SITE_DIR . "include/contacts/email.php",
                 array(),
                 array(
-                  "MODE" => "php",
+                  "MODE" => "html",
                   "NAME" => "E-mail",
                   "TEMPLATE" => "include_area.php",
                 )
@@ -331,7 +331,7 @@
                 SITE_DIR . "include/contacts/address.php",
                 array(),
                 array(
-                  "MODE" => "php",
+                  "MODE" => "html",
                   "NAME" => "Адрес",
                   "TEMPLATE" => "include_area.php",
                 )
@@ -345,7 +345,7 @@
                 SITE_DIR . "include/contacts/schedule.php",
                 array(),
                 array(
-                  "MODE" => "php",
+                  "MODE" => "html",
                   "NAME" => "Время работы",
                   "TEMPLATE" => "include_area.php",
                 )

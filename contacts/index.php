@@ -11,7 +11,7 @@ $APPLICATION->SetTitle("Контакты");
 					SITE_DIR . "include/contacts/desc.php",
 					array(),
 					array(
-						"MODE" => "php",
+						"MODE" => "html",
 						"NAME" => "описание",
 						"TEMPLATE" => "include_area.php",
 					)
@@ -29,7 +29,7 @@ $APPLICATION->SetTitle("Контакты");
 								SITE_DIR . "include/contacts/address.php",
 								array(),
 								array(
-									"MODE" => "php",
+									"MODE" => "html",
 									"NAME" => "адрес",
 									"TEMPLATE" => "include_area.php",
 								)
@@ -48,7 +48,7 @@ $APPLICATION->SetTitle("Контакты");
 								SITE_DIR . "include/contacts/phones.php",
 								array(),
 								array(
-									"MODE" => "php",
+									"MODE" => "html",
 									"NAME" => "телефон",
 									"TEMPLATE" => "include_area.php",
 								)
@@ -67,7 +67,7 @@ $APPLICATION->SetTitle("Контакты");
 								SITE_DIR . "include/contacts/schedule.php",
 								array(),
 								array(
-									"MODE" => "php",
+									"MODE" => "html",
 									"NAME" => "время работы",
 									"TEMPLATE" => "include_area.php",
 								)
@@ -86,7 +86,7 @@ $APPLICATION->SetTitle("Контакты");
 								SITE_DIR . "include/contacts/email.php",
 								array(),
 								array(
-									"MODE" => "php",
+									"MODE" => "html",
 									"NAME" => "email",
 									"TEMPLATE" => "include_area.php",
 								)
