@@ -9,45 +9,4 @@
 	a {
 		color: var(--primary);
 	}
-
-	table {
-		width: 100%;
-		border-collapse: collapse;
-		border-spacing: 0;
-		border-radius: 20px;
-		overflow: hidden;
-		font-size: clamp(14px, 1.6vw, 16px);
-		width: 100%;
-		min-width: 720px;
-
-		td {
-			padding: 10px 20px;
-
-			p {
-				margin: 0;
-			}
-
-			&:not(:first-child) {
-				text-align: center;
-			}
-		}
-
-		thead {
-			color: var(--white);
-			background-color: var(--primary);
-
-			td {
-				font-weight: 600;
-				padding: 20px;
-			}
-		}
-
-		tbody {
-			tr {
-				&:nth-child(even) {
-					background-color: var(--gray-500);
-				}
-			}
-		}
-	}
 }
