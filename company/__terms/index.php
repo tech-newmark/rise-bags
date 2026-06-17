@@ -9,7 +9,7 @@ $APPLICATION->SetTitle("Условия сотрудничества");
 				SITE_DIR . "include/company/cooperation/index.php",
 				array(),
 				array(
-					"MODE" => "php",
+					"MODE" => "html",
 					"NAME" => "текст",
 					"TEMPLATE" => "include_area.php",
 				)

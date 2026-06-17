@@ -9,7 +9,7 @@ $APPLICATION->SetTitle("Производство");
 				SITE_DIR . "include/company/production/index.php",
 				array(),
 				array(
-					"MODE" => "php",
+					"MODE" => "html",
 					"NAME" => "текст",
 					"TEMPLATE" => "include_area.php",
 				)
