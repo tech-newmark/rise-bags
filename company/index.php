@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("О компании");
-?><section class="section company">
+?><section class="section content-page">
 	<div class="container">
 		<div class="grid">
 			<div class="content">
@@ -16,7 +16,7 @@ $APPLICATION->SetTitle("О компании");
 				); ?>
 			</div>
 			<div class="content">
-				<div class="company__img-wrapper">
+				<div class="content-page__img-wrapper">
 					<? $APPLICATION->IncludeFile(
 						SITE_DIR . "include/company/image.php",
 						array(),

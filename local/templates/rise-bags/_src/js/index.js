@@ -11,3 +11,4 @@ import "./modules/compare";
 import "./modules/mobile-menu";
 import "./modules/multilevel-menu";
 import "./modules/header-height";
+import "./modules/table-wrapper.js";
