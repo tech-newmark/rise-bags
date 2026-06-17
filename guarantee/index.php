@@ -1,12 +1,12 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Доставка по Санкт-Петербургу");
+$APPLICATION->SetTitle("Гарантия");
 ?>
-<section class="section production">
+<section class="section">
 	<div class="container">
 		<div class="content">
 			<? $APPLICATION->IncludeFile(
-				SITE_DIR . "include/delivery/delivery-spb.php",
+				SITE_DIR . "include/guarantee.php",
 				array(),
 				array(
 					"MODE" => "php",

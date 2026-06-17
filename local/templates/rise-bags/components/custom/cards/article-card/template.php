@@ -7,7 +7,7 @@ $arResult = $arParams;
     <div class="article-card-container">
         <article class="article-card">
             <a class="clear-btn" href="<?= $arResult['DETAIL_PAGE_URL'] ?>">
-                <img src="<?= ($arResult['PREVIEW_PICTURE']['SRC']) ? $arResult['PREVIEW_PICTURE']['SRC'] : $arResult['DETAIL_PICTURE']['SRC'] ?>" alt="<?= $arResult['NAME'] ?>" width="480" height="240">
+                <img src="<?= ($arResult['PREVIEW_PICTURE']['SRC']) ? $arResult['PREVIEW_PICTURE']['SRC'] : $arResult['DETAIL_PICTURE']['SRC'] ?>" alt="<?= $arResult['NAME'] ?>" width="480" height="160">
             </a>
             <div class="article-card__body">
                 <? if ($arParams['SHOW_DATE_ACTIVE_FROM'] == "Y" && $arResult['DISPLAY_ACTIVE_FROM']): ?>

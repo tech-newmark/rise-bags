@@ -1,12 +1,12 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Самовывоз");
+$APPLICATION->SetTitle("Сертификаты");
 ?>
-<section class="section production">
+<section class="section">
 	<div class="container">
 		<div class="content">
 			<? $APPLICATION->IncludeFile(
-				SITE_DIR . "include/delivery/pickup.php",
+				SITE_DIR . "include/company/certificates.php",
 				array(),
 				array(
 					"MODE" => "php",

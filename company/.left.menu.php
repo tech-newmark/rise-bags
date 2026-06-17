@@ -16,8 +16,8 @@ $aMenuLinks = array(
 		""
 	),
 	array(
-		"Статьи",
-		"/company/articles/",
+		"Сертификаты",
+		"/company/certificates/",
 		array(),
 		array(),
 		""

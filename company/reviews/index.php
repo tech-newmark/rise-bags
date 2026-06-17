@@ -2,7 +2,7 @@
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Отзывы");
 ?>
-<section class="section production">
+<section class="section">
 	<div class="container">
 		<div class="content">
 			Отзывы
