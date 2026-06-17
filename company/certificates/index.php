@@ -9,7 +9,7 @@ $APPLICATION->SetTitle("Сертификаты");
 				SITE_DIR . "include/company/certificates.php",
 				array(),
 				array(
-					"MODE" => "php",
+					"MODE" => "html",
 					"NAME" => "текст",
 					"TEMPLATE" => "include_area.php",
 				)

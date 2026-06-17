@@ -9,7 +9,7 @@ $APPLICATION->SetTitle("Оплата");
 				SITE_DIR . "include/payment.php",
 				array(),
 				array(
-					"MODE" => "php",
+					"MODE" => "html",
 					"NAME" => "текст",
 					"TEMPLATE" => "include_area.php",
 				)

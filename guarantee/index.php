@@ -9,7 +9,7 @@ $APPLICATION->SetTitle("Гарантия");
 				SITE_DIR . "include/guarantee.php",
 				array(),
 				array(
-					"MODE" => "php",
+					"MODE" => "html",
 					"NAME" => "текст",
 					"TEMPLATE" => "include_area.php",
 				)
