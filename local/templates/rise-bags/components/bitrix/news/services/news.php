@@ -62,73 +62,75 @@ if ($arParams["USE_FILTER"] == "Y"):
 endif; ?>
 
 <!-- Верхний баннер -->
-<? $GLOBALS["topBannerSectionFilter"] = [
-	"IBLOCK_ID" => $arParams["TOP_BANNER_IBLOCK_ID"],
-	"INCLUDE_SUBSECTIONS" => "N",
-];
-if ($arParams["TOP_BANNER_SECTION_ID"] !== '') {
-	$GLOBALS["topBannerSectionFilter"]["SECTION_ID"] = $arParams["TOP_BANNER_SECTION_ID"];
-}
-
-$APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"top-banner",
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"ADD_ELEMENT_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "Y",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "Y",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array("", ""),
-		"FILTER_NAME" => "topBannerSectionFilter",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+<? if (!empty($arParams["TOP_BANNER_IBLOCK_ID"])):
+	$GLOBALS["topBannerSectionFilter"] = [
 		"IBLOCK_ID" => $arParams["TOP_BANNER_IBLOCK_ID"],
-		"IBLOCK_TYPE" => "site_content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "N",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => $arParams["TOP_BANNER_SECTION_ID"],
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array("", ""),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "ACTIVE_FROM",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "DESC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N"
-	)
-);
-unset($GLOBALS["topBannerSectionFilter"]); ?>
+	];
+	if (!empty($arParams["TOP_BANNER_SECTION_ID"])) {
+		$GLOBALS["topBannerSectionFilter"]["SECTION_ID"] = $arParams["TOP_BANNER_SECTION_ID"];
+	}
+
+	$APPLICATION->IncludeComponent(
+		"bitrix:news.list",
+		"top-banner",
+		array(
+			"ACTIVE_DATE_FORMAT" => "d.m.Y",
+			"ADD_SECTIONS_CHAIN" => "N",
+			"ADD_ELEMENT_CHAIN" => "N",
+			"AJAX_MODE" => "N",
+			"AJAX_OPTION_ADDITIONAL" => "",
+			"AJAX_OPTION_HISTORY" => "N",
+			"AJAX_OPTION_JUMP" => "N",
+			"AJAX_OPTION_STYLE" => "Y",
+			"CACHE_FILTER" => "Y",
+			"CACHE_GROUPS" => "Y",
+			"CACHE_TIME" => "36000000",
+			"CACHE_TYPE" => "A",
+			"CHECK_DATES" => "Y",
+			"DETAIL_URL" => "",
+			"DISPLAY_BOTTOM_PAGER" => "Y",
+			"DISPLAY_DATE" => "Y",
+			"DISPLAY_NAME" => "Y",
+			"DISPLAY_PICTURE" => "Y",
+			"DISPLAY_PREVIEW_TEXT" => "Y",
+			"DISPLAY_TOP_PAGER" => "N",
+			"FIELD_CODE" => array("", ""),
+			"FILTER_NAME" => "topBannerSectionFilter",
+			"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+			"IBLOCK_ID" => $arParams["TOP_BANNER_IBLOCK_ID"],
+			"IBLOCK_TYPE" => "site_content",
+			"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+			"INCLUDE_SUBSECTIONS" => "N",
+			"MESSAGE_404" => "",
+			"NEWS_COUNT" => "20",
+			"PAGER_BASE_LINK_ENABLE" => "N",
+			"PAGER_DESC_NUMBERING" => "N",
+			"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+			"PAGER_SHOW_ALL" => "N",
+			"PAGER_SHOW_ALWAYS" => "N",
+			"PAGER_TEMPLATE" => ".default",
+			"PAGER_TITLE" => "Новости",
+			"PARENT_SECTION" => $arParams["TOP_BANNER_SECTION_ID"] ?? "",
+			"PARENT_SECTION_CODE" => "",
+			"PREVIEW_TRUNCATE_LEN" => "",
+			"PROPERTY_CODE" => array("", ""),
+			"SET_BROWSER_TITLE" => "N",
+			"SET_LAST_MODIFIED" => "N",
+			"SET_META_DESCRIPTION" => "N",
+			"SET_META_KEYWORDS" => "N",
+			"SET_STATUS_404" => "N",
+			"SET_TITLE" => "N",
+			"SHOW_404" => "N",
+			"SORT_BY1" => "ACTIVE_FROM",
+			"SORT_BY2" => "SORT",
+			"SORT_ORDER1" => "DESC",
+			"SORT_ORDER2" => "ASC",
+			"STRICT_SECTION_CHECK" => "N"
+		)
+	);
+	unset($GLOBALS["topBannerSectionFilter"]);
+endif; ?>
 <!-- Верхний баннер -->
 
 <!-- Список категорий -->
@@ -189,368 +191,381 @@ unset($GLOBALS["topBannerSectionFilter"]); ?>
 ); ?>
 <!-- Список категорий -->
 
-<!-- Кому подходят поставки -->
-<? $GLOBALS["customerTypeSectionFilter"] = [
-	"IBLOCK_ID" => $arParams["CUSTOMER_TYPE_IBLOCK_ID"],
-	"INCLUDE_SUBSECTIONS" => "N",
-];
-if ($arParams["CUSTOMER_TYPE_SECTION_ID"] !== '') {
-	$GLOBALS["customerTypeSectionFilter"]["SECTION_ID"] = $arParams["CUSTOMER_TYPE_SECTION_ID"];
-}
-$APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"tizzers",
-	array(
-		"SHOW_TITLE" => "Y",
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"ADD_ELEMENT_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"COLUMN_VIEW" => "Y",
-		"COMPONENT_TEMPLATE" => "tizzers",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "Y",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => [0 => "", 1 => "",],
-		"FILTER_NAME" => "customerTypeSectionFilter",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => $arParams["CUSTOMER_TYPE_IBLOCK_ID"],
-		"IBLOCK_TYPE" => "site_content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+<!-- Первый блок тизеров -->
+<? if (!empty($arParams["FIRST_TIZZERS_IBLOCK_ID"])):
+	$GLOBALS["firstTizzersSectionFilter"] = [
+		"IBLOCK_ID" => $arParams["FIRST_TIZZERS_IBLOCK_ID"],
 		"INCLUDE_SUBSECTIONS" => "N",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => [0 => "", 1 => "ICON",],
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "ACTIVE_FROM",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "DESC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N"
-	),
-	$component
-);
-unset($GLOBALS["customerTypeSectionFilter"]); ?>
-<!-- Кому подходят поставки -->
+	];
+	if (!empty($arParams["FIRST_TIZZERS_SECTION_ID"])) {
+		$GLOBALS["firstTizzersSectionFilter"]["SECTION_ID"] = $arParams["FIRST_TIZZERS_SECTION_ID"];
+	}
+	$APPLICATION->IncludeComponent(
+		"bitrix:news.list",
+		"tizzers",
+		array(
+			"CUSTOM_TITLE" => $arParams["FIRST_TIZZERS_TITLE"] ?? "",
+			"SHOW_TITLE" => "Y",
+			"ACTIVE_DATE_FORMAT" => "d.m.Y",
+			"ADD_SECTIONS_CHAIN" => "N",
+			"ADD_ELEMENT_CHAIN" => "N",
+			"AJAX_MODE" => "N",
+			"AJAX_OPTION_ADDITIONAL" => "",
+			"AJAX_OPTION_HISTORY" => "N",
+			"AJAX_OPTION_JUMP" => "N",
+			"AJAX_OPTION_STYLE" => "Y",
+			"CACHE_FILTER" => "N",
+			"CACHE_GROUPS" => "Y",
+			"CACHE_TIME" => "36000000",
+			"CACHE_TYPE" => "A",
+			"CHECK_DATES" => "Y",
+			"COLUMN_VIEW" => "Y",
+			"COMPONENT_TEMPLATE" => "tizzers",
+			"DETAIL_URL" => "",
+			"DISPLAY_BOTTOM_PAGER" => "Y",
+			"DISPLAY_DATE" => "Y",
+			"DISPLAY_NAME" => "Y",
+			"DISPLAY_PICTURE" => "Y",
+			"DISPLAY_PREVIEW_TEXT" => "Y",
+			"DISPLAY_TOP_PAGER" => "N",
+			"FIELD_CODE" => [0 => "", 1 => "",],
+			"FILTER_NAME" => "firstTizzersSectionFilter",
+			"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+			"IBLOCK_ID" => $arParams["FIRST_TIZZERS_IBLOCK_ID"],
+			"IBLOCK_TYPE" => "site_content",
+			"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+			"INCLUDE_SUBSECTIONS" => "N",
+			"MESSAGE_404" => "",
+			"NEWS_COUNT" => "20",
+			"PAGER_BASE_LINK_ENABLE" => "N",
+			"PAGER_DESC_NUMBERING" => "N",
+			"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+			"PAGER_SHOW_ALL" => "N",
+			"PAGER_SHOW_ALWAYS" => "N",
+			"PAGER_TEMPLATE" => ".default",
+			"PAGER_TITLE" => "Новости",
+			"PARENT_SECTION" => "",
+			"PARENT_SECTION_CODE" => "",
+			"PREVIEW_TRUNCATE_LEN" => "",
+			"PROPERTY_CODE" => [0 => "", 1 => "ICON",],
+			"SET_BROWSER_TITLE" => "N",
+			"SET_LAST_MODIFIED" => "N",
+			"SET_META_DESCRIPTION" => "N",
+			"SET_META_KEYWORDS" => "N",
+			"SET_STATUS_404" => "N",
+			"SET_TITLE" => "N",
+			"SHOW_404" => "N",
+			"SORT_BY1" => "ACTIVE_FROM",
+			"SORT_BY2" => "SORT",
+			"SORT_ORDER1" => "DESC",
+			"SORT_ORDER2" => "ASC",
+			"STRICT_SECTION_CHECK" => "N"
+		),
+		$component
+	);
+	unset($GLOBALS["firstTizzersSectionFilter"]);
+endif; ?>
+<!-- Первый блок тизеров -->
 
-<!-- Наши преимущества -->
-<? $GLOBALS["advantagesSectionFilter"] = [
-	"IBLOCK_ID" => $arParams["ADVANTAGES_IBLOCK_ID"],
-	"INCLUDE_SUBSECTIONS" => "N",
-];
-if ($arParams["ADVANTAGES_SECTION_ID"] !== '') {
-	$GLOBALS["advantagesSectionFilter"]["SECTION_ID"] = $arParams["ADVANTAGES_SECTION_ID"];
-}
+<!-- Второй блок тизеров -->
+<? if (!empty($arParams["SECOND_TIZZERS_IBLOCK_ID"])):
+	$GLOBALS["secondTizzersSectionFilter"] = [
+		"IBLOCK_ID" => $arParams["SECOND_TIZZERS_IBLOCK_ID"],
+		"INCLUDE_SUBSECTIONS" => "N",
+	];
+	if (!empty($arParams["SECOND_TIZZERS_SECTION_ID"])) {
+		$GLOBALS["secondTizzersSectionFilter"]["SECTION_ID"] = $arParams["SECOND_TIZZERS_SECTION_ID"];
+	}
 
-$APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"tizzers",
-	array(
-		"SHOW_TITLE" => "Y",
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"ADD_ELEMENT_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"COMPONENT_TEMPLATE" => "tizzers",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "Y",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => [0 => "", 1 => "",],
-		"FILTER_NAME" => "advantagesSectionFilter",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => $arParams["ADVANTAGES_IBLOCK_ID"],
-		"IBLOCK_TYPE" => "site_content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"INCLUDE_SUBSECTIONS" => "Y",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => [0 => "", 1 => "ICON",],
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "ACTIVE_FROM",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "DESC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N"
-	),
-	$component
-);
-unset($GLOBALS["advantagesSectionFilter"]); ?>
-<!-- Наши преимущества -->
+	$APPLICATION->IncludeComponent(
+		"bitrix:news.list",
+		"tizzers",
+		array(
+			"CUSTOM_TITLE" => $arParams["SECOND_TIZZERS_TITLE"] ?? "",
+			"SHOW_TITLE" => "Y",
+			"ACTIVE_DATE_FORMAT" => "d.m.Y",
+			"ADD_SECTIONS_CHAIN" => "N",
+			"ADD_ELEMENT_CHAIN" => "N",
+			"AJAX_MODE" => "N",
+			"AJAX_OPTION_ADDITIONAL" => "",
+			"AJAX_OPTION_HISTORY" => "N",
+			"AJAX_OPTION_JUMP" => "N",
+			"AJAX_OPTION_STYLE" => "Y",
+			"CACHE_FILTER" => "N",
+			"CACHE_GROUPS" => "Y",
+			"CACHE_TIME" => "36000000",
+			"CACHE_TYPE" => "A",
+			"CHECK_DATES" => "Y",
+			"COMPONENT_TEMPLATE" => "tizzers",
+			"DETAIL_URL" => "",
+			"DISPLAY_BOTTOM_PAGER" => "Y",
+			"DISPLAY_DATE" => "Y",
+			"DISPLAY_NAME" => "Y",
+			"DISPLAY_PICTURE" => "Y",
+			"DISPLAY_PREVIEW_TEXT" => "Y",
+			"DISPLAY_TOP_PAGER" => "N",
+			"FIELD_CODE" => [0 => "", 1 => "",],
+			"FILTER_NAME" => "secondTizzersSectionFilter",
+			"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+			"IBLOCK_ID" => $arParams["SECOND_TIZZERS_IBLOCK_ID"],
+			"IBLOCK_TYPE" => "site_content",
+			"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+			"INCLUDE_SUBSECTIONS" => "Y",
+			"MESSAGE_404" => "",
+			"NEWS_COUNT" => "20",
+			"PAGER_BASE_LINK_ENABLE" => "N",
+			"PAGER_DESC_NUMBERING" => "N",
+			"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+			"PAGER_SHOW_ALL" => "N",
+			"PAGER_SHOW_ALWAYS" => "N",
+			"PAGER_TEMPLATE" => ".default",
+			"PAGER_TITLE" => "Новости",
+			"PARENT_SECTION" => "",
+			"PARENT_SECTION_CODE" => "",
+			"PREVIEW_TRUNCATE_LEN" => "",
+			"PROPERTY_CODE" => [0 => "", 1 => "ICON",],
+			"SET_BROWSER_TITLE" => "N",
+			"SET_LAST_MODIFIED" => "N",
+			"SET_META_DESCRIPTION" => "N",
+			"SET_META_KEYWORDS" => "N",
+			"SET_STATUS_404" => "N",
+			"SET_TITLE" => "N",
+			"SHOW_404" => "N",
+			"SORT_BY1" => "ACTIVE_FROM",
+			"SORT_BY2" => "SORT",
+			"SORT_ORDER1" => "DESC",
+			"SORT_ORDER2" => "ASC",
+			"STRICT_SECTION_CHECK" => "N"
+		),
+		$component
+	);
+	unset($GLOBALS["secondTizzersSectionFilter"]);
+endif; ?>
+<!-- Второй блок тизеров -->
 
-<!-- Как заказать сумки оптом -->
-<? $GLOBALS["howToOrderSectionFilter"] = [
-	"IBLOCK_ID" => $arParams["HOW_TO_ORDER_IBLOCK_ID"],
-	"INCLUDE_SUBSECTIONS" => "N",
-];
-if ($arParams["HOW_TO_ORDER_SECTION_ID"] !== '') {
-	$GLOBALS["howToOrderSectionFilter"]["SECTION_ID"] = $arParams["HOW_TO_ORDER_SECTION_ID"];
-}
+<!-- Третий блок тизеров -->
+<? if (!empty($arParams["THIRD_TIZZERS_IBLOCK_ID"])):
+	$GLOBALS["thirdTizzersSectionFilter"] = [
+		"IBLOCK_ID" => $arParams["THIRD_TIZZERS_IBLOCK_ID"],
+		"INCLUDE_SUBSECTIONS" => "N",
+	];
+	if (!empty($arParams["THIRD_TIZZERS_SECTION_ID"])) {
+		$GLOBALS["thirdTizzersSectionFilter"]["SECTION_ID"] = $arParams["THIRD_TIZZERS_SECTION_ID"];
+	}
 
-$APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"tizzers",
-	array(
-		"SHOW_ITEM_NUMBER" => "Y",
-		"COLUMN_VIEW" => "Y",
-		"CLEAR_BG" => "Y",
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"ADD_ELEMENT_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"COMPONENT_TEMPLATE" => "tizzers",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "Y",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => [0 => "", 1 => "",],
-		"FILTER_NAME" => "howToOrderSectionFilter",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => $arParams["HOW_TO_ORDER_IBLOCK_ID"],
-		"IBLOCK_TYPE" => "site_content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"INCLUDE_SUBSECTIONS" => "Y",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => [0 => "", 1 => "ICON", 2 => "",],
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SHOW_TITLE" => "Y",
-		"SORT_BY1" => "ACTIVE_FROM",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "DESC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N"
-	),
-	$component
-);
+	$APPLICATION->IncludeComponent(
+		"bitrix:news.list",
+		"tizzers",
+		array(
+			"CUSTOM_TITLE" => $arParams["THIRD_TIZZERS_TITLE"] ?? "",
+			"SHOW_ITEM_NUMBER" => "Y",
+			"COLUMN_VIEW" => "Y",
+			"CLEAR_BG" => "Y",
+			"ACTIVE_DATE_FORMAT" => "d.m.Y",
+			"ADD_SECTIONS_CHAIN" => "N",
+			"ADD_ELEMENT_CHAIN" => "N",
+			"AJAX_MODE" => "N",
+			"AJAX_OPTION_ADDITIONAL" => "",
+			"AJAX_OPTION_HISTORY" => "N",
+			"AJAX_OPTION_JUMP" => "N",
+			"AJAX_OPTION_STYLE" => "Y",
+			"CACHE_FILTER" => "N",
+			"CACHE_GROUPS" => "Y",
+			"CACHE_TIME" => "36000000",
+			"CACHE_TYPE" => "A",
+			"CHECK_DATES" => "Y",
+			"COMPONENT_TEMPLATE" => "tizzers",
+			"DETAIL_URL" => "",
+			"DISPLAY_BOTTOM_PAGER" => "Y",
+			"DISPLAY_DATE" => "Y",
+			"DISPLAY_NAME" => "Y",
+			"DISPLAY_PICTURE" => "Y",
+			"DISPLAY_PREVIEW_TEXT" => "Y",
+			"DISPLAY_TOP_PAGER" => "N",
+			"FIELD_CODE" => [0 => "", 1 => "",],
+			"FILTER_NAME" => "thirdTizzersSectionFilter",
+			"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+			"IBLOCK_ID" => $arParams["THIRD_TIZZERS_IBLOCK_ID"],
+			"IBLOCK_TYPE" => "site_content",
+			"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+			"INCLUDE_SUBSECTIONS" => "Y",
+			"MESSAGE_404" => "",
+			"NEWS_COUNT" => "20",
+			"PAGER_BASE_LINK_ENABLE" => "N",
+			"PAGER_DESC_NUMBERING" => "N",
+			"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+			"PAGER_SHOW_ALL" => "N",
+			"PAGER_SHOW_ALWAYS" => "N",
+			"PAGER_TEMPLATE" => ".default",
+			"PAGER_TITLE" => "Новости",
+			"PARENT_SECTION" => "",
+			"PARENT_SECTION_CODE" => "",
+			"PREVIEW_TRUNCATE_LEN" => "",
+			"PROPERTY_CODE" => [0 => "", 1 => "ICON", 2 => "",],
+			"SET_BROWSER_TITLE" => "N",
+			"SET_LAST_MODIFIED" => "N",
+			"SET_META_DESCRIPTION" => "N",
+			"SET_META_KEYWORDS" => "N",
+			"SET_STATUS_404" => "N",
+			"SET_TITLE" => "N",
+			"SHOW_404" => "N",
+			"SHOW_TITLE" => "Y",
+			"SORT_BY1" => "ACTIVE_FROM",
+			"SORT_BY2" => "SORT",
+			"SORT_ORDER1" => "DESC",
+			"SORT_ORDER2" => "ASC",
+			"STRICT_SECTION_CHECK" => "N"
+		),
+		$component
+	);
 
-unset($GLOBALS["howToOrderSectionFilter"]); ?>
-<!-- Как заказать сумки оптом -->
+	unset($GLOBALS["thirdTizzersSectionFilter"]); ?>
+<? endif; ?>
+<!-- Третий блок тизеров -->
 
-<!-- Сотрудничество -->
-<? $GLOBALS["tizzersCooperatinSectionFilter"] = [
-	"IBLOCK_ID" => $arParams["COOPERATION_TIZZERS_IBLOCK_ID"],
-	"INCLUDE_SUBSECTIONS" => "N",
-];
-if ($arParams["COOPERATION_TIZZERS_SECTION_ID"] !== '') {
-	$GLOBALS["tizzersCooperatinSectionFilter"]["SECTION_ID"] = $arParams["COOPERATION_TIZZERS_SECTION_ID"];
-}
-$APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"tizzers",
-	array(
-		"BIG_TIZZERS" => "Y",
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"ADD_ELEMENT_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "Y",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array("", ""),
-		"FILTER_NAME" => "tizzersCooperatinSectionFilter",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => $arParams["COOPERATION_TIZZERS_IBLOCK_ID"],
-		"IBLOCK_TYPE" => "site_content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"INCLUDE_SUBSECTIONS" => "Y",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => $arParams["COOPERATION_TIZZERS_SECTION_ID"],
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => [0 => "", 1 => "ICON",],
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "ACTIVE_FROM",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "DESC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N"
-	)
-);
-unset($GLOBALS["tizzersCooperatinSectionFilter"]); ?>
-<!-- Сотрудничество -->
+<!-- Четвертый блок тизеров -->
+<? if (!empty($arParams["FOURTH_TIZZERS_IBLOCK_ID"])):
+	$GLOBALS["fourthTizzersSectionFilter"] = [
+		"IBLOCK_ID" => $arParams["FOURTH_TIZZERS_IBLOCK_ID"],
+		"INCLUDE_SUBSECTIONS" => "N",
+	];
+	if (!empty($arParams["FOURTH_TIZZERS_SECTION_ID"])) {
+		$GLOBALS["fourthTizzersSectionFilter"]["SECTION_ID"] = $arParams["FOURTH_TIZZERS_SECTION_ID"];
+	}
+	$APPLICATION->IncludeComponent(
+		"bitrix:news.list",
+		"tizzers",
+		array(
+			"CUSTOM_TITLE" => $arParams["FOURTH_TIZZERS_TITLE"] ?? "",
+			"BIG_TIZZERS" => "Y",
+			"ACTIVE_DATE_FORMAT" => "d.m.Y",
+			"ADD_SECTIONS_CHAIN" => "N",
+			"ADD_ELEMENT_CHAIN" => "N",
+			"AJAX_MODE" => "N",
+			"AJAX_OPTION_ADDITIONAL" => "",
+			"AJAX_OPTION_HISTORY" => "N",
+			"AJAX_OPTION_JUMP" => "N",
+			"AJAX_OPTION_STYLE" => "Y",
+			"CACHE_FILTER" => "N",
+			"CACHE_GROUPS" => "Y",
+			"CACHE_TIME" => "36000000",
+			"CACHE_TYPE" => "A",
+			"CHECK_DATES" => "Y",
+			"DETAIL_URL" => "",
+			"DISPLAY_BOTTOM_PAGER" => "Y",
+			"DISPLAY_DATE" => "Y",
+			"DISPLAY_NAME" => "Y",
+			"DISPLAY_PICTURE" => "Y",
+			"DISPLAY_PREVIEW_TEXT" => "Y",
+			"DISPLAY_TOP_PAGER" => "N",
+			"FIELD_CODE" => array("", ""),
+			"FILTER_NAME" => "fourthTizzersSectionFilter",
+			"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+			"IBLOCK_ID" => $arParams["FOURTH_TIZZERS_IBLOCK_ID"],
+			"IBLOCK_TYPE" => "site_content",
+			"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+			"INCLUDE_SUBSECTIONS" => "Y",
+			"MESSAGE_404" => "",
+			"NEWS_COUNT" => "20",
+			"PAGER_BASE_LINK_ENABLE" => "N",
+			"PAGER_DESC_NUMBERING" => "N",
+			"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+			"PAGER_SHOW_ALL" => "N",
+			"PAGER_SHOW_ALWAYS" => "N",
+			"PAGER_TEMPLATE" => ".default",
+			"PAGER_TITLE" => "Новости",
+			"PARENT_SECTION" => $arParams["FOURTH_TIZZERS_SECTION_ID"] ?? "",
+			"PARENT_SECTION_CODE" => "",
+			"PREVIEW_TRUNCATE_LEN" => "",
+			"PROPERTY_CODE" => [0 => "", 1 => "ICON",],
+			"SET_BROWSER_TITLE" => "N",
+			"SET_LAST_MODIFIED" => "N",
+			"SET_META_DESCRIPTION" => "N",
+			"SET_META_KEYWORDS" => "N",
+			"SET_STATUS_404" => "N",
+			"SET_TITLE" => "N",
+			"SHOW_404" => "N",
+			"SORT_BY1" => "ACTIVE_FROM",
+			"SORT_BY2" => "SORT",
+			"SORT_ORDER1" => "DESC",
+			"SORT_ORDER2" => "ASC",
+			"STRICT_SECTION_CHECK" => "N"
+		)
+	);
+	unset($GLOBALS["fourthTizzersSectionFilter"]);
+endif; ?>
+<!-- Четвертый блок тизеров -->
 
 <!-- Вопросы и ответы -->
-<?
-$GLOBALS["faqPreviewSectionFilter"] = [
-	"IBLOCK_ID" => $arParams["FAQ_PREVIEW_IBLOCK_ID"],
-	"INCLUDE_SUBSECTIONS" => "N",
-];
-if ($arParams["FAQ_PREVIEW_SECTION_ID"] !== '') {
-	$GLOBALS["faqPreviewSectionFilter"]["SECTION_ID"] = $arParams["FAQ_PREVIEW_SECTION_ID"];
-}
+<? if (!empty($arParams["FAQ_PREVIEW_IBLOCK_ID"])):
+	$GLOBALS["faqPreviewSectionFilter"] = [
+		"IBLOCK_ID" => $arParams["FAQ_PREVIEW_IBLOCK_ID"],
+		"INCLUDE_SUBSECTIONS" => "N",
+	];
+	if (!empty($arParams["FAQ_PREVIEW_SECTION_ID"])) {
+		$GLOBALS["faqPreviewSectionFilter"]["SECTION_ID"] = $arParams["FAQ_PREVIEW_SECTION_ID"];
+	}
 ?>
 <? $APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"faq-preview",
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"ADD_ELEMENT_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "Y",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "Y",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array("", ""),
-		"FILTER_NAME" => "faqPreviewSectionFilter",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => $arParams["FAQ_PREVIEW_IBLOCK_ID"],
-		"IBLOCK_TYPE" => "site_content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"INCLUDE_SUBSECTIONS" => "N",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => $arParams["FAQ_PREVIEW_SECTION_ID"],
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array("", ""),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "ACTIVE_FROM",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "DESC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N"
-	)
-);
-unset($GLOBALS["faqPreviewSectionFilter"]); ?>
+		"bitrix:news.list",
+		"faq-preview",
+		array(
+			"ACTIVE_DATE_FORMAT" => "d.m.Y",
+			"ADD_SECTIONS_CHAIN" => "N",
+			"ADD_ELEMENT_CHAIN" => "N",
+			"AJAX_MODE" => "N",
+			"AJAX_OPTION_ADDITIONAL" => "",
+			"AJAX_OPTION_HISTORY" => "N",
+			"AJAX_OPTION_JUMP" => "N",
+			"AJAX_OPTION_STYLE" => "Y",
+			"CACHE_FILTER" => "Y",
+			"CACHE_GROUPS" => "Y",
+			"CACHE_TIME" => "36000000",
+			"CACHE_TYPE" => "A",
+			"CHECK_DATES" => "Y",
+			"DETAIL_URL" => "",
+			"DISPLAY_BOTTOM_PAGER" => "Y",
+			"DISPLAY_DATE" => "Y",
+			"DISPLAY_NAME" => "Y",
+			"DISPLAY_PICTURE" => "Y",
+			"DISPLAY_PREVIEW_TEXT" => "Y",
+			"DISPLAY_TOP_PAGER" => "N",
+			"FIELD_CODE" => array("", ""),
+			"FILTER_NAME" => "faqPreviewSectionFilter",
+			"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+			"IBLOCK_ID" => $arParams["FAQ_PREVIEW_IBLOCK_ID"],
+			"IBLOCK_TYPE" => "site_content",
+			"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+			"INCLUDE_SUBSECTIONS" => "N",
+			"MESSAGE_404" => "",
+			"NEWS_COUNT" => "20",
+			"PAGER_BASE_LINK_ENABLE" => "N",
+			"PAGER_DESC_NUMBERING" => "N",
+			"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+			"PAGER_SHOW_ALL" => "N",
+			"PAGER_SHOW_ALWAYS" => "N",
+			"PAGER_TEMPLATE" => ".default",
+			"PAGER_TITLE" => "Новости",
+			"PARENT_SECTION" => $arParams["FAQ_PREVIEW_SECTION_ID"] ?? "",
+			"PARENT_SECTION_CODE" => "",
+			"PREVIEW_TRUNCATE_LEN" => "",
+			"PROPERTY_CODE" => array("", ""),
+			"SET_BROWSER_TITLE" => "N",
+			"SET_LAST_MODIFIED" => "N",
+			"SET_META_DESCRIPTION" => "N",
+			"SET_META_KEYWORDS" => "N",
+			"SET_STATUS_404" => "N",
+			"SET_TITLE" => "N",
+			"SHOW_404" => "N",
+			"SORT_BY1" => "ACTIVE_FROM",
+			"SORT_BY2" => "SORT",
+			"SORT_ORDER1" => "DESC",
+			"SORT_ORDER2" => "ASC",
+			"STRICT_SECTION_CHECK" => "N"
+		)
+	);
+	unset($GLOBALS["faqPreviewSectionFilter"]);
+endif; ?>
 <!-- Вопросы и ответы -->
 
 <!-- Форма -->

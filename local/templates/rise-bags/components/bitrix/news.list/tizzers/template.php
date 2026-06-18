@@ -1,12 +1,13 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 $this->setFrameMode(true);
 $i = 1;
+$title = trim((string)($arParams["CUSTOM_TITLE"] ?? ''));
 
 if ($arResult["ITEMS"]): ?>
   <section class="section">
     <div class="container">
-      <? if ($arParams["SHOW_TITLE"] == "Y"): ?>
-        <h3><?= $arResult["NAME"] ?></h3>
+      <? if (($arParams["SHOW_TITLE"] ?? '') == "Y" || $title !== ''): ?>
+        <h3><?= !empty($title) ? $title : $arResult["NAME"] ?></h3>
       <? endif; ?>
       <div class="tizzers-container">
         <div class="tizzers <?= $arParams["BIG_TIZZERS"] == "Y" ? "tizzers--big" : "" ?>">
