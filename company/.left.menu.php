@@ -23,6 +23,13 @@ $aMenuLinks = array(
 		""
 	),
 	array(
+		"Условия сотрудничества",
+		"/company/cooperation/",
+		array(),
+		array(),
+		""
+	),
+	array(
 		"Информация потребителю",
 		"/company/customers-info/",
 		array(),

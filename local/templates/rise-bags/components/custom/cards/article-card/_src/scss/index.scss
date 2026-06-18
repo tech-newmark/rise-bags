@@ -49,16 +49,16 @@
 			overflow: hidden;
 		}
 
-		div {
-			margin: 0;
-			-webkit-line-clamp: 3;
-			display: -webkit-box;
-			-webkit-box-orient: vertical;
-			overflow: hidden;
-		}
-
 		.clear-btn {
 			margin-top: auto;
 		}
+	}
+
+	&__desc {
+		margin: 0;
+		-webkit-line-clamp: 3;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 }

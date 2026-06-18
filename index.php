@@ -3,9 +3,9 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Интернет-магазин \"Rise-bags\"");
 ?>
 <? $APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"top-banner",
-	array(
+	"bitrix:news.list", 
+	"top-banner", 
+	[
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
 		"AJAX_MODE" => "N",
@@ -26,7 +26,10 @@ $APPLICATION->SetTitle("Интернет-магазин \"Rise-bags\"");
 		"DISPLAY_PICTURE" => "Y",
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => [0 => "", 1 => "",],
+		"FIELD_CODE" => [
+			0 => "",
+			1 => "",
+		],
 		"FILTER_NAME" => "",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "7",
@@ -45,7 +48,13 @@ $APPLICATION->SetTitle("Интернет-магазин \"Rise-bags\"");
 		"PARENT_SECTION" => "",
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => [0 => "LINK_URL", 1 => "H1_TITLE", 2 => "BUTTON", 3 => "",],
+		"PROPERTY_CODE" => [
+			0 => "LINK_URL",
+			1 => "H1_TITLE",
+			2 => "SHOW_ON_INDEX_PAGE",
+			3 => "BUTTON",
+			4 => "",
+		],
 		"SET_BROWSER_TITLE" => "N",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "N",
@@ -58,7 +67,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Rise-bags\"");
 		"SORT_ORDER1" => "DESC",
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N"
-	),
+	],
 	$component
 ); ?>
 

@@ -67,13 +67,23 @@
 			<?= $arResult["FORM_FOOTER"] ?>
 		</div>
 
-		<?
-		$APPLICATION->IncludeFile(
-			SITE_DIR . 'include/callback-form-img.php',
-			array(),
-			array('MODE' => 'html', 'NAME' => 'Изображение в форме', 'SHOW_BORDER' => true)
-		);
-		?>
+		<? if ($arParams["INNER_PAGE"] == "Y"): ?>
+			<?
+			$APPLICATION->IncludeFile(
+				SITE_DIR . 'include/callback-form-img--inner-page.php',
+				array(),
+				array('MODE' => 'html', 'NAME' => 'Изображение в форме', 'SHOW_BORDER' => true)
+			);
+			?>
+		<? else: ?>
+			<?
+			$APPLICATION->IncludeFile(
+				SITE_DIR . 'include/callback-form-img.php',
+				array(),
+				array('MODE' => 'html', 'NAME' => 'Изображение в форме', 'SHOW_BORDER' => true)
+			);
+			?>
+		<? endif; ?>
 
 	</div>
 </section>

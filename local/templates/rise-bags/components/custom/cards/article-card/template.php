@@ -20,7 +20,7 @@ $arResult = $arParams;
                     <h2><?= $arResult['NAME'] ?></h2>
                 </a>
                 <? if ($arResult['~PREVIEW_TEXT'] || $arResult['~DETAIL_TEXT']): ?>
-                    <div><?= ($arResult['~PREVIEW_TEXT']) ?  $arResult['~PREVIEW_TEXT'] : $arResult['~DETAIL_TEXT'] ?></div>
+                    <div class="article-card__desc"><?= ($arResult['~PREVIEW_TEXT']) ?  $arResult['~PREVIEW_TEXT'] : $arResult['~DETAIL_TEXT'] ?></div>
                 <? endif; ?>
                 <a class="clear-btn" href="<?= $arResult['DETAIL_PAGE_URL'] ?>">Подробнее
                     <svg width="20" height="20" viewBox="0 0 20 20" role="img" aria-hidden="true" focusable="false">
