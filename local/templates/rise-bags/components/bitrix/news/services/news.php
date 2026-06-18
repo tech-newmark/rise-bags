@@ -63,17 +63,20 @@ endif; ?>
 
 <!-- Верхний баннер -->
 <? $GLOBALS["topBannerSectionFilter"] = [
-	"IBLOCK_ID" => 7,
-	"SECTION_ID" => 50,
+	"IBLOCK_ID" => $arParams["TOP_BANNER_IBLOCK_ID"],
 	"INCLUDE_SUBSECTIONS" => "N",
 ];
+if ($arParams["TOP_BANNER_SECTION_ID"] !== '') {
+	$GLOBALS["topBannerSectionFilter"]["SECTION_ID"] = $arParams["TOP_BANNER_SECTION_ID"];
+}
 
 $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"top-banner",
 	array(
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "Y",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"ADD_ELEMENT_CHAIN" => "N",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
 		"AJAX_OPTION_HISTORY" => "N",
@@ -94,9 +97,9 @@ $APPLICATION->IncludeComponent(
 		"FIELD_CODE" => array("", ""),
 		"FILTER_NAME" => "topBannerSectionFilter",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "7",
+		"IBLOCK_ID" => $arParams["TOP_BANNER_IBLOCK_ID"],
 		"IBLOCK_TYPE" => "site_content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "N",
 		"MESSAGE_404" => "",
 		"NEWS_COUNT" => "20",
@@ -107,16 +110,16 @@ $APPLICATION->IncludeComponent(
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => ".default",
 		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "50",
+		"PARENT_SECTION" => $arParams["TOP_BANNER_SECTION_ID"],
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
 		"PROPERTY_CODE" => array("", ""),
-		"SET_BROWSER_TITLE" => "Y",
+		"SET_BROWSER_TITLE" => "N",
 		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "Y",
-		"SET_META_KEYWORDS" => "Y",
+		"SET_META_DESCRIPTION" => "N",
+		"SET_META_KEYWORDS" => "N",
 		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "Y",
+		"SET_TITLE" => "N",
 		"SHOW_404" => "N",
 		"SORT_BY1" => "ACTIVE_FROM",
 		"SORT_BY2" => "SORT",
@@ -125,7 +128,6 @@ $APPLICATION->IncludeComponent(
 		"STRICT_SECTION_CHECK" => "N"
 	)
 );
-
 unset($GLOBALS["topBannerSectionFilter"]); ?>
 <!-- Верхний баннер -->
 
@@ -146,13 +148,16 @@ unset($GLOBALS["topBannerSectionFilter"]); ?>
 		"DETAIL_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["detail"],
 		"SECTION_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["section"],
 		"IBLOCK_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["news"],
-		"SET_TITLE" => $arParams["SET_TITLE"],
-		"SET_LAST_MODIFIED" => $arParams["SET_LAST_MODIFIED"],
+		"SET_BROWSER_TITLE" => "N",
+		"SET_TITLE" => "N",
+		"SET_LAST_MODIFIED" => "N",
 		"MESSAGE_404" => $arParams["MESSAGE_404"],
 		"SET_STATUS_404" => $arParams["SET_STATUS_404"],
 		"SHOW_404" => $arParams["SHOW_404"],
 		"FILE_404" => $arParams["FILE_404"],
-		"INCLUDE_IBLOCK_INTO_CHAIN" => $arParams["INCLUDE_IBLOCK_INTO_CHAIN"],
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"ADD_ELEMENT_CHAIN" => "N",
 		"CACHE_TYPE" => $arParams["CACHE_TYPE"],
 		"CACHE_TIME" => $arParams["CACHE_TIME"],
 		"CACHE_FILTER" => $arParams["CACHE_FILTER"],
@@ -185,13 +190,21 @@ unset($GLOBALS["topBannerSectionFilter"]); ?>
 <!-- Список категорий -->
 
 <!-- Кому подходят поставки -->
-<? $APPLICATION->IncludeComponent(
+<? $GLOBALS["customerTypeSectionFilter"] = [
+	"IBLOCK_ID" => $arParams["CUSTOMER_TYPE_IBLOCK_ID"],
+	"INCLUDE_SUBSECTIONS" => "N",
+];
+if ($arParams["CUSTOMER_TYPE_SECTION_ID"] !== '') {
+	$GLOBALS["customerTypeSectionFilter"]["SECTION_ID"] = $arParams["CUSTOMER_TYPE_SECTION_ID"];
+}
+$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"tizzers",
 	array(
 		"SHOW_TITLE" => "Y",
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
+		"ADD_ELEMENT_CHAIN" => "N",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
 		"AJAX_OPTION_HISTORY" => "N",
@@ -212,9 +225,9 @@ unset($GLOBALS["topBannerSectionFilter"]); ?>
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
 		"FIELD_CODE" => [0 => "", 1 => "",],
-		"FILTER_NAME" => "",
+		"FILTER_NAME" => "customerTypeSectionFilter",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "17",
+		"IBLOCK_ID" => $arParams["CUSTOMER_TYPE_IBLOCK_ID"],
 		"IBLOCK_TYPE" => "site_content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "N",
@@ -245,17 +258,27 @@ unset($GLOBALS["topBannerSectionFilter"]); ?>
 		"STRICT_SECTION_CHECK" => "N"
 	),
 	$component
-); ?>
+);
+unset($GLOBALS["customerTypeSectionFilter"]); ?>
 <!-- Кому подходят поставки -->
 
 <!-- Наши преимущества -->
-<? $APPLICATION->IncludeComponent(
+<? $GLOBALS["advantagesSectionFilter"] = [
+	"IBLOCK_ID" => $arParams["ADVANTAGES_IBLOCK_ID"],
+	"INCLUDE_SUBSECTIONS" => "N",
+];
+if ($arParams["ADVANTAGES_SECTION_ID"] !== '') {
+	$GLOBALS["advantagesSectionFilter"]["SECTION_ID"] = $arParams["ADVANTAGES_SECTION_ID"];
+}
+
+$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"tizzers",
 	array(
 		"SHOW_TITLE" => "Y",
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
+		"ADD_ELEMENT_CHAIN" => "N",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
 		"AJAX_OPTION_HISTORY" => "N",
@@ -275,9 +298,9 @@ unset($GLOBALS["topBannerSectionFilter"]); ?>
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
 		"FIELD_CODE" => [0 => "", 1 => "",],
-		"FILTER_NAME" => "",
+		"FILTER_NAME" => "advantagesSectionFilter",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "18",
+		"IBLOCK_ID" => $arParams["ADVANTAGES_IBLOCK_ID"],
 		"IBLOCK_TYPE" => "site_content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "Y",
@@ -308,11 +331,20 @@ unset($GLOBALS["topBannerSectionFilter"]); ?>
 		"STRICT_SECTION_CHECK" => "N"
 	),
 	$component
-); ?>
+);
+unset($GLOBALS["advantagesSectionFilter"]); ?>
 <!-- Наши преимущества -->
 
 <!-- Как заказать сумки оптом -->
-<? $APPLICATION->IncludeComponent(
+<? $GLOBALS["howToOrderSectionFilter"] = [
+	"IBLOCK_ID" => $arParams["HOW_TO_ORDER_IBLOCK_ID"],
+	"INCLUDE_SUBSECTIONS" => "N",
+];
+if ($arParams["HOW_TO_ORDER_SECTION_ID"] !== '') {
+	$GLOBALS["howToOrderSectionFilter"]["SECTION_ID"] = $arParams["HOW_TO_ORDER_SECTION_ID"];
+}
+
+$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"tizzers",
 	array(
@@ -321,6 +353,7 @@ unset($GLOBALS["topBannerSectionFilter"]); ?>
 		"CLEAR_BG" => "Y",
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
+		"ADD_ELEMENT_CHAIN" => "N",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
 		"AJAX_OPTION_HISTORY" => "N",
@@ -340,9 +373,9 @@ unset($GLOBALS["topBannerSectionFilter"]); ?>
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
 		"FIELD_CODE" => [0 => "", 1 => "",],
-		"FILTER_NAME" => "",
+		"FILTER_NAME" => "howToOrderSectionFilter",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "19",
+		"IBLOCK_ID" => $arParams["HOW_TO_ORDER_IBLOCK_ID"],
 		"IBLOCK_TYPE" => "site_content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "Y",
@@ -374,15 +407,19 @@ unset($GLOBALS["topBannerSectionFilter"]); ?>
 		"STRICT_SECTION_CHECK" => "N"
 	),
 	$component
-); ?>
+);
+
+unset($GLOBALS["howToOrderSectionFilter"]); ?>
 <!-- Как заказать сумки оптом -->
 
 <!-- Сотрудничество -->
 <? $GLOBALS["tizzersCooperatinSectionFilter"] = [
-	"IBLOCK_ID" => 5,
-	"SECTION_ID" => 53,
+	"IBLOCK_ID" => $arParams["COOPERATION_TIZZERS_IBLOCK_ID"],
 	"INCLUDE_SUBSECTIONS" => "N",
 ];
+if ($arParams["COOPERATION_TIZZERS_SECTION_ID"] !== '') {
+	$GLOBALS["tizzersCooperatinSectionFilter"]["SECTION_ID"] = $arParams["COOPERATION_TIZZERS_SECTION_ID"];
+}
 $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"tizzers",
@@ -390,6 +427,7 @@ $APPLICATION->IncludeComponent(
 		"BIG_TIZZERS" => "Y",
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
+		"ADD_ELEMENT_CHAIN" => "N",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
 		"AJAX_OPTION_HISTORY" => "N",
@@ -410,7 +448,7 @@ $APPLICATION->IncludeComponent(
 		"FIELD_CODE" => array("", ""),
 		"FILTER_NAME" => "tizzersCooperatinSectionFilter",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "5",
+		"IBLOCK_ID" => $arParams["COOPERATION_TIZZERS_IBLOCK_ID"],
 		"IBLOCK_TYPE" => "site_content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "Y",
@@ -423,7 +461,7 @@ $APPLICATION->IncludeComponent(
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => ".default",
 		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "53",
+		"PARENT_SECTION" => $arParams["COOPERATION_TIZZERS_SECTION_ID"],
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
 		"PROPERTY_CODE" => [0 => "", 1 => "ICON",],
@@ -447,10 +485,12 @@ unset($GLOBALS["tizzersCooperatinSectionFilter"]); ?>
 <!-- Вопросы и ответы -->
 <?
 $GLOBALS["faqPreviewSectionFilter"] = [
-	"IBLOCK_ID" => 6,
-	"SECTION_ID" => 49,
+	"IBLOCK_ID" => $arParams["FAQ_PREVIEW_IBLOCK_ID"],
 	"INCLUDE_SUBSECTIONS" => "N",
 ];
+if ($arParams["FAQ_PREVIEW_SECTION_ID"] !== '') {
+	$GLOBALS["faqPreviewSectionFilter"]["SECTION_ID"] = $arParams["FAQ_PREVIEW_SECTION_ID"];
+}
 ?>
 <? $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
@@ -458,6 +498,7 @@ $GLOBALS["faqPreviewSectionFilter"] = [
 	array(
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
+		"ADD_ELEMENT_CHAIN" => "N",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
 		"AJAX_OPTION_HISTORY" => "N",
@@ -478,7 +519,7 @@ $GLOBALS["faqPreviewSectionFilter"] = [
 		"FIELD_CODE" => array("", ""),
 		"FILTER_NAME" => "faqPreviewSectionFilter",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "6",
+		"IBLOCK_ID" => $arParams["FAQ_PREVIEW_IBLOCK_ID"],
 		"IBLOCK_TYPE" => "site_content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "N",
@@ -491,7 +532,7 @@ $GLOBALS["faqPreviewSectionFilter"] = [
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => ".default",
 		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "49",
+		"PARENT_SECTION" => $arParams["FAQ_PREVIEW_SECTION_ID"],
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
 		"PROPERTY_CODE" => array("", ""),
