@@ -1,6 +1,5 @@
 <?php
-if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)
-{
+if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 	die();
 }
 /** @var array $arParams */
@@ -13,3 +12,37 @@ $arParams['SHARE_HANDLERS'] ??= [];
 $arParams['SHARE_HANDLERS'] = is_array($arParams['SHARE_HANDLERS']) ? $arParams['SHARE_HANDLERS'] : [];
 $arParams['SHARE_SHORTEN_URL_LOGIN'] = (string)($arParams['SHARE_SHORTEN_URL_LOGIN'] ?? 'N');
 $arParams['SHARE_SHORTEN_URL_KEY'] = (string)($arParams['SHARE_SHORTEN_URL_KEY'] ?? 'N');
+
+// Получаем описание услуги и связанные с ней элементы
+$sectionId = CIBlockFindTools::GetSectionID(
+	$arResult["VARIABLES"]["SECTION_ID"] ?? 0,
+	$arResult["VARIABLES"]["SECTION_CODE"] ?? "",
+	[
+		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+		"GLOBAL_ACTIVE" => "Y",
+	]
+);
+
+$arResult["CURRENT_SECTION"] = [];
+
+if ($sectionId > 0) {
+	$sectionResult = CIBlockSection::GetList(
+		[],
+		[
+			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+			"ID" => $sectionId,
+			"GLOBAL_ACTIVE" => "Y",
+		],
+		false,
+		[
+			"ID",
+			"NAME",
+			"DESCRIPTION",
+			"DESCRIPTION_TYPE",
+			"UF_TIZZERS",
+			"UF_ADVANTAGES",
+		]
+	);
+
+	$arResult["CURRENT_SECTION"] = $sectionResult->Fetch() ?: [];
+}
