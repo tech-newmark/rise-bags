@@ -1,117 +1,35 @@
 <?php
-if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)
-{
+if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 	die();
 }
 
 /** @var array $arCurrentValues */
 
 $arTemplateParameters = array(
-	"TOP_BANNER_IBLOCK_ID" => Array(
-		"NAME" => GetMessage("SERVICES_TOP_BANNER_IBLOCK_ID"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"TOP_BANNER_SECTION_ID" => Array(
-		"NAME" => GetMessage("SERVICES_TOP_BANNER_SECTION_ID"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"FIRST_TIZZERS_IBLOCK_ID" => Array(
-		"NAME" => GetMessage("SERVICES_FIRST_TIZZERS_IBLOCK_ID"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"FIRST_TIZZERS_SECTION_ID" => Array(
-		"NAME" => GetMessage("SERVICES_FIRST_TIZZERS_SECTION_ID"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"FIRST_TIZZERS_TITLE" => Array(
-		"NAME" => GetMessage("SERVICES_FIRST_TIZZERS_TITLE"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"SECOND_TIZZERS_IBLOCK_ID" => Array(
-		"NAME" => GetMessage("SERVICES_SECOND_TIZZERS_IBLOCK_ID"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"SECOND_TIZZERS_SECTION_ID" => Array(
-		"NAME" => GetMessage("SERVICES_SECOND_TIZZERS_SECTION_ID"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"SECOND_TIZZERS_TITLE" => Array(
-		"NAME" => GetMessage("SERVICES_SECOND_TIZZERS_TITLE"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"THIRD_TIZZERS_IBLOCK_ID" => Array(
-		"NAME" => GetMessage("SERVICES_THIRD_TIZZERS_IBLOCK_ID"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"THIRD_TIZZERS_SECTION_ID" => Array(
-		"NAME" => GetMessage("SERVICES_THIRD_TIZZERS_SECTION_ID"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"THIRD_TIZZERS_TITLE" => Array(
-		"NAME" => GetMessage("SERVICES_THIRD_TIZZERS_TITLE"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"FOURTH_TIZZERS_IBLOCK_ID" => Array(
-		"NAME" => GetMessage("SERVICES_FOURTH_TIZZERS_IBLOCK_ID"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"FOURTH_TIZZERS_SECTION_ID" => Array(
-		"NAME" => GetMessage("SERVICES_FOURTH_TIZZERS_SECTION_ID"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"FOURTH_TIZZERS_TITLE" => Array(
-		"NAME" => GetMessage("SERVICES_FOURTH_TIZZERS_TITLE"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"FAQ_PREVIEW_IBLOCK_ID" => Array(
-		"NAME" => GetMessage("SERVICES_FAQ_PREVIEW_IBLOCK_ID"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"FAQ_PREVIEW_SECTION_ID" => Array(
-		"NAME" => GetMessage("SERVICES_FAQ_PREVIEW_SECTION_ID"),
-		"TYPE" => "STRING",
-		"PARENT" => "ADDITIONAL_SETTINGS",
-	),
-	"DISPLAY_DATE" => Array(
+	"DISPLAY_DATE" => array(
 		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_DATE"),
 		"TYPE" => "CHECKBOX",
 		"DEFAULT" => "Y",
 	),
-	"DISPLAY_PICTURE" => Array(
+	"DISPLAY_PICTURE" => array(
 		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_PICTURE"),
 		"TYPE" => "CHECKBOX",
 		"DEFAULT" => "Y",
 	),
-	"DISPLAY_PREVIEW_TEXT" => Array(
+	"DISPLAY_PREVIEW_TEXT" => array(
 		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_TEXT"),
 		"TYPE" => "CHECKBOX",
 		"DEFAULT" => "Y",
 	),
-	"USE_SHARE" => Array(
+	"USE_SHARE" => array(
 		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_USE_SHARE"),
 		"TYPE" => "CHECKBOX",
-		"DEFAULT" =>"N",
-		"REFRESH"=> "Y",
+		"DEFAULT" => "N",
+		"REFRESH" => "Y",
 	),
 );
 
-if (($arCurrentValues['USE_SHARE'] ?? 'N') === 'Y')
-{
+if (($arCurrentValues['USE_SHARE'] ?? 'N') === 'Y') {
 	$arTemplateParameters["SHARE_HIDE"] = array(
 		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_SHARE_HIDE"),
 		"TYPE" => "CHECKBOX",
@@ -125,16 +43,15 @@ if (($arCurrentValues['USE_SHARE'] ?? 'N') === 'Y')
 		"TYPE" => "STRING",
 		"MULTIPLE" => "N",
 		"COLS" => 25,
-		"REFRESH"=> "Y",
+		"REFRESH" => "Y",
 	);
 
 	$shareComponentTemplate = (trim((string)($arCurrentValues["SHARE_TEMPLATE"] ?? '')));
-	if ($shareComponentTemplate === '')
-	{
+	if ($shareComponentTemplate === '') {
 		$shareComponentTemplate = false;
 	}
 
-	include_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/components/bitrix/main.share/util.php");
+	include_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/components/bitrix/main.share/util.php");
 
 	$arHandlers = __bx_share_get_handlers($shareComponentTemplate);
 
