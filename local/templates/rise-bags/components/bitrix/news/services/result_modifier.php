@@ -41,6 +41,8 @@ if ($sectionId > 0) {
 			"DESCRIPTION_TYPE",
 			"UF_TIZZERS",
 			"UF_ADVANTAGES",
+			"UF_STAGES",
+			"UF_FAQ",
 		]
 	);
 
