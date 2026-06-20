@@ -7,7 +7,7 @@ $this->setFrameMode(true);
     <div class="container">
       <h2>Выберите продукцию для оптовой закупки</h2>
       <p class="base-text">Перейдите в нужный раздел, чтобы ознакомиться с ассортиментом и оставить заявку на получение условий поставки.</p>
-      <div class="swiper autofill-slider">
+      <div class="swiper service-slider">
         <div class="swiper-wrapper">
           <? foreach ($arResult["ITEMS"] as $arItem): ?>
             <?

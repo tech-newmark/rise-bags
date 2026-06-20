@@ -1,13 +1,11 @@
-.examples-list {
-	.swiper {
-		padding-bottom: 40px;
-
-		&-slide {
+.service-detail {
+	.examples-slider {
+		.swiper-slide {
 			width: 80%;
-			max-width: 340px;
 
 			@media (min-width: 650px) {
 				width: 100%;
+				max-width: 340px;
 			}
 
 			@media (min-width: 1040px) {
@@ -22,13 +20,18 @@
 			}
 		}
 
-		&-pagination {
+		.swiper-pagination {
 			position: static;
 			padding: 20px 0;
 
 			&-bullet-active {
 				background-color: var(--primary);
 			}
+		}
+
+		.swiper-button-prev,
+		.swiper-button-next {
+			transform: translateY(-50%);
 		}
 	}
 }

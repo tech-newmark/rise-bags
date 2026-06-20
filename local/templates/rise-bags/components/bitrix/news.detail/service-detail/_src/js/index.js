@@ -1,7 +1,5 @@
 BX.ready(function () {
-	const slider = document.querySelector(".service-slider");
-
-	console.log(slider);
+	const slider = document.querySelector(".examples-slider");
 
 	if (slider) {
 		const pagination = slider.querySelector(".swiper-pagination");
@@ -13,8 +11,11 @@ BX.ready(function () {
 			spaceBetween: 20,
 
 			breakpoints: {
+				780: {
+					spaceBetween: 30,
+				},
 				1240: {
-					slidesPerView: 3,
+					spaceBetween: 40,
 				},
 			},
 
