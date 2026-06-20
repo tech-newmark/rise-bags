@@ -39,6 +39,7 @@ if ($sectionId > 0) {
 			"NAME",
 			"DESCRIPTION",
 			"DESCRIPTION_TYPE",
+			"UF_BANNERS",
 			"UF_TIZZERS",
 			"UF_ADVANTAGES",
 			"UF_STAGES",

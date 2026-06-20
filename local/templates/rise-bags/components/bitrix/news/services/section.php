@@ -15,7 +15,11 @@ $this->setFrameMode(true); ?>
 <section class="service-section">
 
 	<!-- Верхний баннер -->
-	<? $APPLICATION->IncludeComponent(
+	<?
+	$GLOBALS["bannersFilter"] = [
+		"ID" => ($arResult["CURRENT_SECTION"]["UF_BANNERS"] ?? null) ?: 0,
+	];
+	$APPLICATION->IncludeComponent(
 		"bitrix:news.list",
 		"top-banner",
 		array(
@@ -40,7 +44,7 @@ $this->setFrameMode(true); ?>
 			"DISPLAY_PREVIEW_TEXT" => "Y",
 			"DISPLAY_TOP_PAGER" => "N",
 			"FIELD_CODE" => [0 => "", 1 => "",],
-			"FILTER_NAME" => "",
+			"FILTER_NAME" => "bannersFilter",
 			"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 			"IBLOCK_ID" => "7",
 			"IBLOCK_TYPE" => "site_content",
@@ -55,7 +59,7 @@ $this->setFrameMode(true); ?>
 			"PAGER_SHOW_ALWAYS" => "N",
 			"PAGER_TEMPLATE" => ".default",
 			"PAGER_TITLE" => "Новости",
-			"PARENT_SECTION" => "50",
+			"PARENT_SECTION" => "",
 			"PARENT_SECTION_CODE" => "",
 			"PREVIEW_TRUNCATE_LEN" => "",
 			"PROPERTY_CODE" => [0 => "FORM_BUTTON", 1 => "LINK", 2 => "",],
@@ -73,7 +77,8 @@ $this->setFrameMode(true); ?>
 			"STRICT_SECTION_CHECK" => "N"
 		),
 		$component
-	); ?>
+	);
+	unset($GLOBALS["bannersFilter"]); ?>
 	<!-- Верхний баннер -->
 
 	<!-- Список элементов -->
@@ -276,6 +281,7 @@ $this->setFrameMode(true); ?>
 		"bitrix:news.list",
 		"tizzers",
 		array(
+			"CLEAR_BG" => "Y",
 			"SHOW_TITLE" => "Y",
 			"CUSTOM_TITLE" => "Как начать оптовое сотрудничество",
 			"COLUMN_VIEW" => "Y",
@@ -336,13 +342,13 @@ $this->setFrameMode(true); ?>
 
 	<!-- Сео-блок -->
 	<? if (!empty($arResult["CURRENT_SECTION"]["DESCRIPTION"])): ?>
-		<div class="service-section__seo">
+		<section class="section service-section__seo">
 			<div class="container">
 				<div class="content">
 					<?= $arResult["CURRENT_SECTION"]["DESCRIPTION"] ?>
 				</div>
 			</div>
-		</div>
+		</section>
 	<? endif; ?>
 	<!-- Сео-блок  -->
 

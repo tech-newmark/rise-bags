@@ -307,6 +307,7 @@ $this->setFrameMode(true);
 		"bitrix:news.list",
 		"tizzers",
 		array(
+			"CLEAR_BG" => "Y",
 			"SHOW_TITLE" => "Y",
 			"CUSTOM_TITLE" => "Как начать оптовое сотрудничество",
 			"COLUMN_VIEW" => "Y",
