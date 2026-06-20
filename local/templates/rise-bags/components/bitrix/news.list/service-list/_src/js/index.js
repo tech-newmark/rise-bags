@@ -1,5 +1,5 @@
 BX.ready(function () {
-	const slider = document.querySelector(".autofill-slider");
+	const slider = document.querySelector(".service-slider");
 
 	console.log(slider);
 

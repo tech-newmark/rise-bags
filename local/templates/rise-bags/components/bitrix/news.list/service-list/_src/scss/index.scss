@@ -42,11 +42,12 @@
 			max-width: 300px;
 
 			@media (min-width: 560px) {
-				max-width: 340px;
+				width: 100%;
+				max-width: 400px;
 			}
 
 			@media (min-width: 1240px) {
-				max-width: 100%;
+				max-width: 530px;
 			}
 		}
 
