@@ -1,28 +1,23 @@
 BX.ready(function () {
 	const slider = document.querySelector(".examples-slider");
 
-	console.log(slider);
-
 	if (slider) {
 		const pagination = slider.querySelector(".swiper-pagination");
 		const btnNext = slider.querySelector(".swiper-button-next");
 		const btnPrev = slider.querySelector(".swiper-button-prev");
 
 		new window.Swiper(slider, {
-			slidesPerView: 1,
+			slidesPerView: "auto",
 			spaceBetween: 20,
+			watchOverflow: true,
 
 			breakpoints: {
-				580: {
-					slidesPerView: 2,
+				768: {
+					spaceBetween: 30,
 				},
 
-				800: {
-					slidesPerView: 3,
-				},
-
-				1240: {
-					slidesPerView: 4,
+				1040: {
+					spaceBetween: 40,
 				},
 			},
 

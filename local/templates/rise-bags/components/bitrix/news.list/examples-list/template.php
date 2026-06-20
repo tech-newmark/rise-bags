@@ -5,17 +5,9 @@ $this->setFrameMode(true);
 // includeComponentAssets('news.list/examples-list');
 ?>
 
-
-<section class="section examples-list">
-	<div class="container">
-		<div class="articles__header">
-			<h1><?= $arResult["NAME"] ?></h1>
-			<? if ($arResult["DESCRIPTION"]): ?>
-				<div><?= $arResult["DESCRIPTION"] ?></div>
-			<? endif; ?>
-		</div>
-
-		<? if ($arResult["ITEMS"]): ?>
+<? if ($arResult["ITEMS"]): ?>
+	<section class="section examples-list">
+		<div class="container">
 			<h2>Примеры наших работ</h2>
 			<div class="swiper examples-slider">
 				<div class="swiper-wrapper">
@@ -28,20 +20,8 @@ $this->setFrameMode(true);
 						</div>
 					<? endforeach; ?>
 				</div>
-				<div class="swiper-button-prev">
-					<svg width="16" height="16" viewBox="0 0 16 16" role="img" aria-hidden="true" focusable="false">
-						<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-arrow"></use>
-					</svg>
-				</div>
-				<div class="swiper-button-next"><svg width="16" height="16" viewBox="0 0 16 16" role="img" aria-hidden="true" focusable="false">
-						<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-arrow"></use>
-					</svg>
-				</div>
 				<div class="swiper-pagination"></div>
 			</div>
-		<? endif; ?>
-
-	</div>
-
-
-</section>
+		</div>
+	</section>
+<? endif; ?>
