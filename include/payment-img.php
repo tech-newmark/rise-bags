@@ -1,0 +1,1 @@
+<img width="900" src="/upload/medialibrary/65c/it7u2g8xde0ch9jyg0bw2eheua3b4rip.png" height="600" title="оплата" alt="оплата"><br>

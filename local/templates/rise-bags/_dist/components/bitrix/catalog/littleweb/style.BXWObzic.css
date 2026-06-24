@@ -1,0 +1,1 @@
+.catalog__header{margin-bottom:32px}.catalog .grid{display:grid;grid-template-columns:320px auto;gap:var(--base-gap)}.catalog .grid-item--sidebar{position:sticky;top:40px;height:-moz-fit-content;height:fit-content}.catalog .grid-item--main{position:sticky;top:32px;display:flex;flex-direction:column;gap:24px;height:-moz-fit-content;height:fit-content}
